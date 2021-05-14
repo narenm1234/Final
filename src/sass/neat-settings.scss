@@ -1,0 +1,11 @@
+@import "neat-helpers"; // or "neat-helpers" when in Rails
+
+// default settings
+$border-box-sizing: false;
+$max-width: 100%;
+$gutter: 0em;
+$grid-columns: 4;
+
+$col-6: new-breakpoint(max-width 510px 6);
+$col-9: new-breakpoint(min-width 511px max-width 768px 9);
+$col-12: new-breakpoint(min-width 769px 12);

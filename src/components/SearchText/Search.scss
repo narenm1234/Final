@@ -1,0 +1,31 @@
+.sidebarlink {
+	display: flex;
+	color: #e1e9fc;
+	justify-content: flex-start;
+	align-items: center;
+	padding: 20px 40px;
+	list-style: none;
+	height: 60px;
+	text-decoration: none;
+	font-size: 18px;
+	color: #495057;
+}
+.searchInput {
+	width: 425px;
+	border: none;
+}
+.searchDiv {
+	width: 10%;
+	padding: 1%;
+}
+.search {
+    width: 425px;
+    height: 32px;
+	margin-top: 10px;
+	padding-left: 10px;
+    border-radius: 4px;
+    border: solid 1px #dddbda;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: row;
+  }

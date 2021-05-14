@@ -1,0 +1,41 @@
+
+$col-6-max-width: 510px;
+$col-9-max-width: 768px;
+$col-12-max-width: 100%;
+
+@function cols-to-breakpoint($columns) {
+    @if $columns == 6 { @return $col-6; }
+    @else if $columns == 9 { @return $col-9; }
+    @else if $columns == 12 { @return $col-12; }
+}
+
+@mixin for-landscape(){
+     @media (orientation:landscape) { @content; }
+}
+
+@function max-width-for-cols($columns){
+    @if $columns == 6 { @return $col-6-max-width; }
+    @else if $columns == 9 { @return $col-9-max-width; }
+    @else if $columns == 12 { @return $col-12-max-width; }
+}
+
+@mixin for-cols($c1, $c2:0, $c3:0, $c4:0, $c5:0) {
+
+    @include media(cols-to-breakpoint($c1)){ @content; }
+
+    @if $c2 != 0 {
+        @include media(cols-to-breakpoint($c2)){ @content; }
+    }
+
+    @if $c3 != 0 {
+        @include media(cols-to-breakpoint($c3)){ @content; }
+    }
+
+    @if $c4 != 0 {
+        @include media(cols-to-breakpoint($c4)){ @content; }
+    }
+
+    @if $c5 != 0 {
+        @include media(cols-to-breakpoint($c5)){ @content; }
+    }
+}

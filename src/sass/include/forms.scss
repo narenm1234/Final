@@ -1,0 +1,24 @@
+/**
+* Forms
+**/
+.form {
+
+}
+
+.form-textarea {
+    resize: none;
+    width: 100%;
+    padding: 1em;
+    height: 13em;
+    color: $colorBody;
+}
+
+.form-textarea__count {
+    font-size: .75em;
+    color: white;
+}
+
+.form-input--text {
+    width: 100%;
+    padding: 1em;
+}

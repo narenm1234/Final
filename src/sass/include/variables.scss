@@ -1,0 +1,78 @@
+$animSpeed: 0.3s;
+
+$maxMobile: 510px;
+$minTablet: 511px;
+$maxTablet: 768px;
+$minDesktop: 769px;
+$minWidescreen: 1025px;
+
+
+$focusStyleWhite: 2px solid #fff;
+$focusStyleBlack: 2px solid #000;
+$focusStyleRed: 2px solid #cc0000;
+
+
+$colorBody: #6A6A6A;
+$colorBodyDark: #333;
+
+$colorBodyDarker: #666666;
+$colorTargetRed: #cc0000;
+$colorDarkGray: #444444;
+$colorLtGray: #9a9a9a;
+$colorLtGreen: #e9f3e4;
+$colorLtGreenAlt: #39b54a;
+$colorLtBlue: rgb(195,224,231);
+$colorGreen: rgb(3,114,54);
+$colorBlue: rgb(5,70,207);
+$colorTeal: #309ab0;
+$colorGreen: #7fc14a;
+
+.color--light-gray{
+	color: $colorLtGray;
+}
+.color--target-red {
+    color: $colorTargetRed;
+}
+.color--white {
+    color: #fff;
+}
+.color--blue {
+    color: $colorBlue;
+}
+.color--success {
+    color: $colorGreen;
+}
+.color--error {
+    color: $colorTargetRed;
+}
+
+.color--body {
+    color: $colorBody;
+}
+.color--body-dark {
+    color: $colorBodyDark;
+}
+
+.color--teal {
+    color: $colorTeal;
+}
+
+.color--green {
+    color: $colorGreen;
+}
+.color--light-green {
+    color: $colorLtGreen;
+}
+.color--light-green-alt {
+    color: $colorLtGreenAlt;
+}
+
+.bg-color--light-gray{
+	background-color: $colorLtGray;
+}
+.bg-color--body{
+    background-color: $colorBody;
+}
+.bg-color--body-dark{
+	background-color: $colorBodyDark;
+}

@@ -1,0 +1,17 @@
+ /* Make sure this variables file always gets loaded first */
+@import "include/variables.scss";
+
+@import "include/mixins.scss";
+@import "include/normalize.scss";
+@import "include/paths.scss";
+@import "include/forms.scss";
+
+
+/* Components */
+/* nothing in here should ever conflict */
+
+// global components
+@import "../components/Search/Search.scss";
+@import "../components/Header/Header.scss";
+@import "../pages/GroundPending/GroundPendng.scss";
+@import "../components/SearchText/Search.scss"

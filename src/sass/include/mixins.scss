@@ -1,0 +1,137 @@
+/**
+Credits: mikewgd - http://snippetrepo.com/snippets/sass-mixin-for-vendor-prefix
+@mixin vendor
+Easily apply styles and adding vendor prefixes will be added with ease.
+@param name - css property
+@param arg - css values
+Usage: @include vendor(border-radius, 4px);
+**/
+@mixin vendor($name, $argument) {
+   -webkit-#{$name}: #{$argument};
+   -ms-#{$name}: #{$argument};
+   -moz-#{$name}: #{$argument};
+   -o-#{$name}: #{$argument};
+    #{$name}: #{$argument};
+}
+
+/**
+Credits: mikewgd - http://snippetrepo.com/snippets/sass-mixin-for-vendor-prefix
+@mixin vendor
+Easily apply styles and adding vendor prefixes will be added with ease.
+@param name - css property
+@param arg - css values
+Usage: @include vendor(border-radius, 4px);
+**/
+@mixin vendor-Filter($name, $argument, $value) {
+   -webkit-#{$name}: #{$argument}unquote("("#{$value}")");
+   -ms-#{$name}: #{$argument}unquote("("#{$value}")");
+   -moz-#{$name}: #{$argument}unquote("("#{$value}")");
+   -o-#{$name}: #{$argument}unquote("("#{$value}")");
+    #{$name}: #{$argument}unquote("("#{$value}")");
+}
+
+
+
+@mixin animation($animate) {
+    -webkit-animation: $animate;
+    -moz-animation: $animate;
+    -o-animation: $animate;
+    animation: $animate;
+}
+
+@mixin keyframes($animationName) {
+    @-webkit-keyframes #{$animationName} {
+        @content;
+    }
+    @-moz-keyframes #{$animationName} {
+        @content;
+    }
+    @-o-keyframes #{$animationName} {
+        @content;
+    }
+    @keyframes #{$animationName} {
+        @content;
+    }
+}
+
+@mixin opacity($value) {
+    $value2: $value * 100;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=$value2)";
+    filter: alpha(opacity=$value2);
+    -moz-opacity: $value;
+    -khtml-opacity: $value;
+    opacity: $value;
+}
+
+@mixin transition($time) {
+    -webkit-transition: $time;
+    -moz-transition: $time;
+    -o-transition: $time;
+    -ms-transition: $time;
+    transition: $time;
+}
+@mixin for-mobile(){
+  @media screen and (max-width: $maxMobile){ @content; }
+}
+@mixin for-tablet(){
+  @media screen and (min-width: $minTablet) and (max-width: $maxTablet){ @content; }
+}
+@mixin for-desktop(){
+  @media screen and (min-width: $minDesktop){ @content; }
+}
+@mixin for-widescreen(){
+  @media screen and (min-width: $minWidescreen){ @content; }
+}
+
+
+@mixin for-retina(){
+    @media
+    only screen and (-webkit-min-device-pixel-ratio: 2),
+    only screen and (   min--moz-device-pixel-ratio: 2),
+    only screen and (     -o-min-device-pixel-ratio: 2/1),
+    only screen and (        min-device-pixel-ratio: 2),
+    only screen and (                min-resolution: 192dpi),
+    only screen and (                min-resolution: 2dppx) {
+        @content;
+    }
+}
+
+
+// @mixin retinaImageRepeatX($path, $width, $height, $ext) {
+// 	background: url($basePath + $path + "_1x." + $ext) repeat-x scroll 0 0 transparent;
+// 	@media only screen and (-webkit-min-device-pixel-ratio: 1.5),
+//     only screen and (-o-min-device-pixel-ratio: 3/2),
+//     only screen and (min--moz-device-pixel-ratio: 1.5),
+//     only screen and (min-device-pixel-ratio: 1.5) {
+//         background: url($basePath + $path + "." + $ext) repeat-x scroll 0 0 transparent;
+//         background-size: $width $height;
+// 	}
+// }
+//
+// @mixin retinaImageRepeat($path, $width, $height, $ext) {
+// 	background: url($basePath + $path + "_1x." + $ext) repeat scroll 0 0 transparent;
+// 	@media only screen and (-webkit-min-device-pixel-ratio: 1.5),
+//     only screen and (-o-min-device-pixel-ratio: 3/2),
+//     only screen and (min--moz-device-pixel-ratio: 1.5),
+//     only screen and (min-device-pixel-ratio: 1.5) {
+//         background: url($basePath + $path + "." + $ext) repeat scroll 0 0 transparent;
+//         background-size: $width $height;
+// 	}
+// }
+//
+// @mixin retinaImage($path, $width, $height, $ext) {
+// 	background: url($basePath + $path + "." + $ext) 0 0 transparent;
+// 	@media only screen and (-webkit-min-device-pixel-ratio: 1.5),
+//     only screen and (-o-min-device-pixel-ratio: 3/2),
+//     only screen and (min--moz-device-pixel-ratio: 1.5),
+//     only screen and (min-device-pixel-ratio: 1.5) {
+//         background: url($basePath + $path + "." + $ext) 0 0 transparent;
+//         background-size: $width $height;
+// 	}
+// }
+//
+
+//
+// @mixin hitbox() {
+//     background-image: url(hack);
+// }
