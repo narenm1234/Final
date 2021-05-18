@@ -126,7 +126,7 @@
   line-height   : 1.5;
   letter-spacing: normal;
   color         : #080707;
-  padding-bottom: 50px;
+  padding-bottom: 20px;
 }
 
 .home {
@@ -266,20 +266,17 @@
   left: 15%;
   background-color: #ffffff;
   display: flex;
+  margin-bottom: 20px;
 }
 .Year-Make-Model-Col {
   width           : 425px;
-  height          : 50px;
-  margin-top      : 8px;
-  padding         : 16px;
   border-radius   : 4px;
+  margin-top: 8px;
   background-color: #ffffff;
 }
 .Vehicle-Price-Option {
   width           : 425px;
-  height          : 50px;
   margin-top      : 8px;
-  padding         : 16px;
   border-radius   : 4px;
   background-color: #ffffff;
 }
@@ -305,13 +302,29 @@
   background-color: #ffffff;
 }
 .progressStyle{
-  width:54%;
+  width:60%;
   margin: 10px;
 }
 .img {
-  height: 205px;
+  height: 168px;
   display: block;
   max-width: 400px;
   overflow: hidden;
   width: 100%;
+}
+.NavigatorButtons{
+  margin-top: 45px;
+}
+.textStyleWarning{
+  color:#cc0000;
+}
+.MuiLinearProgress-root{
+  height: 10px!important;
+  width: inherit;
+}
+.MuiLinearProgress-barColorSecondary {
+  background-color: #cc0000!important;
+}
+.MuiLinearProgress-colorSecondary {
+  background-color: #d8d8d8!important;
 }

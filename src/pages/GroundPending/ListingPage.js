@@ -36,7 +36,7 @@ export default function ListingPage(props) {
                                     <List >
 
                                         <span className="textStyle">
-                                            Exclusivity Period: 00:00 remaining
+                                            Exclusivity Period: <span className="textStyleWarning">00:00 remaining</span>
                                         </span>
                                         <span className="progressStyle">
                                             <LinearProgress variant="determinate" value={50} color="secondary" />
