@@ -9,13 +9,12 @@ export default function ListingPage(props) {
     const [vehicleResponse, setVehicleResponse] = useState([])
 
     useEffect(() => {
-        
-        
+
+
         getVehicleDetails()
     })
     async function getVehicleDetails() {
         let apiResponse = await getGroundingList();
-        debugger
         setVehicleResponse(apiResponse.data);
     }
 
