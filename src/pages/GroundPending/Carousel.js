@@ -67,20 +67,7 @@ function SwipeableTextMobileStepper() {
 
     return (
         <div className={classes.root}>
-            <AutoPlaySwipeableViews
-                axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-                index={activeStep}
-                onChangeIndex={handleStepChange}
-                enableMouseEvents
-            >
-                {tutorialSteps.map((step, index) => (
-                    <div key={step.label}>
-                        {Math.abs(activeStep - index) <= 2 ? (
-                            <img className="img" src={step.imgPath} alt={step.label} />
-                        ) : null}
-                    </div>
-                ))}
-            </AutoPlaySwipeableViews>
+            <img className="img" src={tutorialSteps[activeStep].imgPath} alt={tutorialSteps[activeStep].label} />
             <MobileStepper
                 steps={maxSteps}
                 position="static"
