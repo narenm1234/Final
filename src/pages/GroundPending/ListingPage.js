@@ -12,7 +12,7 @@ export default function ListingPage(props) {
 
 
         getVehicleDetails()
-    })
+    });
     async function getVehicleDetails() {
         let apiResponse = await getGroundingList();
         setVehicleResponse(apiResponse.data.data);
