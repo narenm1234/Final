@@ -15,8 +15,9 @@ export default function ListingPage(props) {
     })
     async function getVehicleDetails() {
         let apiResponse = await getGroundingList();
-        debugger
-        setVehicleResponse(apiResponse.data);
+        
+        setVehicleResponse(apiResponse.data.data);
+        console.log('------>',apiResponse.data)
     }
 
 
@@ -32,7 +33,7 @@ export default function ListingPage(props) {
                             <Grid item xs={4}>
                                 <div class="Year-Make-Model-Col">
                                     <div class="vehicleMakeModel">
-                                        <span>{vehicle.brand} {vehicle.model} - {vehicle.ext_color} | {vehicle.model_year}</span>
+                                        <span>{vehicle.brand} {vehicle.model} - {vehicle.text_color} | {vehicle.model_year}</span>
                                     </div>
                                     <List >
 
