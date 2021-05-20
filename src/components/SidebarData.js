@@ -16,23 +16,23 @@ export const SidebarData = [
   },
   {
     title: 'Grounded',
-    path: '/grounded',
+
     iconClosed: <IoIcons.IoIosArrowUp />,
     iconOpened: <IoIcons.IoIosArrowDown />,
 
     subNav: [
       {
         title: 'Grounded',
-        path: '/grounded/grounded',
+        path: '/grounded',
 
       },
       {
         title: 'Passed',
-        path: '/grounded/passed',
+        path: '/passed',
       },
       {
         title: 'Purchased',
-        path: '/grounded/purchased',
+        path: '/purchased',
       }
     ]
   }

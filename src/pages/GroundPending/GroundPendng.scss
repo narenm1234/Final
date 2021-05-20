@@ -281,6 +281,9 @@
   border-radius   : 4px;
   background-color: #ffffff;
 }
+div.vehicleMakeModel{
+  font-size: 18px;
+}
 .textStyle{
   font-family: ToyotaTypeBook;
   font-size: 13px;
@@ -291,6 +294,18 @@
   letter-spacing: normal;
   color: #080707;
   display: block;
+}
+.margin__space{
+  margin-left:19%;
+}
+.margin__space1{
+  margin-left:55%;
+}
+.margin__space2{
+  margin-left:21.5%;
+}
+.margin__space3{
+  margin-left:56%;
 }
 .textBold{
   font-weight: 1000 !important;

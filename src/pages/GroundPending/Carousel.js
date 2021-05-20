@@ -14,15 +14,15 @@ const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 const tutorialSteps = [
     {
         imgPath:
-            'car.png',
+            'car.jpg',
     },
     {
         imgPath:
-            'car1.jpeg',
+            'car1.jpg',
     },
     {
         imgPath:
-            'car3.jpeg',
+            'car2.jpg',
     },
 ];
 

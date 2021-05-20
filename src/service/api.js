@@ -2,6 +2,7 @@ import axios from 'axios'
 const url = 'http://internal-a3e2a8608d24e4c5f8b42aed9c3587d7-2044184104.us-east-1.elb.amazonaws.com/getAccountDetailsBykey'
 const groundListUrl = 'http://internal-a50e6ebab05f54b63bde1da01edfb6a9-814886826.us-east-1.elb.amazonaws.com/asp-services/getGroundingList'
 const tokenUrl = 'http://internal-a3e2a8608d24e4c5f8b42aed9c3587d7-2044184104.us-east-1.elb.amazonaws.com/tokenData'
+const passedVehicleUrl = 'http://internal-a50e6ebab05f54b63bde1da01edfb6a9-814886826.us-east-1.elb.amazonaws.com/asp-services/getPassedVehicles'
 export async function getAuthToken() {
     const options = {
         headers: {
@@ -47,5 +48,17 @@ export async function getGroundingList() {
     const requestData =  "ALL";
 
     return await axios.post(groundListUrl,requestData , options);
+
+}
+export async function getPassedList() {
+    const options = {
+        headers: {
+            "Content-Type": "application/json"
+             }
+             
+    };
+    const requestData =  "ALL";
+
+    return await axios.post(passedVehicleUrl,requestData , options);
 
 }

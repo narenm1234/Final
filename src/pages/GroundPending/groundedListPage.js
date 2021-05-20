@@ -38,7 +38,7 @@ export default function ListingPage(props) {
                                     <List >
 
                                         <span className="textStyle">
-                                           <span className="textBold"> Exclusivity Period</span>: <span className="textStyleWarning">00:00 remaining</span>
+                                           <span className="textBold"> Exclusivity Period</span>: <span className="textStyleWarning">00:00 Remaining</span>
                                         </span>
                                         <span className="progressStyle">
                                             <LinearProgress variant="determinate" value={50} color="secondary" />
@@ -67,20 +67,20 @@ export default function ListingPage(props) {
                             <Grid item xs={4}>
                                 <div class="Vehicle-Price-Option">
                                     <div class="vehicleMakeModel">
-                                        <span>Vehiche price option </span>
+                                        <span>Vehicle price option </span>
                                     </div>
                                     <List >
                                         <span className="textStyle">
-                                        <span className="textBold"> Payoff</span> {vehicle.pay_off_amt}
+                                        <span className="textBold"> Payoff   </span> <span className="margin__space3">${vehicle.pay_off_amt}</span>
                                         </span>
                                         <span className="textStyle">
-                                        <span className="textBold"> Residual + Remaining Payments</span> {vehicle.residual_amt + vehicle.remaining_pmts}
+                                        <span className="textBold"> Residual + Remaining Payments</span> <span className="margin__space">${vehicle.residual_amt + vehicle.remaining_pmts}</span>
                                         </span>
                                         <span className="textStyle">
-                                        <span className="textBold"> Market</span> $000,000
+                                        <span className="textBold"> Market</span> <span className="margin__space1">$000,000</span>
                                         </span>
                                         <span className="textStyle">
-                                        <span className="textBold"> Market + Remaining Payments </span> ${vehicle.remaining_pmts}
+                                        <span className="textBold"> Market + Remaining Payments </span><span className="margin__space2"> ${vehicle.remaining_pmts}</span>
                                         </span>
                                     </List>
                                     <div className="NavigatorButtons">
