@@ -284,13 +284,23 @@
 .textStyle{
   font-family: ToyotaTypeBook;
   font-size: 13px;
-  font-weight: 600!important;
+  font-weight: normal;
   font-stretch: normal;
   font-style: normal;
   line-height: 1.54;
   letter-spacing: normal;
   color: #080707;
   display: block;
+}
+.textBold{
+  font-weight: 1000 !important;
+  font-family: ToyotaTypeBook;
+}
+.vin{
+  text-decoration: none;
+  font-weight: 500 !important;
+  font-family: ToyotaType;
+  color: #0091ff;
 }
 .PassonVehicleStyle {
   width: 151px;

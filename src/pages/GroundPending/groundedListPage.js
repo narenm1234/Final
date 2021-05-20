@@ -38,26 +38,27 @@ export default function ListingPage(props) {
                                     <List >
 
                                         <span className="textStyle">
-                                            Exclusivity Period: <span className="textStyleWarning">00:00 remaining</span>
+                                           <span className="textBold"> Exclusivity Period</span>: <span className="textStyleWarning">00:00 remaining</span>
                                         </span>
                                         <span className="progressStyle">
                                             <LinearProgress variant="determinate" value={50} color="secondary" />
                                         </span>
 
                                         <span className="textStyle">
-                                            VIN: {vehicle.vin}
+                                        <span className="textBold"> VIN:</span><a className="vin" href="/home"> {vehicle.vin}</a>
+                                        </span>
+                                        
+                                        <span className="textStyle">
+                                        <span className="textBold"> Grounding Date:</span> {moment(vehicle.grounding_date).format('MM/DD/YYYY')}
                                         </span>
                                         <span className="textStyle">
-                                            Grounding Date: {moment(vehicle.grounding_date).format('MM/DD/YYYY')}
+                                        <span className="textBold"> Grounding Mileage:</span> {vehicle.odometer_reading}
                                         </span>
                                         <span className="textStyle">
-                                            Grounding Mileage: {vehicle.odometer_reading}
+                                        <span className="textBold"> Inspection Mileage:</span> 000,000 miles
                                         </span>
                                         <span className="textStyle">
-                                            Inspection Mileage: 000,000 miles
-                                        </span>
-                                        <span className="textStyle">
-                                            Account Type: {vehicle.account_type}
+                                        <span className="textBold"> Account Type: </span> {vehicle.account_type}
                                         </span>
                                     </List>
 
@@ -70,16 +71,16 @@ export default function ListingPage(props) {
                                     </div>
                                     <List >
                                         <span className="textStyle">
-                                            Payoff: {vehicle.pay_off_amt}
+                                        <span className="textBold"> Payoff</span> {vehicle.pay_off_amt}
                                         </span>
                                         <span className="textStyle">
-                                            Residual + Remaining Payments: {vehicle.residual_amt + vehicle.remaining_pmts}
+                                        <span className="textBold"> Residual + Remaining Payments</span> {vehicle.residual_amt + vehicle.remaining_pmts}
                                         </span>
                                         <span className="textStyle">
-                                            Market: $000,000
+                                        <span className="textBold"> Market</span> $000,000
                                         </span>
                                         <span className="textStyle">
-                                            Market + Remaining Payments: ${vehicle.remaining_pmts}
+                                        <span className="textBold"> Market + Remaining Payments </span> ${vehicle.remaining_pmts}
                                         </span>
                                     </List>
                                     <div className="NavigatorButtons">
