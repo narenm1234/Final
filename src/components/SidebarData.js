@@ -11,7 +11,7 @@ export const SidebarData = [
     path: '/home',
   },
   {
-    title: 'Ground Pending',
+    title: 'Check in Vehicle',
     path: '/groundpending',
   },
   {
@@ -31,34 +31,30 @@ export const SidebarData = [
         path: '/grounded/passed',
       },
       {
-        title: '???Purchased???',
+        title: 'Purchased',
         path: '/grounded/purchased',
-      },
-      {
-        title: 'Last Chance',
-        path: '/grounded/lastchance',
       }
     ]
-  },
-  {
-    title: 'Auctions',
-    path: '/reports',
-    iconClosed: <IoIcons.IoIosArrowUp />,
-    iconOpened: <IoIcons.IoIosArrowDown />,
+  }
+  // {
+  //   title: 'Auctions',
+  //   path: '/reports',
+  //   iconClosed: <IoIcons.IoIosArrowUp />,
+  //   iconOpened: <IoIcons.IoIosArrowDown />,
 
-    subNav: [
-      {
-        title: 'Auction 1 00:00:00',
-        path: '/reports/reports1',
-        cName: 'sub-nav'
-      },
-      {
-        title: 'Auction 2 00:00:00',
-        path: '/reports/reports2',
-        cName: 'sub-nav'
-      }
-    ]
-  },
+  //   subNav: [
+  //     {
+  //       title: 'Auction 1 00:00:00',
+  //       path: '/reports/reports1',
+  //       cName: 'sub-nav'
+  //     },
+  //     {
+  //       title: 'Auction 2 00:00:00',
+  //       path: '/reports/reports2',
+  //       cName: 'sub-nav'
+  //     }
+  //   ]
+  // // },
   // {
   //   title: 'Watchlist',
   //   path: '/products',
