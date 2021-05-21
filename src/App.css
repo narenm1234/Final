@@ -38,3 +38,8 @@
     url("../src/assets/WebFont/ToyotaType-Book.ttf") format("truetype");
   font-weight: normal;
 }
+.centerContents{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+}
