@@ -1,16 +1,11 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import * as FaIcons from 'react-icons/fa';
-import * as AiIcons from 'react-icons/ai';
-import { SidebarData } from './SidebarData';
-import SubMenu from './SubMenu';
 import { IconContext } from 'react-icons/lib';
 import "./SideBar.scss"
 import { MdClose } from "react-icons/md";
 import { BsChevronRight } from "react-icons/bs";
-
-
+import NewSidebar from './NewSideBar';
 
 const Nav = styled.div`
   background: #f1f1f1;
@@ -67,23 +62,21 @@ const Sidebar = () => {
 
   const showSidebar = () => setSidebar(true);
   const hideSidebar = () => setSidebar(false);
-  console.log(sidebar+' start') 
   return (
     <>
       <IconContext.Provider value={{ color: '#000000' }}>
         <SidebarNav sidebar={sidebar}>
-  
+
           <SidebarWrap>
             <div className='mainMenu'>Main Menu
-            <div className="closeIcon" onClick ={hideSidebar} style={{ marginLeft: "35%" }}><MdClose /> </div>
+              <div className="closeIcon" onClick={hideSidebar} style={{ marginLeft: "35%" }}><MdClose />
+              </div>
             </div>
-            {SidebarData.map((item, index) => {
-              return <SubMenu item={item} key={index} />;
-            })}
+            <NewSidebar />
           </SidebarWrap>
         </SidebarNav>
         <SidebarNavHide sidebar={sidebar}>
-            <div className="-Background-Color" onClick={showSidebar}> <BsChevronRight /></div>
+          <div className="-Background-Color" onClick={showSidebar}> <BsChevronRight /></div>
         </SidebarNavHide>
       </IconContext.Provider>
     </>
