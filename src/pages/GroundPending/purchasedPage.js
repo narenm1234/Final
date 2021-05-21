@@ -50,7 +50,7 @@ export default function ListingPage2(props) {
                                         </span>
                                         
                                         <span className="textStyle">
-                                        <span className="textBold"> Purchase Date:</span> {moment(vehicle.grounding_date).format('MM/DD/YYYY')}
+                                        <span className="textBold"> Purchase Date:</span> {moment(vehicle.purchase_date).format('MM/DD/YYYY')}
                                         </span>
                                         {/* <span className="textStyle">
                                         <span className="textBold"> Grounding Mileage:</span> {vehicle.odometer_reading} miles
@@ -59,45 +59,32 @@ export default function ListingPage2(props) {
                                         <span className="textBold"> Inspection Mileage:</span> 000,000 miles
                                         </span> */}
                                         <span className="textStyle">
-                                        <span className="textBold"> Purchase Type: </span> Purchase
+                                        <span className="textBold"> Purchase Type: </span> {vehicle.purchase_type}
                                         </span>
                                     </List>
 
                                 </div>
                             </Grid>
-                            {/* <Grid item xs={4}>
+                             <Grid item xs={4}>
                                 <div class="Vehicle-Price-Option">
                                     <div class="vehicleMakeModel">
-                                        <span>Vehicle price option </span>
+                                        <span>Vehicle Cost </span>
                                     </div>
                                     <List >
                                         <span className="textStyle">
-                                        <span className="textBold"> Payoff   </span> <span className="margin__space3">${vehicle.pay_off_amt}</span>
+                                        <span className="textBold"> Payoff Price  </span> <span className="margin__space3">${vehicle.pay_off_amt}</span>
                                         </span>
                                         <span className="textStyle">
-                                        <span className="textBold"> Residual + Remaining Payments</span> <span className="margin__space">${vehicle.residual_amt + vehicle.remaining_pmts}</span>
+                                        <span className="textBold">  Rem.Payments</span> <span className="margin__space">${ vehicle.remaining_pmts}</span>
                                         </span>
                                         <span className="textStyle">
-                                        <span className="textBold"> Market</span> <span className="margin__space1">$000,000</span>
+                                        <span className="textBold"> Admin Fee</span> <span className="margin__space1">{vehicle.admin_fee}</span>
                                         </span>
-                                        <span className="textStyle">
-                                        <span className="textBold"> Market + Remaining Payments </span><span className="margin__space2"> ${vehicle.remaining_pmts}</span>
-                                        </span>
+                                       
                                     </List>
-                                    <div className="NavigatorButtons">
-                                        <Button className="PassonVehicleStyle">
-                                            Pass on vehicle
-                                        </Button>
-                                        <Button
-                                            variant="contained"
-                                            color="primary"
-                                            className="button"
-                                        >
-                                            {'Purchase Vehicle'}
-                                        </Button>
-                                    </div>
+                                    
                                 </div>
-                            </Grid> */}
+                            </Grid> 
                         </Grid>
 
                     </div>

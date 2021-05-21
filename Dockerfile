@@ -5,8 +5,9 @@ RUN npm set strict-ssl false
 RUN npm config set registry https://artifactory.tfs.toyota.com/artifactory/api/npm/devops-npmjs-virtual
 WORKDIR /app
 COPY ./package.json .
-RUN npm install --production
+COPY ./node_modules .
+COPY ./build .
 COPY . .
-RUN npm run build
+# RUN npm run build
 EXPOSE 3000
 CMD [ "npm", "run", "start"]

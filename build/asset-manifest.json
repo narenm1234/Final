@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/static/css/main.e4752147.chunk.css",
+    "main.js": "/static/js/main.a9998d6d.chunk.js",
+    "main.js.map": "/static/js/main.a9998d6d.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.82c505ac.js",
+    "runtime-main.js.map": "/static/js/runtime-main.82c505ac.js.map",
+    "static/js/2.77ff45fe.chunk.js": "/static/js/2.77ff45fe.chunk.js",
+    "static/js/2.77ff45fe.chunk.js.map": "/static/js/2.77ff45fe.chunk.js.map",
+    "static/js/3.bf57fbd6.chunk.js": "/static/js/3.bf57fbd6.chunk.js",
+    "static/js/3.bf57fbd6.chunk.js.map": "/static/js/3.bf57fbd6.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.e4752147.chunk.css.map": "/static/css/main.e4752147.chunk.css.map",
+    "static/js/2.77ff45fe.chunk.js.LICENSE.txt": "/static/js/2.77ff45fe.chunk.js.LICENSE.txt",
+    "static/media/App.css": "/static/media/ToyotaType-Book.d0889508.ttf"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.82c505ac.js",
+    "static/js/2.77ff45fe.chunk.js",
+    "static/css/main.e4752147.chunk.css",
+    "static/js/main.a9998d6d.chunk.js"
+  ]
+}
