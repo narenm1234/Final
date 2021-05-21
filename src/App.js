@@ -8,6 +8,7 @@ import MainMenu from './pages/MainMenu';
 import Home from './pages/Home';
 import GroundPending from './pages/GroundPending/GroundPending';
 import GroundPending1 from './pages/GroundPending/GroundPending1';
+import GroundPending2 from './pages/GroundPending/GroundPending2';
 import { Grounded, Grounded1, LastChance,  Purchased } from './pages/Grounded';
 import '../src/assets/WebFont/ToyotaType-Book.ttf'
 import '../src/sass/main.scss'
@@ -31,7 +32,7 @@ function App() {
             <Route path='/groundpending' exact component={VINSearch} />
             <Route path='/grounded' exact component={GroundPending} />
             <Route path='/passed' exact component={GroundPending1} />
-            <Route path='/purchased' exact component={GroundPending1} />
+            <Route path='/purchased' exact component={GroundPending2} />
             <Route path='/grounded/lastchance' exact component={LastChance} />
           </Switch>
         </Router>
