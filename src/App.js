@@ -29,16 +29,16 @@ function App() {
           <Switch>
 
             <Route path='/home' exact component={Home} />
-            <Route path='/groundpending' exact component={VINSearch} />
-            <Route path='/grounded' exact component={GroundPending} />
+            {/* <Route path='/groundpending' exact component={VINSearch} /> */}
+            {/* <Route path='/grounded' exact component={GroundPending} />
             <Route path='/passed' exact component={GroundPending1} />
             <Route path='/purchased' exact component={GroundPending2} />
             <Route path='/groundpending' exact component={GroundPending} />
-            <Route path='/grounded' exact component={Grounded} />
-            <Route path='/checkinvehicle' exact component={CheckinVehicle} />
-            <Route path='/grounded/grounded' exact component={Grounded1} />
-            <Route path='/grounded/passed' exact component={GroundPassed} />
-            <Route path='/grounded/purchased' exact component={GroundPurchased} />
+            <Route path='/grounded' exact component={Grounded} /> */}
+            <Route path='/checkinvehicle' exact component={VINSearch} />
+            <Route path='/grounded' exact component={GroundPending} />
+            <Route path='/passed' exact component={GroundPending1} />
+            <Route path='/purchased' exact component={GroundPending2} />
             <Route path='/grounded/lastchance' exact component={LastChance} />
           </Switch>
         </Router>

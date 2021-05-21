@@ -54,15 +54,15 @@ export default function NewSidebar() {
                 </ListItem>
                 <Collapse in={open} timeout="auto" unmountOnExit>
                     <List component="div" disablePadding className={classes.sideBarCSS}>
-                        <ListItem component={Link} to="/groundpending" >
+                        <ListItem component={Link} to="/grounded" >
                             <ListItemText primary="Grounded" />
                             <Chip className={classes.root} label="4"></Chip>
                         </ListItem>
-                        <ListItem component={Link} to="/grounded/passed" >
+                        <ListItem component={Link} to="/passed" >
                             <ListItemText primary="Passed" />
                             <Chip className={classes.root} label="0"></Chip>
                         </ListItem>
-                        <ListItem component={Link} to="/grounded/purchased" >
+                        <ListItem component={Link} to="/purchased" >
                             <ListItemText primary="Purchased" />
                             <Chip className={classes.root} label="0"></Chip>
                         </ListItem>
