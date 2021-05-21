@@ -9,16 +9,19 @@ import { getGroundingList } from '../../service/api';
 //let resp = [{ "account_type": "LEASE", "pay_off_amt": 12000, "residual_amt": 11000, "remaining_pmts": 250, "model_year": 19, "brand": "MAZDA", "model": "SD", "ext_color": "Color", "grounding_date": "2021-05-11T00:00:00", "odometer_reading": "9000", "vin": "JM3KFBDM0K1698372" }, { "account_type": "LEASE", "pay_off_amt": 12500, "residual_amt": 9000, "remaining_pmts": 300, "model_year": 2018, "brand": "MAZDA", "model": "MAZDA3", "ext_color": "Black", "grounding_date": "2021-05-11T00:00:00", "odometer_reading": "12000", "vin": "JM3KFADM3K1586305" }, { "account_type": "LEASE", "pay_off_amt": 14000, "residual_amt": 11000, "remaining_pmts": 400, "model_year": 2018, "brand": "MAZDA", "model": "MAZDA3", "ext_color": "Blue", "grounding_date": "2021-05-07T00:00:00", "odometer_reading": "8000", "vin": "3MZBPBCM4LM125760" }, { "account_type": "LEASE", "pay_off_amt": 15000, "residual_amt": 14000, "remaining_pmts": 500, "model_year": 2018, "brand": "MAZDA", "model": "MAZDA3", "ext_color": "Blue", "grounding_date": "2021-05-08T00:00:00", "odometer_reading": "6000", "vin": "JM3KFABM2L0748452" }]
 export default function ListingPage(props) {
     const [vehicleResponse, setVehicleResponse] = useState([])
+    const [value,setValue] = useState([])
 
     useEffect(() => {
 
 
         getVehicleDetails()
-    });
+    },[value]);
     async function getVehicleDetails() {
         let apiResponse = await getGroundingList();
         setVehicleResponse(apiResponse.data.data);
     }
+
+    
 
 
     return (
@@ -67,7 +70,7 @@ export default function ListingPage(props) {
                             <Grid item xs={4}>
                                 <div class="Vehicle-Price-Option">
                                     <div class="vehicleMakeModel">
-                                        <span>Vehicle price option </span>
+                                        <span>Vehicle Price Option </span>
                                     </div>
                                     <List >
                                         <span className="textStyle">

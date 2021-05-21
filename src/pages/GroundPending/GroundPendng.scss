@@ -326,6 +326,7 @@ div.vehicleMakeModel{
   border: solid 1px #0070d2 !important;
   color:#0070d2 !important;
   background-color: #ffffff;
+  text-transform: initial !important;
 }
 .progressStyle{
   width:60%;
@@ -353,4 +354,7 @@ div.vehicleMakeModel{
 }
 .MuiLinearProgress-colorSecondary {
   background-color: #d8d8d8!important;
+}
+.button{
+text-transform: initial !important;
 }

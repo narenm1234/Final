@@ -9,12 +9,13 @@ import { getPurchasedList } from '../../service/api';
 //let resp = [{ "account_type": "LEASE", "pay_off_amt": 12000, "residual_amt": 11000, "remaining_pmts": 250, "model_year": 19, "brand": "MAZDA", "model": "SD", "ext_color": "Color", "grounding_date": "2021-05-11T00:00:00", "odometer_reading": "9000", "vin": "JM3KFBDM0K1698372" }, { "account_type": "LEASE", "pay_off_amt": 12500, "residual_amt": 9000, "remaining_pmts": 300, "model_year": 2018, "brand": "MAZDA", "model": "MAZDA3", "ext_color": "Black", "grounding_date": "2021-05-11T00:00:00", "odometer_reading": "12000", "vin": "JM3KFADM3K1586305" }, { "account_type": "LEASE", "pay_off_amt": 14000, "residual_amt": 11000, "remaining_pmts": 400, "model_year": 2018, "brand": "MAZDA", "model": "MAZDA3", "ext_color": "Blue", "grounding_date": "2021-05-07T00:00:00", "odometer_reading": "8000", "vin": "3MZBPBCM4LM125760" }, { "account_type": "LEASE", "pay_off_amt": 15000, "residual_amt": 14000, "remaining_pmts": 500, "model_year": 2018, "brand": "MAZDA", "model": "MAZDA3", "ext_color": "Blue", "grounding_date": "2021-05-08T00:00:00", "odometer_reading": "6000", "vin": "JM3KFABM2L0748452" }]
 export default function ListingPage2(props) {
     const [vehicleResponse, setVehicleResponse] = useState([])
+    const [value,setValue] = useState([])
 
     useEffect(() => {
 
 
         getVehicleDetails()
-    });
+    },[value]);
     async function getVehicleDetails() {
         let apiResponse = await getPurchasedList();
         setVehicleResponse(apiResponse.data.data);
@@ -49,16 +50,16 @@ export default function ListingPage2(props) {
                                         </span>
                                         
                                         <span className="textStyle">
-                                        <span className="textBold"> Grounding Date:</span> {moment(vehicle.grounding_date).format('MM/DD/YYYY')}
+                                        <span className="textBold"> Purchase Date:</span> {moment(vehicle.grounding_date).format('MM/DD/YYYY')}
                                         </span>
-                                        <span className="textStyle">
+                                        {/* <span className="textStyle">
                                         <span className="textBold"> Grounding Mileage:</span> {vehicle.odometer_reading} miles
-                                        </span>
-                                        <span className="textStyle">
+                                        </span> */}
+                                        {/* <span className="textStyle">
                                         <span className="textBold"> Inspection Mileage:</span> 000,000 miles
-                                        </span>
+                                        </span> */}
                                         <span className="textStyle">
-                                        <span className="textBold"> Account Type: </span> {vehicle.purchase_type}
+                                        <span className="textBold"> Purchase Type: </span> Purchase
                                         </span>
                                     </List>
 
