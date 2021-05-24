@@ -307,6 +307,27 @@ div.vehicleMakeModel{
 .margin__space3{
   margin-left:56%;
 }
+.margin__space4{
+  margin-left:26%;
+}
+.margin__space5{
+  margin-left:21.5%;
+}
+.margin__space6{
+  margin-left:29%;
+}
+.textStyleTotalFee{
+  font-size: 14px;
+  font-weight: 800 !important;
+  font-family: ToyotaTypeBook;
+  color:#cc0000;
+}
+.totalFeeSum{
+  font-size: 18px;
+  font-weight: 1000 !important;
+  font-family: ToyotaTypeBook;
+  margin-left: 12%;
+}
 .textBold{
   font-weight: 1000 !important;
   font-family: ToyotaTypeBook;
@@ -357,4 +378,10 @@ div.vehicleMakeModel{
 }
 .button{
 text-transform: initial !important;
+}
+.purchasedScreenTotal {
+  width: 240px;
+  height: 2px;
+  margin: 8px 0 5px;
+  background-color: #dddbda;
 }
