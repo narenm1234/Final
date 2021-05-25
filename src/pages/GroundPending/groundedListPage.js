@@ -40,7 +40,7 @@ export default function ListingPage(props) {
                             <Grid item xs={4}>
                                 <div class="Year-Make-Model-Col">
                                     <div class="vehicleMakeModel">
-                                        <span>{vehicle.brand} {vehicle.model} - {vehicle.text_color} | {vehicle.model_year}</span>
+                                        <span>{vehicle.brand} {vehicle.model}  {vehicle.ext_color}  {vehicle.model_year}</span>
                                     </div>
                                     <List >
 
@@ -142,7 +142,7 @@ export default function ListingPage(props) {
                     </div>
                 )
             }) : (<div className='listingPageCard'>
-                <h1>No  data found</h1>
+                
             </div>)
 
     );

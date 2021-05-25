@@ -5,6 +5,7 @@ import List from '@material-ui/core/List';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import SwipeableTextMobileStepper from './Carousel';
 import moment from 'moment';
+import CurrencyFormat from 'react-currency-format';
 import { getPurchasedList } from '../../service/api';
 //let resp = [{ "account_type": "LEASE", "pay_off_amt": 12000, "residual_amt": 11000, "remaining_pmts": 250, "model_year": 19, "brand": "MAZDA", "model": "SD", "ext_color": "Color", "grounding_date": "2021-05-11T00:00:00", "odometer_reading": "9000", "vin": "JM3KFBDM0K1698372" }, { "account_type": "LEASE", "pay_off_amt": 12500, "residual_amt": 9000, "remaining_pmts": 300, "model_year": 2018, "brand": "MAZDA", "model": "MAZDA3", "ext_color": "Black", "grounding_date": "2021-05-11T00:00:00", "odometer_reading": "12000", "vin": "JM3KFADM3K1586305" }, { "account_type": "LEASE", "pay_off_amt": 14000, "residual_amt": 11000, "remaining_pmts": 400, "model_year": 2018, "brand": "MAZDA", "model": "MAZDA3", "ext_color": "Blue", "grounding_date": "2021-05-07T00:00:00", "odometer_reading": "8000", "vin": "3MZBPBCM4LM125760" }, { "account_type": "LEASE", "pay_off_amt": 15000, "residual_amt": 14000, "remaining_pmts": 500, "model_year": 2018, "brand": "MAZDA", "model": "MAZDA3", "ext_color": "Blue", "grounding_date": "2021-05-08T00:00:00", "odometer_reading": "6000", "vin": "JM3KFABM2L0748452" }]
 export default function ListingPage2(props) {
@@ -34,7 +35,7 @@ export default function ListingPage2(props) {
                             <Grid item xs={4}>
                                 <div class="Year-Make-Model-Col">
                                     <div class="vehicleMakeModel">
-                                        <span>{vehicle.brand} {vehicle.model} - {vehicle.text_color} | {vehicle.model_year}</span>
+                                        <span>{vehicle.brand} {vehicle.model}  {vehicle.ext_color}  {vehicle.model_year}</span>
                                     </div>
                                     <List >
 
@@ -59,7 +60,7 @@ export default function ListingPage2(props) {
                                         <span className="textBold"> Inspection Mileage:</span> 000,000 miles
                                         </span> */}
                                         <span className="textStyle">
-                                            <span className="textBold"> Purchase Type: </span> {vehicle.purchase_type}
+                                            <span className="textBold"> Purchase Type: Purchase </span> {vehicle.purchase_type}
                                         </span>
                                     </List>
 
@@ -72,17 +73,17 @@ export default function ListingPage2(props) {
                                     </div>
                                     <List >
                                         <span className="textStyle">
-                                            <span className="textBold"> Payoff Price  </span> <span className="margin__space4">${vehicle.pay_off_amt}</span>
+                                            <span className="textBold"> Payoff Price  </span> <span className="margin__space4"><CurrencyFormat value={ vehicle.pay_off_amt} displayType={'text'} thousandSeparator={true} prefix={'$'} /></span>
                                         </span>
                                         <span className="textStyle">
-                                            <span className="textBold">  Rem.Payments</span> <span className="margin__space5">${vehicle.remaining_pmts}</span>
+                                            <span className="textBold">  Rem.Payments</span> <span className="margin__space5"><CurrencyFormat value={ vehicle.remaining_pmts} displayType={'text'} thousandSeparator={true} prefix={'$'} /></span>
                                         </span>
                                         <span className="textStyle">
-                                            <span className="textBold"> Admin Fee</span> <span className="margin__space6">{vehicle.admin_fee}</span>
+                                            <span className="textBold"> Admin Fee</span> <span className="margin__space6">$300</span>
                                         </span>
                                         <div className="purchasedScreenTotal" />
                                         <span className="textStyle">
-                                            <span className="textStyleTotalFee"> Total Price</span> <span className="totalFeeSum">$100,000.00</span>
+                                            <span className="textStyleTotalFee"> Total Price</span> <span className="totalFeeSum"><CurrencyFormat value = {vehicle.pay_off_amt + vehicle.remaining_pmts + 300}  displayType={'text'} thousandSeparator={true} prefix={'$'} /></span>
                                         </span>
                                     </List>
 
@@ -93,7 +94,7 @@ export default function ListingPage2(props) {
                     </div>
                 )
             }) : (<div className='listingPageCard'>
-                <h1>No  data found</h1>
+                
             </div>)
 
     );
