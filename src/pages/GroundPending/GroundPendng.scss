@@ -261,10 +261,10 @@
   background-color: #c23934 !important;
 }
 .listingPageCard {
-  width: 82%;
+  width: 80%;
   position: relative;
   top: 60px;
-  left: 15%;
+  left: 300px;
   background-color: #ffffff;
   display: flex;
   margin-bottom: 20px;
@@ -276,7 +276,7 @@
   background-color: #ffffff;
 }
 .Vehicle-Price-Option {
-  width           : 425px;
+  width           : 70%;
   margin-top      : 8px;
   border-radius   : 4px;
   background-color: #ffffff;
@@ -332,6 +332,9 @@ div.vehicleMakeModel{
   font-weight: 1000 !important;
   font-family: ToyotaTypeBook;
 }
+.textSize{
+  font-size: 14px;
+}
 .vin{
   text-decoration: none;
   font-weight: 500 !important;
@@ -350,8 +353,9 @@ div.vehicleMakeModel{
   text-transform: initial !important;
 }
 .progressStyle{
-  width:60%;
-  margin: 10px;
+  width:70%;
+  margin: 10px 0  10px 0;
+  display: flex;
 }
 .img {
   height: 168px;
@@ -361,7 +365,7 @@ div.vehicleMakeModel{
   width: 100%;
 }
 .NavigatorButtons{
-  margin-top: 45px;
+  margin-top: 5px;
 }
 .textStyleWarning{
   color:#cc0000;
@@ -384,4 +388,7 @@ text-transform: initial !important;
   height: 2px;
   margin: 8px 0 5px;
   background-color: #dddbda;
+}
+.paddingCSS{
+  padding: 0px!important;
 }
