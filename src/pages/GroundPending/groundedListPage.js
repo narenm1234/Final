@@ -16,8 +16,6 @@ export default function ListingPage(props) {
     const [value, setValue] = useState([])
 
     useEffect(() => {
-
-
         getVehicleDetails()
     }, [value]);
     async function getVehicleDetails() {
@@ -142,7 +140,7 @@ export default function ListingPage(props) {
                     </div>
                 )
             }) : (<div className='listingPageCard'>
-                
+
             </div>)
 
     );
