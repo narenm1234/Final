@@ -22,10 +22,6 @@ export default function ListingPage(props) {
         let apiResponse = await getGroundingList();
         setVehicleResponse(apiResponse.data.data);
     }
-
-
-
-
     return (
         vehicleResponse.length > 0 ?
             vehicleResponse.map(vehicle => {
