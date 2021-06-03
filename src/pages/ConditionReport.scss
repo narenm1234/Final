@@ -1,0 +1,145 @@
+.conditionPageCard{
+  width: 70%;
+  display: flex;
+  margin: 5% 15% 0% 25%;
+  background: #f3f2f2;
+}
+.reportTitle {
+    width: 242px;
+    height: 30px;
+    font-family: ToyotaType;
+    font-size: 20px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    color: #080707;
+  }
+  .damageTitle {
+    width: 100%;
+    height: 30px;
+    font-family: ToyotaType;
+    font-size: 14px;
+    padding-left: 25%;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    color: #080707;
+    display: block;
+    }
+  .ConditionReportSection {
+    display: inline-flex;
+    margin: 20px!important;
+  }
+  .ConditionCardBody{
+      margin: 8px 0px 15px;
+      padding: 16px;
+      border-radius: 4px;
+      box-shadow: -1px 0 3px 0 rgba(0, 0, 0, 0.25);
+      background-color: #ffffff;
+  }
+  .ConditionReportInspection {
+    width: 138px;
+    height: 33px;
+    padding: 4px 8px;
+    border-radius: 100px;
+    background-color: #04844b;
+  }
+  .BadgeValue {
+    width: 122px;
+    height: 15px;
+    font-size: 12px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #ffffff;
+  }
+  .ConditionCard {
+    width: 162px;
+    height: 70px;
+    border-radius: 4px;
+    box-shadow: -1px 0 3px 0 rgba(0, 0, 0, 0.25);
+    background-color: #ffffff;
+  }
+  .ConditionCardDamage {
+    height: 70px;
+    border-radius: 4px;
+    box-shadow: -1px 0 3px 0 rgba(0, 0, 0, 0.25);
+    background-color: #ffffff;
+  }
+  .ConditionCardMargin{
+    margin-right: 25px !important;
+  }
+  .detailedReport {
+    height: 32px;
+    margin: 15.5px 77.5px 7.5px 64.5px;
+    padding: 4px 16px;
+    font-size: 14px;
+    border-radius: 4px;
+    border: solid 1px #0070d2;
+    background-color: #ffffff;
+  }
+  .disclaimer {
+    width: 327px;
+    height: 32px;
+    margin: 7.5px 0 0;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.6;
+    letter-spacing: normal;
+    text-align: center;
+    color: #e02020;
+  }
+  .smallCardTitle{
+  height: 14px;
+  margin: 0 0 10px;
+  font-size: 12px;
+  font-weight: 300;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.17;
+  letter-spacing: normal;
+  text-align: center;
+  color: #3e3e3c;
+  }
+  .smallCardBody {
+    width: 72px;
+    height: 24px;
+    padding: 0px 0px 0 25%;
+    font-size: 16px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    text-align: center;
+    color: #080707;
+  }
+  .inputFieldTextArea {
+    width: 400px;
+    height: 130px;
+    margin: 2px 0 0;
+    padding: 8px 4px 4px 12px;
+    border-radius: 4px;
+    border: solid 1px #dddbda;
+    background-color: #ffffff;
+  }
+  .LabelTextTextArea {
+    width: 94px;
+    height: 18px;
+    margin: 0 6px 0 0;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    color: #3e3e3c;
+  }
