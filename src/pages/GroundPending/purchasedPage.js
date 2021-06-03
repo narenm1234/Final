@@ -47,7 +47,7 @@ export default function ListingPage2(props) {
                                         </span> */}
 
                                         <span className="textStyle">
-                                            <span className="textBold"> VIN:</span><a className="vin" href="/home"> {vehicle.vin}</a>
+                                            <span className="textBold"> VIN:</span><a className="vin" href="/conditionreport"> {vehicle.vin}</a>
                                         </span>
 
                                         <span className="textStyle">
@@ -73,17 +73,17 @@ export default function ListingPage2(props) {
                                     </div>
                                     <List >
                                         <span className="textStyle">
-                                            <span className="textBold"> Payoff Price  </span> <span className="margin__space4"><CurrencyFormat value={ vehicle.pay_off_amt} displayType={'text'} thousandSeparator={true} prefix={'$'} /></span>
+                                            <span className="textBold"> Payoff Price  </span> <span className="margin__space4"><CurrencyFormat value={vehicle.pay_off_amt} displayType={'text'} thousandSeparator={true} prefix={'$'} /></span>
                                         </span>
                                         <span className="textStyle">
-                                            <span className="textBold">  Rem.Payments</span> <span className="margin__space5"><CurrencyFormat value={ vehicle.remaining_pmts} displayType={'text'} thousandSeparator={true} prefix={'$'} /></span>
+                                            <span className="textBold">  Rem.Payments</span> <span className="margin__space5"><CurrencyFormat value={vehicle.remaining_pmts} displayType={'text'} thousandSeparator={true} prefix={'$'} /></span>
                                         </span>
                                         <span className="textStyle">
                                             <span className="textBold"> Admin Fee</span> <span className="margin__space6">$300</span>
                                         </span>
                                         <div className="purchasedScreenTotal" />
                                         <span className="textStyle">
-                                            <span className="textStyleTotalFee"> Total Price</span> <span className="totalFeeSum"><CurrencyFormat value = {vehicle.pay_off_amt + vehicle.remaining_pmts + 300}  displayType={'text'} thousandSeparator={true} prefix={'$'} /></span>
+                                            <span className="textStyleTotalFee"> Total Price</span> <span className="totalFeeSum"><CurrencyFormat value={vehicle.pay_off_amt + vehicle.remaining_pmts + 300} displayType={'text'} thousandSeparator={true} prefix={'$'} /></span>
                                         </span>
                                     </List>
 
@@ -94,7 +94,7 @@ export default function ListingPage2(props) {
                     </div>
                 )
             }) : (<div className='listingPageCard'>
-                
+
             </div>)
 
     );
