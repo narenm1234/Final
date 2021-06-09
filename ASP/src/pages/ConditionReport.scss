@@ -35,6 +35,7 @@
     margin: 20px!important;
   }
   .ConditionCardBody{
+    width:90%!important;
       margin: 8px 0px 15px;
       padding: 16px;
       border-radius: 4px;
@@ -123,7 +124,7 @@
     color: #080707;
   }
   .inputFieldTextArea {
-    width: 400px;
+    width: 90%;
     height: 130px;
     margin: 2px 0 0;
     padding: 8px 4px 4px 12px;
@@ -142,4 +143,34 @@
     line-height: 1.5;
     letter-spacing: normal;
     color: #3e3e3c;
+  }
+  .vehicleSectionCR{
+    width: 90%;
+  margin: 16px 24px 40px 10px;
+  padding: 16px 9px 32px 24px;
+  border-radius: 4px;
+  background-color: #ffffff;
+  }
+  .table{
+    min-width: 250,
+  }
+  .MuiTableCell-root{
+    border-bottom: none!important;
+  }
+  .MuiTableHead-root{
+    background-color: #fafaf9;
+  }
+  .MuiTableContainer-root{
+    box-shadow: none!important;
+  }
+  .disclaimerVRS {
+    margin: 7.5px 0 0;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.6;
+    letter-spacing: normal;
+    text-align: center;
+    color: #e02020;
   }
