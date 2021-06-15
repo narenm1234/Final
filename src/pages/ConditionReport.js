@@ -15,15 +15,24 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
+import ViewDetailedReport from './ViewDetailedReport';
+import MyGallery from './ImageGallery';
 export default function ConditionReport(props) {
     let listOfItem = ['VIN', 'Engine', 'Door', 'Body Style', 'Transmission', 'Drive Train', 'Interior type', 'Interior Color', 'Keys', 'Interior Type', 'Odor', 'Keys', 'Grounding Mileage', 'Account Type'];
     let wheelTyrelistOfItem = ['LF', 'RF', 'LR', 'RR', 'SP', 'RR']
+    const [open, setOpen] = React.useState(false)
+
+    const handleOpen = () => {
+        setOpen(!open)
+    }
+    const handleClose = () => {
+        setOpen(!open)
+    }
     return (
         <div className='conditionPageCard'>
             <Grid container spacing={3}>
                 <Grid item xs={5}>
-                    <SwipeableTextMobileStepper />
-
+                    <MyGallery />
                     <Grid container className="ConditionCardBody">
                         <div className='damageTitle'>
                             <span>Damage Report</span>
@@ -64,7 +73,7 @@ export default function ConditionReport(props) {
                                 </CardContent>
                             </Card>
                         </Grid>
-                        <div className="detailedReport">
+                        <div className="detailedReport" onClick={handleOpen}>
                             View detailed Report
                         </div>
                         <div className="disclaimer">
@@ -273,6 +282,7 @@ export default function ConditionReport(props) {
                     </Grid>
                 </Grid>
             </Grid>
+            <ViewDetailedReport open={open} close={handleClose} />
         </div>
     );
 };
