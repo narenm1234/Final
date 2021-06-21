@@ -6,14 +6,14 @@ import * as RiIcons from 'react-icons/ri';
 import { MdClose } from "react-icons/md";
 export const SidebarData = [
   
-  {
-    title: 'Home',
-    path: '/home',
-  },
-  {
-    title: 'Check in Vehicle',
-    path: '/groundpending',
-  },
+  // {
+  //   title: 'Home',
+  //   path: '/home',
+  // },
+  // {
+  //   title: 'Check in Vehicle',
+  //   path: '/groundpending',
+  // },
   {
     title: 'Grounded',
 

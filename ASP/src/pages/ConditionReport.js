@@ -74,7 +74,7 @@ export default function ConditionReport(props) {
                             </Card>
                         </Grid>
                         <div className="detailedReport" onClick={handleOpen}>
-                            View detailed Report
+                            View Full Damage Report
                         </div>
                         <div className="disclaimer">
                             Disclaimer: Damage estimates are included for reference and may not be reflective of the actual repair costs

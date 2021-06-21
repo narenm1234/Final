@@ -151,7 +151,7 @@ export default function ViewDetailedReport(props) {
                                 <TableRow>
                                     <TableCell>Damaged Area</TableCell>
                                     <TableCell align="right">Wear&Tear</TableCell>
-                                    <TableCell align="right">Labour Hpurs</TableCell>
+                                    <TableCell align="right">Labour Hours</TableCell>
                                     <TableCell align="right">Paint Hours</TableCell>
                                     <TableCell align="right">Part Cost</TableCell>
                                     <TableCell align="right">Estimate</TableCell>

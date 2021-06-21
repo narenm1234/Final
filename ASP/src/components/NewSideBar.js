@@ -31,18 +31,6 @@ export default function NewSidebar() {
     };
     return (
         <div className={classes.sideBarCSS}>
-            <ListItem component={Link} to="/home">
-                <ListItemText
-                    primary="Home"
-                />
-                <Chip className={classes.root} label="0"></Chip>
-            </ListItem>
-            <ListItem component={Link} to="/checkinvehicle">
-                <ListItemText
-                    primary="Check In vehicle"
-                />
-                <Chip className={classes.root} label="0"></Chip>
-            </ListItem>
             <List
                 component="nav"
                 aria-labelledby="nested-list-subheader"
