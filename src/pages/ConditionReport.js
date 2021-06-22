@@ -17,6 +17,9 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import ViewDetailedReport from './ViewDetailedReport';
 import MyGallery from './ImageGallery';
+import CloudDownloadOutlined from '@material-ui/icons/CloudDownloadOutlined'
+import PrintSharp from '@material-ui/icons/PrintSharp'
+
 export default function ConditionReport(props) {
     let listOfItem = ['VIN', 'Engine', 'Door', 'Body Style', 'Transmission', 'Drive Train', 'Interior type', 'Interior Color', 'Keys', 'Interior Type', 'Odor', 'Keys', 'Grounding Mileage', 'Account Type'];
     let wheelTyrelistOfItem = ['LF', 'RF', 'LR', 'RR', 'SP', 'RR']
@@ -30,7 +33,15 @@ export default function ConditionReport(props) {
     }
     return (
         <div className='conditionPageCard'>
-            <Grid container spacing={3}>
+            <Grid item xs={12}>
+                <div className='conditionTopBar'>
+                    <Grid xs={12} className='conditionTopBarLayout'>
+                        <CloudDownloadOutlined /><span className="conditionTopBarStyles">Download Report</span>
+                        <PrintSharp /><span className="conditionTopBarStyles">Print Report</span>
+                    </Grid>
+                </div>
+            </Grid>
+            <Grid container spacing={3} className="ConditionCardReportSpace">
                 <Grid item xs={5}>
                     <MyGallery />
                     <Grid container className="ConditionCardBody">
@@ -43,7 +54,7 @@ export default function ConditionReport(props) {
                                     <div className="smallCardTitle">
                                         Exterior total
                                     </div>
-                                    <div className="smallCardBody">
+                                    <div className="smallCardBody warningColor">
                                         $10000
                                     </div>
                                 </CardContent>
@@ -55,7 +66,7 @@ export default function ConditionReport(props) {
                                     <div className="smallCardTitle">
                                         Interior total
                                     </div>
-                                    <div className="smallCardBody">
+                                    <div className="smallCardBody warningColor">
                                         $10000
                                     </div>
                                 </CardContent>
@@ -67,18 +78,22 @@ export default function ConditionReport(props) {
                                     <div className="smallCardTitle">
                                         Mechanical total
                                     </div>
-                                    <div className="smallCardBody">
+                                    <div className="smallCardBody warningColor">
                                         $10000
                                     </div>
                                 </CardContent>
                             </Card>
                         </Grid>
-                        <div className="detailedReport" onClick={handleOpen}>
-                            View detailed Report
-                        </div>
-                        <div className="disclaimer">
-                            Disclaimer: Damage estimates are included for reference and may not be reflective of the actual repair costs
-                        </div>
+                        <Grid item xs={12} >
+                            <div className="detailedReport" onClick={handleOpen}>
+                                View detailed Report
+                            </div>
+                        </Grid>
+                        <Grid item xs={12} >
+                            <div className="disclaimer">
+                                Disclaimer: Damage estimates are included for reference and may not be reflective of the actual repair costs
+                            </div>
+                        </Grid>
                     </Grid>
                     <div className="LabelTextTextArea">Announcements</div>
                     <TextareaAutosize
