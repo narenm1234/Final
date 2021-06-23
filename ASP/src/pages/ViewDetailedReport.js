@@ -77,14 +77,19 @@ export default function ViewDetailedReport(props) {
                     Damage  Report
                 </DialogTitle>
                 <DialogContent>
-                    <Grid item xs={6} >
-                        <MyGallery thumbnailPosition={"left"} />
+                    <Grid item xs={6} className="galleryView">
+                        <MyGallery originalHeight="250px" originalWidth="250px" thumbnailPosition={"left"} />
                     </Grid>
 
-                    <div className="viewReportCenter">Estimated Damage Repair Totals</div>
-                    <hr />
+                    <Grid container >
+                        <Grid xs={12}>
+                            <div className="viewReportCenter">Estimated Damage Repair Totals</div>
+                            <div className="hrLine" />
+                        </Grid>
+                    </Grid>
                     <Grid container className="viewReportBody">
-                        <Grid item xs={2} >
+
+                        <Grid item  >
                             <Card className="viewReportCards" >
                                 <CardContent>
                                     <div className="smallCardTitle">
@@ -96,7 +101,7 @@ export default function ViewDetailedReport(props) {
                                 </CardContent>
                             </Card>
                         </Grid>
-                        <Grid item xs={2} >
+                        <Grid item  >
                             <Card className="viewReportCards" >
                                 <CardContent>
                                     <div className="smallCardTitle">
@@ -108,7 +113,7 @@ export default function ViewDetailedReport(props) {
                                 </CardContent>
                             </Card>
                         </Grid>
-                        <Grid item xs={2} >
+                        <Grid item  >
                             <Card className="viewReportCards" >
                                 <CardContent>
                                     <div className="smallCardTitle">
@@ -120,7 +125,7 @@ export default function ViewDetailedReport(props) {
                                 </CardContent>
                             </Card>
                         </Grid>
-                        <Grid item xs={2} >
+                        <Grid item  >
                             <Card className="viewReportCards" >
                                 <CardContent>
                                     <div className="smallCardTitle">
@@ -132,7 +137,7 @@ export default function ViewDetailedReport(props) {
                                 </CardContent>
                             </Card>
                         </Grid>
-                        <Grid item xs={2} >
+                        <Grid item  >
                             <Card className="ConditionCardDamage" >
                                 <CardContent>
                                     <div className="smallCardTitle">
@@ -159,7 +164,7 @@ export default function ViewDetailedReport(props) {
                             </TableHead>
                             <TableBody>
                                 <TableRow>
-                                    <TableCell colSpan={6} component="th" scope="row">
+                                    <TableCell colSpan={6} component="th" scope="row" className="warningColorTable">
                                         Interior
                                     </TableCell>
 
@@ -186,7 +191,7 @@ export default function ViewDetailedReport(props) {
                                 })
                                 }
                                 <TableRow>
-                                    <TableCell colSpan={6} component="th" scope="row">
+                                    <TableCell colSpan={6} component="th" scope="row" className="warningColorTable">
                                         Exterior
                                     </TableCell>
 
@@ -214,7 +219,7 @@ export default function ViewDetailedReport(props) {
                                 })
                                 }
                                 <TableRow>
-                                    <TableCell colSpan={6} component="th" scope="row">
+                                    <TableCell colSpan={6} component="th" scope="row" className="warningColorTable">
                                         Mechanical
                                     </TableCell>
 
@@ -275,8 +280,8 @@ export default function ViewDetailedReport(props) {
                         </Table>
                     </TableContainer>
                 </DialogContent>
-                <DialogActions>
-                    <Button autoFocus onClick={handleClose} color="secondary">
+                <DialogActions className="reportFooter">
+                    <Button autoFocus onClick={handleClose} className="closeButton" color="secondary">
                         close
                     </Button>
                 </DialogActions>
