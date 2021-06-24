@@ -3,9 +3,8 @@ import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import List from '@material-ui/core/List';
-import SwipeableTextMobileStepper from './GroundPending/Carousel';
+import Typography from '@material-ui/core/Typography';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
-import ListItem from '@material-ui/core/ListItem';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -86,7 +85,7 @@ export default function ConditionReport(props) {
                         </Grid>
                         <Grid item xs={12} >
                             <div className="detailedReport" onClick={handleOpen}>
-                                View detailed Report
+                                View Full Detailed Report
                             </div>
                         </Grid>
                         <Grid item xs={12} >
@@ -176,7 +175,8 @@ export default function ConditionReport(props) {
                     </Grid>
                     <Grid container spacing={3}>
                         <Card className="vehicleSectionCR">
-                            <h4>Vehicle Details</h4>
+                            <Typography variant="h6">Vehicle Details</Typography>
+                            <hr />
                             <CardContent>
 
                                 {listOfItem.map(list => {
@@ -199,7 +199,8 @@ export default function ConditionReport(props) {
                             </CardContent>
 
                             <CardContent>
-                                <h4>Accessories</h4>
+                                <Typography variant="h6">Accessories</Typography>
+                                <hr />
                                 <TableContainer component={Paper}>
                                     <Table className="table" size="small" aria-label="a dense table">
                                         {/*  <TableHead>
@@ -229,7 +230,8 @@ export default function ConditionReport(props) {
                                 </TableContainer>
                             </CardContent>
                             <CardContent>
-                                <h4>Wheels and Tyres</h4>
+                                <Typography variant="h6">Wheels and Tyres</Typography>
+                                <hr />
                                 <TableContainer component={Paper}>
                                     <Table className="table" size="small" aria-label="a dense table">
                                         <TableHead>
@@ -261,7 +263,8 @@ export default function ConditionReport(props) {
                                 </TableContainer>
                             </CardContent>
                             <CardContent>
-                                <h4>Build Data</h4>
+                                <Typography variant="h6">Build Data</Typography>
+                                <hr />
                                 <TableContainer component={Paper}>
                                     <Table className="table" size="small" aria-label="a dense table">
                                         <TableHead>
