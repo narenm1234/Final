@@ -18,7 +18,7 @@ import ViewDetailedReport from './ViewDetailedReport';
 import MyGallery from './ImageGallery';
 import CloudDownloadOutlined from '@material-ui/icons/CloudDownloadOutlined'
 import PrintSharp from '@material-ui/icons/PrintSharp'
-
+import Button from '@material-ui/core/Button';
 export default function ConditionReport(props) {
     let listOfItem = ['VIN', 'Engine', 'Door', 'Body Style', 'Transmission', 'Drive Train', 'Interior type', 'Interior Color', 'Keys', 'Interior Type', 'Odor',  'Grounding Mileage', 'Account Type'];
     let wheelTyrelistOfItem = ['LF', 'RF', 'LR', 'RR', 'SP', 'RR']
@@ -84,9 +84,9 @@ export default function ConditionReport(props) {
                             </Card>
                         </Grid>
                         <Grid item xs={12} >
-                            <div className="detailedReport" onClick={handleOpen}>
+                            <Button variant="outlined" color="primary" className="detailedReport" onClick={handleOpen}>
                                 View Full Detailed Report
-                            </div>
+                            </Button>
                         </Grid>
                         <Grid item xs={12} >
                             <div className="disclaimer">

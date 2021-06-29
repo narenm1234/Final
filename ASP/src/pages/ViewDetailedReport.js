@@ -9,8 +9,7 @@ import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
+import List from '@material-ui/core/List';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -19,6 +18,10 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import MyGallery from './ImageGallery';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import ListItemText from '@material-ui/core/ListItemText';
+import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 const styles = (theme) => ({
     root: {
         margin: 0,
@@ -77,79 +80,54 @@ export default function ViewDetailedReport(props) {
                     Damage  Report
                 </DialogTitle>
                 <DialogContent>
-                    <Grid item xs={6} className="galleryView">
-                        <MyGallery originalHeight="250px" originalWidth="250px" thumbnailPosition={"left"} />
-                    </Grid>
-
                     <Grid container >
-                        <Grid xs={12}>
+                        <Grid item xs={6} className="galleryView">
+                            <MyGallery />
+                        </Grid>
+
+
+                        <Grid xs={6}>
                             <div className="viewReportCenter">Estimated Damage Repair Totals</div>
                             <div className="hrLine" />
-                        </Grid>
-                    </Grid>
-                    <Grid container className="viewReportBody">
+                            <Grid container className="experiorSpacing">
+                                <Grid item xs={12}>
+                                    <List >
+                                        <ListItem >
+                                            <ListItemText className="smallCardTitle"><span className="textBold alignleft">Interior</span></ListItemText>
+                                            <ListItemSecondaryAction className="smallCardBody">$10000</ListItemSecondaryAction>
+                                        </ListItem>
+                                        <ListItem>
+                                            <ListItemText className="smallCardTitle"><span className="textBold alignleft">Exterior</span></ListItemText>
+                                            <ListItemSecondaryAction className="smallCardBody">$00,000.00</ListItemSecondaryAction>
+                                        </ListItem>
+                                        <ListItem>
+                                            <ListItemText className="smallCardTitle"><span className="textBold alignleft">Mechanical total</span></ListItemText>
+                                            <ListItemSecondaryAction className="smallCardBody">$00,000.00</ListItemSecondaryAction>
+                                        </ListItem>
+                                        <ListItem>
+                                            <ListItemText className="smallCardTitle"><span className="textBold alignleft">Normal W and T</span></ListItemText>
+                                            <ListItemSecondaryAction className="smallCardBody">$00,000.00</ListItemSecondaryAction>
+                                        </ListItem>
+                                        <ListItem>
+                                            <ListItemText className="smallCardTitle"><span className="textBold alignleft">Normal W and T</span></ListItemText>
+                                            <ListItemSecondaryAction className="smallCardBody">$00,000.00</ListItemSecondaryAction>
+                                        </ListItem>
+                                    </List>
 
-                        <Grid item  >
-                            <Card className="viewReportCards" >
-                                <CardContent>
-                                    <div className="smallCardTitle">
-                                        Interior
-                                    </div>
-                                    <div className="smallCardBody">
-                                        $10000
-                                    </div>
-                                </CardContent>
-                            </Card>
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <div className="LabelTextTextAreaDamage">Damage Area Description</div>
+                                    <TextareaAutosize
+                                        className="inputFieldTextAreaDamage"
+                                        aria-label="maximum height"
+                                        placeholder="Maximum 4 rows"
+                                        defaultValue="Short description that aligns with the photo that is being displayed from the table below" />
+                                </Grid>
+                            </Grid>
                         </Grid>
-                        <Grid item  >
-                            <Card className="viewReportCards" >
-                                <CardContent>
-                                    <div className="smallCardTitle">
-                                        Exterior
-                                    </div>
-                                    <div className="smallCardBody">
-                                        $00,000.00
-                                    </div>
-                                </CardContent>
-                            </Card>
-                        </Grid>
-                        <Grid item  >
-                            <Card className="viewReportCards" >
-                                <CardContent>
-                                    <div className="smallCardTitle">
-                                        Mechanical total
-                                    </div>
-                                    <div className="smallCardBody">
-                                        $00,000.00
-                                    </div>
-                                </CardContent>
-                            </Card>
-                        </Grid>
-                        <Grid item  >
-                            <Card className="viewReportCards" >
-                                <CardContent>
-                                    <div className="smallCardTitle">
-                                        Normal W and T
-                                    </div>
-                                    <div className="smallCardBody">
-                                        $00,000.00
-                                    </div>
-                                </CardContent>
-                            </Card>
-                        </Grid>
-                        <Grid item  >
-                            <Card className="ConditionCardDamage" >
-                                <CardContent>
-                                    <div className="smallCardTitle">
-                                        Exclusive W&T
-                                    </div>
-                                    <div className="smallCardBody">
-                                        $00,000.00
-                                    </div>
-                                </CardContent>
-                            </Card>
-                        </Grid>
+
                     </Grid>
+
                     <TableContainer component={Paper}>
                         <Table className="table" size="small" aria-label="a dense table">
                             <TableHead>

@@ -1,0 +1,31 @@
+import React, { useState } from 'react';
+import Card from '@material-ui/core/Card';
+import Button from '@material-ui/core/Button';
+import CardContent from '@material-ui/core/CardContent';
+import CustomizedInputBase from './CustomisedInput';
+import Typography from '@material-ui/core/Typography';
+import { Divider } from '@material-ui/core';
+const AdminVehicleSearch = (props) => {
+
+  return (
+    <Card className="adminSearchCard">
+      <CardContent className="adminSearcheader">
+        <Typography variant="h4" component="h4">
+          Welcome to Auction Sales Platform
+        </Typography>
+        <Typography variant="p" component="p">
+          Search for a vehicle, or start with any of the menu items on the left.
+        </Typography>
+      </CardContent>
+      <Divider />
+      <CardContent className="adminSearchCardBody">
+        <CustomizedInputBase />
+        <Button variant="contained" color="primary">
+          Close
+        </Button>
+      </CardContent>
+    </Card>
+
+  )
+}
+export default AdminVehicleSearch;

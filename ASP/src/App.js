@@ -14,6 +14,7 @@ import GroundPassed from './pages/GroundPassed';
 import GroundPurchased from './pages/GroundPurchased';
 import CheckinVehicle from './pages/CheckinVehicle';
 import ConditionReport from './pages/ConditionReport';
+import AdminHome from './pages/AdminHome'
 function App() {
   // useEffect(() => {
   //    const tokenResponse =await axiosConfig.getAuthToken();
@@ -25,23 +26,26 @@ function App() {
       <div>
         <Header></Header>
         <Router>
-          <Sidebar />
-          <Switch>
+          <div>
+            <Sidebar />
 
-            <Route path='/home' exact component={Home} />
-            {/* <Route path='/groundpending' exact component={VINSearch} /> */}
-            {/* <Route path='/grounded' exact component={GroundPending} />
+            <Switch>
+              <Route path='/home' exact component={Home} />
+              <Route path='/adminSearch' exact component={AdminHome} />
+              {/* <Route path='/groundpending' exact component={VINSearch} /> */}
+              {/* <Route path='/grounded' exact component={GroundPending} />
             <Route path='/passed' exact component={GroundPending1} />
             <Route path='/purchased' exact component={GroundPending2} />
             <Route path='/groundpending' exact component={GroundPending} />
             <Route path='/grounded' exact component={Grounded} /> */}
-            <Route path='/checkinvehicle' exact component={VINSearch} />
-            <Route path='/grounded' exact component={GroundPending} />
-            <Route path='/passed' exact component={GroundPending1} />
-            <Route path='/purchased' exact component={GroundPending2} />
-            <Route path='/grounded/lastchance' exact component={LastChance} />
-            <Route path='/conditionreport' exact component={ConditionReport} />
-          </Switch>
+              <Route path='/checkinvehicle' exact component={VINSearch} />
+              <Route path='/grounded' exact component={GroundPending} />
+              <Route path='/passed' exact component={GroundPending1} />
+              <Route path='/purchased' exact component={GroundPending2} />
+              <Route path='/grounded/lastchance' exact component={LastChance} />
+              <Route path='/conditionreport' exact component={ConditionReport} />
+            </Switch>
+          </div>
         </Router>
       </div>
     </>
