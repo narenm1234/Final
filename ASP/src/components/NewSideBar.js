@@ -31,6 +31,18 @@ export default function NewSidebar() {
     };
     return (
         <div className={classes.sideBarCSS}>
+            <ListItem component={Link} to="/home">
+                <ListItemText
+                    primary="Home"
+                />
+                <Chip className={classes.root} label="0"></Chip>
+            </ListItem>
+            <ListItem component={Link} to="/checkinvehicle">
+                <ListItemText
+                    primary="Check In vehicle"
+                />
+                <Chip className={classes.root} label="0"></Chip>
+            </ListItem>
             <List
                 component="nav"
                 aria-labelledby="nested-list-subheader"
@@ -52,6 +64,28 @@ export default function NewSidebar() {
                         </ListItem>
                         <ListItem component={Link} to="/purchased" >
                             <ListItemText primary="Purchased" />
+                            <Chip className={classes.root} label="0"></Chip>
+                        </ListItem>
+                    </List>
+                </Collapse>
+            </List>
+            <List
+                component="nav"
+                aria-labelledby="nested-list-subheader"
+            >
+                <ListItem button onClick={handleClick}>
+
+                    {open ? <ExpandLess /> : <ExpandMore />}
+                    <ListItemText primary="Admin" />
+                </ListItem>
+                <Collapse in={open} timeout="auto" unmountOnExit>
+                    <List component="div" disablePadding className={classes.sideBarCSS}>
+                        <ListItem component={Link} to="/adminSearch" >
+                            <ListItemText primary="Vehicle Search" />
+                            <Chip className={classes.root} label="4"></Chip>
+                        </ListItem>
+                        <ListItem component={Link} to="/passed" >
+                            <ListItemText primary="Inventory Requests" />
                             <Chip className={classes.root} label="0"></Chip>
                         </ListItem>
                     </List>
