@@ -8,50 +8,51 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import MyGallery from './ImageGallery';
 export default function AdminDetailedReport(props) {
-    let groundingDetails = [
-        { "Account Number": "00000000000" },
-        { "Current Status": "Detail" },
-        { "Customer Return Date": "00/00/2021" },
-        { "Grounding Dealer Number": "00000000000" },
-        { "Grounding Dealer Name": "Dealer Name" },
-        { "Grounding Date": "00/00/2021" },
-        { "Grounding Mileage": "000,000 mi" },
-        { "Transportation Order Date": "00/00/2021" },
-        { "Transportation Company": "Company Name" },
-        { "Bankruptcy Code": "Detail" },
-        { "Term Code": "Detail" },
-        { "Dealer Exclusivity Expire Date": "00/00/2021" },
-        { "Type": "Detail" },
-        { "Residual": "$00,000.00" },
-        { "Current Payoff Amount": "$00,000.00" },
-        { "Grounding Dealer Auction": "Detail" },
-        { "Total Outstanding Remaining Payments": "00" },
-        { "Guaranteed Payments": "$00,000.00" },
-        { "Payment Guarantee": "Yes/No" },
-        { "10-Day Rule No Charge Amount": "$00,000.00" },
-        { "Payoff at Grounding": "?????" },
-        { "Market Based Price": "$00,000.00" },
-        { "Remaining Payments at Grounding": "$00,000.00" },
-    ]
-    let inspectionDetails = [
-        { "Inspection Scheduled Date": "00/00/2021" },
-        { "Inspection Date": "00/00/2021" },
-        { "Inspection Status": "Detail" },
-        { "Inspection Mileage": "000,000 mi" },
-        { "Master Keys Returned": "00" },
-        { "Value Keys Returned": "00" },
-        { "Inspection Type": "Detail" },
-        { "Excess Wear & Tear Amount": "$00,000.00" },
-    ]
-    let purchaseDetails = [
-        { "Sold Date": "00/00/2021" },
-        { "Purchasing Dealer": "Dealer Name" },
-        { "Purchase Dealer Number": "00000000000" },
-        { "Purchase Type": "Detail" },
-        { "Gross Purchase Amount": "$00,000.00" },
-        { "Purchasing Dealer Legal Name": "Detail" },
-    ]
+    let groundingDetails = {
+        "Account Number": "00000000000",
+        "Current Status": "Detail",
+        "Customer Return Date": "00/00/2021",
+        "Current Status": "Detail",
+        "Grounding Dealer Number": "00000000000",
+        "Grounding Dealer Name": "Dealer Name",
+        "Grounding Date": "00/00/2021",
+        "Grounding Mileage": "000,000 mi",
+        "Transportation Order Date": "00/00/2021",
+        "Transportation Company": "Company Name",
+        "Bankruptcy Code": "Detail",
+        "Term Code": "Detail",
+        "Dealer Exclusivity Expire Date": "00/00/2021",
+        "Type": "Detail",
+        "Residual": "$00,000.00",
+        "Current Payoff Amount": "$00,000.00",
+        "Grounding Dealer Auction": "Detail",
+        "Total Outstanding Remaining Payments": "00",
+        "Guaranteed Payments": "$00,000.00",
+        "Payment Guarantee": "Yes/No",
+        "10-Day Rule No Charge Amount": "$00,000.00",
+        "Payoff at Grounding": "?????",
+        "Market Based Price": "$00,000.00",
+        "Remaining Payments at Grounding": "$00,000.00"
+    };
+    let inspectionDetails = {
+        "Inspection Scheduled Date": "00/00/2021",
+        "Inspection Date": "00/00/2021",
+        "Inspection Status": "Detail",
+        "Inspection Mileage": "000,000 mi",
+        "Master Keys Returned": "00",
+        "Value Keys Returned": "00",
+        "Inspection Type": "Detail",
+        "Excess Wear & Tear Amount": "$00,000.00"
+    };
 
+    let purchaseDetails = {
+        "Sold Date": "00/00/2021",
+        "Purchasing Dealer": "Dealer Name",
+        "Purchase Dealer Number": "00000000000",
+        "Purchase Type": "Detail",
+        "Gross Purchase Amount": "$00,000.00",
+        "Purchasing Dealer Legal Name": "Detail"
+    };
     const [open, setOpen] = React.useState(false)
 
     const handleOpen = () => {
@@ -82,7 +83,7 @@ export default function AdminDetailedReport(props) {
                             <hr />
                             <CardContent>
 
-                                {Object.entries(groundingDetails).forEach(([key, value]) => {
+                                {Object.entries(groundingDetails).map(([key, value]) => {
                                     return (
                                         <List className="paddingCSS">
                                             <ListItemText>
@@ -105,7 +106,7 @@ export default function AdminDetailedReport(props) {
                             <hr />
                             <CardContent>
 
-                                {Object.entries(inspectionDetails).forEach(([key, value]) => {
+                                {Object.entries(inspectionDetails).map(([key, value]) => {
                                     return (
                                         <List className="paddingCSS">
                                             <ListItemText>
@@ -127,7 +128,7 @@ export default function AdminDetailedReport(props) {
                             <hr />
                             <CardContent>
 
-                                {Object.entries(purchaseDetails).forEach(([key, value]) => {
+                                {Object.entries(purchaseDetails).map(([key, value]) => {
                                     return (
                                         <List className="paddingCSS">
                                             <ListItemText>

@@ -29,8 +29,14 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function CustomizedInputBase() {
+export default function CustomizedInputBase(props) {
     const classes = useStyles();
+    const [searchtext, setSearchtext] = React.useState("");
+
+    const handleSearchText = (value) => {
+        setSearchtext(value)
+        props.searchdetails(searchtext)
+    }
 
     return (
         <Paper component="form" className={classes.root}>
@@ -41,6 +47,7 @@ export default function CustomizedInputBase() {
                 className={classes.input}
                 placeholder="Search Vehicle By VIN"
                 inputProps={{ 'aria-label': 'search vehicle by VIN' }}
+                onChange={(evt) => handleSearchText(evt.target.value)}
             />
         </Paper>
     );
