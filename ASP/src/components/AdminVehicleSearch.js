@@ -5,6 +5,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CustomizedInputBase from './CustomisedInput';
 import Typography from '@material-ui/core/Typography';
 import { Divider } from '@material-ui/core';
+import SearchText from './SearchText/Search';
 const AdminVehicleSearch = (props) => {
 
   return (
@@ -19,7 +20,7 @@ const AdminVehicleSearch = (props) => {
       </CardContent>
       <Divider />
       <CardContent className="adminSearchCardBody">
-        <CustomizedInputBase />
+        <CustomizedInputBase searchdetails={(SearchText) => props.searchdetails(SearchText)} />
         <Button variant="contained" color="primary">
           Close
         </Button>
