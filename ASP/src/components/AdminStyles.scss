@@ -13,3 +13,60 @@
 .adminSearcheader{
     text-align: center;
 }
+.topBarAdmin {
+    height: 52px;
+    z-index: 1!important;
+    top: 52px!important;
+    padding: 7px 24px 7px 30%;
+    background-color: #ffffff!important;
+    color: #080707!important;
+}
+.notesSection{
+    width: 100%;
+    height: 100vh;
+    background-color: #ffffff;
+    z-index: 3!important;
+    position: fixed;
+    margin-top: 52px;
+    box-shadow: -1px 0 3px 0 rgba(0, 0, 0, 0.25)
+}
+.notesText{
+    width: 216px;
+  height: 150px;
+  margin: 0 0 16px 0;
+  padding: 5px 12px 45px;
+  border-radius: 4px;
+  border: solid 1px #dddbda;
+  background-color: #ffffff;
+}
+.notesTextContent{
+    font-size: 13px;
+}
+.notesSectionHeader{
+    width: 264px;
+    height: 52px;
+    margin: 0 0 24px;
+    padding: 10px 12px;
+    box-shadow: 0 1px 0 0 #dddbda;
+    background-color: #ffffff;
+}
+.notesSectionContent{
+    width: 217px!important;
+  height: 80px;
+  margin: 0 0 4px;
+  font-size: 13px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.54;
+  letter-spacing: normal;
+  color: #3e3e3c;
+  margin: 10px;
+  padding: 10px;
+}
+.adminTabsSection{
+    width: 70%;
+    display: flex;
+    margin: 9% 0% 0% 50%;
+    background: #f3f2f2;
+  }
