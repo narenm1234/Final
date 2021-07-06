@@ -1,6 +1,8 @@
 import React from 'react';
 import AdminVehicleSearch from '../components/AdminVehicleSearch';
-import AdminDetailedReport from './AdminDetailedReport';
+import Grid from '@material-ui/core/Grid';
+import VehicleSearchTabs from '../components/Tabs';
+import NotesSection from '../components/NotesSection';
 const AdminHome = () => {
   const [searchText, setSearchText] = React.useState("");
   const handleSearch = (text) => {
@@ -9,7 +11,7 @@ const AdminHome = () => {
   }
 
   return (
-    (searchText.length > 8) ? (<AdminDetailedReport />) : (<AdminVehicleSearch searchdetails={(text) => handleSearch(text)} />)
+    (searchText.length > 8) ? (<Grid container><Grid xs={10}><VehicleSearchTabs /></Grid><Grid xs={2}><NotesSection /></Grid></Grid>) : (<AdminVehicleSearch searchdetails={(text) => handleSearch(text)} />)
   );
 };
 
