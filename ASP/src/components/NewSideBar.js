@@ -31,7 +31,7 @@ export default function NewSidebar() {
     };
     return (
         <div className={classes.sideBarCSS}>
-            <ListItem component={Link} to="/home">
+            {/* <ListItem component={Link} to="/home">
                 <ListItemText
                     primary="Home"
                 />
@@ -42,7 +42,7 @@ export default function NewSidebar() {
                     primary="Check In vehicle"
                 />
                 <Chip className={classes.root} label="0"></Chip>
-            </ListItem>
+            </ListItem> */}
             <List
                 component="nav"
                 aria-labelledby="nested-list-subheader"
