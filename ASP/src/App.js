@@ -39,11 +39,17 @@ function App() {
             <Route path='/groundpending' exact component={GroundPending} />
             <Route path='/grounded' exact component={Grounded} /> */}
               <Route path='/checkinvehicle' exact component={VINSearch} />
-              <Route path='/grounded' exact component={GroundPending} />
+              <Route path='/grounded' exact exact render={
+                (props) => (<GroundPending {...props} />
+                )
+              } />
               <Route path='/passed' exact component={GroundPending1} />
               <Route path='/purchased' exact component={GroundPending2} />
               <Route path='/grounded/lastchance' exact component={LastChance} />
-              <Route path='/conditionreport' exact component={ConditionReport} />
+              <Route path='/conditionreport' exact render={
+                (props) => (<ConditionReport {...props} />
+                )
+              } />
             </Switch>
           </div>
         </Router>
