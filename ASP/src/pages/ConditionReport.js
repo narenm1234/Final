@@ -19,13 +19,41 @@ import MyGallery from './ImageGallery';
 import CloudDownloadOutlined from '@material-ui/icons/CloudDownloadOutlined'
 import PrintSharp from '@material-ui/icons/PrintSharp'
 import Button from '@material-ui/core/Button';
-import { getInspectionList } from '../service/api';
+import { getInspectionVehicleDetails, getInspectionAccessoryDetails, getInspectionWheelTiresDetails } from '../service/api'
 export default function ConditionReport(props) {
     let listOfItem = ['VIN', 'Engine', 'Door', 'Body Style', 'Transmission', 'Drive Train', 'Interior type', 'Interior Color', 'Keys', 'Interior Type', 'Odor',  'Grounding Mileage', 'Account Type'];
     let wheelTyrelistOfItem = ['LF', 'RF', 'LR', 'RR', 'SP', 'RR']
     const [open, setOpen] = React.useState(false)
-    const [vehicleResponse, setVehicleResponse] = useState([])
-    const [value, setValue] = useState([])
+    const [condionVehicleDetails, setCondionVehicleDetails] = React.useState({})
+    const [accessoryDetails, setAccessoryDetails] = React.useState({})
+    const [wheelTiresDetails, setWheelTiresDetails] = React.useState({})
+    const [vin, setVin] = React.useState(props.location.state.vin)
+    const [inspectionId, setInspectionId] = React.useState(0)
+    console.log("vin", vin)
+    useEffect(() => {
+        getConditionVehicleDetails()
+    }, [vin]);
+
+    useEffect(() => {
+        getInspectionAccessory(inspectionId)
+        getInspectionWheelTires(inspectionId)
+    }, [inspectionId]);
+
+    async function getConditionVehicleDetails() {
+        let apiResponse = await getInspectionVehicleDetails(vin);
+        setCondionVehicleDetails(apiResponse.data.data);
+        setInspectionId(apiResponse.data.data.inspectionId)
+    }
+
+    async function getInspectionAccessory(inspectionId) {
+        let apiResponse = await getInspectionAccessoryDetails(inspectionId);
+        setAccessoryDetails(apiResponse.data.data);
+    }
+
+    async function getInspectionWheelTires(inspectionId) {
+        let apiResponse = await getInspectionWheelTiresDetails(inspectionId);
+        setWheelTiresDetails(apiResponse.data.data);
+    }
 
     const handleOpen = () => {
         setOpen(!open)
@@ -182,22 +210,184 @@ export default function ConditionReport(props) {
                             <hr />
                             <CardContent>
 
-                                {listOfItem.map(list => {
-                                    return (
-                                        <List className="paddingCSS">
-                                            <ListItemText>
-                                                <span className="textStyle">
-                                                    <span className="textBold">  {list}  </span>
+                                <List className="paddingCSS">
+                                    <ListItemText>
+                                        <span className="textStyle">
+                                            <span className="textBold">  VIN  </span>
 
-                                                </span>
-                                            </ListItemText>
-                                            <ListItemSecondaryAction>
-                                                <span className="textSize">Details</span>
-                                            </ListItemSecondaryAction>
-                                        </List>
-                                    )
-                                })
-                                }
+                                        </span>
+                                    </ListItemText>
+                                    <ListItemSecondaryAction>
+                                        <span className="textSize">{vin}</span>
+                                    </ListItemSecondaryAction>
+                                </List>
+                                <List className="paddingCSS">
+                                    <ListItemText>
+                                        <span className="textStyle">
+                                            <span className="textBold">  Inspection Date  </span>
+
+                                        </span>
+                                    </ListItemText>
+                                    <ListItemSecondaryAction>
+                                        <span className="textSize">{condionVehicleDetails?.inspection_date}</span>
+                                    </ListItemSecondaryAction>
+                                </List>
+                                <List className="paddingCSS">
+                                    <ListItemText>
+                                        <span className="textStyle">
+                                            <span className="textBold">  Inspection Location  </span>
+
+                                        </span>
+                                    </ListItemText>
+                                    <ListItemSecondaryAction>
+                                        <span className="textSize">{condionVehicleDetails?.location_address}</span>
+                                    </ListItemSecondaryAction>
+                                </List>
+                                <List className="paddingCSS">
+                                    <ListItemText>
+                                        <span className="textStyle">
+                                            <span className="textBold">  Consignor  </span>
+
+                                        </span>
+                                    </ListItemText>
+                                    <ListItemSecondaryAction>
+                                        <span className="textSize">{condionVehicleDetails?.location_address}</span>
+                                    </ListItemSecondaryAction>
+                                </List>
+                                <List className="paddingCSS">
+                                    <ListItemText>
+                                        <span className="textStyle">
+                                            <span className="textBold">  Engine  </span>
+
+                                        </span>
+                                    </ListItemText>
+                                    <ListItemSecondaryAction>
+                                        <span className="textSize">{condionVehicleDetails?.engine_cylinder}</span>
+                                    </ListItemSecondaryAction>
+                                </List>
+                                <List className="paddingCSS">
+                                    <ListItemText>
+                                        <span className="textStyle">
+                                            <span className="textBold">  Door  </span>
+
+                                        </span>
+                                    </ListItemText>
+                                    <ListItemSecondaryAction>
+                                        <span className="textSize">{condionVehicleDetails?.location_address}</span>
+                                    </ListItemSecondaryAction>
+                                </List>
+                                <List className="paddingCSS">
+                                    <ListItemText>
+                                        <span className="textStyle">
+                                            <span className="textBold">  Body Style  </span>
+
+                                        </span>
+                                    </ListItemText>
+                                    <ListItemSecondaryAction>
+                                        <span className="textSize">{condionVehicleDetails?.body_style}</span>
+                                    </ListItemSecondaryAction>
+                                </List>
+                                <List className="paddingCSS">
+                                    <ListItemText>
+                                        <span className="textStyle">
+                                            <span className="textBold">  Transmission  </span>
+
+                                        </span>
+                                    </ListItemText>
+                                    <ListItemSecondaryAction>
+                                        <span className="textSize">{condionVehicleDetails?.transmission_type}</span>
+                                    </ListItemSecondaryAction>
+                                </List>
+                                <List className="paddingCSS">
+                                    <ListItemText>
+                                        <span className="textStyle">
+                                            <span className="textBold">  Drive Train  </span>
+
+                                        </span>
+                                    </ListItemText>
+                                    <ListItemSecondaryAction>
+                                        <span className="textSize">{condionVehicleDetails?.location_address}</span>
+                                    </ListItemSecondaryAction>
+                                </List>
+                                <List className="paddingCSS">
+                                    <ListItemText>
+                                        <span className="textStyle">
+                                            <span className="textBold">  Exterior color  </span>
+
+                                        </span>
+                                    </ListItemText>
+                                    <ListItemSecondaryAction>
+                                        <span className="textSize">{condionVehicleDetails?.ext_color}</span>
+                                    </ListItemSecondaryAction>
+                                </List>
+                                <List className="paddingCSS">
+                                    <ListItemText>
+                                        <span className="textStyle">
+                                            <span className="textBold">  Interior Type  </span>
+
+                                        </span>
+                                    </ListItemText>
+                                    <ListItemSecondaryAction>
+                                        <span className="textSize">{condionVehicleDetails?.location_address}</span>
+                                    </ListItemSecondaryAction>
+                                </List>
+                                <List className="paddingCSS">
+                                    <ListItemText>
+                                        <span className="textStyle">
+                                            <span className="textBold">  Interior color  </span>
+
+                                        </span>
+                                    </ListItemText>
+                                    <ListItemSecondaryAction>
+                                        <span className="textSize">{condionVehicleDetails?.int_color}</span>
+                                    </ListItemSecondaryAction>
+                                </List>
+
+                                <List className="paddingCSS">
+                                    <ListItemText>
+                                        <span className="textStyle">
+                                            <span className="textBold">  Keys  </span>
+
+                                        </span>
+                                    </ListItemText>
+                                    <ListItemSecondaryAction>
+                                        <span className="textSize">{condionVehicleDetails?.location_address}</span>
+                                    </ListItemSecondaryAction>
+                                </List>
+                                <List className="paddingCSS">
+                                    <ListItemText>
+                                        <span className="textStyle">
+                                            <span className="textBold">  Grounding Mileage  </span>
+
+                                        </span>
+                                    </ListItemText>
+                                    <ListItemSecondaryAction>
+                                        <span className="textSize">{condionVehicleDetails?.location_address}</span>
+                                    </ListItemSecondaryAction>
+                                </List>
+                                <List className="paddingCSS">
+                                    <ListItemText>
+                                        <span className="textStyle">
+                                            <span className="textBold">  Account Type  </span>
+
+                                        </span>
+                                    </ListItemText>
+                                    <ListItemSecondaryAction>
+                                        <span className="textSize">{condionVehicleDetails?.location_address}</span>
+                                    </ListItemSecondaryAction>
+                                </List>
+                                <List className="paddingCSS">
+                                    <ListItemText>
+                                        <span className="textStyle">
+                                            <span className="textBold">  odour  </span>
+
+                                        </span>
+                                    </ListItemText>
+                                    <ListItemSecondaryAction>
+                                        <span className="textSize">{condionVehicleDetails?.location_address}</span>
+                                    </ListItemSecondaryAction>
+                                </List>
+
 
                             </CardContent>
 
