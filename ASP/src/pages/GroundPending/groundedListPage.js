@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
@@ -25,6 +26,11 @@ export default function ListingPage(props) {
         setVehicleResponse(apiResponse.data.data);
     }
 
+    const openConditionReport = (VINumber) => {
+        props.history.push('/conditionreport', {
+            vin: VINumber
+        })
+    }
 
 
 
@@ -52,7 +58,7 @@ export default function ListingPage(props) {
                                         </span>
 
                                         <span className="textStyle">
-                                            <span className="textBold"> VIN:</span><a className="vin" href="/conditionreport"> {vehicle.vin}</a>
+                                            <span className="textBold"> VIN:</span><a className="vin" onClick={() => openConditionReport(vehicle.vin)}> {vehicle.vin}</a>
                                         </span>
 
                                         <span className="textStyle">
