@@ -42,7 +42,8 @@ export default function ConditionReport(props) {
     async function getConditionVehicleDetails() {
         let apiResponse = await getInspectionVehicleDetails(vin);
         setCondionVehicleDetails(apiResponse.data.data);
-        setInspectionId(apiResponse.data.data.inspectionId)
+        setInspectionId(apiResponse.data.inspection_id)
+        console.log("------>",apiResponse.data)
     }
 
     async function getInspectionAccessory(inspectionId) {

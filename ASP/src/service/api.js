@@ -4,7 +4,6 @@ const groundListUrl = 'http://internal-a50e6ebab05f54b63bde1da01edfb6a9-81488682
 const tokenUrl = 'http://internal-a3e2a8608d24e4c5f8b42aed9c3587d7-2044184104.us-east-1.elb.amazonaws.com/tokenData'
 const passedVehicleUrl = 'http://internal-a50e6ebab05f54b63bde1da01edfb6a9-814886826.us-east-1.elb.amazonaws.com/asp-services/getPassedVehicles'
 const purchasedVehicleUrl = 'http://internal-a50e6ebab05f54b63bde1da01edfb6a9-814886826.us-east-1.elb.amazonaws.com/asp-services/getPurchasedVehicles'
-const insectionVehicleDetails = 'http://internal-a50e6ebab05f54b63bde1da01edfb6a9-814886826.us-east-1.elb.amazonaws.com/asp-services/getInsectionVehicleDetails'
 const inspectionAccessoryDetailsUrl = 'http://internal-a50e6ebab05f54b63bde1da01edfb6a9-814886826.us-east-1.elb.amazonaws.com/asp-services/getInspectionAccessoryDetails'
 const inspectionWheelTiresDetailsUrl = 'http://internal-a50e6ebab05f54b63bde1da01edfb6a9-814886826.us-east-1.elb.amazonaws.com/asp-services/getInspectionWheelTiresDetails'
 export async function getAuthToken() {
@@ -85,11 +84,8 @@ export async function getInspectionVehicleDetails(VINumber) {
         }
 
     };
-    const requestData = {
-        "LookupValue": VINumber
-    };
 
-    return await axios.post(insectionVehicleDetails, requestData, options);
+    return await axios.post(`http://internal-a50e6ebab05f54b63bde1da01edfb6a9-814886826.us-east-1.elb.amazonaws.com/asp-services/getVehicleInsectionDetails?vin=${VINumber}`,options);
 
 }
 export async function getInspectionWheelTiresDetails(inspectionId) {
@@ -99,11 +95,12 @@ export async function getInspectionWheelTiresDetails(inspectionId) {
         }
 
     };
-    const requestData = {
-        "LookupValue": inspectionId
-    };
+    // const requestData = {
+    //     // "inspectinId": inspectionId
+    //     inspectionId
+    // };
 
-    return await axios.post(inspectionWheelTiresDetailsUrl, requestData, options);
+    return await axios.post(inspectionWheelTiresDetailsUrl,inspectionId, options);
 
 }
 export async function getInspectionAccessoryDetails(inspectionId) {
