@@ -7,6 +7,7 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import AdminDetailedReport from '../pages/AdminDetailedReport';
+import StatusHistory from './StatusHistory';
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
 
@@ -68,7 +69,8 @@ export default function VehicleSearchTabs() {
                 <AdminDetailedReport />
             </TabPanel>
             <TabPanel value={value} index={1}>
-                <div className='adminTabsSection'>Status History</div>
+                <div className='adminTabsSection'><StatusHistory /></div>
+
             </TabPanel>
             <TabPanel value={value} index={2}>
                 <div className='adminTabsSection'>Update Mileage/price</div>
