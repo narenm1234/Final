@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
-import Search from '../Search/Search';
 import Separator from '../Separator';
-
+import AdminSearchHeader from '../AdminSearchHeader';
 const Header = (props) => {
   const [showDealer, setShowDealer] = useState(false);
-  const placeholderValue = "Serach by Year, Make, Model,VIN, Series or Color";
   const toggleShowDealer = () => {
     setShowDealer(!showDealer);
   }
@@ -15,7 +13,7 @@ const Header = (props) => {
         <Separator />
         <div class="auctionSales"><text>Auction Sales Platform </text></div>
       </div>
-
+      <AdminSearchHeader searchdetails={(SearchText) => props.searchdetails(SearchText)} />
       <div onClick={toggleShowDealer} class="dealerName"><text>Dealer Name</text></div>
       {showDealer && <div class="toggleShowDealertab"><div class="toggleNotSelectedtab" >Profile </div> <div class="toggleSelectedtab">User Settings</div> <div class="toggleNotSelectedtab" >Help</div></div>}
     </div>
