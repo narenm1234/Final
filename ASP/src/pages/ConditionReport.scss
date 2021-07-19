@@ -2,6 +2,7 @@
   width: 70%;
   display: flex;
   margin: 5% 15% 0% 25%;
+  position: absolute;
   background: #f3f2f2;
 }
 .reportTitle {
@@ -111,6 +112,18 @@
   text-align: center;
   color: #3e3e3c;
   }
+  .smallCardTitle1{
+    height: 14px;
+    margin: 0 0 10px;
+    font-size: 11.6px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.17;
+    letter-spacing: normal;
+    text-align: center;
+    color: #3e3e3c;
+    }
   .smallCardBody {
     height: 24px;
     font-size: 16px;
@@ -254,6 +267,8 @@
       line-height: 1.54;
       letter-spacing: normal;
       color: #006dcc;
+      position: relative;
+      
   }
   .conditionTopBarLayout{
     margin-right: 4%;

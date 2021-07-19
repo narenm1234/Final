@@ -85,7 +85,7 @@ export async function getInspectionVehicleDetails(VINumber) {
 
     };
 
-    return await axios.post(`http://internal-a50e6ebab05f54b63bde1da01edfb6a9-814886826.us-east-1.elb.amazonaws.com/asp-services/getVehicleInsectionDetails?vin=${VINumber}`,options);
+    return await axios.post(`http://internal-a50e6ebab05f54b63bde1da01edfb6a9-814886826.us-east-1.elb.amazonaws.com/asp-services/getVehicleInsectionDetails?vin=JM3KFBDM0K1698372`,options);
 
 }
 export async function getInspectionWheelTiresDetails(inspectionId) {
