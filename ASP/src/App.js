@@ -15,6 +15,7 @@ import GroundPurchased from './pages/GroundPurchased';
 import CheckinVehicle from './pages/CheckinVehicle';
 import ConditionReport from './pages/ConditionReport';
 import AdminHome from './pages/AdminHome'
+import AppWithRouterAccess from './AppWithRouterAccess';
 function App() {
   // useEffect(() => {
   //    const tokenResponse =await axiosConfig.getAuthToken();
@@ -30,14 +31,8 @@ function App() {
             <Sidebar />
 
             <Switch>
-              <Route path='/home' exact component={Home} />
+              {/* {<Route path='/home' exact component={Home} />
               <Route path='/adminSearch' exact component={AdminHome} />
-              {/* <Route path='/groundpending' exact component={VINSearch} /> */}
-              {/* <Route path='/grounded' exact component={GroundPending} />
-            <Route path='/passed' exact component={GroundPending1} />
-            <Route path='/purchased' exact component={GroundPending2} />
-            <Route path='/groundpending' exact component={GroundPending} />
-            <Route path='/grounded' exact component={Grounded} /> */}
               <Route path='/checkinvehicle' exact component={VINSearch} />
               <Route path='/grounded' exact exact render={
                 (props) => (<GroundPending {...props} />
@@ -49,7 +44,8 @@ function App() {
               <Route path='/conditionreport' exact render={
                 (props) => (<ConditionReport {...props} />
                 )
-              } />
+              } />} */}
+              <AppWithRouterAccess />
             </Switch>
           </div>
         </Router>
