@@ -17,14 +17,14 @@ function App() {
 
   return (
     <>
-      {/* <div>
+      <div>
         <Header></Header>
         <Router>
           <div>
             <Sidebar />
 
             <Switch>
-               {<Route path='/home' exact component={Home} />
+               <Route path='/home' exact component={Home} />
               <Route path='/adminSearch' exact component={AdminHome} />
               <Route path='/checkinvehicle' exact component={VINSearch} />
               <Route path='/grounded' exact exact render={
@@ -37,15 +37,15 @@ function App() {
               <Route path='/conditionreport' exact render={
                 (props) => (<ConditionReport {...props} />
                 )
-              } />} 
+                }/>
               
             </Switch>
           </div>
         </Router>
-      </div>*/}
-      <Router>
+      </div>
+      {/* <Router>
         <AppWithRouterAccess />
-      </Router>
+      </Router> */}
 
     </>
   );

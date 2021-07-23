@@ -19,7 +19,7 @@ import MyGallery from './ImageGallery';
 import CloudDownloadOutlined from '@material-ui/icons/CloudDownloadOutlined'
 import PrintSharp from '@material-ui/icons/PrintSharp'
 import Button from '@material-ui/core/Button';
-import { getPassedList } from '../service/api';
+import { getPassedList1 } from '../service/api';
 import { getInspectionVehicleDetails, getInspectionAccessoryDetails, getInspectionWheelTiresDetails } from '../service/api'
 export default function ConditionReport(props) {
     let listOfItem = ['VIN', 'Engine', 'Door', 'Body Style', 'Transmission', 'Drive Train', 'Interior type', 'Interior Color', 'Keys', 'Interior Type', 'Odor',  'Grounding Mileage', 'Account Type'];
@@ -40,7 +40,7 @@ export default function ConditionReport(props) {
         getVehicleDetails()
     }, []);
     async function getVehicleDetails() {
-        let apiResponse = await getPassedList();
+        let apiResponse = await getPassedList1();
         setVehicleResponse(apiResponse.data.data);
         console.log(VehicleResponse.data)
     }
@@ -57,8 +57,8 @@ export default function ConditionReport(props) {
     async function getConditionVehicleDetails() {
         let apiResponse = await getInspectionVehicleDetails();
         setCondionVehicleDetails(apiResponse.data);
-        setInspectionId(apiResponse.data.inspection_id)
-        console.log("------>",apiResponse.data)
+        //setInspectionId(apiResponse.data.inspection_id)
+        console.log("------>",condionVehicleDetails)
     }
 
     async function getInspectionAccessory(inspectionId) {
@@ -202,7 +202,7 @@ export default function ConditionReport(props) {
                                         Inspection Grade
                                     </div>
                                     <div className="smallCardBody">
-                                        0.0
+                                    {condionVehicleDetails.condition_grade}
                                     </div>
                                 </CardContent>
                             </Card>
