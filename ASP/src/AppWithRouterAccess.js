@@ -18,6 +18,7 @@ import '../src/sass/main.scss'
 import VINSearch from './pages/GroundPending/VINSearch';
 import ConditionReport from './pages/ConditionReport';
 import AdminHome from './pages/AdminHome'
+import InventoryRequestsTabs from './components/InventoryRequestsTabs';
 const oktaAuth = new OktaAuth(oktaAuthConfig);
 
 const AppWithRouterAccess = () => {
@@ -87,7 +88,7 @@ const AppWithRouterAccess = () => {
                                     (props) => (<GroundPending {...props} />
                                     )
                                 } />
-                                <SecureRoute path='/passed' exact component={GroundPending1} />
+                                <SecureRoute path='/adminInventoryRequests' exact component={InventoryRequestsTabs} />
                                 <SecureRoute path='/purchased' exact component={GroundPending2} />
                                 <SecureRoute path='/conditionreport' exact render={
                                     (props) => (<ConditionReport {...props} />
