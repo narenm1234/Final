@@ -84,7 +84,7 @@ export default function NewSidebar() {
                             <ListItemText primary="Vehicle Search" />
                             <Chip className={classes.root} label="4"></Chip>
                         </ListItem>
-                        <ListItem component={Link} to="/passed" >
+                        <ListItem component={Link} to="/adminInventoryRequests" >
                             <ListItemText primary="Inventory Requests" />
                             <Chip className={classes.root} label="0"></Chip>
                         </ListItem>
