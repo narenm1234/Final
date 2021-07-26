@@ -19,7 +19,7 @@ import MyGallery from './ImageGallery';
 import CloudDownloadOutlined from '@material-ui/icons/CloudDownloadOutlined'
 import PrintSharp from '@material-ui/icons/PrintSharp'
 import Button from '@material-ui/core/Button';
-import { getPassedList1 } from '../service/api';
+import { getPassedList1, getInspectionDamageDetailsApi} from '../service/api';
 import { getInspectionVehicleDetails, getInspectionAccessoryDetails, getInspectionWheelTiresDetails } from '../service/api'
 export default function ConditionReport(props) {
     let listOfItem = ['VIN', 'Engine', 'Door', 'Body Style', 'Transmission', 'Drive Train', 'Interior type', 'Interior Color', 'Keys', 'Interior Type', 'Odor',  'Grounding Mileage', 'Account Type'];
@@ -28,11 +28,27 @@ export default function ConditionReport(props) {
     const [condionVehicleDetails, setCondionVehicleDetails] = React.useState({})
     const [accessoryDetails, setAccessoryDetails] = React.useState({})
     const [wheelTiresDetails, setWheelTiresDetails] = React.useState({})
-    // const [vin, setVin] = React.useState(props.location.state.vin)
-    const [inspectionId, setInspectionId] = React.useState(0)
+    const [vin, setVin] = React.useState(props.location.state.vin)
+    const [inspectionId, setInspectionId] = React.useState([])
     const [VehicleResponse, setVehicleResponse] = useState([])
     const [value, setValue] = useState([])
-    
+    const [DamageDetails,setDamageDetails]= useState([])
+
+
+    console.log("inspectionId",inspectionId)
+
+
+    useEffect(()=>{
+
+        getInspectionDamageDetails()
+
+    },[inspectionId]);
+
+    async function getInspectionDamageDetails(){
+        let getInspectionDamageDetailsaApiResponse = await getInspectionDamageDetailsApi(inspectionId,vin);
+        setDamageDetails(getInspectionDamageDetailsaApiResponse.data)
+
+    }
 
     useEffect(() => {
 
@@ -57,7 +73,7 @@ export default function ConditionReport(props) {
     async function getConditionVehicleDetails() {
         let apiResponse = await getInspectionVehicleDetails();
         setCondionVehicleDetails(apiResponse.data);
-        //setInspectionId(apiResponse.data.inspection_id)
+        setInspectionId(apiResponse.data.inspection_id)
         console.log("------>",condionVehicleDetails)
     }
 
@@ -101,7 +117,7 @@ export default function ConditionReport(props) {
                                         Exterior total
                                     </div>
                                     <div className="smallCardBody warningColor">
-                                        $000,000.00
+                                       {DamageDetails.exteriorCost?DamageDetails.exteriorCost:'NA'}
                                     </div>
                                 </CardContent>
                             </Card>
@@ -113,7 +129,7 @@ export default function ConditionReport(props) {
                                         Interior total
                                     </div>
                                     <div className="smallCardBody warningColor">
-                                        $000,000.00
+                                    {DamageDetails.interiorCost?DamageDetails.interiorCost:'NA'}
                                     </div>
                                 </CardContent>
                             </Card>
@@ -125,7 +141,7 @@ export default function ConditionReport(props) {
                                         Mechanical total
                                     </div>
                                     <div className="smallCardBody warningColor">
-                                        $000,000.00
+                                    {DamageDetails.maintainenceCost?DamageDetails.maintainenceCost:'NA'}
                                     </div>
                                 </CardContent>
                             </Card>
@@ -531,7 +547,7 @@ export default function ConditionReport(props) {
                     </Grid>
                 </Grid>
             </Grid>
-            <ViewDetailedReport open={open} close={handleClose} />
+            <ViewDetailedReport DamageDetails={DamageDetails} open={open} close={handleClose} />
         </div>
     );
 };

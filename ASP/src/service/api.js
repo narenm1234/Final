@@ -11,6 +11,7 @@ var purchasedVehicleUrl;
 var inspectionAccessoryDetailsUrl;
 var inspectionWheelTiresDetailsUrl;
 var inspectionVehicleDetails;
+var getInspectionDamageDetailsUrl;
 
 
 
@@ -36,6 +37,7 @@ purchasedVehicleUrl = 'https://aspservices-internal-dev.tfs.toyota.com/asp-servi
 inspectionAccessoryDetailsUrl = 'https://aspservices-internal-dev.tfs.toyota.com/asp-services/getAccessoryDetails'
 inspectionWheelTiresDetailsUrl = 'https://aspservices-internal-dev.tfs.toyota.com/asp-services/getInspectionWheelTiresDetails'
 inspectionVehicleDetails = 'https://aspservices-internal-dev.tfs.toyota.com/asp-services/getVehicleInspectionDetails'
+getInspectionDamageDetailsUrl='https://aspservices-internal-dev.tfs.toyota.com/asp-services/getInspectionDamageDetails'
 }
 else if(hostname.includes('stage' ))
 {
@@ -162,7 +164,7 @@ export async function getInspectionVehicleDetails(VINumber) {
 
     };
 
-    return await axios.post(`${inspectionVehicleDetails}?vin=JM3KFBDM0K1698372`,options);
+    return await axios.post(`${inspectionVehicleDetails}?vin=${VINumber}`,options);
 
 }
 export async function getInspectionWheelTiresDetails(inspectionId) {
@@ -193,4 +195,22 @@ export async function getInspectionAccessoryDetails(inspectionId) {
 
 }
 
+
+//getInspectionDamageDetails
+
+export async function getInspectionDamageDetailsApi(inspectionId,vin){
+
+    console.log("inspectionId",inspectionId)
+    console.log("Vin",vin)
+    
+    const options = {
+        headers: {
+            "Content-Type": "application/json"
+        }
+
+    };
+    
+
+    return await axios.post(`${getInspectionDamageDetailsUrl}?inpsectionId=14901584&vin=JM3KFBDM0K1698372`);
+}
 
