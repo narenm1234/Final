@@ -156,7 +156,7 @@ export async function getPurchasedList() {
     return await axios.post(purchasedVehicleUrl,requestData , options);
 
 }
-export async function getInspectionVehicleDetails(VINumber) {
+export async function getInspectionVehicleDetails(vin) {
     const options = {
         headers: {
             "Content-Type": "application/json"
@@ -164,7 +164,7 @@ export async function getInspectionVehicleDetails(VINumber) {
 
     };
 
-    return await axios.post(`${inspectionVehicleDetails}?vin=${VINumber}`,options);
+    return await axios.post(`${inspectionVehicleDetails}?vin=${vin}`,options);
 
 }
 export async function getInspectionWheelTiresDetails(inspectionId) {
