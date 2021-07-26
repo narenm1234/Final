@@ -42,7 +42,7 @@ export default function ConditionReport(props) {
 
         getInspectionDamageDetails()
 
-    },[inspectionId]);
+    },[]);
 
     async function getInspectionDamageDetails(){
         let getInspectionDamageDetailsaApiResponse = await getInspectionDamageDetailsApi(inspectionId,vin);
@@ -71,10 +71,10 @@ export default function ConditionReport(props) {
     }, [inspectionId]);
 
     async function getConditionVehicleDetails() {
-        let apiResponse = await getInspectionVehicleDetails();
+        let apiResponse = await getInspectionVehicleDetails(vin);
+        console.log("getConditionVehicleDetailsresponse",apiResponse)
         setCondionVehicleDetails(apiResponse.data);
         setInspectionId(apiResponse.data.inspection_id)
-        console.log("------>",condionVehicleDetails)
     }
 
     async function getInspectionAccessory(inspectionId) {
@@ -230,7 +230,7 @@ export default function ConditionReport(props) {
                                         Odometer
                                     </div>
                                     <div className="smallCardBody">
-                                        000,000 mi
+                                    {condionVehicleDetails.inspection_mileage}
                                     </div>
                                 </CardContent>
                             </Card>
@@ -250,7 +250,7 @@ export default function ConditionReport(props) {
                                         </span>
                                     </ListItemText>
                                     <ListItemSecondaryAction>
-                                        <span className="textSize">JM3KFBDM0K1698372</span>
+                                        <span className="textSize">{vin}</span>
                                     </ListItemSecondaryAction>
                                 </List>
                                 <List className="paddingCSS">
@@ -261,7 +261,9 @@ export default function ConditionReport(props) {
                                         </span>
                                     </ListItemText>
                                     <ListItemSecondaryAction>
-                                        <span className="textSize">07/15/2021</span>
+                                        <span className="textSize">
+                                        {condionVehicleDetails.inspection_date}
+                                        </span>
                                     </ListItemSecondaryAction>
                                 </List>
                                 <List className="paddingCSS">
@@ -272,7 +274,23 @@ export default function ConditionReport(props) {
                                         </span>
                                     </ListItemText>
                                     <ListItemSecondaryAction>
-                                        <span className="textSize">Mazda Plano </span>
+                                        <span className="textSize">
+                                        {condionVehicleDetails.location_address}
+                                        </span>
+                                    </ListItemSecondaryAction>
+                                </List>
+                                <List className="paddingCSS">
+                                    <ListItemText>
+                                        <span className="textStyle">
+                                            <span >
+                                                .
+                                            </span>
+                                        </span>
+                                    </ListItemText>
+                                    <ListItemSecondaryAction>
+                                        <span className="textSize">
+                                        {condionVehicleDetails.location_address2}+{condionVehicleDetails.location_city}+{condionVehicleDetails.location_code}
+                                        </span>
                                     </ListItemSecondaryAction>
                                 </List>
                                 <List className="paddingCSS">
@@ -283,18 +301,7 @@ export default function ConditionReport(props) {
                                         </span>
                                     </ListItemText>
                                     <ListItemSecondaryAction>
-                                        <span className="textSize">Plano, Texas 75034 </span>
-                                    </ListItemSecondaryAction>
-                                </List>
-                                <List className="paddingCSS">
-                                    <ListItemText>
-                                        <span className="textStyle">
-                                            <span > .   </span>
-
-                                        </span>
-                                    </ListItemText>
-                                    <ListItemSecondaryAction>
-                                        <span className="textSize">(310) 345-6756 </span>
+                                        <span className="textSize">{condionVehicleDetails.location_code}</span>
                                     </ListItemSecondaryAction>
                                 </List>
                                 <List className="paddingCSS">
@@ -305,7 +312,7 @@ export default function ConditionReport(props) {
                                         </span>
                                     </ListItemText>
                                     <ListItemSecondaryAction>
-                                        {/* <span className="textSize">{condionVehicleDetails?.location_address}</span> */}
+                                        <span className="textSize">{condionVehicleDetails?.location_address}</span>
                                     </ListItemSecondaryAction>
                                 </List>
                                 <List className="paddingCSS">
@@ -316,7 +323,7 @@ export default function ConditionReport(props) {
                                         </span>
                                     </ListItemText>
                                     <ListItemSecondaryAction>
-                                        <span className="textSize">4 Cylinder</span>
+                                        <span className="textSize">{condionVehicleDetails?.engine_cylinder}</span>
                                     </ListItemSecondaryAction>
                                 </List>
                                 <List className="paddingCSS">
@@ -349,7 +356,7 @@ export default function ConditionReport(props) {
                                         </span>
                                     </ListItemText>
                                     <ListItemSecondaryAction>
-                                        <span className="textSize">Automatic</span>
+                                        <span className="textSize">{condionVehicleDetails?.transmission_type}</span>
                                     </ListItemSecondaryAction>
                                 </List>
                                 <List className="paddingCSS">
@@ -371,7 +378,7 @@ export default function ConditionReport(props) {
                                         </span>
                                     </ListItemText>
                                     <ListItemSecondaryAction>
-                                        <span className="textSize">Jet Black Mica</span>
+                                        <span className="textSize">{condionVehicleDetails?.ext_color}</span>
                                     </ListItemSecondaryAction>
                                 </List>
                                 <List className="paddingCSS">
@@ -382,7 +389,7 @@ export default function ConditionReport(props) {
                                         </span>
                                     </ListItemText>
                                     <ListItemSecondaryAction>
-                                        <span className="textSize">Cloth</span>
+                                        <span className="textSize">{condionVehicleDetails?.interior_material}</span>
                                     </ListItemSecondaryAction>
                                 </List>
                                 <List className="paddingCSS">
@@ -393,7 +400,7 @@ export default function ConditionReport(props) {
                                         </span>
                                     </ListItemText>
                                     <ListItemSecondaryAction>
-                                        <span className="textSize">Black</span>
+                                        <span className="textSize">{condionVehicleDetails?.int_color}</span>
                                     </ListItemSecondaryAction>
                                 </List>
 
