@@ -502,12 +502,12 @@ export default function ConditionReport(props) {
                                                 return (
                                                     <TableRow key={list}> */}
                                                         <TableCell component="th" scope="row">
-                                                            FL
+                                                            {wheelTiresDetails?.tire_location}
                                                         </TableCell>
-                                                        <TableCell align="right">Goodyear</TableCell>
-                                                        <TableCell align="right">16</TableCell>
-                                                        <TableCell align="right"></TableCell>
-                                                        <TableCell align="right">6/32</TableCell>
+                                                        <TableCell align="right">{wheelTiresDetails?.manufracturer}</TableCell>
+                                                        <TableCell align="right">{wheelTiresDetails?.size}</TableCell>
+                                                        <TableCell align="right">{wheelTiresDetails?.tread}</TableCell>
+                                                        <TableCell align="right">{wheelTiresDetails?.tread}</TableCell>
                                                     {/* </TableRow>
                                                 )
                                             })
