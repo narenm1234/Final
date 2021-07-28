@@ -12,6 +12,7 @@ var inspectionAccessoryDetailsUrl;
 var inspectionWheelTiresDetailsUrl;
 var inspectionVehicleDetails;
 var getInspectionDamageDetailsUrl;
+var getOEMBuildDetailsUrl;
 
 
 
@@ -26,6 +27,8 @@ purchasedVehicleUrl = 'https://aspservices-internal-dev.tfs.toyota.com/asp-servi
 inspectionAccessoryDetailsUrl = 'https://aspservices-internal-dev.tfs.toyota.com/asp-services/getInspectionAccessoryDetails'
 inspectionWheelTiresDetailsUrl = 'https://aspservices-internal-dev.tfs.toyota.com/asp-services/getInspectionWheelTiresDetails'
 inspectionVehicleDetails = 'https://aspservices-internal-dev.tfs.toyota.com/asp-services/getVehicleInspectionDetails'
+getInspectionDamageDetailsUrl='https://aspservices-internal-dev.tfs.toyota.com/asp-services/getInspectionDamageDetails'
+getOEMBuildDetailsUrl='https://aspservices-internal-dev.tfs.toyota.com/asp-services/getOEMBuildDetails'
 }
 else if(hostname.includes('local' ))
 {
@@ -38,6 +41,7 @@ inspectionAccessoryDetailsUrl = 'https://aspservices-internal-dev.tfs.toyota.com
 inspectionWheelTiresDetailsUrl = 'https://aspservices-internal-dev.tfs.toyota.com/asp-services/getInspectionWheelTiresDetails'
 inspectionVehicleDetails = 'https://aspservices-internal-dev.tfs.toyota.com/asp-services/getVehicleInspectionDetails'
 getInspectionDamageDetailsUrl='https://aspservices-internal-dev.tfs.toyota.com/asp-services/getInspectionDamageDetails'
+getOEMBuildDetailsUrl='https://aspservices-internal-dev.tfs.toyota.com/asp-services/getOEMBuildDetails'
 }
 else if(hostname.includes('stage' ))
 {
@@ -179,7 +183,7 @@ export async function getInspectionWheelTiresDetails(inspectionId) {
     //     inspectionId
     // };
 
-    return await axios.post(inspectionWheelTiresDetailsUrl,inspectionId, options);
+    return await axios.post(inspectionWheelTiresDetailsUrl,14901584, options);
 
 }
 export async function getInspectionAccessoryDetails(inspectionId) {
@@ -213,4 +217,20 @@ export async function getInspectionDamageDetailsApi(inspectionId,vin){
 
     return await axios.post(`${getInspectionDamageDetailsUrl}?inpsectionId=14901584&vin=JM3KFBDM0K1698372`);
 }
+
+
+export async function getOEMBuildDetailsApi(){
+    
+    const options = {
+        headers: {
+            "Content-Type": "application/json"
+        }
+
+    };
+    
+    const vinData = 'JM3KFBDM0K1698372'
+
+    return await axios.post(`${getOEMBuildDetailsUrl}`,vinData);
+}
+
 
