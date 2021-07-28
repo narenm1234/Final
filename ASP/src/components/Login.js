@@ -17,10 +17,11 @@ const Login = ({ config }) => {
     if (!authState) return null;
 
     return authState.isAuthenticated ?
-        <Redirect to={{ pathname: '/adminSearch' }} /> :
-        <OktaSignInWidget
-            config={config}
-            onSuccess={onSuccess}
-            onError={onError} />;
+        <Redirect to={{ pathname: '/adminSearch' }} /> : 
+        // <OktaSignInWidget
+        //     config={config}
+        //     onSuccess={onSuccess}
+        //     onError={onError} />;
+        <Redirect to={{ pathname: 'https://tfs.oktapreview.com/login/default' }} />
 };
 export default Login;

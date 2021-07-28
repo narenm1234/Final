@@ -1,10 +1,10 @@
 const TEST_CLIENT_ID = '0oa10kbu8utGtVjgY0h8';
 const STAGE_CLIENT_ID = 'your-stage-client-id';
-const LOCALHOST_CLIENT_ID = '0oa1ack5z129JQd8T5d7';
+const LOCALHOST_CLIENT_ID = '0oazqm6unew4ySMR80h7';
 const PROD_CLIENT_ID = 'your-prod-client-id';
 const DEV_CLIENT_ID = ' 0oa10kchmc4Hjj6gD0h8';
 
-const ISSUER_URL = 'https://dev-61574451.okta.com/oauth2/default';
+const ISSUER_URL = 'https://tfs.oktapreview.com/oauth2/ausredslpqIsIjQfz0h7';
 const DEV_ISSUER_URL = 'https://tfs.oktapreview.com/oauth2/ausredslpqIsIjQfz0h7';
 const TEST_ISSUER_URL = 'https://tfs.oktapreview.com/oauth2/ausredslpqIsIjQfz0h7';
 const STAGE_ISSUER_URL = 'https://tfs.oktapreview.com/oauth2/ausredslpqIsIjQfz0h7';
@@ -54,10 +54,10 @@ const oktaAuthConfig = {
 //narenm1234
 //okta@61574451
 const oktaSignInConfig = {
-    //baseUrl: 'https://tfs.oktapreview.com',
-    baseUrl:'https://dev-61574451.okta.com',
-    // clientId: '0oazqm6unew4ySMR80h7',
-    clientId: '0oa1ack5z129JQd8T5d7',
+    baseUrl: 'https://tfs.oktapreview.com/login/default',
+   // baseUrl:'https://dev-61574451.okta.com',
+     clientId: '0oazqm6unew4ySMR80h7',
+    //clientId: '0oa1ack5z129JQd8T5d7',
     redirectUri: window.location.origin + '/login/callback',
     authParams: {
         // If your app is configured to use the Implicit flow

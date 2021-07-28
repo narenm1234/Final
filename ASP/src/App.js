@@ -17,7 +17,7 @@ function App() {
 
   return (
     <>
-      <div>
+      {/* <div>
         <Header></Header>
         <Router>
           <div>
@@ -42,10 +42,10 @@ function App() {
             </Switch>
           </div>
         </Router>
-      </div>
-      {/* <Router>
+      </div> */}
+      <Router>
         <AppWithRouterAccess />
-      </Router> */}
+      </Router>
 
     </>
   );
