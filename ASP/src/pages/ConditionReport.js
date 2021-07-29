@@ -19,11 +19,7 @@ import MyGallery from './ImageGallery';
 import CloudDownloadOutlined from '@material-ui/icons/CloudDownloadOutlined'
 import PrintSharp from '@material-ui/icons/PrintSharp'
 import Button from '@material-ui/core/Button';
-<<<<<<< HEAD
-import { getPassedList1, getInspectionDamageDetailsApi} from '../service/api';
-=======
 import { getPassedList1, getInspectionDamageDetailsApi,getOEMBuildDetailsApi} from '../service/api';
->>>>>>> 34c802f4d598cedfc764bdfebb975c4b96e4abc9
 import { getInspectionVehicleDetails, getInspectionAccessoryDetails, getInspectionWheelTiresDetails } from '../service/api'
 export default function ConditionReport(props) {
     let listOfItem = ['VIN', 'Engine', 'Door', 'Body Style', 'Transmission', 'Drive Train', 'Interior type', 'Interior Color', 'Keys', 'Interior Type', 'Odor',  'Grounding Mileage', 'Account Type'];
@@ -515,7 +511,7 @@ export default function ConditionReport(props) {
                                         <TableBody>
                                             {wheelTiresDetails?.map(list => {
                                                 return (
-                                                    <TableRow key={list}> */}
+                                                    <TableRow key={list}> 
                                                         <TableCell component="th" scope="row">
                                                             {wheelTiresDetails?.tire_location}
                                                         </TableCell>
@@ -527,7 +523,7 @@ export default function ConditionReport(props) {
                                                     </TableRow>
                                                 )
                                             })
-                                            } */}
+                                            } 
                                         </TableBody>
                                     </Table>
                                 </TableContainer>

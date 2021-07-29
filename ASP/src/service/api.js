@@ -234,21 +234,5 @@ export async function getOEMBuildDetailsApi(){
 }
 
 
-//getInspectionDamageDetails
 
-export async function getInspectionDamageDetailsApi(inspectionId,vin){
-
-    console.log("inspectionId",inspectionId)
-    console.log("Vin",vin)
-    
-    const options = {
-        headers: {
-            "Content-Type": "application/json"
-        }
-
-    };
-    
-
-    return await axios.post(`${getInspectionDamageDetailsUrl}?inpsectionId=14901584&vin=JM3KFBDM0K1698372`);
-}
 
