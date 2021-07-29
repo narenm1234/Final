@@ -28,7 +28,7 @@ export default function ConditionReport(props) {
     const [condionVehicleDetails, setCondionVehicleDetails] = React.useState({})
     const [accessoryDetails, setAccessoryDetails] = React.useState({})
     const [wheelTiresDetails, setWheelTiresDetails] =useState([])
-    const [vin, setVin] = React.useState(props?.location?.state?.vin)
+    const [vin, setVin] = React.useState(props?.match?.params?.vin)
     const [inspectionId, setInspectionId] = React.useState([])
     const [VehicleResponse, setVehicleResponse] = useState([])
     const [value, setValue] = useState([])
@@ -36,14 +36,14 @@ export default function ConditionReport(props) {
     const [OEMBuildDetailsData, setOEMBuildDetailsData] = useState([]);
 
 
-    console.log("OEMBuildDetailsData",OEMBuildDetailsData)
+    console.log("vin:",vin)
 
     useEffect(()=>{
         getOEMBuildDetails()
-    },[])
+    },[vin])
 
     async function getOEMBuildDetails(){
-        let apiResponse = await getOEMBuildDetailsApi()
+        let apiResponse = await getOEMBuildDetailsApi(vin)
         setOEMBuildDetailsData(apiResponse.data)
     }
 
@@ -73,7 +73,7 @@ export default function ConditionReport(props) {
     // console.log("vin", vin)
     useEffect(() => {
         getConditionVehicleDetails()
-    }, []);
+    }, [vin]);
 
     useEffect(() => {
         getInspectionAccessory(inspectionId)
@@ -300,7 +300,7 @@ export default function ConditionReport(props) {
                                     </ListItemText>
                                     <ListItemSecondaryAction>
                                         <span className="textSize">
-                                        {condionVehicleDetails.location_address2}+{condionVehicleDetails.location_city}+{condionVehicleDetails.location_code}
+                                        {condionVehicleDetails.location_address2}{condionVehicleDetails.location_city}
                                         </span>
                                     </ListItemSecondaryAction>
                                 </List>
