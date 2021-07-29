@@ -13,11 +13,12 @@ import VINSearch from './pages/GroundPending/VINSearch';
 import ConditionReport from './pages/ConditionReport';
 import AdminHome from './pages/AdminHome'
 import AppWithRouterAccess from './AppWithRouterAccess';
+import InventoryRequestsTabs from './components/InventoryRequestsTabs';
 function App() {
 
   return (
     <>
-      {/* <div>
+      <div>
         <Header></Header>
         <Router>
           <div>
@@ -38,14 +39,15 @@ function App() {
                 (props) => (<ConditionReport {...props} />
                 )
                 }/>
+                <Route path='/adminInventoryRequests' exact component={InventoryRequestsTabs} />
               
             </Switch>
           </div>
         </Router>
-      </div> */}
-      <Router>
+      </div>
+      {/* <Router>
         <AppWithRouterAccess />
-      </Router>
+      </Router> */}
 
     </>
   );
