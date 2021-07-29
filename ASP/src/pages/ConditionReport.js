@@ -19,7 +19,11 @@ import MyGallery from './ImageGallery';
 import CloudDownloadOutlined from '@material-ui/icons/CloudDownloadOutlined'
 import PrintSharp from '@material-ui/icons/PrintSharp'
 import Button from '@material-ui/core/Button';
+<<<<<<< HEAD
 import { getPassedList1, getInspectionDamageDetailsApi} from '../service/api';
+=======
+import { getPassedList1, getInspectionDamageDetailsApi,getOEMBuildDetailsApi} from '../service/api';
+>>>>>>> 34c802f4d598cedfc764bdfebb975c4b96e4abc9
 import { getInspectionVehicleDetails, getInspectionAccessoryDetails, getInspectionWheelTiresDetails } from '../service/api'
 export default function ConditionReport(props) {
     let listOfItem = ['VIN', 'Engine', 'Door', 'Body Style', 'Transmission', 'Drive Train', 'Interior type', 'Interior Color', 'Keys', 'Interior Type', 'Odor',  'Grounding Mileage', 'Account Type'];
@@ -27,15 +31,25 @@ export default function ConditionReport(props) {
     const [open, setOpen] = React.useState(false)
     const [condionVehicleDetails, setCondionVehicleDetails] = React.useState({})
     const [accessoryDetails, setAccessoryDetails] = React.useState({})
-    const [wheelTiresDetails, setWheelTiresDetails] = React.useState({})
-    const [vin, setVin] = React.useState(props.location.state.vin)
+    const [wheelTiresDetails, setWheelTiresDetails] =useState([])
+    const [vin, setVin] = React.useState(props?.location?.state?.vin)
     const [inspectionId, setInspectionId] = React.useState([])
     const [VehicleResponse, setVehicleResponse] = useState([])
     const [value, setValue] = useState([])
-    const [DamageDetails,setDamageDetails]= useState([])
+    const [DamageDetails, setDamageDetails] = useState([])
+    const [OEMBuildDetailsData, setOEMBuildDetailsData] = useState([]);
 
 
-    console.log("inspectionId",inspectionId)
+    console.log("OEMBuildDetailsData",OEMBuildDetailsData)
+
+    useEffect(()=>{
+        getOEMBuildDetails()
+    },[])
+
+    async function getOEMBuildDetails(){
+        let apiResponse = await getOEMBuildDetailsApi()
+        setOEMBuildDetailsData(apiResponse.data)
+    }
 
 
     useEffect(()=>{
@@ -79,12 +93,13 @@ export default function ConditionReport(props) {
 
     async function getInspectionAccessory(inspectionId) {
         let apiResponse = await getInspectionAccessoryDetails(inspectionId);
-        setAccessoryDetails(apiResponse.data.data);
+        setAccessoryDetails(apiResponse.data);
     }
 
     async function getInspectionWheelTires(inspectionId) {
         let apiResponse = await getInspectionWheelTiresDetails(inspectionId);
-        setWheelTiresDetails(apiResponse.data.data);
+        console.log("wheelTiresDetailsapires",apiResponse)
+        setWheelTiresDetails(apiResponse.data);
     }
 
     const handleOpen = () => {
@@ -470,9 +485,9 @@ export default function ConditionReport(props) {
                                                 return ( */}
                                                     <TableRow key="10074">
                                                         <TableCell component="th" scope="row">
-                                                            10074
+                                                            {accessoryDetails.item_id}
                                                         </TableCell>
-                                                        <TableCell align="right">SUPER CHARGER - NO</TableCell>
+                                                        <TableCell align="right">{accessoryDetails.description}</TableCell>
                                                         {/* <TableCell align="right">y</TableCell>
                                                         <TableCell align="right">z</TableCell> */}
                                                     </TableRow>
@@ -498,17 +513,18 @@ export default function ConditionReport(props) {
                                             </TableRow>
                                         </TableHead>
                                         <TableBody>
-                                            {/* {wheelTyrelistOfItem.map(list => {
+                                            {wheelTiresDetails?.map(list => {
                                                 return (
                                                     <TableRow key={list}> */}
                                                         <TableCell component="th" scope="row">
                                                             {wheelTiresDetails?.tire_location}
                                                         </TableCell>
-                                                        <TableCell align="right">{wheelTiresDetails?.manufracturer}</TableCell>
-                                                        <TableCell align="right">{wheelTiresDetails?.size}</TableCell>
-                                                        <TableCell align="right">{wheelTiresDetails?.tread}</TableCell>
-                                                        <TableCell align="right">{wheelTiresDetails?.tread}</TableCell>
-                                                    {/* </TableRow>
+                                                        <TableCell align="right">{list.tire_location}</TableCell>
+                                                        <TableCell align="right">{list.manufracturer}</TableCell>
+                                                        <TableCell align="right">{list.size}</TableCell>
+                                                        <TableCell align="right">{list.tread}</TableCell>
+                                                        <TableCell align="right">{list.tread}</TableCell>
+                                                    </TableRow>
                                                 )
                                             })
                                             } */}
