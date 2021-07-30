@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import MyGallery from './ImageGallery';
+import {getInspectionVehicleDetails} from '../service/api';
 export default function AdminDetailedReport(props) {
     let groundingDetails = {
         "Account Number": "00000000000",
@@ -54,6 +55,21 @@ export default function AdminDetailedReport(props) {
         "Purchasing Dealer Legal Name": "Detail"
     };
     const [open, setOpen] = React.useState(false)
+    const [condionVehicleDetails, setCondionVehicleDetails] = useState({})
+    const [vin,setvin] = useState( 'JM3KFBDM0K1698372');
+
+    console.log("admndetailedreport props:",props)
+
+
+    useEffect(() => {
+        getConditionVehicleDetails()
+    }, [vin])
+
+    async function getConditionVehicleDetails() {
+        let apiResponse = await getInspectionVehicleDetails(vin);
+        console.log("getConditionVehicleDetailsresponse",apiResponse)
+        setCondionVehicleDetails(apiResponse.data);
+    }
 
     const handleOpen = () => {
         setOpen(!open)
