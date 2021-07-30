@@ -15,9 +15,9 @@ const useStyles = makeStyles({
     },
     manualStyles: {
         position: 'absolute',
-        top: "150px",
+        top: "175px",
         left: "320px",
-        margin: '20px',
+        margin: '20px 0',
         width: 950,
     },
     filterStyles: {
