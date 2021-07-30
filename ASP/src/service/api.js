@@ -53,6 +53,8 @@ purchasedVehicleUrl = 'https://aspservices-internal-stage.tfs.toyota.com/asp-ser
 inspectionAccessoryDetailsUrl = 'https://aspservices-internal-stage.tfs.toyota.com/asp-services/getInspectionAccessoryDetails'
 inspectionWheelTiresDetailsUrl = 'https://aspservices-internal-stage.tfs.toyota.com/asp-services/getInspectionWheelTiresDetails'
 inspectionVehicleDetails = 'https://aspservices-internal-stage.tfs.toyota.com/asp-services/getVehicleInspectionDetails'
+getInspectionDamageDetailsUrl='https://aspservices-internal-stage.tfs.toyota.com/asp-services/getInspectionDamageDetails'
+getOEMBuildDetailsUrl='https://aspservices-internal-stage.tfs.toyota.com/asp-services/getOEMBuildDetails'
 }
 else if(hostname.includes('test' ))
 {
@@ -63,7 +65,9 @@ passedVehicleUrl = 'https://aspservices-internal-test.tfs.toyota.com/asp-service
 purchasedVehicleUrl = 'https://aspservices-internal-test.tfs.toyota.com/asp-services/getPurchasedVehicles'
 inspectionAccessoryDetailsUrl = 'https://aspservices-internal-test.tfs.toyota.com/asp-services/getInspectionAccessoryDetails'
 inspectionWheelTiresDetailsUrl = 'https://aspservices-internal-test.tfs.toyota.com/asp-services/getInspectionWheelTiresDetails'
-inspectionVehicleDetails = 'https://aspservices-internal-stage.test.tfs.toyota.com/asp-services/getVehicleInspectionDetails'
+inspectionVehicleDetails = 'https://aspservices-internal-test.tfs.toyota.com/asp-services/getVehicleInspectionDetails'
+getInspectionDamageDetailsUrl='https://aspservices-internal-test.tfs.toyota.com/asp-services/getInspectionDamageDetails'
+getOEMBuildDetailsUrl='https://aspservices-internal-test.tfs.toyota.com/asp-services/getOEMBuildDetails'
 }
 else
 {
@@ -74,7 +78,9 @@ passedVehicleUrl = 'https://aspservices-internal-prod.tfs.toyota.com/asp-service
 purchasedVehicleUrl = 'https://aspservices-internal-prod.tfs.toyota.com/asp-services/getPurchasedVehicles'
 inspectionAccessoryDetailsUrl = 'https://aspservices-internal-prod.tfs.toyota.com/asp-services/getInspectionAccessoryDetails'
 inspectionWheelTiresDetailsUrl = 'https://aspservices-internal-prod.tfs.toyota.com/asp-services/getInspectionWheelTiresDetails'
-inspectionVehicleDetails = 'https://aspservices-internal-stage.tfs.toyota.com/asp-services/getVehicleInspectionDetails'
+inspectionVehicleDetails = 'https://aspservices-internal-prod.tfs.toyota.com/asp-services/getVehicleInspectionDetails'
+getInspectionDamageDetailsUrl='https://aspservices-internal-prod.tfs.toyota.com/asp-services/getInspectionDamageDetails'
+getOEMBuildDetailsUrl='https://aspservices-internal-prod.tfs.toyota.com/asp-services/getOEMBuildDetails'
 }
 
 export async function getAuthToken() {
@@ -219,7 +225,7 @@ export async function getInspectionDamageDetailsApi(inspectionId,vin){
 }
 
 
-export async function getOEMBuildDetailsApi(){
+export async function getOEMBuildDetailsApi(vin){
     
     const options = {
         headers: {
@@ -228,9 +234,8 @@ export async function getOEMBuildDetailsApi(){
 
     };
     
-    const vinData = 'JM3KFBDM0K1698372'
 
-    return await axios.post(`${getOEMBuildDetailsUrl}`,vinData);
+    return await axios.post(`${getOEMBuildDetailsUrl}`,vin);
 }
 
 
