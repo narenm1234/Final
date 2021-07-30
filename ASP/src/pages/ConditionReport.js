@@ -20,7 +20,9 @@ import CloudDownloadOutlined from '@material-ui/icons/CloudDownloadOutlined'
 import PrintSharp from '@material-ui/icons/PrintSharp'
 import Button from '@material-ui/core/Button';
 import { getPassedList1, getInspectionDamageDetailsApi,getOEMBuildDetailsApi} from '../service/api';
-import { getInspectionVehicleDetails, getInspectionAccessoryDetails, getInspectionWheelTiresDetails } from '../service/api'
+import { getInspectionVehicleDetails, getInspectionAccessoryDetails, getInspectionWheelTiresDetails } from '../service/api';
+import moment from 'moment';
+
 export default function ConditionReport(props) {
     let listOfItem = ['VIN', 'Engine', 'Door', 'Body Style', 'Transmission', 'Drive Train', 'Interior type', 'Interior Color', 'Keys', 'Interior Type', 'Odor',  'Grounding Mileage', 'Account Type'];
     let wheelTyrelistOfItem = ['LF', 'RF', 'LR', 'RR', 'SP', 'RR']
@@ -34,9 +36,11 @@ export default function ConditionReport(props) {
     const [value, setValue] = useState([])
     const [DamageDetails, setDamageDetails] = useState([])
     const [OEMBuildDetailsData, setOEMBuildDetailsData] = useState([]);
+    
 
 
-    console.log("vin:",vin)
+
+    console.log("condionVehicleDetails:",condionVehicleDetails)
 
     useEffect(()=>{
         getOEMBuildDetails()
@@ -128,7 +132,7 @@ export default function ConditionReport(props) {
                                         Exterior total
                                     </div>
                                     <div className="smallCardBody warningColor">
-                                       {DamageDetails.exteriorCost?DamageDetails.exteriorCost:'NA'}
+                                      {'$'}{DamageDetails.exteriorCost?DamageDetails.exteriorCost:'NA'}
                                     </div>
                                 </CardContent>
                             </Card>
@@ -140,7 +144,7 @@ export default function ConditionReport(props) {
                                         Interior total
                                     </div>
                                     <div className="smallCardBody warningColor">
-                                    {DamageDetails.interiorCost?DamageDetails.interiorCost:'NA'}
+                                    {'$'}{DamageDetails.interiorCost?DamageDetails.interiorCost:'NA'}
                                     </div>
                                 </CardContent>
                             </Card>
@@ -152,7 +156,7 @@ export default function ConditionReport(props) {
                                         Mechanical total
                                     </div>
                                     <div className="smallCardBody warningColor">
-                                    {DamageDetails.maintainenceCost?DamageDetails.maintainenceCost:'NA'}
+                                    {'$'}{DamageDetails.maintainenceCost?DamageDetails.maintainenceCost:'NA'}
                                     </div>
                                 </CardContent>
                             </Card>
@@ -273,7 +277,7 @@ export default function ConditionReport(props) {
                                     </ListItemText>
                                     <ListItemSecondaryAction>
                                         <span className="textSize">
-                                        {condionVehicleDetails.inspection_date}
+                                        {moment(condionVehicleDetails.inspection_date).format('MM/DD/YYYY')}
                                         </span>
                                     </ListItemSecondaryAction>
                                 </List>

@@ -35,7 +35,7 @@ function App() {
               <Route path='/passed' exact component={GroundPending1} />
               <Route path='/purchased' exact component={GroundPending2} />
               <Route path='/grounded/lastchance' exact component={LastChance} />
-              <Route path='/conditionreport/:vin' exact render={
+              <Route path='/conditionreport:vin' exact render={
                 (props) => (<ConditionReport {...props} />
                 )
                 }/>
