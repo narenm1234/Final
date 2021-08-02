@@ -49,7 +49,7 @@ export default function ListingPage2(props) {
                                         </span> */}
 
                                         <span className="textStyle">
-                                            <span className="textBold"> VIN:</span><a className="vin" href="/conditionreport"> {vehicle.groundingDetails.vin}</a>
+                                            <span className="textBold"> VIN:</span><a className="vin" href={`/conditionreport${vehicle.groundingDetails.vin}`}> {vehicle.groundingDetails.vin}</a>
                                         </span>
 
                                         <span className="textStyle">

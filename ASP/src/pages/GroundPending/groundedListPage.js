@@ -60,7 +60,7 @@ export default function ListingPage(props) {
                                         </span>
 
                                         <span className="textStyle">
-                                            <span className="textBold"> VIN:</span><a className="vin" onClick={() => openConditionReport(vehicle.vin)}> {vehicle.vin}</a>
+                                            <span className="textBold"> VIN:</span><a className="vin" href={`/conditionreport${vehicle.vin}`} > {vehicle.vin}</a>
                                         </span>
 
                                         <span className="textStyle">
