@@ -8,6 +8,9 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import MyGallery from './ImageGallery';
 import {getInspectionVehicleDetails} from '../service/api';
+import moment from 'moment';
+
+
 export default function AdminDetailedReport(props) {
     let groundingDetails = {
         "Account Number": "00000000000",
@@ -36,7 +39,7 @@ export default function AdminDetailedReport(props) {
         "Remaining Payments at Grounding": "$00,000.00"
     };
     let inspectionDetails = {
-        "Inspection Scheduled Date": "00/00/2021",
+        "Inspection Scheduled Date": `${moment(props?.inspectiondata?.inspection_date).format('MM/DD/YYYY')}`,
         "Inspection Date": "00/00/2021",
         "Inspection Status": "Detail",
         "Inspection Mileage": "000,000 mi",
@@ -57,6 +60,7 @@ export default function AdminDetailedReport(props) {
     const [open, setOpen] = React.useState(false)
     const [condionVehicleDetails, setCondionVehicleDetails] = useState({})
     const [vin,setvin] = useState( 'JM3KFBDM0K1698372');
+
 
     console.log("admndetailedreport props:",props)
 

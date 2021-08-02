@@ -8,8 +8,6 @@ import { Divider } from '@material-ui/core';
 import SearchText from './SearchText/Search';
 const AdminVehicleSearch = (props) => {
 
-  const [Vin,setvin] = useState();
-
   console.log("searchdetails",props);
 
   return (

@@ -48,14 +48,17 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function VehicleSearchTabs() {
+export default function VehicleSearchTabs(props) {
     const classes = useStyles();
     const [value, setValue] = React.useState(0);
+
+    console.log("aaaa",props)
+
+    const{inspectiondata}=props;
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
-
     return (
         <div>
             <AppBar position="fixed" className='topBarAdmin'>
@@ -66,7 +69,7 @@ export default function VehicleSearchTabs() {
                 </Tabs>
             </AppBar>
             <TabPanel value={value} index={0}>
-                <AdminDetailedReport />
+                <AdminDetailedReport inspectiondata={inspectiondata}/>
             </TabPanel>
             <TabPanel value={value} index={1}>
                 <div className='adminTabsSection'><StatusHistory /></div>
