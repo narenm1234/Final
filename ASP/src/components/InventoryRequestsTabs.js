@@ -8,77 +8,77 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import ManualPricing from './ManualPricing';
 import RRMApproval from './RRMApproval';
-import MileageDisc from './MileageDisc'
-function TabPanel(props) {
-    const { children, value, index, ...other } = props;
+import MileageDisc from './MileageDisc';
 
-    return (
-        <div
-            role="tabpanel"
-            hidden={value !== index}
-            id={`simple-tabpanel-${index}`}
-            aria-labelledby={`simple-tab-${index}`}
-            {...other}
-        >
-            {value === index && (
-                <Box p={3}>
-                    <Typography>{children}</Typography>
-                </Box>
-            )}
-        </div>
-    );
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box p={3}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
 }
 
 TabPanel.propTypes = {
-    children: PropTypes.node,
-    index: PropTypes.any.isRequired,
-    value: PropTypes.any.isRequired,
+  children: PropTypes.node,
+  index: PropTypes.any.isRequired,
+  value: PropTypes.any.isRequired,
 };
 
 function a11yProps(index) {
-    return {
-        id: `simple-tab-${index}`,
-        'aria-controls': `simple-tabpanel-${index}`,
-    };
+  return {
+    id: `simple-tab-${index}`,
+    'aria-controls': `simple-tabpanel-${index}`,
+  };
 }
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-        flexGrow: 1,
-        backgroundColor: theme.palette.background.paper,
-    },
+  root: {
+    flexGrow: 1,
+    backgroundColor: theme.palette.background.paper,
+  },
 }));
 
 export default function InventoryRequestsTabs(props) {
-    const classes = useStyles();
-    const [value, setValue] = React.useState(0);
+  const classes = useStyles();
+  const [value, setValue] = React.useState(0);
 
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
-    };
-    console.log(props)
-    return (
-        <div>
-            <AppBar position="fixed" className='topBarAdmin'>
-                <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
-                    <Tab label="Awaiting Manual Pricing" {...a11yProps(0)} />
-                    <Tab label="RRM Approvals" {...a11yProps(1)} />
-                    <Tab label="Mileage Discrepencies" {...a11yProps(2)} />
-                    <Tab label="No Inspections" {...a11yProps(3)} />
-                </Tabs>
-            </AppBar>
-            <TabPanel value={value} index={0}>
-                <ManualPricing props={props} />
-            </TabPanel>
-            <TabPanel value={value} index={1}>
-                <div className='adminTabsSection'><RRMApproval /></div>
-            </TabPanel>
-            <TabPanel value={value} index={2}>
-                <div className='adminTabsSection'><MileageDisc /></div>
-            </TabPanel>
-            <TabPanel value={value} index={3}>
-                <div className='adminTabsSection'><h2>No Inspections</h2></div>
-            </TabPanel>
-        </div>
-    );
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+  
+  return (
+    <div>
+      <AppBar position="fixed" className='topBarAdmin'>
+        <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
+          <Tab label="Awaiting Manual Pricing" {...a11yProps(0)} />
+          <Tab label="RRM Approvals" {...a11yProps(1)} />
+          <Tab label="Mileage Discrepencies" {...a11yProps(2)} />
+          <Tab label="No Inspections" {...a11yProps(3)} />
+        </Tabs>
+      </AppBar>
+      <TabPanel value={value} index={0}>
+        <ManualPricing props={props} />
+      </TabPanel>
+      <TabPanel value={value} index={1}>
+        <div className='adminTabsSection'><RRMApproval /></div>
+      </TabPanel>
+      <TabPanel value={value} index={2}>
+        <div className='adminTabsSection'><MileageDisc /></div>
+      </TabPanel>
+      <TabPanel value={value} index={3}>
+        <div className='adminTabsSection'><h2>No Inspections</h2></div>
+      </TabPanel>
+    </div>
+  );
 }
