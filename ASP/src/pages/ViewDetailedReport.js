@@ -73,6 +73,8 @@ export default function ViewDetailedReport(props) {
         props.close()
     };
 
+    const {DamageDetails}=props;
+
     return (
         <div>
             <Dialog onClose={handleClose} maxWidth={'lg'} aria-labelledby="max-width-dialog-title" open={props.open}>
@@ -94,15 +96,15 @@ export default function ViewDetailedReport(props) {
                                     <List >
                                         <ListItem >
                                             <ListItemText className="smallCardTitle"><span className="textBold alignleft">Interior</span></ListItemText>
-                                            <ListItemSecondaryAction className="smallCardBody">$10000</ListItemSecondaryAction>
+                                            <ListItemSecondaryAction className="smallCardBody">{DamageDetails.interiorCost?DamageDetails.interiorCost:'NA'}</ListItemSecondaryAction>
                                         </ListItem>
                                         <ListItem>
                                             <ListItemText className="smallCardTitle"><span className="textBold alignleft">Exterior</span></ListItemText>
-                                            <ListItemSecondaryAction className="smallCardBody">$00,000.00</ListItemSecondaryAction>
+                                            <ListItemSecondaryAction className="smallCardBody">{DamageDetails.exteriorCost?DamageDetails.exteriorCost:'NA'}</ListItemSecondaryAction>
                                         </ListItem>
                                         <ListItem>
                                             <ListItemText className="smallCardTitle"><span className="textBold alignleft">Mechanical total</span></ListItemText>
-                                            <ListItemSecondaryAction className="smallCardBody">$00,000.00</ListItemSecondaryAction>
+                                            <ListItemSecondaryAction className="smallCardBody">{DamageDetails.maintainenceCost?DamageDetails.maintainenceCost:'NA'}</ListItemSecondaryAction>
                                         </ListItem>
                                         <ListItem>
                                             <ListItemText className="smallCardTitle"><span className="textBold alignleft">Normal W and T</span></ListItemText>

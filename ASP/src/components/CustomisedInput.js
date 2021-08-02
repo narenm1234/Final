@@ -32,6 +32,7 @@ const useStyles = makeStyles((theme) => ({
 export default function CustomizedInputBase(props) {
     const classes = useStyles();
     const [searchtext, setSearchtext] = React.useState("");
+    console.log("searchtext : ",searchtext)
 
     const handleSearchText = (value) => {
         setSearchtext(value)

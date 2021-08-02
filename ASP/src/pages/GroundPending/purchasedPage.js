@@ -20,6 +20,7 @@ export default function ListingPage2(props) {
     async function getVehicleDetails() {
         let apiResponse = await getPurchasedList();
         setVehicleResponse(apiResponse.data.data);
+        console.log(vehicleResponse)
     }
 
 

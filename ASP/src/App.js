@@ -13,18 +13,19 @@ import VINSearch from './pages/GroundPending/VINSearch';
 import ConditionReport from './pages/ConditionReport';
 import AdminHome from './pages/AdminHome'
 import AppWithRouterAccess from './AppWithRouterAccess';
+import InventoryRequestsTabs from './components/InventoryRequestsTabs';
 function App() {
 
   return (
     <>
-      {/* <div>
+      <div>
         <Header></Header>
         <Router>
           <div>
             <Sidebar />
 
             <Switch>
-               {<Route path='/home' exact component={Home} />
+               <Route path='/home' exact component={Home} />
               <Route path='/adminSearch' exact component={AdminHome} />
               <Route path='/checkinvehicle' exact component={VINSearch} />
               <Route path='/grounded' exact exact render={
@@ -34,18 +35,19 @@ function App() {
               <Route path='/passed' exact component={GroundPending1} />
               <Route path='/purchased' exact component={GroundPending2} />
               <Route path='/grounded/lastchance' exact component={LastChance} />
-              <Route path='/conditionreport' exact render={
+              <Route path='/conditionreport/:vin' exact render={
                 (props) => (<ConditionReport {...props} />
                 )
-              } />} 
+                }/>
+                <Route path='/adminInventoryRequests' exact component={InventoryRequestsTabs} />
               
             </Switch>
           </div>
         </Router>
-      </div>*/}
-      <Router>
+      </div>
+      {/* <Router>
         <AppWithRouterAccess />
-      </Router>
+      </Router> */}
 
     </>
   );
