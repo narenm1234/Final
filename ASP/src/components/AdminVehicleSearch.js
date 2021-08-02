@@ -8,6 +8,10 @@ import { Divider } from '@material-ui/core';
 import SearchText from './SearchText/Search';
 const AdminVehicleSearch = (props) => {
 
+  const [Vin,setvin] = useState();
+
+  console.log("searchdetails",props);
+
   return (
     <Card className="adminSearchCard">
       <CardContent className="adminSearcheader">
@@ -21,8 +25,8 @@ const AdminVehicleSearch = (props) => {
       <Divider />
       <CardContent className="adminSearchCardBody">
         <CustomizedInputBase searchdetails={(SearchText) => props.searchdetails(SearchText)} />
-        <Button variant="contained" color="primary">
-          Close
+        <Button variant="contained" onClick={props.fromchildhandleSubmitbtn()} color="primary">
+          Submit
         </Button>
       </CardContent>
     </Card>

@@ -96,15 +96,15 @@ export default function ViewDetailedReport(props) {
                                     <List >
                                         <ListItem >
                                             <ListItemText className="smallCardTitle"><span className="textBold alignleft">Interior</span></ListItemText>
-                                            <ListItemSecondaryAction className="smallCardBody">{DamageDetails.interiorCost?DamageDetails.interiorCost:'NA'}</ListItemSecondaryAction>
+                                            <ListItemSecondaryAction className="smallCardBody">{"$"}{DamageDetails.interiorCost?DamageDetails.interiorCost:'NA'}</ListItemSecondaryAction>
                                         </ListItem>
                                         <ListItem>
                                             <ListItemText className="smallCardTitle"><span className="textBold alignleft">Exterior</span></ListItemText>
-                                            <ListItemSecondaryAction className="smallCardBody">{DamageDetails.exteriorCost?DamageDetails.exteriorCost:'NA'}</ListItemSecondaryAction>
+                                            <ListItemSecondaryAction className="smallCardBody">{"$"}{DamageDetails.exteriorCost?DamageDetails.exteriorCost:'NA'}</ListItemSecondaryAction>
                                         </ListItem>
                                         <ListItem>
                                             <ListItemText className="smallCardTitle"><span className="textBold alignleft">Mechanical total</span></ListItemText>
-                                            <ListItemSecondaryAction className="smallCardBody">{DamageDetails.maintainenceCost?DamageDetails.maintainenceCost:'NA'}</ListItemSecondaryAction>
+                                            <ListItemSecondaryAction className="smallCardBody">{"$"}{DamageDetails.maintainenceCost?DamageDetails.maintainenceCost:'NA'}</ListItemSecondaryAction>
                                         </ListItem>
                                         <ListItem>
                                             <ListItemText className="smallCardTitle"><span className="textBold alignleft">Normal W and T</span></ListItemText>
