@@ -3,6 +3,12 @@
   display: flex;
   margin: 5% 15% 0% 25%;
   position: absolute;
+background: #f3f2f2;
+}
+.conditionPageCardReports{
+  width: 65%;
+  margin: 5% 0% 0% 20%;
+  position: absolute;
   background: #f3f2f2;
 }
 .reportTitle {
@@ -247,13 +253,10 @@
     margin-top: 4%!important ;
   }
   .conditionTopBar{
-    width: 120%;
+    width: 70%;
     position: fixed;
     height: 40px;
     top: 52px;
-    left: -300px;
-    padding: 7px 24px 7px 653px;
-    //box-shadow: 0 2px 4px 0 rgb(0 0 0 / 20%);
     background-color: #ffffff;
   }
   .conditionTopBarStyles{
@@ -271,8 +274,9 @@
       
   }
   .conditionTopBarLayout{
-    margin-right: 4%;
-    float: right;
+    margin-left: 4%;
+    float: left;
+    padding: 8px;
   }
   .reportFooter{
   margin: 32px 0 0;
