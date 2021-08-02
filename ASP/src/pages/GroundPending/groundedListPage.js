@@ -24,7 +24,9 @@ export default function ListingPage(props) {
     async function getVehicleDetails() {
         let apiResponse = await getGroundingList();
         setVehicleResponse(apiResponse.data.data);
+        console.log('------->',apiResponse)
     }
+    
 
     const openConditionReport = (VINumber) => {
         props.history.push('/conditionreport', {
@@ -91,7 +93,7 @@ export default function ListingPage(props) {
                                                 </span>
                                             </ListItemText>
                                             <ListItemSecondaryAction>
-                                                <span className="textSize"><CurrencyFormat value={vehicle.pay_off_amt} displayType={'text'} thousandSeparator={true} prefix={'$'} /></span>
+                                                <span className="textSize"><CurrencyFormat value={vehicle.pay_off_amt? vehicle.pay_off_amt:""} displayType={'text'} thousandSeparator={true} prefix={'$'} /></span>
                                             </ListItemSecondaryAction>
                                         </ListItem>
 
@@ -125,7 +127,7 @@ export default function ListingPage(props) {
                                                 </span>
                                             </ListItemText>
                                             <ListItemSecondaryAction>
-                                                <span className="textSize"><CurrencyFormat value={vehicle.remaining_pmts} displayType={'text'} thousandSeparator={true} prefix={'$'} /></span>
+                                                <span className="textSize"><CurrencyFormat value={vehicle.remaining_pmts?vehicle.remaining_pmts:""} displayType={'text'} thousandSeparator={true} prefix={'$'} /></span>
                                             </ListItemSecondaryAction>
                                         </ListItem>
                                     </List>
