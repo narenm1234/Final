@@ -16,13 +16,12 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import ViewDetailedReport from './ViewDetailedReport';
 import MyGallery from './ImageGallery';
-import CloudDownloadOutlined from '@material-ui/icons/CloudDownloadOutlined'
-import PrintSharp from '@material-ui/icons/PrintSharp'
+
 import Button from '@material-ui/core/Button';
 import { getPassedList } from '../service/api';
 import { getInspectionVehicleDetails, getInspectionAccessoryDetails, getInspectionWheelTiresDetails } from '../service/api'
 export default function ConditionReport(props) {
-    let listOfItem = ['VIN', 'Engine', 'Door', 'Body Style', 'Transmission', 'Drive Train', 'Interior type', 'Interior Color', 'Keys', 'Interior Type', 'Odor',  'Grounding Mileage', 'Account Type'];
+    let listOfItem = ['VIN', 'Engine', 'Door', 'Body Style', 'Transmission', 'Drive Train', 'Interior type', 'Interior Color', 'Keys', 'Interior Type', 'Odor', 'Grounding Mileage', 'Account Type'];
     let wheelTyrelistOfItem = ['LF', 'RF', 'LR', 'RR', 'SP', 'RR']
     const [open, setOpen] = React.useState(false)
     const [condionVehicleDetails, setCondionVehicleDetails] = React.useState({})
@@ -32,7 +31,7 @@ export default function ConditionReport(props) {
     const [inspectionId, setInspectionId] = React.useState(0)
     const [VehicleResponse, setVehicleResponse] = useState([])
     const [value, setValue] = useState([])
-    
+
 
     useEffect(() => {
 
@@ -58,7 +57,7 @@ export default function ConditionReport(props) {
         let apiResponse = await getInspectionVehicleDetails();
         setCondionVehicleDetails(apiResponse.data);
         setInspectionId(apiResponse.data.inspection_id)
-        console.log("------>",apiResponse.data)
+        console.log("------>", apiResponse.data)
     }
 
     async function getInspectionAccessory(inspectionId) {
@@ -79,14 +78,7 @@ export default function ConditionReport(props) {
     }
     return (
         <div className='conditionPageCard'>
-            {/* <Grid item xs={12}>
-                <div className='conditionTopBar'>
-                    <Grid xs={12} className='conditionTopBarLayout'>
-                        <CloudDownloadOutlined /><span className="conditionTopBarStyles">Download Report</span>
-                        <PrintSharp /><span className="conditionTopBarStyles">Print Report</span>
-                    </Grid>
-                </div>
-            </Grid> */}
+
             <Grid container spacing={3} className="ConditionCardReportSpace">
                 <Grid item xs={5}>
                     <MyGallery />
@@ -445,15 +437,15 @@ export default function ConditionReport(props) {
                                         <TableBody>
                                             {/* {['Item Name', 'Item Name', 'Item Name', 'Item Name'].map(list => {
                                                 return ( */}
-                                                    <TableRow key="10074">
-                                                        <TableCell component="th" scope="row">
-                                                            10074
-                                                        </TableCell>
-                                                        <TableCell align="right">SUPER CHARGER - NO</TableCell>
-                                                        {/* <TableCell align="right">y</TableCell>
+                                            <TableRow key="10074">
+                                                <TableCell component="th" scope="row">
+                                                    10074
+                                                </TableCell>
+                                                <TableCell align="right">SUPER CHARGER - NO</TableCell>
+                                                {/* <TableCell align="right">y</TableCell>
                                                         <TableCell align="right">z</TableCell> */}
-                                                    </TableRow>
-                                                {/* )
+                                            </TableRow>
+                                            {/* )
                                             })
                                             } */}
                                         </TableBody>
@@ -478,14 +470,14 @@ export default function ConditionReport(props) {
                                             {/* {wheelTyrelistOfItem.map(list => {
                                                 return (
                                                     <TableRow key={list}> */}
-                                                        <TableCell component="th" scope="row">
-                                                            FL
-                                                        </TableCell>
-                                                        <TableCell align="right">Goodyear</TableCell>
-                                                        <TableCell align="right">16</TableCell>
-                                                        <TableCell align="right"></TableCell>
-                                                        <TableCell align="right">6/32</TableCell>
-                                                    {/* </TableRow>
+                                            <TableCell component="th" scope="row">
+                                                FL
+                                            </TableCell>
+                                            <TableCell align="right">Goodyear</TableCell>
+                                            <TableCell align="right">16</TableCell>
+                                            <TableCell align="right"></TableCell>
+                                            <TableCell align="right">6/32</TableCell>
+                                            {/* </TableRow>
                                                 )
                                             })
                                             } */}

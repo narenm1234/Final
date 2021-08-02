@@ -9,15 +9,16 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import TablePagination from '@material-ui/core/TablePagination';
 import SwipableFilter from './SwipableFilter';
+import ManualPricingSideBar from './ManualPricingSideBar';
 const useStyles = makeStyles({
     table: {
         width: 950,
     },
     manualStyles: {
         position: 'absolute',
-        top: "150px",
+        top: "175px",
         left: "320px",
-        margin: '20px',
+        margin: '20px 0',
         width: 950,
     },
     filterStyles: {
@@ -50,9 +51,9 @@ const rows = [
     createVehicleData("0000000000000000", "2021", "Make Name", "Model/Trim", "Region Label", "00/00/0000", "Status", "XYZ"),
 ];
 
-export default function ManualPricing() {
+export default function ManualPricing(props) {
     const classes = useStyles();
-
+    console.log(props.props)
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
     const handleChangePage = (event, newPage) => {
@@ -63,51 +64,61 @@ export default function ManualPricing() {
         setRowsPerPage(parseInt(event.target.value, 10));
         setPage(0);
     };
+    const openConditionReport = (VINumber) => {
+        props.props.history.push('/conditionreportRequests', {
+            vin: VINumber
+        })
+    }
     return (
         <>
-            <SwipableFilter />
-            <TableContainer component={Paper} className={classes.manualStyles}>
-                <Table className={classes.table} aria-label="simple table">
-                    <TableHead>
-                        <TableRow>
-                            <TableCell align="center">VIN</TableCell>
-                            <TableCell align="center">Year</TableCell>
-                            <TableCell align="center">Make</TableCell>
-                            <TableCell align="center">Model/Trim</TableCell>
-                            <TableCell align="center">Grounding Region</TableCell>
-                            <TableCell align="center">Inspection Date</TableCell>
-                            <TableCell align="center">Inspection Status</TableCell>
-                            <TableCell align="center">Action Code</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {rows.map((row) => (
-                            <TableRow key={row.name}>
-                                <TableCell align="right">
-                                    {row.VIN}
-                                </TableCell>
-                                <TableCell align="right">{row.Year}</TableCell>
-                                <TableCell align="right">{row.Make}</TableCell>
-                                <TableCell align="right">{row.Model_Trim}</TableCell>
-                                <TableCell align="right">{row.Grounding_Region}</TableCell>
-                                <TableCell align="right">{row.Inspection_Date}</TableCell>
-                                <TableCell align="right">{row.Inspection_Status}</TableCell>
-                                <TableCell align="right">{row.Action_Code}</TableCell>
+            <div>
+                <SwipableFilter />
+                <TableContainer component={Paper} className={classes.manualStyles}>
+                    <Table className={classes.table} aria-label="simple table">
+                        <TableHead>
+                            <TableRow>
+                                <TableCell align="center">VIN</TableCell>
+                                <TableCell align="center">Year</TableCell>
+                                <TableCell align="center">Make</TableCell>
+                                <TableCell align="center">Model/Trim</TableCell>
+                                <TableCell align="center">Grounding Region</TableCell>
+                                <TableCell align="center">Inspection Date</TableCell>
+                                <TableCell align="center">Inspection Status</TableCell>
+                                <TableCell align="center">Action Code</TableCell>
                             </TableRow>
-                        ))}
-                    </TableBody>
+                        </TableHead>
+                        <TableBody>
+                            {rows.map((row) => (
+                                <TableRow key={row.name}>
+                                    <TableCell align="right">
+                                        <span className="textStyle">
+                                            <a className="vin" onClick={() => openConditionReport(row.VIN)}> {row.VIN}</a>
+                                        </span>
+                                    </TableCell>
+                                    <TableCell align="right">{row.Year}</TableCell>
+                                    <TableCell align="right">{row.Make}</TableCell>
+                                    <TableCell align="right">{row.Model_Trim}</TableCell>
+                                    <TableCell align="right">{row.Grounding_Region}</TableCell>
+                                    <TableCell align="right">{row.Inspection_Date}</TableCell>
+                                    <TableCell align="right">{row.Inspection_Status}</TableCell>
+                                    <TableCell align="right">{row.Action_Code}</TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
 
-                </Table>
-                <TablePagination
-                    rowsPerPageOptions={[5, 10, 25]}
-                    component="div"
-                    count={rows.length}
-                    rowsPerPage={rowsPerPage}
-                    page={page}
-                    onPageChange={handleChangePage}
-                    onRowsPerPageChange={handleChangeRowsPerPage}
-                />
-            </TableContainer>
+                    </Table>
+                    <TablePagination
+                        rowsPerPageOptions={[5, 10, 25]}
+                        component="div"
+                        count={rows.length}
+                        rowsPerPage={rowsPerPage}
+                        page={page}
+                        onPageChange={handleChangePage}
+                        onRowsPerPageChange={handleChangeRowsPerPage}
+                    />
+                </TableContainer>
+            </div>
+
         </>
     );
 }
