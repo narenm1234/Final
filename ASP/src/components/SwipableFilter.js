@@ -145,7 +145,8 @@ const SmallInput = withStyles((theme) => ({
   },
 }))(InputBase);
 
-export default function SwipableFilter() {
+export default function SwipableFilter(props) {
+  const { fetchDataBasedOnSearchValue } = props;
   const classes = useStyles();
   const [state, setState] = useState({
     top: false,
@@ -381,8 +382,10 @@ export default function SwipableFilter() {
         </IconButton>
         <InputBase
           className={classes.filterInput}
-          placeholder="Search"
+          placeholder="Search VIN"
           inputProps={{ 'aria-label': 'Search' }}
+          value={searchtext || ''}
+          onKeyUp={(evt) => fetchDataBasedOnSearchValue(evt.target.value)}
           onChange={(evt) => handleSearchText(evt.target.value)}
         />
       </Paper>
