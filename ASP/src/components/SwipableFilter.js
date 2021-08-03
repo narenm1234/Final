@@ -146,7 +146,7 @@ const SmallInput = withStyles((theme) => ({
 }))(InputBase);
 
 export default function SwipableFilter(props) {
-  const { fetchDataBasedOnSearchValue } = props;
+  const { fetchDataBasedOnSearchValue, fetchDataBasedOnFilters, resetFilterList } = props;
   const classes = useStyles();
   const [state, setState] = useState({
     top: false,
@@ -166,18 +166,18 @@ export default function SwipableFilter(props) {
     auctionCode: ''
   });
   const [makeOptions, setMakeOptions] = useState([
-    {value: 'audi', text: 'Audi'},
-    {value: 'bmw', text: 'BMW'},
-    {value: 'benz', text: 'Benz'}
+    {value: 'Audi', text: 'Audi'},
+    {value: 'BMW', text: 'BMW'},
+    {value: 'Benz', text: 'Benz'}
   ]);
   const [inspectionStatusOptions, setInspectionStatusOptions] = useState([
-    {value: 'pending', text: 'Pending'},
-    {value: 'completed', text: 'Completed'}
+    {value: 'Pending', text: 'Pending'},
+    {value: 'Completed', text: 'Completed'}
   ]);
   const [groundingRegionOptions, setGroundingRegionOptions] = useState([
-    {value: 'texas', text: 'Texas'},
-    {value: 'florida', text: 'Florida'},
-    {value: 'indiana', text: 'Indiana'}
+    {value: 'Texas', text: 'Texas'},
+    {value: 'Florida', text: 'Florida'},
+    {value: 'Indiana', text: 'Indiana'}
   ]);
   const [searchtext, setSearchtext] = useState("");
 
@@ -192,8 +192,20 @@ export default function SwipableFilter(props) {
     setFilterInput({ ...filterInput, ...{ [event.target.name]: event.target.value }});
   };
 
-  const handleOnSubmit = () => {
-    console.log(filterInput);
+  const resetFilterInput = () => {
+    setFilterInput({
+      vin: '',
+      yearFrom: '',
+      yearTo: '',
+      make: '',
+      inspectionStatus: '',
+      inspectionDateFrom: '',
+      inspectionDateTo: '',
+      groundingRegion: '',
+      auctionCode: ''
+    });
+    resetFilterList();
+    setState({ ...state, ['right']: false });
   }
 
   const list = (anchor) => (
@@ -360,10 +372,10 @@ export default function SwipableFilter(props) {
         </ListItem>
       </List>
       <List className={classes.swipeFilterBtn}>
-        <Button autoFocus className={classes.cancelButton} color="primary">
+        <Button autoFocus className={classes.cancelButton} color="primary" onClick={() => resetFilterInput()}>
           Cancel
         </Button>
-        <Button autoFocus className={classes.updateButton} color="secondary" onClick={handleOnSubmit}>
+        <Button autoFocus className={classes.updateButton} color="secondary" onClick={() => fetchDataBasedOnFilters(filterInput)}>
           Update
         </Button>
       </List>

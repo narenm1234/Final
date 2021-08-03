@@ -41,14 +41,14 @@ function createVehicleData(VIN, Year, Make, Model_Trim, Grounding_Region, Inspec
 }
 
 const rows = [
-  createVehicleData("0000000000002015", "2021", "Make Name", "Model/Trim", "Region Label", "00/00/0000", "Status", "XYZ"),
-  createVehicleData("0000000000002016", "2021", "Make Name", "Model/Trim", "Region Label", "00/00/0000", "Status", "XYZ"),
-  createVehicleData("0000000000002017", "2021", "Make Name", "Model/Trim", "Region Label", "00/00/0000", "Status", "XYZ"),
-  createVehicleData("0000000000002018", "2021", "Make Name", "Model/Trim", "Region Label", "00/00/0000", "Status", "XYZ"),
-  createVehicleData("0000000000002019", "2021", "Make Name", "Model/Trim", "Region Label", "00/00/0000", "Status", "XYZ"),
-  createVehicleData("0000000000002020", "2021", "Make Name", "Model/Trim", "Region Label", "00/00/0000", "Status", "XYZ"),
-  createVehicleData("0000000000002021", "2021", "Make Name", "Model/Trim", "Region Label", "00/00/0000", "Status", "XYZ"),
-  createVehicleData("0000000000002022", "2021", "Make Name", "Model/Trim", "Region Label", "00/00/0000", "Status", "XYZ"),
+  createVehicleData("0704303398645911", "2015", "Audi", "A1", "Florida", "01/23/2015", "Pending", "XYZ"),
+  createVehicleData("6672920469419405", "2016", "BMW", "B1", "Indiana", "04/26/2016", "Pending", "XYZ"),
+  createVehicleData("7660443910307535", "2017", "Benz", "C1", "Texas", "08/13/2017", "Pending", "XYZ"),
+  createVehicleData("2769586046735830", "2018", "Audi", "A2", "Texas", "12/17/2018", "Completed", "XYZ"),
+  createVehicleData("2563959933582287", "2019", "BMW", "B2", "Florida", "07/30/2019", "Completed", "XYZ"),
+  createVehicleData("8309130666254027", "2020", "Benz", "C2", "Indiana", "03/14/2020", "Completed", "XYZ"),
+  createVehicleData("3180783430963337", "2021", "Audi", "A3", "Indiana", "11/15/2021", "Pending", "XYZ"),
+  createVehicleData("0087479668724131", "2022", "BMW", "B3", "Texas", "10/24/2022", "Completed", "XYZ"),
 ];
 
 export default function ManualPricing(props) {
@@ -84,11 +84,58 @@ export default function ManualPricing(props) {
     }
   }
 
+  const fetchDataBasedOnFilters = (filterInput) => {
+    let vehicleListCopy = [...rows];
+    if (filterInput.vin) {
+      vehicleListCopy = vehicleListCopy.filter(row => {
+        return row.VIN.indexOf(filterInput.vin) !== -1 || row.Year >= filterInput.yearFrom && row.Year <= filterInput.yearTo;
+      });
+    }
+    if (filterInput.yearFrom && filterInput.yearTo) {
+      vehicleListCopy = vehicleListCopy.filter(row => {
+        return row.Year >= filterInput.yearFrom && row.Year <= filterInput.yearTo;
+      });
+    }
+    if (filterInput.make) {
+      vehicleListCopy = vehicleListCopy.filter(row => {
+        return row.Make.indexOf(filterInput.make) !== -1;
+      });
+    }
+    if (filterInput.inspectionStatus) {
+      vehicleListCopy = vehicleListCopy.filter(row => {
+        return row.Inspection_Status.indexOf(filterInput.inspectionStatus) !== -1;
+      });
+    }
+    if (filterInput.groundingRegion) {
+      vehicleListCopy = vehicleListCopy.filter(row => {
+        return row.Grounding_Region.indexOf(filterInput.groundingRegion) !== -1;
+      });
+    }
+    if (filterInput.auctionCode) {
+      vehicleListCopy = vehicleListCopy.filter(row => {
+        return row.Action_Code.indexOf(filterInput.auctionCode) !== -1;
+      });
+    }
+    if (filterInput.inspectionDateFrom && filterInput.inspectionDateTo) {
+      vehicleListCopy = vehicleListCopy.filter(row => {
+        const dateTs = Date.parse(row.Inspection_Date);
+        return dateTs >= Date.parse(filterInput.inspectionDateFrom) && dateTs <= Date.parse(filterInput.inspectionDateTo);
+      });
+    }
+    setVehicleList(vehicleListCopy);
+  }
+
+  const resetFilterList = () => {
+    setVehicleList(rows);
+  }
+
   return (
     <>
       <div>
         <SwipableFilter
           fetchDataBasedOnSearchValue={fetchDataBasedOnSearchValue}
+          fetchDataBasedOnFilters={fetchDataBasedOnFilters}
+          resetFilterList={resetFilterList}
         />
         <TableContainer component={Paper} className={classes.manualStyles}>
           <Table className={classes.table} aria-label="simple table">
