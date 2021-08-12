@@ -110,14 +110,14 @@ export default function ConditionReport(props) {
     }
     return (
         <div className='conditionPageCard'>
-            {/* <Grid item xs={12}>
+            <Grid item xs={12}>
                 <div className='conditionTopBar'>
                     <Grid xs={12} className='conditionTopBarLayout'>
                         <CloudDownloadOutlined /><span className="conditionTopBarStyles">Download Report</span>
                         <PrintSharp /><span className="conditionTopBarStyles">Print Report</span>
                     </Grid>
                 </div>
-            </Grid> */}
+            </Grid>
             <Grid container spacing={3} className="ConditionCardReportSpace">
                 <Grid item xs={5}>
                     <MyGallery />
