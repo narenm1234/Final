@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -68,7 +68,8 @@ export default function ManualPricing(props) {
 
   const openConditionReport = (VINumber) => {
     props.props.history.push('/conditionreportRequests', {
-      vin: VINumber
+      vin: VINumber,
+      pageName: "Manual Pricing",
     })
   }
 

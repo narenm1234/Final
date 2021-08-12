@@ -98,7 +98,7 @@ const AppWithRouterAccess = () => {
                                     (props) => (<ConditionReport {...props} />
                                     )
                                 } />
-                                <SecureRoute path='/conditionreportRequests' exact render={
+                                <Route path='/conditionreportRequests' exact render={
                                     (props) => (<ConditionReportRequests {...props} />
                                     )
                                 } />

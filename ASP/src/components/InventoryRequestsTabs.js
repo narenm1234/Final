@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -8,8 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import ManualPricing from './ManualPricing';
 import RRMApproval from './RRMApproval';
-import MileageDisc from './MileageDisc';
-
+import MileageDisc from './MileageDisc'
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
   return (
@@ -53,32 +52,42 @@ export default function InventoryRequestsTabs(props) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-  
-  return (
-    <div>
-      <AppBar position="fixed" className='topBarAdmin'>
-        <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
-          <Tab label="Awaiting Manual Pricing" {...a11yProps(0)} />
-          <Tab label="RRM Approvals" {...a11yProps(1)} />
-          <Tab label="Mileage Discrepencies" {...a11yProps(2)} />
-          <Tab label="No Inspections" {...a11yProps(3)} />
-        </Tabs>
-      </AppBar>
-      <TabPanel value={value} index={0}>
-        <ManualPricing props={props} />
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        <div className='adminTabsSection'><RRMApproval /></div>
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        <div className='adminTabsSection'><MileageDisc /></div>
-      </TabPanel>
-      <TabPanel value={value} index={3}>
-        <div className='adminTabsSection'><h2>No Inspections</h2></div>
-      </TabPanel>
-    </div>
-  );
+    useEffect(() => {
+        if (props.location.state && props.location.state.pageName === 'RRMApproval') {
+            setValue(1)
+        } else if (props.location.state && props.location.state.pageName === 'Manual Pricing') {
+            setValue(0)
+        }
+        else if (props.location.state && props.location.state.pageName === 'Mileage Discrepencies') {
+            setValue(2)
+        }
+    }, [props.location.state && props.location.state.pageName]);
+
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
+    };
+    return (
+        <div>
+            <AppBar position="fixed" className='topBarAdmin'>
+                <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
+                    <Tab label="Awaiting Manual Pricing" {...a11yProps(0)} />
+                    <Tab label="RRM Approvals" {...a11yProps(1)} />
+                    <Tab label="Mileage Discrepencies" {...a11yProps(2)} />
+                    <Tab label="No Inspections" {...a11yProps(3)} />
+                </Tabs>
+            </AppBar>
+            <TabPanel value={value} index={0}>
+                <ManualPricing props={props} />
+            </TabPanel>
+            <TabPanel value={value} index={1}>
+                <div className='adminTabsSection'><RRMApproval props={props} /></div>
+            </TabPanel>
+            <TabPanel value={value} index={2}>
+                <div className='adminTabsSection'><MileageDisc props={props} /></div>
+            </TabPanel>
+            <TabPanel value={value} index={3}>
+                <div className='adminTabsSection'><h2>No Inspections</h2></div>
+            </TabPanel>
+        </div>
+    );
 }

@@ -55,7 +55,7 @@ const rows = [
 
 ];
 
-export default function RRMApproval() {
+export default function RRMApproval(props) {
     const classes = useStyles();
 
     const [page, setPage] = React.useState(0);
@@ -68,6 +68,12 @@ export default function RRMApproval() {
         setRowsPerPage(parseInt(event.target.value, 10));
         setPage(0);
     };
+    const openConditionReport = (VINumber) => {
+        props.props.history.push('/conditionreportRequests', {
+            vin: VINumber,
+            pageName: "RRMApproval",
+        })
+    }
     return (
         <>
             <SwipableFilterRRM />
@@ -92,7 +98,9 @@ export default function RRMApproval() {
                         {rows.map((row) => (
                             <TableRow key={row.name}>
                                 <TableCell align="right">
-                                    {row.VIN}
+                                    <span className="textStyle">
+                                        <a className="vin" onClick={() => openConditionReport(row.VIN)}> {row.VIN}</a>
+                                    </span>
                                 </TableCell>
                                 <TableCell align="right">{row.Year}</TableCell>
                                 <TableCell align="right">{row.Make}</TableCell>

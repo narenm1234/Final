@@ -29,6 +29,7 @@ export default function ConditionReportRequests(props) {
     const [accessoryDetails, setAccessoryDetails] = React.useState({})
     const [wheelTiresDetails, setWheelTiresDetails] =useState([])
     const [vin, setVin] = React.useState(props?.match?.params?.vin)
+const [pageName, setPageName] = React.useState(props?.location?.state?.pageName)
     const [inspectionId, setInspectionId] = React.useState([])
     const [VehicleResponse, setVehicleResponse] = useState([])
     const [value, setValue] = useState([])
@@ -110,7 +111,7 @@ export default function ConditionReportRequests(props) {
                 <Grid item xs={12}>
                     <div className='conditionTopBar'>
                         <Grid xs={12} className='conditionTopBarLayout'>
-                            <Link to="/adminInventoryRequests">name</Link>
+                            <Link to={{ pathname: "/adminInventoryRequests", state: { pageName: pageName } }} >{pageName}</Link>
                         </Grid>
                     </div>
                 </Grid>

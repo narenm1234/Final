@@ -57,7 +57,7 @@ const rows = [
     createVehicleData("0000000000000000", "2021", "Make Name", "Model/Trim", "Region Label", "00,0000", "00,0000", "00/00/000"),
 ];
 
-export default function MileageDisc() {
+export default function MileageDisc(props) {
     const classes = useStyles();
 
     const [page, setPage] = React.useState(0);
@@ -70,6 +70,12 @@ export default function MileageDisc() {
         setRowsPerPage(parseInt(event.target.value, 10));
         setPage(0);
     };
+    const openConditionReport = (VINumber) => {
+        props.props.history.push('/conditionreportRequests', {
+            vin: VINumber,
+            pageName: "Mileage Discrepencies",
+        })
+    }
     return (
         <>
             <SwipableFilterMileage />
@@ -91,7 +97,9 @@ export default function MileageDisc() {
                         {rows.map((row) => (
                             <TableRow key={row.name}>
                                 <TableCell align="right">
-                                    {row.VIN}
+                                    <span className="textStyle">
+                                        <a className="vin" onClick={() => openConditionReport(row.VIN)}> {row.VIN}</a>
+                                    </span>
                                 </TableCell>
                                 <TableCell align="right">{row.Year}</TableCell>
                                 <TableCell align="right">{row.Make}</TableCell>
