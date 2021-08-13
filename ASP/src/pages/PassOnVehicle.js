@@ -9,6 +9,7 @@ import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
+import Divider from '@material-ui/core/Divider';
 import { postDealerActionPassOnVehicle } from '../service/api'
 const styles = (theme) => ({
     root: {
@@ -75,11 +76,13 @@ export default function PassOnVehicle(props) {
     }
     return (
         <div>
-            <Dialog onClose={handleClose} maxWidth={'lg'} aria-labelledby="max-width-dialog-title" open={props.open}>
+            <Dialog onClose={handleClose} aria-labelledby="max-width-dialog-title" open={props.open}>
                 <DialogTitle className="viewReportHeader" id="customized-dialog-title" onClose={handleClose} >
                     Pass On vehicle
                 </DialogTitle>
+                <Divider />
                 <DialogContent>
+
                     <Grid container >
                         <Grid xs={12}>
                             <div className="viewReportCenter">You have passed on Vehicle</div>
@@ -90,7 +93,7 @@ export default function PassOnVehicle(props) {
                     <Button autoFocus onClick={handleClose} color="primary">
                         Cancel
                     </Button>
-                    <Button autoFocus onClick={handleProceed} className="closeButton" color="secondary">
+                    <Button autoFocus onClick={handleProceed} className="closePassBtn" color="secondary">
                         Proceed
                     </Button>
                 </DialogActions>
