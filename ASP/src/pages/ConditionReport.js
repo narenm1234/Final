@@ -287,43 +287,65 @@ export default function ConditionReport(props) {
                                             <span className="textStyle">
                                                 <span className="textBold">  Inspection Location  </span>
 
+                                        </span>
+                                    </ListItemText>
+                                    <ListItemSecondaryAction>
+                                        <span className="textSize">
+                                        {condionVehicleDetails.location_name}
+                                        </span>
+                                    </ListItemSecondaryAction>
+                                </List>
+                                <List className="paddingCSS">
+                                    <ListItemText>
+                                        <span className="textStyle">
+                                            <span >
+                                                .
                                             </span>
-                                        </ListItemText>
-                                        <ListItemSecondaryAction>
-                                            <span className="textSize">
-                                                {condionVehicleDetails.location_address}
-                                            </span>
-                                        </ListItemSecondaryAction>
-                                    </List>
-                                    <List className="paddingCSS">
-                                        <ListItemText>
-                                            <span className="textStyle">
-                                                <span >
-                                                    .
-                                                </span>
-                                            </span>
-                                        </ListItemText>
-                                        <ListItemSecondaryAction>
-                                            <span className="textSize">
-                                                {condionVehicleDetails.location_address2}{condionVehicleDetails.location_city}
-                                            </span>
-                                        </ListItemSecondaryAction>
-                                    </List>
-                                    <List className="paddingCSS">
-                                        <ListItemText>
-                                            <span className="textStyle">
-                                                <span > .   </span>
+                                        </span>
+                                    </ListItemText>
+                                    <ListItemSecondaryAction>
+                                        <span className="textSize">
+                                        {condionVehicleDetails.location_address}
+                                        </span>
+                                    </ListItemSecondaryAction>
+                                </List>
+                                <List className="paddingCSS">
+                                    <ListItemText>
+                                        <span className="textStyle">
+                                            <span > .   </span>
 
-                                            </span>
-                                        </ListItemText>
-                                        <ListItemSecondaryAction>
-                                            <span className="textSize">{condionVehicleDetails.location_code}</span>
-                                        </ListItemSecondaryAction>
-                                    </List>
-                                    <List className="paddingCSS">
-                                        <ListItemText>
-                                            <span className="textStyle">
-                                                <span className="textBold">  Consignor  </span>
+                                        </span>
+                                    </ListItemText>
+                                    <ListItemSecondaryAction>
+                                        <span className="textSize">{condionVehicleDetails.location_address2}{condionVehicleDetails.location_city}</span>
+                                    </ListItemSecondaryAction>
+                                </List>
+                                <List className="paddingCSS">
+                                    <ListItemText>
+                                        <span className="textStyle">
+                                            <span > .   </span>
+
+                                        </span>
+                                    </ListItemText>
+                                    <ListItemSecondaryAction>
+                                        <span className="textSize">{condionVehicleDetails.location_state}-{condionVehicleDetails.location_zip}</span>
+                                    </ListItemSecondaryAction>
+                                </List>
+                                <List className="paddingCSS">
+                                    <ListItemText>
+                                        <span className="textStyle">
+                                            <span > .   </span>
+
+                                        </span>
+                                    </ListItemText>
+                                    <ListItemSecondaryAction>
+                                        <span className="textSize">{condionVehicleDetails.location_phone}</span>
+                                    </ListItemSecondaryAction>
+                                </List>
+                                <List className="paddingCSS">
+                                    <ListItemText>
+                                        <span className="textStyle">
+                                            <span className="textBold">  Consignor  </span>
 
                                             </span>
                                         </ListItemText>
