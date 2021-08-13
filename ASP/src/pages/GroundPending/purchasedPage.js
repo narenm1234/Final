@@ -28,7 +28,7 @@ let resp = [{
     }, "vin": "JM3KFABM2L0748452"
 }]
 export default function ListingPage2(props) {
-    const [vehicleResponse, setVehicleResponse] = useState(resp)
+    const [vehicleResponse, setVehicleResponse] = useState([])
     const [value, setValue] = useState([])
 
     useEffect(() => {

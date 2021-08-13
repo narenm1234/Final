@@ -248,12 +248,9 @@ export async function postDealerActionPassOnVehicle(VINumber) {
 
 
     };
-    const requestData = {
-        "dealerAction": "PASS",
-        "vin": VINumber
-    };
 
-    return await axios.post(`${getDealerActionUrl}`, requestData, options);
+
+    return await axios.post(`${getDealerActionUrl}?dealerAction=pass&vin=${VINumber}`,  options);
 
 }
 
