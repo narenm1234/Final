@@ -110,14 +110,14 @@ export default function ConditionReport(props) {
     }
     return (
         <div className='conditionPageCard'>
-            <Grid item xs={12}>
+            {/* <Grid item xs={12}>
                 <div className='conditionTopBar'>
                     <Grid xs={12} className='conditionTopBarLayout'>
                         <CloudDownloadOutlined /><span className="conditionTopBarStyles">Download Report</span>
                         <PrintSharp /><span className="conditionTopBarStyles">Print Report</span>
                     </Grid>
                 </div>
-            </Grid>
+            </Grid> */}
             <Grid container spacing={3} className="ConditionCardReportSpace">
                 <Grid item xs={5}>
                     <MyGallery />
@@ -290,7 +290,7 @@ export default function ConditionReport(props) {
                                     </ListItemText>
                                     <ListItemSecondaryAction>
                                         <span className="textSize">
-                                        {condionVehicleDetails.location_address}
+                                        {condionVehicleDetails.location_name}
                                         </span>
                                     </ListItemSecondaryAction>
                                 </List>
@@ -304,7 +304,7 @@ export default function ConditionReport(props) {
                                     </ListItemText>
                                     <ListItemSecondaryAction>
                                         <span className="textSize">
-                                        {condionVehicleDetails.location_address2}{condionVehicleDetails.location_city}
+                                        {condionVehicleDetails.location_address}
                                         </span>
                                     </ListItemSecondaryAction>
                                 </List>
@@ -316,7 +316,29 @@ export default function ConditionReport(props) {
                                         </span>
                                     </ListItemText>
                                     <ListItemSecondaryAction>
-                                        <span className="textSize">{condionVehicleDetails.location_code}</span>
+                                        <span className="textSize">{condionVehicleDetails.location_address2}{condionVehicleDetails.location_city}</span>
+                                    </ListItemSecondaryAction>
+                                </List>
+                                <List className="paddingCSS">
+                                    <ListItemText>
+                                        <span className="textStyle">
+                                            <span > .   </span>
+
+                                        </span>
+                                    </ListItemText>
+                                    <ListItemSecondaryAction>
+                                        <span className="textSize">{condionVehicleDetails.location_state}-{condionVehicleDetails.location_zip}</span>
+                                    </ListItemSecondaryAction>
+                                </List>
+                                <List className="paddingCSS">
+                                    <ListItemText>
+                                        <span className="textStyle">
+                                            <span > .   </span>
+
+                                        </span>
+                                    </ListItemText>
+                                    <ListItemSecondaryAction>
+                                        <span className="textSize">{condionVehicleDetails.location_phone}</span>
                                     </ListItemSecondaryAction>
                                 </List>
                                 <List className="paddingCSS">
