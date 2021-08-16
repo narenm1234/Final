@@ -166,9 +166,10 @@ export default function SwipableFilter(props) {
     auctionCode: ''
   });
   const [makeOptions, setMakeOptions] = useState([
-    {value: 'Audi', text: 'Audi'},
-    {value: 'BMW', text: 'BMW'},
-    {value: 'Benz', text: 'Benz'}
+    {value: 'CX-5', text: 'CX-5'},
+    {value: 'MX-5', text: 'MX-5'},
+    {value: 'Mazda3', text: 'Mazda3'},
+    {value: 'Mazda6', text: 'Mazda6'}
   ]);
   const [inspectionStatusOptions, setInspectionStatusOptions] = useState([
     {value: 'Pending', text: 'Pending'},

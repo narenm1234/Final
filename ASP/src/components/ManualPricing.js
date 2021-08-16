@@ -41,14 +41,14 @@ function createVehicleData(VIN, Year, Make, Model_Trim, Grounding_Region, Inspec
 }
 
 const rows = [
-  createVehicleData("0704303398645911", "2015", "Audi", "A1", "Florida", "01/23/2015", "Pending", "XYZ"),
-  createVehicleData("6672920469419405", "2016", "BMW", "B1", "Indiana", "04/26/2016", "Pending", "XYZ"),
-  createVehicleData("7660443910307535", "2017", "Benz", "C1", "Texas", "08/13/2017", "Pending", "XYZ"),
-  createVehicleData("2769586046735830", "2018", "Audi", "A2", "Texas", "12/17/2018", "Completed", "XYZ"),
-  createVehicleData("2563959933582287", "2019", "BMW", "B2", "Florida", "07/30/2019", "Completed", "XYZ"),
-  createVehicleData("8309130666254027", "2020", "Benz", "C2", "Indiana", "03/14/2020", "Completed", "XYZ"),
-  createVehicleData("3180783430963337", "2021", "Audi", "A3", "Indiana", "11/15/2021", "Pending", "XYZ"),
-  createVehicleData("0087479668724131", "2022", "BMW", "B3", "Texas", "10/24/2022", "Completed", "XYZ"),
+  createVehicleData("0704303398645911", "2015", "CX-5", "A1", "Florida", "01/23/2015", "Pending", "XYZ"),
+  createVehicleData("6672920469419405", "2016", "Mazda3", "B1", "Indiana", "04/26/2016", "Pending", "XYZ"),
+  createVehicleData("7660443910307535", "2017", "Mazda6", "C1", "Texas", "08/13/2017", "Pending", "XYZ"),
+  createVehicleData("2769586046735830", "2018", "MX-5", "A2", "Texas", "12/17/2018", "Completed", "XYZ"),
+  createVehicleData("2563959933582287", "2019", "Mazda3", "B2", "Florida", "07/30/2019", "Completed", "XYZ"),
+  createVehicleData("8309130666254027", "2020", "Mazda3", "C2", "Indiana", "03/14/2020", "Completed", "XYZ"),
+  createVehicleData("3180783430963337", "2021", "Mazda6", "A3", "Indiana", "11/15/2021", "Pending", "XYZ"),
+  createVehicleData("0087479668724131", "2022", "CX-5", "B3", "Texas", "10/24/2022", "Completed", "XYZ"),
 ];
 
 export default function ManualPricing(props) {

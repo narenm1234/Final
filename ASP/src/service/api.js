@@ -3,16 +3,16 @@ import axios from 'axios'
 // const TEST_BASE = 'https://aspservices-internal-test.tfs.toyota.com/asp-services/';
 // const PROD_BASE = 'https://aspservices-internal-prod.tfs.toyota.com/asp-services/';
 // const STAGE_BASE = 'https://aspservices-internal-stage.tfs.toyota.com/asp-services/';
-var url;
-var groundListUrl;
-var tokenUrl;
-var passedVehicleUrl;
-var purchasedVehicleUrl;
-var inspectionAccessoryDetailsUrl;
-var inspectionWheelTiresDetailsUrl;
-var inspectionVehicleDetails;
-var getInspectionDamageDetailsUrl;
-var getOEMBuildDetailsUrl;
+let url;
+let groundListUrl;
+let tokenUrl;
+let passedVehicleUrl;
+let purchasedVehicleUrl;
+let inspectionAccessoryDetailsUrl;
+let inspectionWheelTiresDetailsUrl;
+let inspectionVehicleDetails;
+let getInspectionDamageDetailsUrl;
+let getOEMBuildDetailsUrl;
 let getDealerActionUrl;
 
 
@@ -47,16 +47,16 @@ else if (hostname.includes('local')) {
 }
 else if (hostname.includes('stage')) {
     url = 'http://internal-a3e2a8608d24e4c5f8b42aed9c3587d7-2044184104.us-east-1.elb.amazonaws.com/getAccountDetailsBykey'
-    groundListUrl = 'https://aspservices-internal-stage.tfs.toyota.com/asp-services/getGroundingList'
+    groundListUrl = 'http://aspservices-internal-stage.tfs.toyota.com/asp-services/getGroundingList'
     tokenUrl = 'http://internal-a3e2a8608d24e4c5f8b42aed9c3587d7-2044184104.us-east-1.elb.amazonaws.com/tokenData'
-    passedVehicleUrl = 'https://aspservices-internal-stage.tfs.toyota.com/asp-services/getPassedVehicles'
-    purchasedVehicleUrl = 'https://aspservices-internal-stage.tfs.toyota.com/asp-services/getPurchasedVehicles'
-    inspectionAccessoryDetailsUrl = 'https://aspservices-internal-stage.tfs.toyota.com/asp-services/getInspectionAccessoryDetails'
-    inspectionWheelTiresDetailsUrl = 'https://aspservices-internal-stage.tfs.toyota.com/asp-services/getInspectionWheelTiresDetails'
-    inspectionVehicleDetails = 'https://aspservices-internal-stage.tfs.toyota.com/asp-services/getVehicleInspectionDetails'
-    getInspectionDamageDetailsUrl = 'https://aspservices-internal-stage.tfs.toyota.com/asp-services/getInspectionDamageDetails'
-    getOEMBuildDetailsUrl = 'https://aspservices-internal-stage.tfs.toyota.com/asp-services/getOEMBuildDetails'
-    getDealerActionUrl = 'https://aspservices-internal-stage.tfs.toyota.com/asp-services/DealerAction'
+    passedVehicleUrl = 'http://aspservices-internal-stage.tfs.toyota.com/asp-services/getPassedVehicles'
+    purchasedVehicleUrl = 'http://aspservices-internal-stage.tfs.toyota.com/asp-services/getPurchasedVehicles'
+    inspectionAccessoryDetailsUrl = 'http://aspservices-internal-stage.tfs.toyota.com/asp-services/getInspectionAccessoryDetails'
+    inspectionWheelTiresDetailsUrl = 'http://aspservices-internal-stage.tfs.toyota.com/asp-services/getInspectionWheelTiresDetails'
+    inspectionVehicleDetails = 'http://aspservices-internal-stage.tfs.toyota.com/asp-services/getVehicleInspectionDetails'
+    getInspectionDamageDetailsUrl = 'http://aspservices-internal-stage.tfs.toyota.com/asp-services/getInspectionDamageDetails'
+    getOEMBuildDetailsUrl = 'http://aspservices-internal-stage.tfs.toyota.com/asp-services/getOEMBuildDetails'
+    getDealerActionUrl = 'http://aspservices-internal-stage.tfs.toyota.com/asp-services/DealerAction'
 }
 else if (hostname.includes('test')) {
     url = 'http://internal-a3e2a8608d24e4c5f8b42aed9c3587d7-2044184104.us-east-1.elb.amazonaws.com/getAccountDetailsBykey'
