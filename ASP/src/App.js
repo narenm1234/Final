@@ -45,6 +45,10 @@ function App() {
                 (props) => (<ConditionReport {...props} />
                 )
               } />
+              <Route path='/conditionreport' exact render={
+                (props) => (<ConditionReport {...props} />
+                )
+              } />
             </Switch>
           </div>
         </Router>
