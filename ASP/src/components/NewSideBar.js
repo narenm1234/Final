@@ -60,11 +60,11 @@ export default function NewSidebar() {
                         </ListItem>
                         <ListItem component={Link} to="/passed" >
                             <ListItemText primary="Passed" />
-                            <Chip className={classes.root} label="0"></Chip>
+                            <Chip className={classes.root} label="8"></Chip>
                         </ListItem>
                         <ListItem component={Link} to="/purchased" >
                             <ListItemText primary="Purchased" />
-                            <Chip className={classes.root} label="0"></Chip>
+                            <Chip className={classes.root} label="9"></Chip>
                         </ListItem>
                     </List>
                 </Collapse>
@@ -82,11 +82,11 @@ export default function NewSidebar() {
                     <List component="div" disablePadding className={classes.sideBarCSS}>
                         <ListItem component={Link} to="/adminSearch" >
                             <ListItemText primary="Vehicle Search" />
-                            <Chip className={classes.root} label="4"></Chip>
+                            
                         </ListItem>
                         <ListItem component={Link} to="/adminInventoryRequests" >
                             <ListItemText primary="Inventory Requests" />
-                            <Chip className={classes.root} label="0"></Chip>
+                            
                         </ListItem>
                     </List>
                 </Collapse>

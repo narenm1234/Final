@@ -73,7 +73,7 @@ export default function InventoryRequestsTabs(props) {
                     <Tab label="Awaiting Manual Pricing" {...a11yProps(0)} />
                     <Tab label="RRM Approvals" {...a11yProps(1)} />
                     <Tab label="Mileage Discrepencies" {...a11yProps(2)} />
-                    <Tab label="No Inspections" {...a11yProps(3)} />
+                    {/* <Tab label="No Inspections" {...a11yProps(3)} /> */}
                 </Tabs>
             </AppBar>
             <TabPanel value={value} index={0}>

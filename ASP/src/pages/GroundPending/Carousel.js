@@ -12,11 +12,15 @@ const tutorialSteps = [
     },
     {
         imgPath:
-            'car1.jpg',
+            'car.jpg',
     },
     {
         imgPath:
-            'car2.jpg',
+            'car.jpg',
+    },
+    {
+        imgPath:
+            'car.jpg',
     },
 ];
 

@@ -15,11 +15,12 @@ import Paper from '@material-ui/core/Paper';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import ViewDetailedReport from './ViewDetailedReport';
+import CurrencyFormat from 'react-currency-format';
 import MyGallery from './ImageGallery';
 import CloudDownloadOutlined from '@material-ui/icons/CloudDownloadOutlined'
 import PrintSharp from '@material-ui/icons/PrintSharp'
 import Button from '@material-ui/core/Button';
-import { getPassedList1, getInspectionDamageDetailsApi, getOEMBuildDetailsApi } from '../service/api';
+import { getPassedList1, getInspectionDamageDetailsApi, getOEMBuildDetailsApi, getPurchasedList } from '../service/api';
 import { getInspectionVehicleDetails, getInspectionAccessoryDetails, getInspectionWheelTiresDetails } from '../service/api';
 import moment from 'moment';
 import PurchasedPricingSideBar from '../components/PurchasedPricingSideBar';
@@ -69,11 +70,10 @@ export default function ConditionReport(props) {
 
 
         getVehicleDetails()
-    }, []);
+    }, [value]);
     async function getVehicleDetails() {
-        let apiResponse = await getPassedList1();
+        let apiResponse = await getPurchasedList(vin);
         setVehicleResponse(apiResponse.data.data);
-        console.log(VehicleResponse.data)
     }
     // console.log("vin", vin)
     useEffect(() => {
@@ -109,6 +109,7 @@ export default function ConditionReport(props) {
     const handleClose = () => {
         setOpen(!open)
     }
+    
     return (
         <>
             <div className='conditionPageCard'>
@@ -184,7 +185,8 @@ export default function ConditionReport(props) {
                     <Grid item xs={7}>
                         <div className='ConditionReportSection'>
                             <div className='reportTitle'>
-                                <span>MAZDA SD 2019 </span>
+                                <span>
+MAZDA CX-5 SPORT FWD Black </span>
                             </div>
                             <span className='ConditionReportInspection'>
                                 <span className='BadgeValue'>Inspection Complete</span>
@@ -246,7 +248,7 @@ export default function ConditionReport(props) {
                                             Odometer
                                         </div>
                                         <div className="smallCardBody">
-                                            {condionVehicleDetails.inspection_mileage}
+                                        <CurrencyFormat value={condionVehicleDetails.inspection_mileage?condionVehicleDetails.inspection_mileage:""} displayType={'text'} thousandSeparator={true} suffix={'  miles'} />
                                         </div>
                                     </CardContent>
                                 </Card>
@@ -297,7 +299,7 @@ export default function ConditionReport(props) {
                                 </List>
                                 <List className="paddingCSS">
                                     <ListItemText>
-                                        <span className="textStyle">
+                                        <span className="textStyle1">
                                             <span >
                                                 .
                                             </span>
@@ -311,7 +313,7 @@ export default function ConditionReport(props) {
                                 </List>
                                 <List className="paddingCSS">
                                     <ListItemText>
-                                        <span className="textStyle">
+                                        <span className="textStyle1">
                                             <span > .   </span>
 
                                         </span>
@@ -322,7 +324,7 @@ export default function ConditionReport(props) {
                                 </List>
                                 <List className="paddingCSS">
                                     <ListItemText>
-                                        <span className="textStyle">
+                                        <span className="textStyle1">
                                             <span > .   </span>
 
                                         </span>
@@ -333,7 +335,7 @@ export default function ConditionReport(props) {
                                 </List>
                                 <List className="paddingCSS">
                                     <ListItemText>
-                                        <span className="textStyle">
+                                        <span className="textStyle1">
                                             <span > .   </span>
 
                                         </span>
@@ -350,7 +352,7 @@ export default function ConditionReport(props) {
                                             </span>
                                         </ListItemText>
                                         <ListItemSecondaryAction>
-                                            <span className="textSize">{condionVehicleDetails?.location_address}</span>
+                                            <span className="textSize"></span>
                                         </ListItemSecondaryAction>
                                     </List>
                                     <List className="paddingCSS">
@@ -508,49 +510,15 @@ export default function ConditionReport(props) {
                                                 return ( */}
                                                 <TableRow key="10074">
                                                     <TableCell component="th" scope="row">
-                                                        {accessoryDetails.item_id}
+                                                    {accessoryDetails.description}
                                                     </TableCell>
-                                                    <TableCell align="right">{accessoryDetails.description}</TableCell>
+                                                    {/* <TableCell align="right">{accessoryDetails.description}</TableCell> */}
                                                     {/* <TableCell align="right">y</TableCell>
                                                         <TableCell align="right">z</TableCell> */}
                                                 </TableRow>
                                                 {/* )
                                             })
                                             } */}
-                                            </TableBody>
-                                        </Table>
-                                    </TableContainer>
-                                </CardContent>
-                                <CardContent>
-                                    <Typography variant="h6">Wheels and Tyres</Typography>
-                                    <hr />
-                                    <TableContainer component={Paper}>
-                                        <Table className="table" size="small" aria-label="a dense table">
-                                            <TableHead>
-                                                <TableRow>
-                                                    <TableCell>Location</TableCell>
-                                                    <TableCell align="right">Brand</TableCell>
-                                                    <TableCell align="right">Size</TableCell>
-                                                    <TableCell align="right">Wheel</TableCell>
-                                                    <TableCell align="right">Tread Depth</TableCell>
-                                                </TableRow>
-                                            </TableHead>
-                                            <TableBody>
-                                                {wheelTiresDetails?.map(list => {
-                                                    return (
-                                                        <TableRow key={list}>
-                                                            <TableCell component="th" scope="row">
-                                                                {wheelTiresDetails?.tire_location}
-                                                            </TableCell>
-                                                            <TableCell align="right">{list.tire_location}</TableCell>
-                                                            <TableCell align="right">{list.manufracturer}</TableCell>
-                                                            <TableCell align="right">{list.size}</TableCell>
-                                                            <TableCell align="right">{list.tread}</TableCell>
-                                                            <TableCell align="right">{list.tread}</TableCell>
-                                                        </TableRow>
-                                                    )
-                                                })
-                                                }
                                             </TableBody>
                                         </Table>
                                     </TableContainer>
@@ -585,6 +553,41 @@ export default function ConditionReport(props) {
                                     </TableContainer>
 
                                 </CardContent>
+                                <CardContent>
+                                    <Typography variant="h6">Wheels and Tyres</Typography>
+                                    <hr />
+                                    <TableContainer component={Paper}>
+                                        <Table className="table" size="small" aria-label="a dense table">
+                                            <TableHead>
+                                                <TableRow>
+                                                    <TableCell>Location</TableCell>
+                                                    <TableCell align="right">Brand</TableCell>
+                                                    <TableCell align="right">Size</TableCell>
+                                                    <TableCell align="right">Wheel</TableCell>
+                                                    <TableCell align="right">Tread Depth</TableCell>
+                                                </TableRow>
+                                            </TableHead>
+                                            <TableBody>
+                                                {wheelTiresDetails?.map(list => {
+                                                    return (
+                                                        <TableRow key={list}>
+                                                            {/* <TableCell component="th" scope="row">
+                                                                {wheelTiresDetails?.tire_location}
+                                                            </TableCell> */}
+                                                            <TableCell align="right" >{list.tire_location}</TableCell>
+                                                            <TableCell align="right">{list.manufracturer}</TableCell>
+                                                            <TableCell align="right">{list.size}</TableCell>
+                                                            <TableCell align="right">{list.wheel}</TableCell>
+                                                            <TableCell align="right">{list.tread}</TableCell>
+                                                        </TableRow>
+                                                    )
+                                                })
+                                                }
+                                            </TableBody>
+                                        </Table>
+                                    </TableContainer>
+                                </CardContent>
+                               
                                 <div className="disclaimerVRS">
                                     Disclaimer: The parts, equipment, accessories, and other information listed above are based on equipment/configuration at the time vehicle was sold by Mazda Motor Corporation to a dealer and does not mean that this vehicle is still so equipped.
                                 </div>

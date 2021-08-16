@@ -12,7 +12,7 @@ background: #f3f2f2;
   background: #f3f2f2;
 }
 .reportTitle {
-    width: 242px;
+    width: 300px;
     height: 30px;
     font-family: ToyotaType;
     font-size: 20px;
@@ -54,6 +54,7 @@ background: #f3f2f2;
     padding: 4px 8px;
     border-radius: 100px;
     background-color: #04844b;
+    margin-left: 2rem;
   }
   .BadgeValue {
     width: 122px;
@@ -313,4 +314,7 @@ background: #f3f2f2;
   }
   .experiorSpacing{
     padding: 30px;
+  }
+  .textStyle1{
+    color: white;
   }

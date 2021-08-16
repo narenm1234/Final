@@ -35,7 +35,7 @@ export default function ListingPage2(props) {
         getVehicleDetails()
     }, [value]);
     async function getVehicleDetails() {
-        let apiResponse = await getPurchasedList();
+        let apiResponse = await getPurchasedList("ALL");
         setVehicleResponse(apiResponse.data.data);
         console.log(vehicleResponse)
         console.log(apiResponse.data.data)
@@ -92,17 +92,17 @@ export default function ListingPage2(props) {
                                     </div>
                                     <List >
                                         <span className="textStyle">
-                                            <span className="textBold"> Payoff Price  </span> <span className="margin__space4"><CurrencyFormat value={vehicle.groundingDetails.pay_off_amt} displayType={'text'} thousandSeparator={true} prefix={'$'} /></span>
+                                            <span className="textBold"> Payoff Price  </span> <span className="margin__space4"><CurrencyFormat value={vehicle.groundingDetails.pay_off_amt} displayType={'text'} thousandSeparator={true} prefix={'$'} />.00</span>
                                         </span>
                                         <span className="textStyle">
-                                            <span className="textBold">  Rem.Payments</span> <span className="margin__space5"><CurrencyFormat value={vehicle.groundingDetails.remaining_pmts} displayType={'text'} thousandSeparator={true} prefix={'$'} /></span>
+                                            <span className="textBold">  Rem.Payments</span> <span className="margin__space5"><CurrencyFormat value={vehicle.groundingDetails.remaining_pmts} displayType={'text'} thousandSeparator={true} prefix={'$'} />.00</span>
                                         </span>
                                         <span className="textStyle">
-                                            <span className="textBold"> Admin Fee</span> <span className="margin__space6">$300</span>
+                                            <span className="textBold"> Admin Fee</span> <span className="margin__space6"><CurrencyFormat value={vehicle.admin_fee} displayType={'text'} thousandSeparator={true} prefix={'$'} />.00</span>
                                         </span>
                                         <div className="purchasedScreenTotal" />
                                         <span className="textStyle">
-                                            <span className="textStyleTotalFee"> Total Price</span> <span className="totalFeeSum"><CurrencyFormat value={vehicle.groundingDetails.pay_off_amt + vehicle.groundingDetails.remaining_pmts + 300} displayType={'text'} thousandSeparator={true} prefix={'$'} /></span>
+                                            <span className="textStyleTotalFee"> Total Price</span> <span className="totalFeeSum"><CurrencyFormat value={vehicle.groundingDetails.pay_off_amt + vehicle.groundingDetails.remaining_pmts + vehicle.admin_fee} displayType={'text'} thousandSeparator={true} prefix={'$'} />.00</span>
                                         </span>
                                     </List>
 

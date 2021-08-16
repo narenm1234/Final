@@ -156,14 +156,14 @@ export async function getPassedList1() {
     return await axios.post(passedVehicleUrl, requestData, options);
 
 }
-export async function getPurchasedList() {
+export async function getPurchasedList(Data) {
     const options = {
         headers: {
             "Content-Type": "application/json"
         }
 
     };
-    const requestData = "ALL";
+    const requestData = Data;
 
     return await axios.post(purchasedVehicleUrl, requestData, options);
 
@@ -250,7 +250,7 @@ export async function postDealerActionPassOnVehicle(VINumber) {
     };
 
 
-    return await axios.post(`${getDealerActionUrl}?dealerAction=pass&vin=${VINumber}`,  options);
+    return await axios.post(`${getDealerActionUrl}?dealerAction=Pass&vin=${VINumber}`,  options);
 
 }
 

@@ -24,7 +24,7 @@ export default function ListingPage(props) {
         getVehicleDetails()
     }, [value]);
     async function getVehicleDetails() {
-        let apiResponse = await getGroundingList();
+        let apiResponse = await getGroundingList("ALL");
         setVehicleResponse(apiResponse.data.data);
         console.log('------->', apiResponse)
     }
@@ -92,7 +92,7 @@ export default function ListingPage(props) {
                                 <Grid item xs={4}>
                                     <div class="Year-Make-Model-Col">
                                         <div class="vehicleMakeModel">
-                                            <span>{vehicle.brand} {vehicle.model} - {vehicle.text_color} | {vehicle.model_year}</span>
+                                            <span>{vehicle.brand} {vehicle.model} {vehicle.ext_color} {vehicle.model_year}</span>
                                         </div>
                                         <List >
 
@@ -137,7 +137,7 @@ export default function ListingPage(props) {
                                                     </span>
                                                 </ListItemText>
                                                 <ListItemSecondaryAction>
-                                                    <span className="textSize"><CurrencyFormat value={vehicle.pay_off_amt ? vehicle.pay_off_amt : ""} displayType={'text'} thousandSeparator={true} prefix={'$'} /></span>
+                                                    <span className="textSize"><CurrencyFormat value={vehicle.pay_off_amt ? vehicle.pay_off_amt : ""} displayType={'text'} thousandSeparator={true} prefix={'$'} />.00</span>
                                                 </ListItemSecondaryAction>
                                             </ListItem>
 
@@ -149,7 +149,7 @@ export default function ListingPage(props) {
                                                     </span>
                                                 </ListItemText>
                                                 <ListItemSecondaryAction>
-                                                    <span className="textSize"><CurrencyFormat value={vehicle.residual_amt + vehicle.remaining_pmts} displayType={'text'} thousandSeparator={true} prefix={'$'} /></span>
+                                                    <span className="textSize"><CurrencyFormat value={vehicle.residual_amt + vehicle.remaining_pmts} displayType={'text'} thousandSeparator={true} prefix={'$'} />.00</span>
                                                 </ListItemSecondaryAction>
                                             </ListItem>
                                             <ListItem className="paddingCSS">
@@ -160,7 +160,7 @@ export default function ListingPage(props) {
                                                     </span>
                                                 </ListItemText>
                                                 <ListItemSecondaryAction>
-                                                    <span className="textSize">$000,000</span>
+                                                    <span className="textSize">N/A</span>
                                                 </ListItemSecondaryAction>
                                             </ListItem>
                                             <ListItem className="paddingCSS">
@@ -171,7 +171,7 @@ export default function ListingPage(props) {
                                                     </span>
                                                 </ListItemText>
                                                 <ListItemSecondaryAction>
-                                                    <span className="textSize"><CurrencyFormat value={vehicle.remaining_pmts ? vehicle.remaining_pmts : ""} displayType={'text'} thousandSeparator={true} prefix={'$'} /></span>
+                                                    <span className="textSize"><CurrencyFormat value={vehicle.remaining_pmts ? vehicle.remaining_pmts : ""} displayType={'text'} thousandSeparator={true} prefix={'$'} />.00</span>
                                                 </ListItemSecondaryAction>
                                             </ListItem>
                                         </List>
