@@ -67,6 +67,14 @@ background: #f3f2f2;
     letter-spacing: normal;
     color: #ffffff;
   }
+  .inspectionStatusWarning {
+    width: 138px;
+    height: 33px;
+    padding: 4px 8px;
+    border-radius: 100px;
+    background-color: #c00;
+    margin-left: 2rem;
+  }
   .ConditionCard {
     width: 123%;
     height: 70px;

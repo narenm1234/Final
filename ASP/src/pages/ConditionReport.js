@@ -33,6 +33,7 @@ export default function ConditionReport(props) {
     const [accessoryDetails, setAccessoryDetails] = React.useState({})
     const [wheelTiresDetails, setWheelTiresDetails] = useState([])
     const [vin, setVin] = React.useState(props?.match?.params?.vin)
+    const [purchaseSection, setPurchaseSection] = React.useState(props?.location?.state?.purchaseSection);
     const [inspectionId, setInspectionId] = React.useState([])
     const [VehicleResponse, setVehicleResponse] = useState([])
     const [value, setValue] = useState([])
@@ -109,7 +110,7 @@ export default function ConditionReport(props) {
     const handleClose = () => {
         setOpen(!open)
     }
-    
+
     return (
         <>
             <div className='conditionPageCard'>
@@ -164,7 +165,8 @@ export default function ConditionReport(props) {
                                 </Card>
                             </Grid>
                             <Grid item xs={12} >
-                                <Button variant="outlined" color="primary" className="detailedReport" onClick={handleOpen}>
+
+                                <Button variant="outlined" color="primary" className="detailedReport" onClick={handleOpen} disabled={!condionVehicleDetails.inspection_date}>
                                     View Full Detailed Report
                                 </Button>
                             </Grid>
@@ -186,11 +188,15 @@ export default function ConditionReport(props) {
                         <div className='ConditionReportSection'>
                             <div className='reportTitle'>
                                 <span>
-MAZDA CX-5 SPORT FWD Black </span>
+                                    MAZDA CX-5 SPORT FWD Black </span>
                             </div>
-                            <span className='ConditionReportInspection'>
-                                <span className='BadgeValue'>Inspection Complete</span>
-                            </span>
+                            {
+                                (!!condionVehicleDetails.inspection_date && condionVehicleDetails.inspection_date.length > 0) ? (<span className='ConditionReportInspection'>
+                                    <span className='BadgeValue'>Inspection Complete</span>
+                                </span>) : (<span className='inspectionStatusWarning'>
+                                    <span className='BadgeValue'>Inspection pending</span>
+                                </span>)
+                            }
                         </div>
                         <Grid container spacing={3}>
                             <Grid item xs={3} className="ConditionCardMargin">
@@ -248,7 +254,7 @@ MAZDA CX-5 SPORT FWD Black </span>
                                             Odometer
                                         </div>
                                         <div className="smallCardBody">
-                                        <CurrencyFormat value={condionVehicleDetails.inspection_mileage?condionVehicleDetails.inspection_mileage:""} displayType={'text'} thousandSeparator={true} suffix={'  miles'} />
+                                            <CurrencyFormat value={condionVehicleDetails.inspection_mileage ? condionVehicleDetails.inspection_mileage : ""} displayType={'text'} thousandSeparator={true} suffix={'  miles'} />
                                         </div>
                                     </CardContent>
                                 </Card>
@@ -289,65 +295,65 @@ MAZDA CX-5 SPORT FWD Black </span>
                                             <span className="textStyle">
                                                 <span className="textBold">  Inspection Location  </span>
 
-                                        </span>
-                                    </ListItemText>
-                                    <ListItemSecondaryAction>
-                                        <span className="textSize">
-                                        {condionVehicleDetails.location_name}
-                                        </span>
-                                    </ListItemSecondaryAction>
-                                </List>
-                                <List className="paddingCSS">
-                                    <ListItemText>
-                                        <span className="textStyle1">
-                                            <span >
-                                                .
                                             </span>
-                                        </span>
-                                    </ListItemText>
-                                    <ListItemSecondaryAction>
-                                        <span className="textSize">
-                                        {condionVehicleDetails.location_address}
-                                        </span>
-                                    </ListItemSecondaryAction>
-                                </List>
-                                <List className="paddingCSS">
-                                    <ListItemText>
-                                        <span className="textStyle1">
-                                            <span > .   </span>
+                                        </ListItemText>
+                                        <ListItemSecondaryAction>
+                                            <span className="textSize">
+                                                {condionVehicleDetails.location_name}
+                                            </span>
+                                        </ListItemSecondaryAction>
+                                    </List>
+                                    <List className="paddingCSS">
+                                        <ListItemText>
+                                            <span className="textStyle1">
+                                                <span >
+                                                    .
+                                                </span>
+                                            </span>
+                                        </ListItemText>
+                                        <ListItemSecondaryAction>
+                                            <span className="textSize">
+                                                {condionVehicleDetails.location_address}
+                                            </span>
+                                        </ListItemSecondaryAction>
+                                    </List>
+                                    <List className="paddingCSS">
+                                        <ListItemText>
+                                            <span className="textStyle1">
+                                                <span > .   </span>
 
-                                        </span>
-                                    </ListItemText>
-                                    <ListItemSecondaryAction>
-                                        <span className="textSize">{condionVehicleDetails.location_address2}{condionVehicleDetails.location_city}</span>
-                                    </ListItemSecondaryAction>
-                                </List>
-                                <List className="paddingCSS">
-                                    <ListItemText>
-                                        <span className="textStyle1">
-                                            <span > .   </span>
+                                            </span>
+                                        </ListItemText>
+                                        <ListItemSecondaryAction>
+                                            <span className="textSize">{condionVehicleDetails.location_address2}{condionVehicleDetails.location_city}</span>
+                                        </ListItemSecondaryAction>
+                                    </List>
+                                    <List className="paddingCSS">
+                                        <ListItemText>
+                                            <span className="textStyle1">
+                                                <span > .   </span>
 
-                                        </span>
-                                    </ListItemText>
-                                    <ListItemSecondaryAction>
-                                        <span className="textSize">{condionVehicleDetails.location_state}-{condionVehicleDetails.location_zip}</span>
-                                    </ListItemSecondaryAction>
-                                </List>
-                                <List className="paddingCSS">
-                                    <ListItemText>
-                                        <span className="textStyle1">
-                                            <span > .   </span>
+                                            </span>
+                                        </ListItemText>
+                                        <ListItemSecondaryAction>
+                                            <span className="textSize">{condionVehicleDetails.location_state}-{condionVehicleDetails.location_zip}</span>
+                                        </ListItemSecondaryAction>
+                                    </List>
+                                    <List className="paddingCSS">
+                                        <ListItemText>
+                                            <span className="textStyle1">
+                                                <span > .   </span>
 
-                                        </span>
-                                    </ListItemText>
-                                    <ListItemSecondaryAction>
-                                        <span className="textSize">{condionVehicleDetails.location_phone}</span>
-                                    </ListItemSecondaryAction>
-                                </List>
-                                <List className="paddingCSS">
-                                    <ListItemText>
-                                        <span className="textStyle">
-                                            <span className="textBold">  Consignor  </span>
+                                            </span>
+                                        </ListItemText>
+                                        <ListItemSecondaryAction>
+                                            <span className="textSize">{condionVehicleDetails.location_phone}</span>
+                                        </ListItemSecondaryAction>
+                                    </List>
+                                    <List className="paddingCSS">
+                                        <ListItemText>
+                                            <span className="textStyle">
+                                                <span className="textBold">  Consignor  </span>
 
                                             </span>
                                         </ListItemText>
@@ -510,7 +516,7 @@ MAZDA CX-5 SPORT FWD Black </span>
                                                 return ( */}
                                                 <TableRow key="10074">
                                                     <TableCell component="th" scope="row">
-                                                    {accessoryDetails.description}
+                                                        {accessoryDetails.description}
                                                     </TableCell>
                                                     {/* <TableCell align="right">{accessoryDetails.description}</TableCell> */}
                                                     {/* <TableCell align="right">y</TableCell>
@@ -587,7 +593,7 @@ MAZDA CX-5 SPORT FWD Black </span>
                                         </Table>
                                     </TableContainer>
                                 </CardContent>
-                               
+
                                 <div className="disclaimerVRS">
                                     Disclaimer: The parts, equipment, accessories, and other information listed above are based on equipment/configuration at the time vehicle was sold by Mazda Motor Corporation to a dealer and does not mean that this vehicle is still so equipped.
                                 </div>
@@ -598,7 +604,7 @@ MAZDA CX-5 SPORT FWD Black </span>
                 </Grid>
                 <ViewDetailedReport DamageDetails={DamageDetails} open={open} close={handleClose} />
             </div>
-            <PurchasedPricingSideBar />
+            {(purchaseSection) ? (<PurchasedPricingSideBar />) : ('')}
         </>
     );
 };

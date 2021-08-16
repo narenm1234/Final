@@ -32,7 +32,8 @@ export default function ListingPage(props) {
 
     const openConditionReport = (VINumber) => {
         props.history.push('/conditionreport', {
-            vin: VINumber
+            vin: VINumber,
+            purchaseSection: true,
         })
     }
     const handleOpen = (vin) => {
@@ -184,6 +185,7 @@ export default function ListingPage(props) {
                                                 variant="contained"
                                                 color="primary"
                                                 className="button"
+                                                onClick={openConditionReport.bind(this, vehicle.vin)}
                                             >
                                                 {'Purchase Vehicle'}
                                             </Button>
