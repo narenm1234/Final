@@ -36,6 +36,11 @@ export default function ListingPage(props) {
             purchaseSection: true,
         })
     }
+    const openConditionScreen = (VINumber) => {
+        props.history.push('/conditionreport', {
+            vin: VINumber,
+        })
+    }
     const handleOpen = (vin) => {
         setPassVin(vin)
         setOpen(!open)
@@ -105,7 +110,7 @@ export default function ListingPage(props) {
                                             </span>
 
                                             <span className="textStyle">
-                                                <span className="textBold"> VIN:</span><a className="vin" href={`/conditionreport${vehicle.vin}`} > {vehicle.vin}</a>
+                                                <span className="textBold"> VIN:</span><a className="vin" onClick={openConditionScreen.bind(this, vehicle.vin)}> {vehicle.vin}</a>
                                             </span>
 
                                             <span className="textStyle">

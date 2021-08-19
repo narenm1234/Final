@@ -32,33 +32,28 @@ export default function ConditionReport(props) {
     const [condionVehicleDetails, setCondionVehicleDetails] = React.useState({})
     const [accessoryDetails, setAccessoryDetails] = React.useState({})
     const [wheelTiresDetails, setWheelTiresDetails] = useState([])
-    const [vin, setVin] = React.useState(props?.match?.params?.vin)
+    const [vin, setVin] = React.useState(props?.location?.state?.vin)
     const [purchaseSection, setPurchaseSection] = React.useState(props?.location?.state?.purchaseSection);
-    const [inspectionId, setInspectionId] = React.useState([])
+    const [inspectionId, setInspectionId] = React.useState(0)
     const [VehicleResponse, setVehicleResponse] = useState([])
-    const [value, setValue] = useState([])
+    //const [value, setValue] = useState([])
     const [DamageDetails, setDamageDetails] = useState([])
     const [OEMBuildDetailsData, setOEMBuildDetailsData] = useState([]);
 
-
-
-
-    console.log("condionVehicleDetails:", condionVehicleDetails)
+    console.log("vin:", vin)
 
     useEffect(() => {
         getOEMBuildDetails()
+        getConditionVehicleDetails()
+        getVehicleDetails()
     }, [vin])
 
     async function getOEMBuildDetails() {
         let apiResponse = await getOEMBuildDetailsApi(vin)
         setOEMBuildDetailsData(apiResponse.data)
     }
-
-
     useEffect(() => {
-
         getInspectionDamageDetails()
-
     }, []);
 
     async function getInspectionDamageDetails() {
@@ -66,20 +61,10 @@ export default function ConditionReport(props) {
         setDamageDetails(getInspectionDamageDetailsaApiResponse.data)
 
     }
-
-    useEffect(() => {
-
-
-        getVehicleDetails()
-    }, [value]);
     async function getVehicleDetails() {
         let apiResponse = await getPurchasedList(vin);
         setVehicleResponse(apiResponse.data.data);
     }
-    // console.log("vin", vin)
-    useEffect(() => {
-        getConditionVehicleDetails()
-    }, [vin]);
 
     useEffect(() => {
         getInspectionAccessory(inspectionId)
