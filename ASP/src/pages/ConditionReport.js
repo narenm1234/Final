@@ -17,7 +17,6 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ViewDetailedReport from './ViewDetailedReport';
 import CurrencyFormat from 'react-currency-format';
 import MyGallery from './ImageGallery';
-import CloudDownloadOutlined from '@material-ui/icons/CloudDownloadOutlined'
 import PrintSharp from '@material-ui/icons/PrintSharp'
 import Button from '@material-ui/core/Button';
 import { getPassedList1, getInspectionDamageDetailsApi, getOEMBuildDetailsApi, getPurchasedList } from '../service/api';
@@ -39,6 +38,7 @@ export default function ConditionReport(props) {
     //const [value, setValue] = useState([])
     const [DamageDetails, setDamageDetails] = useState([])
     const [OEMBuildDetailsData, setOEMBuildDetailsData] = useState([]);
+    const [vehicleDetails, setvehicleDetails] = React.useState(props?.location?.state?.vehicleDetails);
 
     console.log("vin:", vin)
 
@@ -172,8 +172,7 @@ export default function ConditionReport(props) {
                     <Grid item xs={7}>
                         <div className='ConditionReportSection'>
                             <div className='reportTitle'>
-                                <span>
-                                    MAZDA CX-5 SPORT FWD Black </span>
+                                    <span>{vehicleDetails.brand} {vehicleDetails.model} {vehicleDetails.ext_color} {vehicleDetails.model_year}</span>
                             </div>
                             {
                                 (!!condionVehicleDetails.inspection_date && condionVehicleDetails.inspection_date.length > 0) ? (<span className='ConditionReportInspection'>
@@ -191,7 +190,7 @@ export default function ConditionReport(props) {
                                             Payoff
                                         </div>
                                         <div className="smallCardBody">
-                                            $12,000.00
+                                        <span className="textSize"><CurrencyFormat value={vehicleDetails.pay_off_amt ? vehicleDetails.pay_off_amt : ""} displayType={'text'} thousandSeparator={true} prefix={'$'} />.00</span>
                                         </div>
                                     </CardContent>
                                 </Card>
@@ -203,7 +202,7 @@ export default function ConditionReport(props) {
                                             Residual + Remaining
                                         </div>
                                         <div className="smallCardBody">
-                                            $11,250.00
+                                        <span className="textSize"><CurrencyFormat value={vehicleDetails.residual_amt + vehicleDetails.remaining_pmts} displayType={'text'} thousandSeparator={true} prefix={'$'} />.00</span>
                                         </div>
                                     </CardContent>
                                 </Card>

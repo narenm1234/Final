@@ -29,6 +29,7 @@ let resp = [{
 }]
 export default function ListingPage2(props) {
     const [vehicleResponse, setVehicleResponse] = useState([])
+    //const [vehicleResponse, setVehicleResponse] = useState(resp)
     const [value, setValue] = useState([])
 
     useEffect(() => {

@@ -96,23 +96,23 @@ export default function ViewDetailedReport(props) {
                                     <List >
                                         <ListItem >
                                             <ListItemText className="smallCardTitle"><span className="textBold alignleft">Interior</span></ListItemText>
-                                            <ListItemSecondaryAction className="smallCardBody">{"$"}{DamageDetails.interiorCost?DamageDetails.interiorCost:'NA'}</ListItemSecondaryAction>
+                                            <ListItemSecondaryAction className="smallCardBody warningColor">{"$"}{DamageDetails.interiorCost?DamageDetails.interiorCost:'NA'}</ListItemSecondaryAction>
                                         </ListItem>
                                         <ListItem>
                                             <ListItemText className="smallCardTitle"><span className="textBold alignleft">Exterior</span></ListItemText>
-                                            <ListItemSecondaryAction className="smallCardBody">{"$"}{DamageDetails.exteriorCost?DamageDetails.exteriorCost:'NA'}</ListItemSecondaryAction>
+                                            <ListItemSecondaryAction className="smallCardBody warningColor">{"$"}{DamageDetails.exteriorCost?DamageDetails.exteriorCost:'NA'}</ListItemSecondaryAction>
                                         </ListItem>
                                         <ListItem>
                                             <ListItemText className="smallCardTitle"><span className="textBold alignleft">Mechanical total</span></ListItemText>
-                                            <ListItemSecondaryAction className="smallCardBody">{"$"}{DamageDetails.maintainenceCost?DamageDetails.maintainenceCost:'NA'}</ListItemSecondaryAction>
+                                            <ListItemSecondaryAction className="smallCardBody warningColor">{"$"}{DamageDetails.maintainenceCost?DamageDetails.maintainenceCost:'NA'}</ListItemSecondaryAction>
                                         </ListItem>
                                         <ListItem>
                                             <ListItemText className="smallCardTitle"><span className="textBold alignleft">Normal W and T</span></ListItemText>
-                                            <ListItemSecondaryAction className="smallCardBody">$00,000.00</ListItemSecondaryAction>
+                                            <ListItemSecondaryAction className="smallCardBody warningColor">$00,000.00</ListItemSecondaryAction>
                                         </ListItem>
                                         <ListItem>
-                                            <ListItemText className="smallCardTitle"><span className="textBold alignleft">Normal W and T</span></ListItemText>
-                                            <ListItemSecondaryAction className="smallCardBody">$00,000.00</ListItemSecondaryAction>
+                                            <ListItemText className="smallCardTitle"><span className="textBold alignleft ">Excessive W and T</span></ListItemText>
+                                            <ListItemSecondaryAction className="smallCardBody errorColor">$00,000.00</ListItemSecondaryAction>
                                         </ListItem>
                                     </List>
 
@@ -235,10 +235,10 @@ export default function ViewDetailedReport(props) {
                                 <TableRow >
                                     <TableCell colSpan={2} component="th" scope="row">
                                     </TableCell>
-                                    <TableCell colSpan={1} style={{ width: 90 }} align="right">Total</TableCell>
+                                    <TableCell colSpan={1} style={{ width: 90,color: '#0070d2' }} align="right">Total</TableCell>
                                     <TableCell colSpan={2} component="th" scope="row">
                                     </TableCell>
-                                    <TableCell style={{ width: 90 }} align="right">$000,000</TableCell>
+                                    <TableCell style={{ width: 90,color: '#0070d2' }} align="right" >$000,000</TableCell>
                                 </TableRow>
                                 <TableRow >
                                     <TableCell colSpan={2} component="th" scope="row">
