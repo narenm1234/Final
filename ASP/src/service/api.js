@@ -14,6 +14,7 @@ let inspectionVehicleDetails;
 let getInspectionDamageDetailsUrl;
 let getOEMBuildDetailsUrl;
 let getDealerActionUrl;
+let getTokenSSO;
 
 
 
@@ -44,19 +45,22 @@ else if (hostname.includes('local')) {
     getInspectionDamageDetailsUrl = 'https://aspservices-internal-dev.tfs.toyota.com/asp-services/getInspectionDamageDetails'
     getOEMBuildDetailsUrl = 'https://aspservices-internal-dev.tfs.toyota.com/asp-services/getOEMBuildDetails'
     getDealerActionUrl = 'https://aspservices-internal-dev.tfs.toyota.com/asp-services/DealerAction'
+    getTokenSSO = `https://tfs-srm--sdeaug21.lightning.force.com/services/oauth2/authorize?
+    client_id=3MVG9lJB4lV8F4Sgt2q5xweJxaNJkT.Eo7pP8V_v9BuuKeRPjY6GPmF9hylp7_oqSOMocQG1Kha4z125UwV8w&
+    redirect_uri=https://asp-internal-dev.tfs.toyota.com&response_type=code`
 }
 else if (hostname.includes('stage')) {
     url = 'http://internal-a3e2a8608d24e4c5f8b42aed9c3587d7-2044184104.us-east-1.elb.amazonaws.com/getAccountDetailsBykey'
-    groundListUrl = 'http://aspservices-internal-stage.tfs.toyota.com/asp-services/getGroundingList'
+    groundListUrl = 'https://aspservices-internal-stage.tfs.toyota.com/asp-services/getGroundingList'
     tokenUrl = 'http://internal-a3e2a8608d24e4c5f8b42aed9c3587d7-2044184104.us-east-1.elb.amazonaws.com/tokenData'
-    passedVehicleUrl = 'http://aspservices-internal-stage.tfs.toyota.com/asp-services/getPassedVehicles'
-    purchasedVehicleUrl = 'http://aspservices-internal-stage.tfs.toyota.com/asp-services/getPurchasedVehicles'
-    inspectionAccessoryDetailsUrl = 'http://aspservices-internal-stage.tfs.toyota.com/asp-services/getInspectionAccessoryDetails'
-    inspectionWheelTiresDetailsUrl = 'http://aspservices-internal-stage.tfs.toyota.com/asp-services/getInspectionWheelTiresDetails'
-    inspectionVehicleDetails = 'http://aspservices-internal-stage.tfs.toyota.com/asp-services/getVehicleInspectionDetails'
-    getInspectionDamageDetailsUrl = 'http://aspservices-internal-stage.tfs.toyota.com/asp-services/getInspectionDamageDetails'
-    getOEMBuildDetailsUrl = 'http://aspservices-internal-stage.tfs.toyota.com/asp-services/getOEMBuildDetails'
-    getDealerActionUrl = 'http://aspservices-internal-stage.tfs.toyota.com/asp-services/DealerAction'
+    passedVehicleUrl = 'https://aspservices-internal-stage.tfs.toyota.com/asp-services/getPassedVehicles'
+    purchasedVehicleUrl = 'https://aspservices-internal-stage.tfs.toyota.com/asp-services/getPurchasedVehicles'
+    inspectionAccessoryDetailsUrl = 'https://aspservices-internal-stage.tfs.toyota.com/asp-services/getInspectionAccessoryDetails'
+    inspectionWheelTiresDetailsUrl = 'https://aspservices-internal-stage.tfs.toyota.com/asp-services/getInspectionWheelTiresDetails'
+    inspectionVehicleDetails = 'https://aspservices-internal-stage.tfs.toyota.com/asp-services/getVehicleInspectionDetails'
+    getInspectionDamageDetailsUrl = 'https://aspservices-internal-stage.tfs.toyota.com/asp-services/getInspectionDamageDetails'
+    getOEMBuildDetailsUrl = 'https://aspservices-internal-stage.tfs.toyota.com/asp-services/getOEMBuildDetails'
+    getDealerActionUrl = 'https://aspservices-internal-stage.tfs.toyota.com/asp-services/DealerAction'
 }
 else if (hostname.includes('test')) {
     url = 'http://internal-a3e2a8608d24e4c5f8b42aed9c3587d7-2044184104.us-east-1.elb.amazonaws.com/getAccountDetailsBykey'
@@ -71,7 +75,7 @@ else if (hostname.includes('test')) {
     getOEMBuildDetailsUrl = 'https://aspservices-internal-test.tfs.toyota.com/asp-services/getOEMBuildDetails'
     getDealerActionUrl = 'https://aspservices-internal-test.tfs.toyota.com/asp-services/DealerAction'
 }
-else {
+else if (hostname.includes('prod')) {
     url = 'http://internal-a3e2a8608d24e4c5f8b42aed9c3587d7-2044184104.us-east-1.elb.amazonaws.com/getAccountDetailsBykey'
     groundListUrl = 'https://aspservices-internal-prod.tfs.toyota.com/asp-services/getGroundingList'
     tokenUrl = 'http://internal-a3e2a8608d24e4c5f8b42aed9c3587d7-2044184104.us-east-1.elb.amazonaws.com/tokenData'
@@ -253,6 +257,18 @@ export async function postDealerActionPassOnVehicle(VINumber) {
     return await axios.post(`${getDealerActionUrl}?dealerAction=Pass&vin=${VINumber}`,  options);
 
 }
+export async function getAuthTokenSSO() {
+    const options = {
+        headers: {
+            "content-type": 'application/x-www-form-urlencoded'
 
+        }
+       
 
+    };
+    return await axios.post(`https://tfs-srm--sdeaug21.lightning.force.com/services/oauth2/authorize?
+    client_id=3MVG9lJB4lV8F4Sgt2q5xweJxaNJkT.Eo7pP8V_v9BuuKeRPjY6GPmF9hylp7_oqSOMocQG1Kha4z125UwV8w&
+    redirect_uri=https://asp-internal-dev.tfs.toyota.com&response_type=code`,  options);
+
+}
 
