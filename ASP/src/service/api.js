@@ -263,4 +263,22 @@ export async function getAuthTokenSSO() {
     return await axios.post(`https://tfs-srm--sdeaug21.lightning.force.com/services/oauth2/authorize?client_id=${client_id}&redirect_uri=https://asp-internal-dev.tfs.toyota.com&response_type=code`);
 
 }
+export async function getUserInfo(accessToken) {
+       
+    return await axios.post(`https://tfs-srm--sdeaug21.my.salesforce.com/services/oauth2/userinfo?access_token=${accessToken}`);
+
+}
+export async function getAccessTokenEndpoint(code) {
+    const requestData = {
+        "code": code,
+        "grant_type": "authorization_code",
+        "client_id": "3MVG9lJB4lV8F4Sgt2q5xweJxaNJkT.Eo7pP8V_v9BuuKeRPjY6GPmF9hylp7_oqSOMocQG1Kha4z125UwV8w",
+        "client_secret": "8055936591B22A1E7A46227D71CB1E7D2CCA855F7935F24695F96D7F8587E7C5",
+        "redirect_uri":"https://asp-internal-dev.tfs.toyota.com",
+        "format":"json",
+    }
+       
+    return await axios.post(`https://tfs-srm--sdeaug21.my.salesforce.com/services/oauth2/token`,requestData);
+
+}
 
