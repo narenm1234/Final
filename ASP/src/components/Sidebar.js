@@ -1,86 +1,136 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-import { IconContext } from 'react-icons/lib';
+import React from 'react';
+import clsx from 'clsx';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
+import Drawer from '@material-ui/core/Drawer';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Divider from '@material-ui/core/Divider';
+import IconButton from '@material-ui/core/IconButton';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+
+
+import NewSidebar from './NewSideBar'
 import "./SideBar.scss"
-import { MdClose } from "react-icons/md";
-import { BsChevronRight } from "react-icons/bs";
-import NewSidebar from './NewSideBar';
 
-const Nav = styled.div`
-  background: #f1f1f1;
-  height: 80px;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-`;
+const drawerWidth = 240;
 
-const NavIcon = styled(Link)`
-  margin-left: 2rem;
-  font-size: 2rem;
-  height: 80px;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-`;
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+  },
+  appBar: {
+    zIndex: theme.zIndex.drawer + 1,
+    transition: theme.transitions.create(['width', 'margin'], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+    marginTop: 52,
+    backgroundColor: 'white',
+    color: 'black',
+    boxShadow: '0px 0px 3px grey',
+  },
+  appBarShift: {
+    marginLeft: drawerWidth,
+    width: `calc(100% - ${drawerWidth}px)`,
+    transition: theme.transitions.create(['width', 'margin'], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  },
+  menuButton: {
+    marginRight: 36,
+  },
+  hide: {
+    display: 'none',
+  },
+  drawer: {
+    width: drawerWidth,
+    flexShrink: 0,
+    whiteSpace: 'nowrap',
+  },
+  drawerOpen: {
+    width: drawerWidth,
+    transition: theme.transitions.create('width', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+    top: 52,
+    height: 'calc(100% - 52px) !important',
+  },
+  drawerClose: {
+    transition: theme.transitions.create('width', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+    overflowX: 'hidden',
+    width: theme.spacing(7) + 1,
+    [theme.breakpoints.up('sm')]: {
+      width: theme.spacing(9) + 1,
+    },
+    top: 52,
+    height: 'calc(100% - 52px) !important',
+  },
+  toolbar: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    padding: theme.spacing(0, 1),
+    // necessary for content to be below app bar
+    ...theme.mixins.toolbar,
+    justifyContent: 'space-between',
+    fontSize: 18,
+    fontWeight: 600
+  },
+  content: {
+    flexGrow: 1,
+  },
+  closeIcon: {
+    border: '1px solid'
+  }
 
-const SidebarNav = styled.nav`
-  background: #ffffff;
-  width: 232px;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  position: fixed;
-  top: 51px;
-  left: ${({ sidebar }) => (sidebar ? '0' : '-100%')};
-  transition: 350ms;
-  z-index: 10;
-  box-shadow: 1px 0 3px 0 rgba(0, 0, 0, 0.25);
-  background-color: #ffffff;
-`;
-const SidebarNavHide = styled.nav`
-  background: #ffffff;
-  width: 48px;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  position: fixed;
-  top: 51px;
-  left: ${({ sidebar }) => (!sidebar ? '20' : '-100%')};
-  transition: 350ms;
-  z-index: 10;
-  box-shadow: 1px 0 3px 0 rgba(0, 0, 0, 0.25);
-  background-color: #ffffff;
-`;
+}));
 
-const SidebarWrap = styled.div`
-  width: 100%;
-`;
+const Sidebar = (props) => {
+  const { children } = props
+  const classes = useStyles();
+  const theme = useTheme();
+  const [open, setOpen] = React.useState(true);
 
-const Sidebar = () => {
-  const [sidebar, setSidebar] = useState(true);
+  const handleDrawerClose = () => {
+    setOpen(!open);
+  };
 
-  const showSidebar = () => setSidebar(true);
-  const hideSidebar = () => setSidebar(false);
   return (
-    <>
-      <IconContext.Provider value={{ color: '#000000' }}>
-        <SidebarNav sidebar={sidebar}>
-
-          <SidebarWrap>
-            <div className='mainMenu'>Main Menu
-              <div className="closeIcon" onClick={hideSidebar} style={{ marginLeft: "35%" }}><MdClose />
-              </div>
-            </div>
-            <NewSidebar />
-          </SidebarWrap>
-        </SidebarNav>
-        <SidebarNavHide sidebar={sidebar}>
-          <div className="-Background-Color" onClick={showSidebar}> <BsChevronRight /></div>
-        </SidebarNavHide>
-      </IconContext.Provider>
-    </>
+    <div className={classes.root}>
+      <CssBaseline />
+      <Drawer
+        variant="permanent"
+        className={clsx(classes.drawer, {
+          [classes.drawerOpen]: open,
+          [classes.drawerClose]: !open,
+        })}
+        classes={{
+          paper: clsx({
+            [classes.drawerOpen]: open,
+            [classes.drawerClose]: !open,
+          }),
+        }}
+      >
+        <div className={classes.toolbar} >
+          {open ? <div> Main Menu</div> : ''}
+          <IconButton onClick={handleDrawerClose}>
+            {open ? <ChevronLeftIcon className={classes.closeIcon} /> : <ChevronRightIcon className={classes.closeIcon} />}
+          </IconButton>
+        </div>
+        <Divider />
+        {open ? <NewSidebar></NewSidebar> : ""}
+      </Drawer>
+      <main className={classes.content}>
+        {children}
+      </main>
+    </div>
   );
-};
+}
+
 
 export default Sidebar;

@@ -35,11 +35,9 @@ const useStyles = makeStyles({
     width: 'auto',
   },
   filterStyles: {
-    position: 'absolute',
-    top: "132px",
-    left: "320px",
     display: "flex",
-    alignContent: "center"
+    alignContent: "center",
+    paddingBottom:10
   },
   textField: {
     width: "216px",
