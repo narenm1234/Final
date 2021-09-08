@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import React, { useState } from 'react';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -7,26 +7,26 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import TablePagination from '@material-ui/core/TablePagination';
 import SwipableFilter from './SwipableFilter';
-import ManualPricingSideBar from './ManualPricingSideBar';
+import { Box, FormControl, InputLabel, TableSortLabel, Typography } from '@material-ui/core';
+import Pagination from '@material-ui/lab/Pagination';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import InputBase from '@material-ui/core/InputBase';
+
 const useStyles = makeStyles({
   table: {
-    width: 950,
+    border: '1px solid #e1e1e1',
   },
-  manualStyles: {
-    position: 'absolute',
-    top: "175px",
-    left: "320px",
-    margin: '20px 0',
-    width: 950,
+  tableRow: {
+    borderBottom: '1px solid #e1e1e1',
   },
-  filterStyles: {
-    position: 'absolute',
-    top: "90",
-    left: "320px",
-    margin: '20px',
-    width: 950,
+  tableHeaderRow: {
+    borderTop: '1px solid #e1e1e1',
+    borderBottom: '1px solid #e1e1e1',
+  },
+  tableHeadFont: {
+  fontWeight: 600
   },
   root: {
     width: '100%',
@@ -39,7 +39,6 @@ const useStyles = makeStyles({
 function createVehicleData(VIN, Year, Make, Model_Trim, Grounding_Region, Inspection_Date, Inspection_Status, Action_Code) {
   return { VIN, Year, Make, Model_Trim, Grounding_Region, Inspection_Date, Inspection_Status, Action_Code };
 }
-
 const rows = [
   createVehicleData("0704303398645911", "2015", "CX-5", "A1", "Florida", "01/23/2015", "Pending", "XYZ"),
   createVehicleData("6672920469419405", "2016", "Mazda3", "B1", "Indiana", "04/26/2016", "Pending", "XYZ"),
@@ -51,19 +50,52 @@ const rows = [
   createVehicleData("0087479668724131", "2022", "CX-5", "B3", "Texas", "10/24/2022", "Completed", "XYZ"),
 ];
 
+const BootstrapInput = withStyles((theme) => ({
+  root: {
+    'label + &': {
+      marginTop: theme.spacing(3),
+    },
+  },
+  input: {
+    borderRadius: 4,
+    position: 'relative',
+    backgroundColor: theme.palette.background.paper,
+    border: '1px solid #ced4da',
+    fontSize: 16,
+    padding: '5px 26px 5px 12px',
+    transition: theme.transitions.create(['border-color', 'box-shadow']),
+    // Use the system font instead of the default Roboto font.
+    fontFamily: [
+      '-apple-system',
+      'BlinkMacSystemFont',
+      '"Segoe UI"',
+      'Roboto',
+      '"Helvetica Neue"',
+      'Arial',
+      'sans-serif',
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+    ].join(','),
+    '&:focus': {
+      borderRadius: 4,
+      borderColor: '#80bdff',
+      boxShadow: '0 0 0 0.2rem rgba(0,123,255,.25)',
+    },
+  },
+}))(InputBase);
+
 export default function ManualPricing(props) {
   const classes = useStyles();
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
   const [vehicleList, setVehicleList] = useState(rows);
+  const [pageCount, setPageCount] = React.useState(10);
 
+  const handleChangePageCount = (event) => {
+    setPageCount(event.target.value);
+  };
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
   };
 
   const openConditionReport = (VINumber) => {
@@ -138,49 +170,90 @@ export default function ManualPricing(props) {
           fetchDataBasedOnFilters={fetchDataBasedOnFilters}
           resetFilterList={resetFilterList}
         />
-        <TableContainer component={Paper} className={classes.manualStyles}>
+
+        <TableContainer component={Paper}>
           <Table className={classes.table} aria-label="simple table">
-            <TableHead>
-              <TableRow>
-                <TableCell align="center">VIN</TableCell>
-                <TableCell align="center">Year</TableCell>
-                <TableCell align="center">Make</TableCell>
-                <TableCell align="center">Model/Trim</TableCell>
-                <TableCell align="center">Grounding Region</TableCell>
-                <TableCell align="center">Inspection Date</TableCell>
-                <TableCell align="center">Inspection Status</TableCell>
-                <TableCell align="center">Action Code</TableCell>
+            <TableHead className={classes.tableHeaderRow} >
+              <TableRow className={classes.tableHeadFont}>
+                <TableCell align="center">
+                  <TableSortLabel active={true} direction={'asc'} onClick={() => { }}>
+                    VIN
+                  </TableSortLabel>
+                </TableCell>
+                <TableCell align="center">
+                  <TableSortLabel active={true} direction={'asc'} onClick={() => { }}>
+                    Year
+                  </TableSortLabel>
+                </TableCell>
+                <TableCell align="center">
+                  <TableSortLabel active={true} direction={'asc'} onClick={() => { }}>
+                    Make
+                  </TableSortLabel>
+                </TableCell>
+                <TableCell align="center">
+                  <TableSortLabel active={true} direction={'asc'} onClick={() => { }}>
+                    Model/Trim
+                  </TableSortLabel>
+                </TableCell>
+                <TableCell align="center">
+                  <TableSortLabel active={true} direction={'asc'} onClick={() => { }}>
+                    Grounding Region
+                  </TableSortLabel>
+                </TableCell>
+                <TableCell align="center">
+                  <TableSortLabel active={true} direction={'asc'} onClick={() => { }}>
+                    Inspection Date
+                  </TableSortLabel>
+                </TableCell>
+                <TableCell align="center">
+                  <TableSortLabel active={true} direction={'asc'} onClick={() => { }}>
+                    Inspection Status
+                  </TableSortLabel>
+                </TableCell>
+                <TableCell align="center">
+                  <TableSortLabel active={true} direction={'asc'} onClick={() => { }}>
+                    Action Code
+                  </TableSortLabel>
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {vehicleList.map((row) => (
-                <TableRow key={row.name}>
-                  <TableCell align="right">
+              {vehicleList.map((row, index) => (
+                <TableRow key={index} className={classes.tableRow} >
+                  <TableCell align="center" >
                     <span className="textStyle">
                       <a className="vin" onClick={() => openConditionReport(row.VIN)}> {row.VIN}</a>
                     </span>
                   </TableCell>
-                  <TableCell align="right">{row.Year}</TableCell>
-                  <TableCell align="right">{row.Make}</TableCell>
-                  <TableCell align="right">{row.Model_Trim}</TableCell>
-                  <TableCell align="right">{row.Grounding_Region}</TableCell>
-                  <TableCell align="right">{row.Inspection_Date}</TableCell>
-                  <TableCell align="right">{row.Inspection_Status}</TableCell>
-                  <TableCell align="right">{row.Action_Code}</TableCell>
+                  <TableCell align="center" >{row.Year}</TableCell>
+                  <TableCell align="center">{row.Make}</TableCell>
+                  <TableCell align="center">{row.Model_Trim}</TableCell>
+                  <TableCell align="center">{row.Grounding_Region}</TableCell>
+                  <TableCell align="center">{row.Inspection_Date}</TableCell>
+                  <TableCell align="center">{row.Inspection_Status}</TableCell>
+                  <TableCell align="center">{row.Action_Code}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
           </Table>
-          <TablePagination
-            rowsPerPageOptions={[5, 10, 25]}
-            component="div"
-            count={vehicleList.length}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onPageChange={handleChangePage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
-          />
         </TableContainer>
+        <Box display="flex" justifyContent="flex-end" alignItems="center" p={2} className="cpagination">
+          <Box pr={2}>Result per page  </Box>
+          <Box pr={2}> <FormControl className={classes.margin}>
+            <Select labelId="demo-customized-select-label"
+              id="demo-customized-select"
+              value={pageCount}
+              onChange={handleChangePageCount}
+              input={<BootstrapInput />}
+            >
+              <MenuItem value={10}>10</MenuItem>
+              <MenuItem value={20}>20</MenuItem>
+              <MenuItem value={30}>30</MenuItem>
+            </Select>
+          </FormControl>
+          </Box>
+          <Pagination count={4} color="primary" variant="outlined" />
+        </Box>
       </div>
     </>
   );

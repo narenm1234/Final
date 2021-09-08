@@ -56,34 +56,5 @@
     color: #080707;
     display: inline-flex;
     float: right;
-
-  }
-
-  .toggleShowDealertab
-  {
-    width: 147px;
-    height: 110px;
-    margin: 8px 24px 8px 1250px;
-    padding: 5px 1px 3px;
-    border-radius: 4px;
-    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1);
-    border: solid 1px #dddbda;
-    background-color: #ffffff;
-
-  }
-  .toggleSelectedtab
-  {
-    width: 144px;
-    height: 30px;
-    padding: 7px 5px 9px 20px;
-    background-color: #f3f2f2;
-
-  }
-  .toggleNotSelectedtab
-  {
-    width: 144px;
-    height: 30px;
-    padding: 7px 5px 9px 20px;
-    background-color: #ffffff;
-
+    cursor: pointer;
   }

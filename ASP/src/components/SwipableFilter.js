@@ -15,6 +15,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Paper from '@material-ui/core/Paper';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
+import { ReactComponent as GetImage } from '../assets/WebFont/filter.svg';
 
 const useStyles = makeStyles({
   inline: {
@@ -35,11 +36,9 @@ const useStyles = makeStyles({
     width: 'auto',
   },
   filterStyles: {
-    position: 'absolute',
-    top: "132px",
-    left: "320px",
     display: "flex",
-    alignContent: "center"
+    alignContent: "center",
+    paddingBottom:10
   },
   textField: {
     width: "216px",
@@ -74,6 +73,13 @@ const useStyles = makeStyles({
   },
   selectFormControl: {
     width: "100%" 
+  },
+  filter: {
+    width: "24px",
+    fill: "#706e6b !import",
+    height: "21.6px",
+    margin: "0 8px 0 0",
+    padding: "2.2px 1px"
   },
   iconButton: {
     padding: "2px 12px"
@@ -404,7 +410,9 @@ export default function SwipableFilter(props) {
       </Paper>
       {['right'].map((anchor) => (
         <React.Fragment key={anchor} >
-          <Button className={classes.filterResultText} onClick={toggleDrawer(anchor, true)}>{"Filter Results"}</Button>
+          <Button  className={classes.filterResultText} onClick={toggleDrawer(anchor, true)}>
+          <GetImage imageName="filter" className={classes.filter} />{"Filter Results"}
+          </Button>
           <SwipeableDrawer
             anchor={anchor}
             open={state[anchor]}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -9,6 +9,8 @@ import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import Chip from '@material-ui/core/Chip';
 import { makeStyles } from '@material-ui/core/styles';
+import { useLocation } from 'react-router-dom'
+
 const useStyles = makeStyles((theme) => ({
     root: {
         width: "30px",
@@ -21,76 +23,111 @@ const useStyles = makeStyles((theme) => ({
     },
     sideBarCSS: {
         marginLeft: "16px",
+    },
+    activeNavLink: {
+        background: '#e7f3fd',
+        borderLeft: '3px solid #407ed2',
     }
 }));
+
+
+const sidebarItems = [
+    {
+        label: 'Grounded',
+        open: false,
+        childs: [
+            {
+                label: "Grounded",
+                link: "/grounded",
+                badge: "4",
+            },
+            {
+                label: "Passed",
+                link: "/passed",
+                badge: "8",
+            },
+            {
+                label: "Purchased",
+                link: "/purchased",
+                badge: "9",
+            },
+        ]
+    },
+    {
+        label: 'Admin',
+        open: false,
+        childs: [
+            {
+                label: "Vehicle Search",
+                link: "/adminSearch",
+                badge: "",
+            },
+            {
+                label: "Inventory Requests",
+                link: "/adminInventoryRequests",
+                badge: "",
+            }
+        ]
+    }
+]
+
+
 export default function NewSidebar() {
-    const [open, setOpen] = React.useState(true);
+    const location = useLocation();
+    const [list, setList] = React.useState([]);
+    const [open, setOpen] = React.useState([]);
+    const [activeChild, setActiveChild] = React.useState(location.pathname);
     const classes = useStyles();
-    const handleClick = () => {
-        setOpen(!open);
+
+    useEffect(() => {
+        sidebarItems.forEach(item => {
+            item.childs.forEach(child => {
+                if (activeChild == child.link) {
+                    item.open = true;
+                }
+            })
+        });
+        setList(sidebarItems);
+    }, [])
+
+    const handleClick = (item) => {
+        let updatedList = list.map(litem => {
+            if (litem.label === item.label) {
+                litem.open ? litem.open = false : litem.open = true;
+            }
+            return litem;
+        })
+        setList(updatedList);
     };
+
+    const handleClickMakeActive = (child) => {
+        setActiveChild(child.link)
+    }
+
+
     return (
         <div className={classes.sideBarCSS}>
-            {/* <ListItem component={Link} to="/home">
-                <ListItemText
-                    primary="Home"
-                />
-                <Chip className={classes.root} label="0"></Chip>
-            </ListItem>
-            <ListItem component={Link} to="/checkinvehicle">
-                <ListItemText
-                    primary="Check In vehicle"
-                />
-                <Chip className={classes.root} label="0"></Chip>
-            </ListItem> */}
-            <List
-                component="nav"
-                aria-labelledby="nested-list-subheader"
-            >
-                <ListItem button onClick={handleClick}>
-
-                    {open ? <ExpandLess /> : <ExpandMore />}
-                    <ListItemText primary="Grounded" />
-                </ListItem>
-                <Collapse in={open} timeout="auto" unmountOnExit>
-                    <List component="div" disablePadding className={classes.sideBarCSS}>
-                        <ListItem component={Link} to="/grounded" >
-                            <ListItemText primary="Grounded" />
-                            <Chip className={classes.root} label="4"></Chip>
-                        </ListItem>
-                        <ListItem component={Link} to="/passed" >
-                            <ListItemText primary="Passed" />
-                            <Chip className={classes.root} label="8"></Chip>
-                        </ListItem>
-                        <ListItem component={Link} to="/purchased" >
-                            <ListItemText primary="Purchased" />
-                            <Chip className={classes.root} label="9"></Chip>
-                        </ListItem>
-                    </List>
-                </Collapse>
-            </List>
-            <List
-                component="nav"
-                aria-labelledby="nested-list-subheader"
-            >
-                <ListItem button onClick={handleClick}>
-
-                    {open ? <ExpandLess /> : <ExpandMore />}
-                    <ListItemText primary="Admin" />
-                </ListItem>
-                <Collapse in={open} timeout="auto" unmountOnExit>
-                    <List component="div" disablePadding className={classes.sideBarCSS}>
-                        <ListItem component={Link} to="/adminSearch" >
-                            <ListItemText primary="Vehicle Search" />
-                            
-                        </ListItem>
-                        <ListItem component={Link} to="/adminInventoryRequests" >
-                            <ListItemText primary="Inventory Requests" />
-                            
-                        </ListItem>
-                    </List>
-                </Collapse>
-            </List>
+            {list && list.map((item, index) =>
+                <List key={index} component="nav" aria-labelledby="nested-list-subheader" >
+                    <ListItem button onClick={() => { handleClick(item) }}>
+                        {item.open ? <ExpandLess /> : <ExpandMore />}
+                        <ListItemText primary={item.label} />
+                    </ListItem>
+                    <Collapse in={item.open} timeout="auto" unmountOnExit>
+                        <List component="div" disablePadding className={classes.sideBarCSS}>
+                            {item.childs.map(child =>
+                                <ListItem component={Link} to={child.link} key={child.link}
+                                    className={activeChild == child.link ? classes.activeNavLink : ''}
+                                    onClick={() => { handleClickMakeActive(child) }}>
+                                    <ListItemText primary={child.label} />
+                                    {child.badge ? <Chip className={classes.root} label={child.badge}></Chip> : ''}
+                                </ListItem>
+                            )}
+                        </List>
+                    </Collapse>
+                </List>
+            )
+            }
         </div>
     )
 }

@@ -1,11 +1,18 @@
 import React, { useState } from 'react';
 import Separator from '../Separator';
 import AdminSearchHeader from '../AdminSearchHeader';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+
 const Header = (props) => {
-  const [showDealer, setShowDealer] = useState(false);
-  const toggleShowDealer = () => {
-    setShowDealer(!showDealer);
+  const [showDealer, setShowDealer] = useState(null);
+  const toggleShowDealer = (event) => {
+    setShowDealer(event.currentTarget);
+  };
+  const handleClose = () => {
+    setShowDealer(null);
   }
+
   return (
     <div class="container">
       <div class="imageHolder">
@@ -15,15 +22,14 @@ const Header = (props) => {
       </div>
       <AdminSearchHeader searchdetails={(SearchText) => props.searchdetails(SearchText)} />
       <div onClick={toggleShowDealer} class="dealerName"><text>Dealer Name</text></div>
-      {showDealer && <div class="toggleShowDealertab"><div class="toggleNotSelectedtab" >Profile </div> <div class="toggleSelectedtab">User Settings</div> <div class="toggleNotSelectedtab" >Help</div></div>}
+      <Menu id="simple-menu" anchorEl={showDealer} keepMounted open={Boolean(showDealer)}
+        onClose={handleClose} >
+        <MenuItem onClick={handleClose}>Profile</MenuItem>
+        <MenuItem onClick={handleClose}>User Settings</MenuItem>
+        <MenuItem onClick={handleClose}>Help</MenuItem>
+      </Menu>
     </div>
-
-
   )
-
-
-
-
 }
 
 export default Header;
