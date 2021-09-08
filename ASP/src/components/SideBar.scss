@@ -25,6 +25,11 @@
         color:#495057;
       }
   }
+  .st0 {
+    fill-rule: evenodd;
+    clip-rule: evenodd;
+    fill: #706e6b !important;
+}
   .closeIcon{
     &:hover {
         background: #f1f1f1;
