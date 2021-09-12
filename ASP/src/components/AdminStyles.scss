@@ -1,224 +1,229 @@
 .adminSearchCard {
-    width: 700px;
-    position: relative;
-    top: 250px;
-    left: 35%;
-    height: 250px;
+  width: 700px;
+  position: relative;
+  top: 250px;
+  left: 35%;
+  height: 250px;
 }
 
 .adminSearchCardBody {
-    display: flex;
-    padding-right: 5px;
-    margin: 25px;
+  display: flex;
+  padding-right: 5px;
+  margin: 25px;
 }
 
 .adminSearcheader {
-    text-align: center;
+  text-align: center;
 }
 
 .topBarAdmin {
-    height: 48px;
-    top: 52px !important;
-    // padding: 7px;
-    background-color: #ffffff !important;
-    color: #080707 !important;
-    margin: auto;
+  height: 48px;
+  top: 50px !important;
+  // padding: 7px;
+  background-color: #ffffff !important;
+  color: #080707 !important;
+  margin: auto;
 }
 
 .tabset {
-    display: flex;
-    justify-content: center;
-    margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
 
-    .MuiTabs-indicator {
-        bottom: unset !important;
-        top: 0 !important;
-        height: 3px;
-        background-color: #407ed2 !important;
-    }
+  .MuiTabs-indicator {
+    bottom: unset !important;
+    top: 0 !important;
+    height: 3px;
+    background-color: #407ed2 !important;
+  }
 
-    .Mui-selected {
-        background: #e7f3fd !important;
-    }
-
+  .Mui-selected {
+    background: #e7f3fd !important;
+  }
 }
 
 .tablepagination {
-    .MuiTablePagination-select {
-        background-color: white;
-    }
-
+  .MuiTablePagination-select {
+    background-color: white;
+  }
 }
 
-
 .notesSection {
-    width: 100%;
-    height: 100vh;
-    background-color: #ffffff;
-    z-index: 3 !important;
-    position: absolute;
-    margin-top: 52px;
-    box-shadow: -1px 0 3px 0 rgba(0, 0, 0, 0.25)
+  width: 100%;
+  height: 100vh;
+  background-color: #ffffff;
+  z-index: 3 !important;
+  position: absolute;
+  margin-top: 52px;
+  box-shadow: -1px 0 3px 0 rgba(0, 0, 0, 0.25);
 }
 
 .manualPricingSidebar {
-    height: 100vh;
-    background-color: #ffffff;
-    z-index: 3 !important;
-    margin-left: 85%;
-    position: fixed;
-    margin-top: 52px;
-    box-shadow: -1px 0 3px 0 rgba(0, 0, 0, 0.25)
+  height: 100vh;
+  background-color: #ffffff;
+  z-index: 3 !important;
+  margin-left: 85%;
+  position: fixed;
+  margin-top: 52px;
+  box-shadow: -1px 0 3px 0 rgba(0, 0, 0, 0.25);
 }
 
 .swipeFilterBtn {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    padding: 8px 16px;
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    background: #FFF;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 8px 16px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  background: #fff;
 }
 
 .purchasePassBtn {
-    position: absolute !important;
-    bottom: 65px;
-    left: 10px;
-    padding: 8px 16px;
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    background: #FFF;
+  position: absolute !important;
+  bottom: 65px;
+  left: 10px;
+  padding: 8px 16px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  background: #fff;
 }
 
 .passButton {
-    width: 107px;
-    height: 32px;
-    margin: 0 8px 0 0;
-    padding: 1px 6px 1px 7px;
-    border-radius: 4px;
-    border: solid 1px #0070d2 !important;
-    font-size: 0.65rem !important;
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.5 !important;
+  width: 107px;
+  height: 32px;
+  margin: 0 8px 0 0;
+  padding: 1px 6px 1px 7px;
+  border-radius: 4px;
+  border: solid 1px #0070d2 !important;
+  font-size: 0.65rem !important;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5 !important;
 }
 
 .purchaseButton {
-    width: 103px;
-    height: 30px;
-    font-size: 0.65rem !important;
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.5 !important;
-    letter-spacing: normal;
-    text-align: center;
-    color: #fff;
-    border-radius: 4px !important;
-    border: solid 1px grey !important;
+  width: 103px;
+  height: 30px;
+  font-size: 0.65rem !important;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5 !important;
+  letter-spacing: normal;
+  text-align: center;
+  color: #fff;
+  border-radius: 4px !important;
+  border: solid 1px grey !important;
 }
 
 .updateButton {
-    padding: 4px 8px;
-    min-width: 114px;
-    border-radius: 4px;
-    color: #ffffff !important;
-    background-color: #c23934 !important;
+  padding: 4px 8px;
+  min-width: 114px;
+  border-radius: 4px;
+  color: #ffffff !important;
+  background-color: #c23934 !important;
 }
 
 .cancelButton {
-    padding: 4px 8px;
-    min-width: 88px;
-    border-radius: 4px;
-    color: #0070d2 !important;
-    border: solid 1px #dddbda;
-    background-color: #ffffff;
+  padding: 4px 8px;
+  min-width: 88px;
+  border-radius: 4px;
+  color: #0070d2 !important;
+  border: solid 1px #dddbda;
+  background-color: #ffffff;
 }
 
 .notesText {
-    width: 216px;
-    height: 150px;
-    margin: 0 0 16px 0;
-    padding: 5px 12px 45px;
-    border-radius: 4px;
-    border: solid 1px #dddbda;
-    background-color: #ffffff;
+  width: 216px;
+  height: 150px;
+  margin: 0 0 16px 0;
+  padding: 5px 12px 45px;
+  border-radius: 4px;
+  border: solid 1px #dddbda;
+  background-color: #ffffff;
 }
 
 .manualPricing {
-    display: block;
+  display: block;
 }
 
 .manualPricingText {
-    display: block;
-    width: 216px;
-    margin: 0 0 16px 0;
-    padding: 5px 12px 5px;
-    border-radius: 4px;
-    border: solid 1px #dddbda;
-    background-color: #ffffff;
+  display: block;
+  width: 216px;
+  margin: 0 0 16px 0;
+  padding: 5px 12px 5px;
+  border-radius: 4px;
+  border: solid 1px #dddbda;
+  background-color: #ffffff;
 }
 
 .notesTextContent {
-    font-size: 13px;
+  font-size: 13px;
 }
 
 .notesSectionHeader {
-    width: 264px;
-    height: 52px;
-    margin: 0 0 24px;
-    padding: 10px 12px;
-    box-shadow: 0 1px 0 0 #dddbda;
-    background-color: #ffffff;
+  width: 264px;
+  height: 52px;
+  margin: 0 0 24px;
+  padding: 10px 12px;
+  box-shadow: 0 1px 0 0 #dddbda;
+  background-color: #ffffff;
 }
 
 .notesSectionContent {
-    width: 217px !important;
-    height: 80px;
-    margin: 0 0 4px;
-    font-size: 13px;
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.54;
-    letter-spacing: normal;
-    color: #3e3e3c;
-    margin: 10px;
-    padding: 10px;
+  width: 217px !important;
+  height: 80px;
+  margin: 0 0 4px;
+  font-size: 13px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.54;
+  letter-spacing: normal;
+  color: #3e3e3c;
+  margin: 10px;
+  padding: 10px;
 }
 
-.cpagination {
-    .MuiPagination-ul{
-        background-color: white;
-    }
-    .MuiPaginationItem-root {
-        margin: 0px;
-        border-radius: 0px;
-    }
-    .MuiPaginationItem-outlinedPrimary.Mui-selected {
-        color: #ffffff !important;
-        border: 1px solid #407ed2 !important;
-        background-color: #407ed2 !important;
-    }
+.custompagination {
+  .MuiPagination-ul {
+    background-color: white;
+  }
+  .MuiPaginationItem-root {
+    margin: 0px;
+    border-radius: 0px;
+  }
+  .MuiPaginationItem-outlinedPrimary.Mui-selected {
+    color: #ffffff !important;
+    border: 1px solid #407ed2 !important;
+    background-color: #407ed2 !important;
+  }
 }
 
 .MuiTableCell-head {
-    font-weight: 600 !important;
+  font-weight: 600 !important;
 }
 
 .PrivateSwitchBase-root-79 {
-    padding: 0px !important;
+  padding: 0px !important;
 }
 .MuiIconButton-root {
-    padding: 0px !important;
+  padding: 0px !important;
 }
 .MuiTypography-body1 {
-    color: #0070d2 !important;
+  color: #0070d2 !important;
 }
 .MuiTab-root {
-    text-transform: none !important;
+  text-transform: none !important;
+}
+
+.MuiTableSortLabel-root {
+  display: flex !important;
+  justify-content: space-between !important;
+}
+.tableSortIcon {
+  width: 10px;
 }
