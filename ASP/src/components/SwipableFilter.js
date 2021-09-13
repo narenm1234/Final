@@ -1,30 +1,30 @@
-import React, {useState, useEffect} from 'react';
-import clsx from 'clsx';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
-import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
-import Button from '@material-ui/core/Button';
-import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import MenuItem from '@material-ui/core/MenuItem';
-import Select from '@material-ui/core/Select';
-import InputBase from '@material-ui/core/InputBase';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormControl from '@material-ui/core/FormControl';
-import Paper from '@material-ui/core/Paper';
-import IconButton from '@material-ui/core/IconButton';
-import SearchIcon from '@material-ui/icons/Search';
-import { ReactComponent as GetImage } from '../assets/WebFont/filter.svg';
+import React, { useState, useEffect } from "react";
+import clsx from "clsx";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
+import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
+import Button from "@material-ui/core/Button";
+import List from "@material-ui/core/List";
+import Divider from "@material-ui/core/Divider";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
+import MenuItem from "@material-ui/core/MenuItem";
+import Select from "@material-ui/core/Select";
+import InputBase from "@material-ui/core/InputBase";
+import InputLabel from "@material-ui/core/InputLabel";
+import FormControl from "@material-ui/core/FormControl";
+import Paper from "@material-ui/core/Paper";
+import IconButton from "@material-ui/core/IconButton";
+import SearchIcon from "@material-ui/icons/Search";
+import { ReactComponent as GetImage } from "../assets/WebFont/filter.svg";
 
 const useStyles = makeStyles({
   inline: {
     display: "inline-block",
-    marginTop: '25px',
+    marginTop: "25px",
   },
   inlineDate: {
     display: "inline-block",
-    marginTop: '135px',
+    marginTop: "135px",
   },
   list: {
     width: 264,
@@ -33,12 +33,12 @@ const useStyles = makeStyles({
     position: "relative",
   },
   fullList: {
-    width: 'auto',
+    width: "auto",
   },
   filterStyles: {
     display: "flex",
     alignContent: "center",
-    paddingBottom:10
+    paddingBottom: 10,
   },
   textField: {
     width: "216px",
@@ -72,17 +72,17 @@ const useStyles = makeStyles({
     fontSize: "13px",
   },
   selectFormControl: {
-    width: "100%" 
+    width: "100%",
   },
   filter: {
     width: "24px",
     fill: "#706e6b !import",
     height: "21.6px",
     margin: "0 8px 0 0",
-    padding: "2.2px 1px"
+    padding: "2.2px 1px",
   },
   iconButton: {
-    padding: "2px 12px"
+    padding: "2px 12px",
   },
   filterInput: {
     height: "32px",
@@ -104,25 +104,25 @@ const useStyles = makeStyles({
     fontWeight: "500",
     textTransform: "lowercase",
     marginLeft: "16px",
-  }
+  },
 });
 
 const BootstrapInput = withStyles((theme) => ({
   root: {
-    'label + &': {
+    "label + &": {
       marginTop: theme.spacing(3),
     },
   },
   input: {
     borderRadius: 4,
-    position: 'relative',
+    position: "relative",
     backgroundColor: "#ffffff",
-    border: '1px solid #ced4da',
+    border: "1px solid #ced4da",
     fontSize: 16,
-    width: 'auto',
-    height: '10px',
-    padding: '10px 12px',
-    '&:focus': {
+    width: "auto",
+    height: "10px",
+    padding: "10px 12px",
+    "&:focus": {
       borderColor: theme.palette.primary.main,
     },
   },
@@ -130,29 +130,33 @@ const BootstrapInput = withStyles((theme) => ({
 
 const SmallInput = withStyles((theme) => ({
   root: {
-    'label + &': {
+    "label + &": {
       marginTop: theme.spacing(3),
     },
   },
   input: {
     borderRadius: 4,
-    position: 'relative',
+    position: "relative",
     backgroundColor: "#ffffff",
-    border: '1px solid #ced4da',
+    border: "1px solid #ced4da",
     fontSize: 16,
-    display: 'inline-block',
-    minWidth: '65px',
-    height: '10px',
-    marginRight: '5px',
-    padding: '10px 12px',
-    '&:focus': {
+    display: "inline-block",
+    minWidth: "65px",
+    height: "10px",
+    marginRight: "5px",
+    padding: "10px 12px",
+    "&:focus": {
       borderColor: theme.palette.primary.main,
     },
   },
 }))(InputBase);
 
 export default function SwipableFilter(props) {
-  const { fetchDataBasedOnSearchValue, fetchDataBasedOnFilters, resetFilterList } = props;
+  const {
+    fetchDataBasedOnSearchValue,
+    fetchDataBasedOnFilters,
+    resetFilterList,
+  } = props;
   const classes = useStyles();
   const [state, setState] = useState({
     top: false,
@@ -161,69 +165,78 @@ export default function SwipableFilter(props) {
     right: false,
   });
   const [filterInput, setFilterInput] = useState({
-    vin: '',
-    yearFrom: '',
-    yearTo: '',
-    make: '',
-    inspectionStatus: '',
-    inspectionDateFrom: '',
-    inspectionDateTo: '',
-    groundingRegion: '',
-    auctionCode: ''
+    vin: "",
+    yearFrom: "",
+    yearTo: "",
+    make: "",
+    inspectionStatus: "",
+    inspectionDateFrom: "",
+    inspectionDateTo: "",
+    groundingRegion: "",
+    auctionCode: "",
   });
   const [makeOptions, setMakeOptions] = useState([
-    {value: 'CX-5', text: 'CX-5'},
-    {value: 'MX-5', text: 'MX-5'},
-    {value: 'Mazda3', text: 'Mazda3'},
-    {value: 'Mazda6', text: 'Mazda6'}
+    { value: "CX-5", text: "CX-5" },
+    { value: "MX-5", text: "MX-5" },
+    { value: "Mazda3", text: "Mazda3" },
+    { value: "Mazda6", text: "Mazda6" },
   ]);
   const [inspectionStatusOptions, setInspectionStatusOptions] = useState([
-    {value: 'Pending', text: 'Pending'},
-    {value: 'Completed', text: 'Completed'}
+    { value: "Pending", text: "Pending" },
+    { value: "Completed", text: "Completed" },
   ]);
   const [groundingRegionOptions, setGroundingRegionOptions] = useState([
-    {value: 'Texas', text: 'Texas'},
-    {value: 'Florida', text: 'Florida'},
-    {value: 'Indiana', text: 'Indiana'}
+    { value: "Texas", text: "Texas" },
+    { value: "Florida", text: "Florida" },
+    { value: "Indiana", text: "Indiana" },
   ]);
   const [searchtext, setSearchtext] = useState("");
 
   const toggleDrawer = (anchor, open) => (event) => {
-    if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+    if (
+      event &&
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
       return;
     }
     setState({ ...state, [anchor]: open });
   };
 
   const handleOnChange = (event) => {
-    setFilterInput({ ...filterInput, ...{ [event.target.name]: event.target.value }});
+    setFilterInput({
+      ...filterInput,
+      ...{ [event.target.name]: event.target.value },
+    });
   };
 
   const resetFilterInput = () => {
     setFilterInput({
-      vin: '',
-      yearFrom: '',
-      yearTo: '',
-      make: '',
-      inspectionStatus: '',
-      inspectionDateFrom: '',
-      inspectionDateTo: '',
-      groundingRegion: '',
-      auctionCode: ''
+      vin: "",
+      yearFrom: "",
+      yearTo: "",
+      make: "",
+      inspectionStatus: "",
+      inspectionDateFrom: "",
+      inspectionDateTo: "",
+      groundingRegion: "",
+      auctionCode: "",
     });
     resetFilterList();
-    setState({ ...state, ['right']: false });
-  }
+    setState({ ...state, ["right"]: false });
+  };
 
   const list = (anchor) => (
     <div
-      className={clsx(classes.list, {[classes.fullList]: anchor === 'top' || anchor === 'bottom'})}
+      className={clsx(classes.list, {
+        [classes.fullList]: anchor === "top" || anchor === "bottom",
+      })}
       role="presentation"
       //onClick={toggleDrawer(anchor, false)}
       //onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {['Filter Options'].map((text, index) => (
+        {["Filter Options"].map((text, index) => (
           <ListItem button key={text}>
             <ListItemText primary={text} />
           </ListItem>
@@ -286,8 +299,10 @@ export default function SwipableFilter(props) {
               <MenuItem value="" disabled>
                 Select All that Apply
               </MenuItem>
-              {makeOptions.map(make => (
-                <MenuItem value={make.value}>{make.text}</MenuItem>  
+              {makeOptions.map((make, index) => (
+                <MenuItem value={make.value} key={index}>
+                  {make.text}
+                </MenuItem>
               ))}
             </Select>
           </FormControl>
@@ -310,8 +325,10 @@ export default function SwipableFilter(props) {
               <MenuItem value="" disabled>
                 Select All that Apply
               </MenuItem>
-              {inspectionStatusOptions.map(inspectionStatus => (
-                <MenuItem value={inspectionStatus.value}>{inspectionStatus.text}</MenuItem>  
+              {inspectionStatusOptions.map((inspectionStatus, index) => (
+                <MenuItem value={inspectionStatus.value} key={index}>
+                  {inspectionStatus.text}
+                </MenuItem>
               ))}
             </Select>
           </FormControl>
@@ -357,8 +374,10 @@ export default function SwipableFilter(props) {
               <MenuItem value="" disabled>
                 Select All that Apply
               </MenuItem>
-              {groundingRegionOptions.map(groundingRegion => (
-                <MenuItem value={groundingRegion.value}>{groundingRegion.text}</MenuItem>  
+              {groundingRegionOptions.map((groundingRegion, index) => (
+                <MenuItem value={groundingRegion.value} key={index}>
+                  {groundingRegion.text}
+                </MenuItem>
               ))}
             </Select>
           </FormControl>
@@ -379,10 +398,20 @@ export default function SwipableFilter(props) {
         </ListItem>
       </List>
       <List className={classes.swipeFilterBtn}>
-        <Button autoFocus className={classes.cancelButton} color="primary" onClick={() => resetFilterInput()}>
+        <Button
+          autoFocus
+          className={classes.cancelButton}
+          color="primary"
+          onClick={() => resetFilterInput()}
+        >
           Cancel
         </Button>
-        <Button autoFocus className={classes.updateButton} color="secondary" onClick={() => fetchDataBasedOnFilters(filterInput)}>
+        <Button
+          autoFocus
+          className={classes.updateButton}
+          color="secondary"
+          onClick={() => fetchDataBasedOnFilters(filterInput)}
+        >
           Update
         </Button>
       </List>
@@ -390,28 +419,36 @@ export default function SwipableFilter(props) {
   );
 
   const handleSearchText = (value) => {
-    setSearchtext(value)
-  }
+    setSearchtext(value);
+  };
 
   return (
     <div className={classes.filterStyles}>
       <Paper component="form" className={classes.searchBlock}>
-        <IconButton type="submit" className={classes.iconButton} aria-label="search">
+        <IconButton
+          type="submit"
+          className={classes.iconButton}
+          aria-label="search"
+        >
           <SearchIcon />
         </IconButton>
         <InputBase
           className={classes.filterInput}
-          placeholder="Search VIN"
-          inputProps={{ 'aria-label': 'Search' }}
-          value={searchtext || ''}
+          placeholder="Search"
+          inputProps={{ "aria-label": "Search" }}
+          value={searchtext || ""}
           onKeyUp={(evt) => fetchDataBasedOnSearchValue(evt.target.value)}
           onChange={(evt) => handleSearchText(evt.target.value)}
         />
       </Paper>
-      {['right'].map((anchor) => (
-        <React.Fragment key={anchor} >
-          <Button  className={classes.filterResultText} onClick={toggleDrawer(anchor, true)}>
-          <GetImage imageName="filter" className={classes.filter} />{"Filter Results"}
+      {["right"].map((anchor) => (
+        <React.Fragment key={anchor}>
+          <Button
+            className={classes.filterResultText}
+            onClick={toggleDrawer(anchor, true)}
+          >
+            <GetImage imagename="filter" className={classes.filter} />
+            {"Filter Results"}
           </Button>
           <SwipeableDrawer
             anchor={anchor}

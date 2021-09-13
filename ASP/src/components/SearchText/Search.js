@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import CloseIcon from '@material-ui/icons/Close';
-import InputBase from '@material-ui/core/InputBase';
-import IconButton from '@material-ui/core/IconButton';
-import SearchIcon from '@material-ui/icons/Search';
+import React, { useState } from "react";
+import CloseIcon from "@material-ui/icons/Close";
+import InputBase from "@material-ui/core/InputBase";
+import IconButton from "@material-ui/core/IconButton";
+import SearchIcon from "@material-ui/icons/Search";
 const SearchText = (props) => {
   const [search, setSearch] = useState();
   const [searchResults, setSearchResults] = useState();
@@ -13,15 +13,13 @@ const SearchText = (props) => {
   const searchCompleted = props.searchCompleted;
 
   return (
-
-    <div class="search">
-
+    <div className="search">
       <InputBase
         placeholder={placeholder}
         variant="outlined"
         value={props?.searchValue}
         maxlength="18"
-        class="searchInput"
+        className="searchInput"
         fullWidth
         onChange={(evt) => props?.editSearchTerm(evt)}
       />
@@ -34,14 +32,11 @@ const SearchText = (props) => {
 
       <br></br>
       <div>
-        {searchResults?.map(name => <div>
-          {name}
-        </div>)}
+        {searchResults?.map((name, index) => (
+          <div key={index}>{name}</div>
+        ))}
       </div>
     </div>
   );
-
-
-
-}
+};
 export default SearchText;
