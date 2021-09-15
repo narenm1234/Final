@@ -116,7 +116,7 @@
 }
 
 .vehicleMakeModel {
-  width         : 271px;
+  width         : 300px;
   height        : 24px;
   margin        : 0 69px 0 0;
   font-size     : 16px;
@@ -283,7 +283,8 @@
   background-color: #ffffff;
 }
 div.vehicleMakeModel{
-  font-size: 15px;
+  font-size: 13px;
+  width: 350px;
 }
 .textStyle{
   font-family: ToyotaTypeBook;
@@ -312,7 +313,7 @@ div.vehicleMakeModel{
   margin-left:26%;
 }
 .margin__space5{
-  margin-left:21%;
+  margin-left:20%;
 }
 .margin__space6{
   margin-left:27.5% !important;
@@ -407,4 +408,21 @@ text-transform: initial !important;
   height: 20px;
   border: solid 1px #dddbda !important;
   border-Radius: 3px;
+}
+
+.nodataImage{
+  width: 500px;
+  height: 300px;
+}
+.listingPageCardNoData {
+  width: 80%;
+  position: relative;
+  top: 20%;
+  left: 30%;
+  display: grid;
+}
+.nodataText{
+  font-size: 22px;
+  padding-left: 13%;
+  font-weight: 300;
 }

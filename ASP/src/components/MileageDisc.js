@@ -701,7 +701,7 @@ export default function MileageDisc(props) {
           <TableBody>
             {rowsPerPage.map((row) => (
               <TableRow key={row.name} className={classes.tableRow}>
-                <TableCell align="center">
+                {/* <TableCell align="center">
                   <span className="textStyle">
                     <a
                       className="vin"
@@ -718,7 +718,7 @@ export default function MileageDisc(props) {
                 <TableCell align="center">{row.region}</TableCell>
                 <TableCell align="center">{row.inspection_mileage}</TableCell>
                 <TableCell align="center">{row.ground_mileage}</TableCell>
-                <TableCell align="center">{row.difference}</TableCell>
+                <TableCell align="center">{row.difference}</TableCell> */}
               </TableRow>
             ))}
           </TableBody>

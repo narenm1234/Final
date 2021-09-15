@@ -120,7 +120,7 @@ export default function ListingPage1(props) {
                   </span>
                   <span className="textStyle">
                     <span className="textBold"> Inspection Mileage:</span>{" "}
-                    000,000 miles
+                    Pending
                   </span>
                   <span className="textStyle">
                     <span className="textBold"> Account Type: </span>{" "}
@@ -138,7 +138,8 @@ export default function ListingPage1(props) {
         </div>
       );
     })
-  ) : (
-    <div className="listingPageCard"></div>
-  );
+  ) : (<div className='listingPageCardNoData'>
+  <img src="noDataFound.jpeg" className='nodataImage'/>
+  <span className='nodataText'>No  Vehicles found</span>
+</div>)
 }

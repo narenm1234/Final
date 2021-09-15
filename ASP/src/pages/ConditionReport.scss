@@ -1,21 +1,22 @@
 .conditionPageCard{
   width: 70%;
   display: flex;
-  margin: 5% 15% 0% 5%;
-  position: absolute;
+  margin: 5% 15% 10% 5%;
+  position: relative;
 background: #f3f2f2;
+
 }
 .conditionPageCardReports{
-  width: 65%;
+  width: 70%;
   margin: 5% 0% 0% 20%;
   position: absolute;
   background: #f3f2f2;
 }
 .reportTitle {
-    width: 300px;
+    width: 350px;
     height: 30px;
     font-family: ToyotaType;
-    font-size: 20px;
+    font-size: 17px;
     font-weight: 600;
     font-stretch: normal;
     font-style: normal;
@@ -70,10 +71,10 @@ background: #f3f2f2;
   .inspectionStatusWarning {
     width: 138px;
     height: 33px;
-    padding: 4px 8px;
+    padding: 2px 8px;
     border-radius: 100px;
     background-color: #c00;
-    margin-left: 2rem;
+    margin-left: 1rem;
   }
   .ConditionCard {
     width: 123%;

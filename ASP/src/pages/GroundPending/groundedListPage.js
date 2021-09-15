@@ -213,11 +213,12 @@ export default function ListingPage(props) {
                       </span>
                       <span className="textStyle">
                         <span className="textBold"> Inspection Mileage:</span>{" "}
-                        000,000 miles
+                        Pending
                       </span>
                       <span className="textStyle">
                         <span className="textBold"> Account Type: </span>{" "}
-                        {vehicle.account_type}
+                        {/* {vehicle.account_type} */}
+                        Pending
                       </span>
                     </List>
                   </div>
@@ -238,13 +239,13 @@ export default function ListingPage(props) {
                           <span className="textSize">
                             <CurrencyFormat
                               value={
-                                vehicle.pay_off_amt ? vehicle.pay_off_amt : ""
+                                vehicle.pay_off_amt ? vehicle.pay_off_amt:""
                               }
                               displayType={"text"}
                               thousandSeparator={true}
                               prefix={"$"}
                             />
-                            .00
+                            Pending
                           </span>
                         </ListItemSecondaryAction>
                       </ListItem>
@@ -260,15 +261,15 @@ export default function ListingPage(props) {
                         </ListItemText>
                         <ListItemSecondaryAction>
                           <span className="textSize">
-                            <CurrencyFormat
+                            {/* <CurrencyFormat
                               value={
                                 vehicle.residual_amt + vehicle.remaining_pmts
                               }
                               displayType={"text"}
                               thousandSeparator={true}
                               prefix={"$"}
-                            />
-                            .00
+                            /> */}
+                            Pending
                           </span>
                         </ListItemSecondaryAction>
                       </ListItem>
@@ -279,7 +280,7 @@ export default function ListingPage(props) {
                           </span>
                         </ListItemText>
                         <ListItemSecondaryAction>
-                          <span className="textSize">N/A</span>
+                          <span className="textSize">Pending</span>
                         </ListItemSecondaryAction>
                       </ListItem>
                       <ListItem className="paddingCSS">
@@ -293,7 +294,7 @@ export default function ListingPage(props) {
                         </ListItemText>
                         <ListItemSecondaryAction>
                           <span className="textSize">
-                            <CurrencyFormat
+                            {/* <CurrencyFormat
                               value={
                                 vehicle.remaining_pmts
                                   ? vehicle.remaining_pmts
@@ -302,8 +303,8 @@ export default function ListingPage(props) {
                               displayType={"text"}
                               thousandSeparator={true}
                               prefix={"$"}
-                            />
-                            .00
+                            /> */}
+                            Pending
                           </span>
                         </ListItemSecondaryAction>
                       </ListItem>
@@ -335,9 +336,9 @@ export default function ListingPage(props) {
             </div>
           );
         })
-      ) : (
-        <div className="listingPageCard">
-          <h1>No data found</h1>
+      ) : (<div className='listingPageCardNoData'>
+      <img src="noDataFound.jpeg" className='nodataImage'/>
+      <span className='nodataText'>No  Vehicles found</span>
         </div>
       )}
       <PassOnVehicle open={open} close={handleClose} vin={passVin} />

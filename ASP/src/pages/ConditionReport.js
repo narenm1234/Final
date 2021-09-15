@@ -120,7 +120,7 @@ export default function ConditionReport(props) {
                                             Exterior total
                                         </div>
                                         <div className="smallCardBody warningColor">
-                                            {'$'}{DamageDetails.exteriorCost ? DamageDetails.exteriorCost : 'NA'}
+                                            {}{DamageDetails.exteriorCost ? DamageDetails.exteriorCost : 'Pending'}
                                         </div>
                                     </CardContent>
                                 </Card>
@@ -132,7 +132,7 @@ export default function ConditionReport(props) {
                                             Interior total
                                         </div>
                                         <div className="smallCardBody warningColor">
-                                            {'$'}{DamageDetails.interiorCost ? DamageDetails.interiorCost : 'NA'}
+                                            {}{DamageDetails.interiorCost ? DamageDetails.interiorCost : 'Pending'}
                                         </div>
                                     </CardContent>
                                 </Card>
@@ -144,7 +144,7 @@ export default function ConditionReport(props) {
                                             Mechanical total
                                         </div>
                                         <div className="smallCardBody warningColor">
-                                            {'$'}{DamageDetails.maintainenceCost ? DamageDetails.maintainenceCost : 'NA'}
+                                            {}{DamageDetails.maintainenceCost ? DamageDetails.maintainenceCost : 'Pending'}
                                         </div>
                                     </CardContent>
                                 </Card>
@@ -172,7 +172,7 @@ export default function ConditionReport(props) {
                     <Grid item xs={7}>
                         <div className='ConditionReportSection'>
                             <div className='reportTitle'>
-                                    <span>{vehicleDetails.brand} {vehicleDetails.model} {vehicleDetails.ext_color} {vehicleDetails.model_year}</span>
+                                    <span>{vehicleDetails && vehicleDetails.brand} {vehicleDetails && vehicleDetails.model} {vehicleDetails && vehicleDetails.ext_color} {vehicleDetails && vehicleDetails.model_year}</span>
                             </div>
                             {
                                 (!!condionVehicleDetails.inspection_date && condionVehicleDetails.inspection_date.length > 0) ? (<span className='ConditionReportInspection'>
@@ -190,7 +190,8 @@ export default function ConditionReport(props) {
                                             Payoff
                                         </div>
                                         <div className="smallCardBody">
-                                        <span className="textSize"><CurrencyFormat value={vehicleDetails.pay_off_amt ? vehicleDetails.pay_off_amt : ""} displayType={'text'} thousandSeparator={true} prefix={'$'} />.00</span>
+                                            Pending
+                                        {/* <span className="textSize"><CurrencyFormat value={vehicleDetails.pay_off_amt ? vehicleDetails.pay_off_amt : ""} displayType={'text'} thousandSeparator={true} prefix={'$'} />.00</span> */}
                                         </div>
                                     </CardContent>
                                 </Card>
@@ -202,7 +203,8 @@ export default function ConditionReport(props) {
                                             Residual + Remaining
                                         </div>
                                         <div className="smallCardBody">
-                                        <span className="textSize"><CurrencyFormat value={vehicleDetails.residual_amt + vehicleDetails.remaining_pmts} displayType={'text'} thousandSeparator={true} prefix={'$'} />.00</span>
+                                            Pending
+                                        {/* <span className="textSize"><CurrencyFormat value={vehicleDetails.residual_amt + vehicleDetails.remaining_pmts} displayType={'text'} thousandSeparator={true} prefix={'$'} />.00</span> */}
                                         </div>
                                     </CardContent>
                                 </Card>
@@ -214,7 +216,7 @@ export default function ConditionReport(props) {
                                             Market Based
                                         </div>
                                         <div className="smallCardBody">
-                                            $10,500.00
+                                            Pending
                                         </div>
                                     </CardContent>
                                 </Card>
@@ -226,7 +228,8 @@ export default function ConditionReport(props) {
                                             Inspection Grade
                                         </div>
                                         <div className="smallCardBody">
-                                            {condionVehicleDetails.condition_grade}
+                                            Pending
+                                            {/* {condionVehicleDetails.condition_grade} */}
                                         </div>
                                     </CardContent>
                                 </Card>
@@ -238,7 +241,8 @@ export default function ConditionReport(props) {
                                             Odometer
                                         </div>
                                         <div className="smallCardBody">
-                                            <CurrencyFormat value={condionVehicleDetails.inspection_mileage ? condionVehicleDetails.inspection_mileage : ""} displayType={'text'} thousandSeparator={true} suffix={'  miles'} />
+                                            Pending
+                                            {/* <CurrencyFormat value={condionVehicleDetails.inspection_mileage ? condionVehicleDetails.inspection_mileage : ""} displayType={'text'} thousandSeparator={true} suffix={'  miles'} /> */}
                                         </div>
                                     </CardContent>
                                 </Card>

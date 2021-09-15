@@ -115,10 +115,10 @@ export default function ListingPage2(props) {
                     <span className="textBold"> VIN:</span>
                     <a
                       className="vin"
-                      href={`/conditionreport${vehicle.groundingDetails.vin}`}
+                      href={`/conditionreport${vehicle.vin}`}
                     >
                       {" "}
-                      {vehicle.groundingDetails.vin}
+                      {vehicle.vin}
                     </a>
                   </span>
 
@@ -134,7 +134,8 @@ export default function ListingPage2(props) {
                                         </span> */}
                   <span className="textStyle">
                     <span className="textBold"> Purchase Type:</span>{" "}
-                    {vehicle.purchase_type}
+                    {/* {vehicle.purchase_type? vehicle.purchase_type} */}
+                    Pending
                   </span>
                 </List>
               </div>
@@ -148,54 +149,55 @@ export default function ListingPage2(props) {
                   <span className="textStyle">
                     <span className="textBold"> Payoff Price </span>{" "}
                     <span className="margin__space4">
-                      <CurrencyFormat
-                        value={vehicle.groundingDetails.pay_off_amt}
+
+                      {/* <CurrencyFormat
+                        value={vehicle.groundingDetails && vehicle.groundingDetails.pay_off_amt}
                         displayType={"text"}
                         thousandSeparator={true}
                         prefix={"$"}
-                      />
-                      .00
+                      /> */}
+                      Pending
                     </span>
                   </span>
                   <span className="textStyle">
                     <span className="textBold"> Rem.Payments</span>{" "}
                     <span className="margin__space5">
-                      <CurrencyFormat
-                        value={vehicle.groundingDetails.remaining_pmts}
+                      {/* <CurrencyFormat
+                        value={ vehicle.groundingDetails && vehicle.groundingDetails.remaining_pmts}
                         displayType={"text"}
                         thousandSeparator={true}
                         prefix={"$"}
-                      />
-                      .00
+                      /> */}
+                      Pending
                     </span>
                   </span>
                   <span className="textStyle">
                     <span className="textBold"> Admin Fee</span>{" "}
                     <span className="margin__space6">
-                      <CurrencyFormat
+                      {/* <CurrencyFormat
                         value={vehicle.admin_fee}
                         displayType={"text"}
                         thousandSeparator={true}
                         prefix={"$"}
-                      />
-                      .00
+                      /> */}
+                      Pending
                     </span>
                   </span>
                   <div className="purchasedScreenTotal" />
                   <span className="textStyle">
                     <span className="textStyleTotalFee"> Total Price</span>{" "}
                     <span className="totalFeeSum">
-                      <CurrencyFormat
+                      {/* <CurrencyFormat
                         value={
-                          vehicle.groundingDetails.pay_off_amt +
-                          vehicle.groundingDetails.remaining_pmts +
+                         vehicle.groundingDetails && vehicle.groundingDetails.pay_off_amt +
+                          vehicle.groundingDetails && vehicle.groundingDetails.remaining_pmts +
                           vehicle.admin_fee
                         }
                         displayType={"text"}
                         thousandSeparator={true}
                         prefix={"$"}
-                      />
-                      .00
+                      /> */}
+                      Pending
                     </span>
                   </span>
                 </List>
@@ -205,7 +207,8 @@ export default function ListingPage2(props) {
         </div>
       );
     })
-  ) : (
-    <div className="listingPageCard"></div>
-  );
+  ) : (<div className='listingPageCardNoData'>
+  <img src="noDataFound.jpeg" className='nodataImage'/>
+  <span className='nodataText'>No  Vehicles found</span>
+</div>)
 }
