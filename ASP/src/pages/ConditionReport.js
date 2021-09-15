@@ -99,7 +99,7 @@ export default function ConditionReport(props) {
     return (
         <>
             <div className='conditionPageCard'>
-                <Grid item xs={12}>
+                <Grid>
                     <div className='conditionTopBar'>
                         <Grid xs={12} className='conditionTopBarLayout'>
                             <PrintSharp /><span className="conditionTopBarStyles">Print Report</span>
