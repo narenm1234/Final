@@ -217,16 +217,15 @@ export default function ListingPage(props) {
                       </span>
                       <span className="textStyle">
                         <span className="textBold"> Account Type: </span>{" "}
-                        {/* {vehicle.account_type} */}
-                        Pending
+                        {vehicle.account_type}
                       </span>
                     </List>
                   </div>
                 </Grid>
                 <Grid item xs={4}>
                   <div className="Vehicle-Price-Option">
-                    <div className="vehicleMakeModel">
-                      <span>Vehicle Price Option </span>
+                    <div className="vehicleMakeModel1">
+                      <span>Vehicle Price Options </span>
                     </div>
                     <List>
                       <ListItem className="paddingCSS">
