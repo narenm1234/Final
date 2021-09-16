@@ -15,7 +15,7 @@ let getInspectionDamageDetailsUrl;
 let getOEMBuildDetailsUrl;
 let getDealerActionUrl;
 let getTokenSSO;
-let client_id='3MVG9lJB4lV8F4Sgt2q5xweJxaNJkT.Eo7pP8V_v9BuuKeRPjY6GPmF9hylp7_oqSOMocQG1Kha4z125UwV8w';
+let client_id='3MVG9_I_oWkIqLrmNgl8unCGrAPmcPODjDz6DA7QLw7qbd0CKBqVuyUVp_4.c4xZdRowJUxirUcXgiGiPYaQ.';
 let rrm;
 let AMP;
 
@@ -273,7 +273,7 @@ export async function getAuthTokenSSO() {
         "Access-Control-Allow-Origin": "*",
     }
        
-    return await axios.get(`https://tfs-srm--sdeaug21.lightning.force.com/services/oauth2/authorize?client_id=${client_id}&redirect_uri=https://asp-internal-dev.tfs.toyota.com&response_type=code`,requestData);
+    return await axios.get(`https://stratus-stg3.mfindealerservices.com/services/oauth2/authorize?client_id=${client_id}&redirect_uri=https://asp-internal-dev.tfs.toyota.com&response_type=code`,requestData);
 
 }
 export async function getUserInfo(accessToken) {
