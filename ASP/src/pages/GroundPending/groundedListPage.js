@@ -169,7 +169,7 @@ export default function ListingPage(props) {
                       </span>
                     </div>
                     <List>
-                      <span className="textStyle">
+                      {/* <span className="textStyle">
                         <span className="textBold"> Exclusivity Period</span>:{" "}
                         <span className="textStyleWarning">
                           {time} Remaining
@@ -181,7 +181,7 @@ export default function ListingPage(props) {
                           value={progress}
                           color="secondary"
                         />
-                      </span>
+                      </span> */}
 
                       <span className="textStyle">
                         <span className="textBold"> VIN:</span>
@@ -244,7 +244,6 @@ export default function ListingPage(props) {
                               thousandSeparator={true}
                               prefix={"$"}
                             />
-                            Pending
                           </span>
                         </ListItemSecondaryAction>
                       </ListItem>
@@ -260,15 +259,15 @@ export default function ListingPage(props) {
                         </ListItemText>
                         <ListItemSecondaryAction>
                           <span className="textSize">
-                            {/* <CurrencyFormat
+                            <CurrencyFormat
                               value={
                                 vehicle.residual_amt + vehicle.remaining_pmts
                               }
                               displayType={"text"}
                               thousandSeparator={true}
                               prefix={"$"}
-                            /> */}
-                            Pending
+                            />
+                          
                           </span>
                         </ListItemSecondaryAction>
                       </ListItem>
@@ -293,7 +292,7 @@ export default function ListingPage(props) {
                         </ListItemText>
                         <ListItemSecondaryAction>
                           <span className="textSize">
-                            {/* <CurrencyFormat
+                            <CurrencyFormat
                               value={
                                 vehicle.remaining_pmts
                                   ? vehicle.remaining_pmts
@@ -302,8 +301,8 @@ export default function ListingPage(props) {
                               displayType={"text"}
                               thousandSeparator={true}
                               prefix={"$"}
-                            /> */}
-                            Pending
+                            />
+                      
                           </span>
                         </ListItemSecondaryAction>
                       </ListItem>

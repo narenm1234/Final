@@ -8,7 +8,7 @@ import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 const tutorialSteps = [
     {
         imgPath:
-            'car.jpg',
+            'mf.png',
     },
     {
         imgPath:

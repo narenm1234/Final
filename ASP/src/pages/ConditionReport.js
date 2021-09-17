@@ -78,8 +78,8 @@ export default function ConditionReport(props) {
         setInspectionId(apiResponse.data.inspection_id)
     }
 
-    async function getInspectionAccessory(inspectionId) {
-        let apiResponse = await getInspectionAccessoryDetails(inspectionId);
+    async function getInspectionAccessory(vin) {
+        let apiResponse = await getInspectionAccessoryDetails(vin);
         setAccessoryDetails(apiResponse.data);
     }
 
@@ -457,7 +457,7 @@ export default function ConditionReport(props) {
                                             </span>
                                         </ListItemText>
                                         <ListItemSecondaryAction>
-                                            <span className="textSize">9,000 miles</span>
+                                            <span className="textSize"></span>
                                         </ListItemSecondaryAction>
                                     </List>
                                     <List className="paddingCSS">
