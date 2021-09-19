@@ -8,19 +8,19 @@ import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 const tutorialSteps = [
     {
         imgPath:
-            'mf.png',
+            'maz.png',
     },
     {
         imgPath:
-            'car.jpg',
+            'maz.png',
     },
     {
         imgPath:
-            'car.jpg',
+            'maz.png',
     },
     {
         imgPath:
-            'car.jpg',
+            'maz.png',
     },
 ];
 
@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
         display: 'block',
         maxWidth: 400,
         overflow: 'hidden',
-        width: '100%',
+        width: '80%',
     },
 }));
 
