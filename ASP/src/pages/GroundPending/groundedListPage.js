@@ -72,7 +72,7 @@ let resp = [
   },
 ];
 export default function ListingPage(props) {
-  const [vehicleResponse, setVehicleResponse] = useState(resp);
+  const [vehicleResponse, setVehicleResponse] = useState([]);
   const [SSOAuth, setSSOAuth] = useState();
   const [value, setValue] = useState([]);
   const [open, setOpen] = React.useState(false);
