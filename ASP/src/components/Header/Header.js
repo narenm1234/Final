@@ -3,7 +3,7 @@ import Separator from "../Separator";
 import AdminSearchHeader from "../AdminSearchHeader";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
-
+import { Route , withRouter} from 'react-router-dom';
 const Header = (props) => {
   const [showDealer, setShowDealer] = useState(null);
   const toggleShowDealer = (event) => {
@@ -12,7 +12,19 @@ const Header = (props) => {
   const handleClose = () => {
     setShowDealer(null);
   };
-
+  const handleSearch = (SearchText) => {
+    console.log(props)
+    //props.searchdetails(SearchText);
+    openConditionScreen(SearchText,"")
+  }
+  const openConditionScreen = (VINumber, vehicle) => {
+    console.log(props)
+    props.history.push("/conditionreport", {
+      vin: VINumber,
+      vehicleDetails: vehicle,
+      results:true,
+    });
+  };
   return (
     <div className="container">
       <div className="imageHolder">
@@ -21,7 +33,7 @@ const Header = (props) => {
         <div className="auctionSales">Auction Sales Platform </div>
       </div>
       <AdminSearchHeader
-        searchdetails={(SearchText) => props.searchdetails(SearchText)}
+        searchdetails={(SearchText) =>{ handleSearch(SearchText)}}
       />
       <div onClick={toggleShowDealer} className="dealerName">
         Dealer Name
@@ -41,4 +53,4 @@ const Header = (props) => {
   );
 };
 
-export default Header;
+export default withRouter(Header);

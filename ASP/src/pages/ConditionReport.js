@@ -98,6 +98,7 @@ export default function ConditionReport(props) {
 
     return (
         <>
+         
             <div className='conditionPageCard'>
                 <Grid>
                     <div className='conditionTopBar'>
@@ -106,7 +107,13 @@ export default function ConditionReport(props) {
                         </Grid>
                     </div>
                 </Grid>
+                
                 <Grid container spacing={3} className="ConditionCardReportSpace">
+                <Grid item xs={12}>
+                    <div className='conditionResultsText'>
+                    {(!!props.location.state.results) ? (`Results for ${props.location.state.vin}`) : ('') }
+                    </div>
+                </Grid>
                     <Grid item xs={5}>
                         <MyGallery />
                         <Grid container className="ConditionCardBody">
