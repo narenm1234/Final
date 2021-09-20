@@ -699,7 +699,7 @@ export default function MileageDisc(props) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rowsPerPage.map((row) => (
+           {/* {rowsPerPage.map((row) => (
               <TableRow key={row.name} className={classes.tableRow}>
                 <TableCell align="center">
                   <span className="textStyle">
@@ -720,7 +720,7 @@ export default function MileageDisc(props) {
                 <TableCell align="center">{row.ground_mileage}</TableCell>
                 <TableCell align="center">{row.difference}</TableCell>
               </TableRow>
-            ))}
+           ))} */}
           </TableBody>
         </Table>
         <Paginator

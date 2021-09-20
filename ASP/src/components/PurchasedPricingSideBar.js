@@ -89,7 +89,7 @@ export default function PurchasedPricingSideBar(props) {
     groundingRegion: "",
     auctionCode: "",
   });
-  const [value, setValue] = React.useState("female");
+  const [value, setValue] = React.useState("");
 
   const handleChange = (event) => {
     setValue(event.target.value);
@@ -201,7 +201,7 @@ export default function PurchasedPricingSideBar(props) {
           Pass on Vehicle
         </Button>
         <Button
-          disabled={!accountName}
+          disabled={!accountName || !value}
           className="purchaseButton"
           color="secondary"
           onClick={props.onPurchaseVehical}
