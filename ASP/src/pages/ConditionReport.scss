@@ -1,122 +1,136 @@
-.conditionPageCard{
-  width: 70%;
-  display: flex;
-  margin: 5% 15% 10% 5%;
-  position: relative;
-background: #f3f2f2;
+.conditionPageCard {
+  // width: 70%;
+  // display: flex;
+  // margin: 5% 15% 0% 5%;
+  // position: absolute;
+  // background: #f3f2f2;
+  margin-top: 45px;
+}
 
+.conditionPageCardReports {
+  // width: 65%;
+  // margin: 5% 0% 0% 20%;
+  // position: absolute;
+  // background: #f3f2f2;
 }
-.conditionPageCardReports{
-  width: 70%;
-  margin: 5% 0% 0% 20%;
-  position: absolute;
-  background: #f3f2f2;
-}
+
 .reportTitle {
-    width: 350px;
-    height: 30px;
-    font-family: ToyotaType;
-    font-size: 17px;
-    font-weight: 600;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.5;
-    letter-spacing: normal;
-    color: #080707;
-  }
-  .damageTitle {
-    width: 100%;
-    height: 30px;
-    font-family: ToyotaType;
-    font-size: 14px;
-    font-weight: 600;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.5;
-    letter-spacing: normal;
-    color: #080707;
-    text-align: center;
-    display: block;
-    }
-  .ConditionReportSection {
-    display: inline-flex;
-    margin: 20px!important;
-  }
-  .ConditionCardBody{
-      margin: 8px 0px 15px;
-      padding: 16px;
-      border-radius: 4px;
-      box-shadow: -1px 0 3px 0 rgba(0, 0, 0, 0.25);
-      background-color: #ffffff;
-  }
-  .ConditionReportInspection {
-    width: 138px;
-    height: 33px;
-    padding: 4px 8px;
-    border-radius: 100px;
-    background-color: #04844b;
-    margin-left: 2rem;
-  }
-  .BadgeValue {
-    width: 122px;
-    height: 15px;
-    font-size: 12px;
-    font-weight: bold;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    color: #ffffff;
-  }
-  .inspectionStatusWarning {
-    width: 138px;
-    height: 33px;
-    padding: 2px 8px;
-    border-radius: 100px;
-    background-color: #c00;
-    margin-left: 1rem;
-  }
-  .ConditionCard {
-    width: 123%;
-    height: 70px;
-    border-radius: 4px;
-    box-shadow: -1px 0 3px 0 rgba(0, 0, 0, 0.25);
-    background-color: #ffffff;
-  }
-  .ConditionCardDamage {
-    width: 90%;
-    margin-top: 12px;
-    height: 70px;
-    border-radius: 4px;
-    box-shadow: -1px 0 3px 0 rgba(0, 0, 0, 0.25);
-    background-color: #ffffff;
-  }
-  .ConditionCardMargin{
-    margin-right: 25px !important;
-  }
-  .detailedReport {
-    height: 32px;
-    margin: 10% 15%!important;
-    padding: 5px 50px;
-    font-size: 0.68rem!important;
-    font-weight: bold;
-    border-radius: 4px;
-    text-align: center;
-    border: solid 1px #0070d2;
-    background-color: #ffffff;
-  }
-  .disclaimer {
-    height: 50px;
-    font-size: 12px;
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.6;
-    letter-spacing: normal;
-    text-align: center;
-    color: #e02020;
-  }
-  .smallCardTitle{
+  width: 300px;
+  height: 30px;
+  font-family: ToyotaType;
+  font-size: 20px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: #080707;
+}
+
+.damageTitle {
+  width: 100%;
+  height: 30px;
+  font-family: ToyotaType;
+  font-size: 14px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: #080707;
+  text-align: center;
+  display: block;
+}
+
+.ConditionReportSection {
+  display: inline-flex;
+  margin: 20px !important;
+}
+
+.ConditionCardBody {
+  margin: 8px 0px 15px;
+  padding: 16px;
+  border-radius: 4px;
+  box-shadow: -1px 0 3px 0 rgba(0, 0, 0, 0.25);
+  background-color: #ffffff;
+}
+
+.ConditionReportInspection {
+  width: 138px;
+  height: 33px;
+  padding: 4px 8px;
+  border-radius: 100px;
+  background-color: #04844b;
+  margin-left: 2rem;
+}
+
+.BadgeValue {
+  width: 122px;
+  height: 15px;
+  font-size: 12px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #ffffff;
+}
+
+.inspectionStatusWarning {
+  width: 138px;
+  height: 33px;
+  padding: 4px 8px;
+  border-radius: 100px;
+  background-color: #c00;
+  margin-left: 2rem;
+}
+
+.ConditionCard {
+  // width: 123%;
+  min-height: 70px;
+  border-radius: 4px;
+  box-shadow: -1px 0 3px 0 rgba(0, 0, 0, 0.25);
+  background-color: #ffffff;
+}
+
+.ConditionCardDamage {
+  width: 90%;
+  margin-top: 12px;
+  height: 70px;
+  border-radius: 4px;
+  box-shadow: -1px 0 3px 0 rgba(0, 0, 0, 0.25);
+  background-color: #ffffff;
+}
+
+// .ConditionCardMargin {
+//   margin-right: 25px !important;
+// }
+
+.detailedReport {
+  height: 32px;
+  margin: 10% 30% !important;
+  padding: 5px 50px;
+  font-size: 0.68rem !important;
+  font-weight: bold;
+  border-radius: 4px;
+  text-align: center;
+  border: solid 1px #0070d2;
+  background-color: #ffffff;
+}
+
+.disclaimer {
+  height: 50px;
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.6;
+  letter-spacing: normal;
+  text-align: center;
+  color: #e02020;
+}
+
+.smallCardTitle {
   height: 14px;
   margin: 0 0 10px;
   font-size: 12px;
@@ -127,209 +141,235 @@ background: #f3f2f2;
   letter-spacing: normal;
   text-align: center;
   color: #3e3e3c;
-  }
-  .smallCardTitle1{
-    height: 14px;
-    margin: 0 0 10px;
-    font-size: 11.6px;
-    font-weight: bold;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.17;
-    letter-spacing: normal;
-    text-align: center;
-    color: #3e3e3c;
-    }
-  .smallCardBody {
-    height: 24px;
-    font-size: 16px;
-    font-weight: 600;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.5;
-    letter-spacing: normal;
-    text-align: center;
-    color: #080707;
-  }
-  .inputFieldTextArea {
-    width: 100%;
-    height: 180px!important;
-    margin: 2px 0 0;
-    padding: 8px 4px 4px 12px;
-    border-radius: 4px;
-    border: solid 1px #dddbda;
-    background-color: #ffffff;
-  }
-  .inputFieldTextAreaDamage {
-    width: 100%;
-    height: 80px!important;
-    margin: 2px 0 0;
-    padding: 8px 4px 4px 12px;
-    border-radius: 4px;
-    border: solid 1px #dddbda;
-    background-color: #ffffff;
-  }
-  .LabelTextTextArea {
-    width: 94px;
-    height: 18px;
-    margin: 0 6px 0 0;
-    font-size: 12px;
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.5;
-    letter-spacing: normal;
-    color: #3e3e3c;
-  }
-  .LabelTextTextAreaDamage {
-    height: 18px;
-    margin: 0 6px 0 0;
-    font-size: 12px;
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.5;
-    letter-spacing: normal;
-    color: #3e3e3c;
-  }
-  .vehicleSectionCR{
-    width: 83%;
-  margin: 16px 24px 40px 10px;
-  padding: 16px 9px 32px 24px;
+}
+
+.smallCardTitle1 {
+  height: 14px;
+  margin: 0 0 10px;
+  font-size: 11.6px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.17;
+  letter-spacing: normal;
+  text-align: center;
+  color: #3e3e3c;
+}
+
+.smallCardBody {
+  height: 24px;
+  font-size: 16px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: center;
+  color: #080707;
+}
+
+.inputFieldTextArea {
+  width: 100%;
+  height: 180px !important;
+  margin: 2px 0 0;
+  padding: 8px 4px 4px 12px;
+  border-radius: 4px;
+  border: solid 1px #dddbda;
+  background-color: #ffffff;
+}
+
+.inputFieldTextAreaDamage {
+  width: 100%;
+  height: 80px !important;
+  margin: 2px 0 0;
+  padding: 8px 4px 4px 12px;
+  border-radius: 4px;
+  border: solid 1px #dddbda;
+  background-color: #ffffff;
+}
+
+.LabelTextTextArea {
+  width: 94px;
+  height: 18px;
+  margin: 0 6px 0 0;
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: #3e3e3c;
+}
+
+.LabelTextTextAreaDamage {
+  height: 18px;
+  margin: 0 6px 0 0;
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: #3e3e3c;
+}
+
+.vehicleSectionCR {
+  // width: 83%;
+  // margin: 16px 24px 40px 10px;
+  // padding: 16px 9px 32px 24px;
   border-radius: 4px;
   background-color: #ffffff;
-  }
-  .table{
-    min-width: 250,
-  }
-  .MuiTableCell-root{
-    border-bottom: none!important;
-  }
-  .MuiTableHead-root{
-    background-color: #fafaf9;
-  }
-  .MuiTableContainer-root{
-    box-shadow: none!important;
-  }
-  .disclaimerVRS {
-    margin: 7.5px 0 0;
-    font-size: 12px;
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.6;
-    letter-spacing: normal;
-    text-align: center;
-    color: #e02020;
-  }
-  .warningColor{
-    color: 
+}
+
+.table {
+  min-width: 250,
+}
+
+.MuiTableCell-root {
+  border-bottom: none !important;
+}
+
+.MuiTableHead-root {
+  background-color: #fafaf9;
+}
+
+.MuiTableContainer-root {
+  box-shadow: none !important;
+}
+
+.disclaimerVRS {
+  margin: 7.5px 0 0;
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.6;
+  letter-spacing: normal;
+  text-align: center;
+  color: #e02020;
+}
+
+.warningColor {
+  color:
     #0070d2;
-  }
-  .warningColorTable{
-    color: 
-    #0070d2!important;
-    font-size: 14px!important;
-  font-weight: 600!important;
-  }
-  .viewReportBody{
-    width: 100%;
-    margin-left: 20%;
-  }
-  .viewReportCards{
-    box-shadow: none!important;
-    padding: 10px;
-    width: 150px;
-  }
-  .viewReportHeader{
-    text-align: center;
-    font-size: 18px;
-  }
-  .viewReportCenter{
-    text-align: center;
-    font-size: 20px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    height: 35px;
+}
+
+.warningColorTable {
+  color:
+    #0070d2 !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+}
+
+.viewReportBody {
+  width: 100%;
+  margin-left: 20%;
+}
+
+.viewReportCards {
+  box-shadow: none !important;
+  padding: 10px;
+  width: 150px;
+}
+
+.viewReportHeader {
+  text-align: center;
+  font-size: 18px;
+}
+
+.viewReportCenter {
+  text-align: center;
+  font-size: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  height: 35px;
   font-weight: normal;
   font-stretch: normal;
   font-style: normal;
   line-height: 1.5;
   letter-spacing: normal;
   color: #080707;
-  }
-  .image-gallery-svg{
-    height: 60px!important;
-  }
-  .ConditionCardReportSpace{
-    margin-top: 4%!important ;
-  }
-  .conditionTopBar{
-    width: 80%;
-    position: fixed;
-    height: 40px;
-    top: 52px;
-    background-color: #ffffff;
-  }
-  .conditionTopBarStyles{
-      width: 109px;
-      height: 20px;
-      margin: 3px 0 3px 8px;
-      font-size: 13px;
-      font-weight: normal;
-      font-stretch: normal;
-      font-style: normal;
-      line-height: 1.54;
-      letter-spacing: normal;
-      color: #006dcc;
-      position: relative;
-      
-  }
-  .conditionTopBarLayout{
-    margin-left: 4%;
-    float: right;
-    padding: 8px;
-  }
-  .reportFooter{
+}
+
+.image-gallery-svg {
+  height: 60px !important;
+}
+
+
+.conditionTopBar {
+  position: fixed;
+  height: 40px;
+  top: 50px;
+  background-color: #ffffff;
+  border-top: 2px solid #c5c5c5;
+  width: 85%;
+  z-index: 8;
+}
+
+.conditionTopBarStyles {
+  width: 109px;
+  height: 20px;
+  margin: 3px 0 3px 8px;
+  font-size: 13px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.54;
+  letter-spacing: normal;
+  color: #006dcc;
+  position: relative;
+
+}
+
+
+.reportFooter {
   margin: 32px 0 0;
   padding: 12px 16px 12px 804px;
   box-shadow: 0 -2px 0 0 #dddbda;
   background-color: #f3f2f2;
-  }
-  .closeButton {
-    width: 61px;
-    height: 32px;
-    padding: 1px 13.5px;
-    border-radius: 4px;
-    color: #ffffff!important;
-    background-color: #c23934!important;
-  }
-  .closePassBtn {
-    width: 80px;
-    height: 32px;
-    padding: 1px 13.5px;
-    border-radius: 4px;
-    color: #ffffff!important;
-    background-color: 
-    #0070d2!important;
-  }
-  .galleryView{
-    float:left;
-  }
-  .hrLine {
-    height: 1px;
-    margin: 8px 16px 14px;
-    background-color: #dddbda;
-  }
-  .alignleft{
-    float: left;
-  }
-  .experiorSpacing{
-    padding: 30px;
-  }
-  .textStyle1{
-    color: white;
-  }
-  .errorColor{
-   color:#c23934;
-  }
+}
+
+.closeButton {
+  width: 61px;
+  height: 32px;
+  padding: 1px 13.5px;
+  border-radius: 4px;
+  color: #ffffff !important;
+  background-color: #c23934 !important;
+}
+
+.closePassBtn {
+  width: 80px;
+  height: 32px;
+  padding: 1px 13.5px;
+  border-radius: 4px;
+  color: #ffffff !important;
+  background-color:
+    #0070d2 !important;
+}
+
+.galleryView {
+  float: left;
+}
+
+.hrLine {
+  height: 1px;
+  margin: 8px 16px 14px;
+  background-color: #dddbda;
+}
+
+.alignleft {
+  float: left;
+}
+
+.experiorSpacing {
+  padding: 30px;
+}
+
+.textStyle1 {
+  color: white;
+}
+
+.errorColor {
+  color: #c23934;
+}
