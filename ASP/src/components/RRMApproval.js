@@ -1174,7 +1174,7 @@ export default function RRMApproval(props) {
             <TableBody>
               {rowsPerPage.map((row, index) => (
                 <TableRow key={index} className={classes.tableRow}>
-                  {/* <TableCell align="center">
+                  <TableCell align="center">
                     <span className="textStyle">
                       <a
                         className="vin"
@@ -1184,8 +1184,8 @@ export default function RRMApproval(props) {
                         {row.VIN}
                       </a>
                     </span>
-                  </TableCell> */}
-                  {/* <TableCell align="center">{row.Year}</TableCell>
+                  </TableCell>
+                  <TableCell align="center">{row.Year}</TableCell>
                   <TableCell align="center">{row.Make}</TableCell>
                   <TableCell align="center">{row.Model_Trim}</TableCell>
                   <TableCell align="center">{row.auction}</TableCell>
@@ -1193,8 +1193,8 @@ export default function RRMApproval(props) {
                   <TableCell align="center">{row.mmb}</TableCell>
                   <TableCell align="center">{row.percent}</TableCell>
                   <TableCell align="center">{row.priced_rate}</TableCell>
-                  <TableCell align="center">{row.priced_by}</TableCell> */}
-                  {/* <TableCell align="center">
+                  <TableCell align="center">{row.priced_by}</TableCell>
+                  <TableCell align="center">
                     {row.approve}
                    <FormControlLabel
                       control={
@@ -1206,7 +1206,7 @@ export default function RRMApproval(props) {
                       }
                       label=""
                     />
-                  </TableCell> */}
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>
