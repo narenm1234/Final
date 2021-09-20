@@ -102,15 +102,23 @@ export default function ConditionReport(props) {
         <>
          
             <div className='conditionPageCard'>
-                <Grid>
-                    <div className='conditionTopBar'>
-                        <Grid xs={12} className='conditionTopBarLayout'>
+                <Grid container spacing={1} >
+                <div className='conditionTopBar'>
+                    <Grid item xs={12} className='conditionTopBarLayout'>
+                       
                             <PrintSharp /><span className="conditionTopBarStyles">Print Report</span>
-                        </Grid>
+                       
+                    </Grid>
                     </div>
                 </Grid>
                 
+                
                 <Grid container spacing={3} className="ConditionCardReportSpace">
+                {/* <div className='conditionTopBar'>
+                        <Grid xs={8} className='conditionTopBarLayout'>
+                            <PrintSharp /><span className="conditionTopBarStyles">Print Report</span>
+                        </Grid>
+                </div> */}
                 <Grid item xs={12}>
                     <div className='conditionResultsText'>
                     {(!!props.location.state.results) ? (`Results for ${props.location.state.vin}`) : ('') }

@@ -277,7 +277,6 @@
   background-color: #ffffff;
 }
 .Vehicle-Price-Option {
-  width           : 90%;
   margin-top      : 8px;
   border-radius   : 4px;
   background-color: #ffffff;
@@ -354,7 +353,7 @@ div.vehicleMakeModel1{
   background-color: #fff !important;
 }
 .PassonVehicleStyle {
-  width: 151px;
+  width: 50%;
   height: 32px;
   margin: 2px 9px 0 0!important;
   padding: 1px 28px 1px 29px;
@@ -375,6 +374,7 @@ div.vehicleMakeModel1{
   max-width: 400px;
   overflow: hidden;
   width: 100%;
+  padding: 0 15px;
 }
 .NavigatorButtons{
   margin-top: 5px;
@@ -393,6 +393,8 @@ div.vehicleMakeModel1{
   background-color: #d8d8d8!important;
 }
 .button{
+  width: 46%;
+  height: 32px;
 text-transform: initial !important;
 }
 .purchasedScreenTotal {

@@ -72,7 +72,7 @@ let resp = [
   },
 ];
 export default function ListingPage(props) {
-  const [vehicleResponse, setVehicleResponse] = useState([]);
+  const [vehicleResponse, setVehicleResponse] = useState(resp);
   const [SSOAuth, setSSOAuth] = useState();
   const [value, setValue] = useState([]);
   const [open, setOpen] = React.useState(false);
@@ -214,6 +214,7 @@ export default function ListingPage(props) {
                       <span className="textStyle">
                         <span className="textBold"> Inspection Mileage:</span>{" "}
                         Pending
+                        {vehicle.account_type}
                       </span>
                       <span className="textStyle">
                         <span className="textBold"> Account Type: </span>{" "}
