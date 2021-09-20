@@ -30,6 +30,7 @@ import {
 } from "../service/api";
 import ManualPricingSideBar from "../components/ManualPricingSideBar";
 import { Box } from "@material-ui/core";
+import TransactionModal from "./TransactionModal";
 
 export default function ConditionReportRequests(props) {
   let listOfItem = [
@@ -61,6 +62,8 @@ export default function ConditionReportRequests(props) {
   const [value, setValue] = useState([]);
   const [DamageDetails, setDamageDetails] = useState([]);
   const [OEMBuildDetailsData, setOEMBuildDetailsData] = useState([]);
+
+  // const [openTransactionPopup, setOpenTransactionPopup] = useState(true);
 
   useEffect(() => {
     getOEMBuildDetails();
@@ -599,7 +602,18 @@ export default function ConditionReportRequests(props) {
           close={handleClose}
         />
       </Box>
-      <Box></Box>
+
+      {/* <Box>
+        <TransactionModal
+        type={'confirm'}
+          open={openTransactionPopup}
+          onClose={() => {
+            setOpenTransactionPopup(false);
+          }}
+        ></TransactionModal>
+      </Box> */}
+
+
 
       {/* <div className='conditionPageCardReports'>
                 <Grid item xs={12}>

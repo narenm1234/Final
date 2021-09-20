@@ -15,7 +15,7 @@ let getInspectionDamageDetailsUrl;
 let getOEMBuildDetailsUrl;
 let getDealerActionUrl;
 let getTokenSSO;
-let client_id='3MVG9lJB4lV8F4Sgt2q5xweJxaNJkT.Eo7pP8V_v9BuuKeRPjY6GPmF9hylp7_oqSOMocQG1Kha4z125UwV8w';
+let client_id='3MVG9_I_oWkIqLrmNgl8unCGrAPmcPODjDz6DA7QLw7qbd0CKBqVuyUVp_4.c4xZdRowJUxirUcXgiGiPYaQ.';
 let rrm;
 let AMP;
 
@@ -43,7 +43,7 @@ else if (hostname.includes('local')) {
     tokenUrl = 'http://internal-a3e2a8608d24e4c5f8b42aed9c3587d7-2044184104.us-east-1.elb.amazonaws.com/tokenData'
     passedVehicleUrl = 'https://aspservices-internal-dev.tfs.toyota.com/asp-services/getPassedVehicles'
     purchasedVehicleUrl = 'https://aspservices-internal-dev.tfs.toyota.com/asp-services/getPurchasedVehicles'
-    inspectionAccessoryDetailsUrl = 'https://aspservices-internal-dev.tfs.toyota.com/asp-services/getAccessoryDetails'
+    inspectionAccessoryDetailsUrl = 'https://aspservices-internal-dev.tfs.toyota.com/asp-services/getInspectionAccessoryDetails'
     inspectionWheelTiresDetailsUrl = 'https://aspservices-internal-dev.tfs.toyota.com/asp-services/getInspectionWheelTiresDetails'
     inspectionVehicleDetails = 'https://aspservices-internal-dev.tfs.toyota.com/asp-services/getVehicleInspectionDetails'
     getInspectionDamageDetailsUrl = 'https://aspservices-internal-dev.tfs.toyota.com/asp-services/getInspectionDamageDetails'
@@ -206,10 +206,10 @@ export async function getInspectionWheelTiresDetails(inspectionId) {
     //     inspectionId
     // };
 
-    return await axios.post(inspectionWheelTiresDetailsUrl, 14901584, options);
+    return await axios.post(inspectionWheelTiresDetailsUrl, inspectionId, options);
 
 }
-export async function getInspectionAccessoryDetails(inspectionId) {
+export async function getInspectionAccessoryDetails(vin) {
     const options = {
         headers: {
             "Content-Type": "application/json"
@@ -218,7 +218,8 @@ export async function getInspectionAccessoryDetails(inspectionId) {
     };
 
 
-    return await axios.post(`${inspectionAccessoryDetailsUrl}?vin=JM3KFBDM0K1698372`, options);
+    return await axios.post(`${inspectionAccessoryDetailsUrl}?vin=${vin}`, options);
+    
 
 }
 
@@ -238,7 +239,7 @@ export async function getInspectionDamageDetailsApi(inspectionId, vin) {
     };
 
 
-    return await axios.post(`${getInspectionDamageDetailsUrl}?inpsectionId=14901584&vin=JM3KFBDM0K1698372`);
+    return await axios.post(`${getInspectionDamageDetailsUrl}?inpsectionId=${inspectionId}&vin=${vin}`);
 }
 
 
@@ -273,25 +274,25 @@ export async function getAuthTokenSSO() {
         "Access-Control-Allow-Origin": "*",
     }
        
-    return await axios.get(`https://tfs-srm--sdeaug21.lightning.force.com/services/oauth2/authorize?client_id=${client_id}&redirect_uri=https://asp-internal-dev.tfs.toyota.com&response_type=code`,requestData);
+    return await axios.get(`https://stratus-stg3.mfindealerservices.com/services/oauth2/authorize?client_id=${client_id}&redirect_uri=https://asp-dev.mfindealerservices.com&response_type=code&scope=refresh_token`,requestData);
 
 }
 export async function getUserInfo(accessToken) {
        
-    return await axios.post(`https://tfs-srm--sdeaug21.my.salesforce.com/services/oauth2/userinfo?access_token=${accessToken}`);
+    return await axios.post(`https://stratus-stg3.mfindealerservices.com/services/oauth2/userinfo?access_token=${accessToken}`);
 
 }
 export async function getAccessTokenEndpoint(code) {
     const requestData = {
         "code": code,
         "grant_type": "authorization_code",
-        "client_id": "3MVG9lJB4lV8F4Sgt2q5xweJxaNJkT.Eo7pP8V_v9BuuKeRPjY6GPmF9hylp7_oqSOMocQG1Kha4z125UwV8w",
-        "client_secret": "8055936591B22A1E7A46227D71CB1E7D2CCA855F7935F24695F96D7F8587E7C5",
+        "client_id": "3MVG9_I_oWkIqLrmNgl8unCGrAPmcPODjDz6DA7QLw7qbd0CKBqVuyUVp_4.c4xZdRowJUxirUcXgiGiPYaQ.",
+        "client_secret": "A8C495709B3F0BD5972D67EAF464949838E2F35EB623E514F75487A18904D70A",
         "redirect_uri":"https://asp-internal-dev.tfs.toyota.com",
         "format":"json",
     }
        
-    return await axios.post(`https://tfs-srm--sdeaug21.my.salesforce.com/services/oauth2/token`,requestData);
+    return await axios.post(`https://stratus-stg3.mfindealerservices.com/services/oauth2/token`,requestData);
 
 }
 export async function awaitManualPricing() {

@@ -6,7 +6,7 @@ import LinearProgress from "@material-ui/core/LinearProgress";
 import SwipeableTextMobileStepper from "./Carousel";
 import moment from "moment";
 import CurrencyFormat from "react-currency-format";
-import { getPurchasedList } from "../../service/api";
+import { getAccessTokenEndpoint, getPurchasedList } from "../../service/api";
 let resp = [
   {
     account_type: "LEASE",
@@ -72,10 +72,12 @@ let resp = [
     vin: "JM3KFABM2L0748452",
   },
 ];
+
 export default function ListingPage2(props) {
   const [vehicleResponse, setVehicleResponse] = useState([]);
   //const [vehicleResponse, setVehicleResponse] = useState(resp)
   const [value, setValue] = useState([]);
+  
 
   useEffect(() => {
     getVehicleDetails();
@@ -86,7 +88,22 @@ export default function ListingPage2(props) {
     console.log(vehicleResponse);
     console.log(apiResponse.data.data);
   }
-
+  let data = getParameterByName("code");
+function getParameterByName(name, url = window.location.href) {
+  name = name.replace(/[\[\]]/g, '\\$&');
+  var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+      results = regex.exec(url);
+  if (!results) return null;
+  if (!results[2]) return '';
+  return decodeURIComponent(results[2].replace(/\+/g, ' '));
+}
+useEffect(() => {
+  getToken();
+}, [value]);
+async function getToken() {
+  let apiResponse = await getAccessTokenEndpoint(data);
+  console.log("--->",apiResponse)
+}
   return vehicleResponse.length > 0 ? (
     vehicleResponse.map((vehicle, index) => {
       return (
@@ -126,16 +143,23 @@ export default function ListingPage2(props) {
                     <span className="textBold"> Purchase Date:</span>{" "}
                     {moment(vehicle.purchase_date).format("MM/DD/YYYY")}
                   </span>
-                  {/* <span className="textStyle">
-                                        <span className="textBold"> Grounding Mileage:</span> {vehicle.odometer_reading} miles
-                                        </span> */}
-                  {/* <span className="textStyle">
-                                        <span className="textBold"> Inspection Mileage:</span> 000,000 miles
-                                        </span> */}
+                  <span className="textStyle">
+                                        <span className="textBold"> Grounding Mileage:</span>  <CurrencyFormat
+                        value={
+                        vehicle.odometer_reading
+                        }
+                        displayType={"text"}
+                        thousandSeparator={true}
+                  
+                      /> miles
+                                        </span>
+                  <span className="textStyle">
+                                        <span className="textBold"> Inspection Mileage:</span> Pending
+                                        </span>
                   <span className="textStyle">
                     <span className="textBold"> Purchase Type:</span>{" "}
-                    {/* {vehicle.purchase_type? vehicle.purchase_type} */}
-                    Pending
+                    {vehicle.purchase_type? vehicle.purchase_type:""}
+                  
                   </span>
                 </List>
               </div>
@@ -150,44 +174,44 @@ export default function ListingPage2(props) {
                     <span className="textBold"> Payoff Price </span>{" "}
                     <span className="margin__space4">
 
-                      {/* <CurrencyFormat
+                      <CurrencyFormat
                         value={vehicle.groundingDetails && vehicle.groundingDetails.pay_off_amt}
                         displayType={"text"}
                         thousandSeparator={true}
                         prefix={"$"}
-                      /> */}
-                      Pending
+                      />
+                
                     </span>
                   </span>
                   <span className="textStyle">
                     <span className="textBold"> Rem.Payments</span>{" "}
                     <span className="margin__space5">
-                      {/* <CurrencyFormat
+                      <CurrencyFormat
                         value={ vehicle.groundingDetails && vehicle.groundingDetails.remaining_pmts}
                         displayType={"text"}
                         thousandSeparator={true}
                         prefix={"$"}
-                      /> */}
-                      Pending
+                      />
+              
                     </span>
                   </span>
                   <span className="textStyle">
                     <span className="textBold"> Admin Fee</span>{" "}
                     <span className="margin__space6">
-                      {/* <CurrencyFormat
+                      <CurrencyFormat
                         value={vehicle.admin_fee}
                         displayType={"text"}
                         thousandSeparator={true}
                         prefix={"$"}
-                      /> */}
-                      Pending
+                      />
+                  
                     </span>
                   </span>
                   <div className="purchasedScreenTotal" />
                   <span className="textStyle">
                     <span className="textStyleTotalFee"> Total Price</span>{" "}
                     <span className="totalFeeSum">
-                      {/* <CurrencyFormat
+                      <CurrencyFormat
                         value={
                          vehicle.groundingDetails && vehicle.groundingDetails.pay_off_amt +
                           vehicle.groundingDetails && vehicle.groundingDetails.remaining_pmts +
@@ -196,8 +220,7 @@ export default function ListingPage2(props) {
                         displayType={"text"}
                         thousandSeparator={true}
                         prefix={"$"}
-                      /> */}
-                      Pending
+                      />
                     </span>
                   </span>
                 </List>
