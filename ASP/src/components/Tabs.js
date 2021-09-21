@@ -52,8 +52,6 @@ export default function VehicleSearchTabs(props) {
     const classes = useStyles();
     const [value, setValue] = React.useState(0);
 
-    console.log("aaaa",props)
-
     const{inspectiondata}=props;
 
     const handleChange = (event, newValue) => {
@@ -62,7 +60,7 @@ export default function VehicleSearchTabs(props) {
     return (
         <div>
             <AppBar position="fixed" className='topBarAdmin'>
-                <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
+                <Tabs value={value} onChange={handleChange} aria-label="simple tabs example" style={{marginLeft:"35%"}}>
                     <Tab label="Vehicle Summary" {...a11yProps(0)} />
                     <Tab label="Status History" {...a11yProps(1)} />
                     <Tab label="Update Mileage/price" {...a11yProps(2)} />
