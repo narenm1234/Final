@@ -5,8 +5,9 @@ import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import { Box, Button } from "@material-ui/core";
 
-import Checkmark from "../assets/images/tick.png";
-import Crossmark from "../assets/images/cancel.png";
+import confirmmark from "../assets/images/confirm.svg";
+import Checkmark from "../assets/images/success.svg";
+import Crossmark from "../assets/images/failure.svg";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -62,13 +63,13 @@ function TransactionModal(props) {
                 textAlign={"center"}
               >
                 {props.type === "confirm" ? (
-                  <img src={Checkmark} width="50px" />
+                  <img src={confirmmark} width="50px" />
                 ) : null}
                 {props.type === "success" ? (
                   <img src={Checkmark} width="50px" />
                 ) : null}
                 {props.type === "failed" ? (
-                  <img src={Checkmark} width="50px" />
+                  <img src={Crossmark} width="50px" />
                 ) : null}
               </Box>
               <Box width={330} py={1} px={2}>
