@@ -19,12 +19,15 @@ function App() {
   return (
     <>
       <div>
-        <Header></Header>
+       
         <Router>
+        <Header></Header>
           <div>
             <Sidebar>
               <Switch>
-                <Route path='/home' exact component={Home} />
+                <Route path='/home' exact render={
+                  (props) => (<Home {...props} />
+                  )}/>
                 <Route path='/adminSearch' exact component={AdminHome} />
                 <Route path='/checkinvehicle' exact component={VINSearch} />
                 <Route path='/grounded' exact exact render={

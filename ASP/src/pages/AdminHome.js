@@ -6,7 +6,7 @@ import NotesSection from '../components/NotesSection';
 import {getInspectionVehicleDetails} from '../service/api';
 
 
-const AdminHome = () => {
+const AdminHome = (props) => {
   const [searchText, setSearchText] = React.useState("");
   const [isSubmit,setisSubmit] = useState(false);
   const [inspectiondata,setinspectiondata]=useState([])
@@ -30,8 +30,14 @@ const AdminHome = () => {
   const handleSearch = (text) => {
     console.log("home",text)
     setSearchText(text)
+    openConditionScreen(text,"")
   }
-
+  const openConditionScreen = (VINumber, vehicle) => {
+    props.history.push("/conditionreport", {
+      vin: VINumber,
+      vehicleDetails: vehicle,
+    });
+  };
   return (
     (searchText.length==15) ? (<Grid container><Grid xs={10}><VehicleSearchTabs inspectiondata={inspectiondata} /></Grid><Grid xs={2}><NotesSection /></Grid></Grid>) : (<AdminVehicleSearch fromchildhandleSubmitbtn={handleSubmitbtn} searchdetails={(text) => handleSearch(text)} />)
   );

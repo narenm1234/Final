@@ -36,10 +36,12 @@ export default function AdminSearchHeader(props) {
     const [searchtext, setSearchtext] = React.useState("");
 
     const handleSearchText = (value) => {
+        console.log(props)
+        props.searchdetails(value);
         setSearchtext(value)
-        //props.searchdetails(searchtext)
+        
     }
-
+    
     return (
         <Paper component="form" className={classes.root}>
             <IconButton type="submit" className={classes.iconButton} aria-label="search">
@@ -49,7 +51,7 @@ export default function AdminSearchHeader(props) {
                 className={classes.input}
                 placeholder="Global Search by VIN"
                 inputProps={{ 'aria-label': 'search vehicle by VIN' }}
-                onChange={(evt) => handleSearchText(evt.target.value)}
+                onChange={(evt) => props.searchdetails(evt.target.value)}
             />
         </Paper>
     );

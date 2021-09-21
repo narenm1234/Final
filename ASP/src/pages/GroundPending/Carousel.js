@@ -28,6 +28,10 @@ const useStyles = makeStyles((theme) => ({
     root: {
         maxWidth: 400,
         flexGrow: 1,
+        border: "solid 1px #dddbda",
+        margin: "20px",
+        borderRadius: "4px",
+        boxShadow: "0 2px 2px 0 rgba(0, 0, 0, 0.1)",
     },
     header: {
         display: 'flex',
