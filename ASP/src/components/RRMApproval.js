@@ -1172,7 +1172,7 @@ export default function RRMApproval(props) {
               </TableRow>
             </TableHead>
             <TableBody>
-              {rowsPerPage.map((row, index) => (
+             {/* {rowsPerPage.map((row, index) => (
                 <TableRow key={index} className={classes.tableRow}>
                   <TableCell align="center">
                     <span className="textStyle">
@@ -1208,7 +1208,7 @@ export default function RRMApproval(props) {
                     />
                   </TableCell>
                 </TableRow>
-              ))}
+                    ))} */}
             </TableBody>
           </Table>
         </TableContainer>

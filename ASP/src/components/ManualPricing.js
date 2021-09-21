@@ -892,9 +892,9 @@ export default function ManualPricing(props) {
               </TableRow>
             </TableHead>
             <TableBody>
-              {rowsPerPage.map((row, index) => (
+            {/*  {rowsPerPage.map((row, index) => (
                 <TableRow key={index} className={classes.tableRow}>
-                  {/* <TableCell align="center">
+                  <TableCell align="center">
                     <span className="textStyle">
                       <a
                         className="vin"
@@ -911,9 +911,9 @@ export default function ManualPricing(props) {
                   <TableCell align="center">{row.Grounding_Region}</TableCell>
                   <TableCell align="center">{row.Inspection_Date}</TableCell>
                   <TableCell align="center">{row.Inspection_Status}</TableCell>
-                  <TableCell align="center">{row.Action_Code}</TableCell> */}
+                  <TableCell align="center">{row.Action_Code}</TableCell>
                 </TableRow>
-              ))}
+            ))} */}
             </TableBody>
           </Table>
         </TableContainer>
