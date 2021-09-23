@@ -288,7 +288,7 @@ export async function getAccessTokenEndpoint(code) {
         "grant_type": "authorization_code",
         "client_id": "3MVG9_I_oWkIqLrmNgl8unCGrAPmcPODjDz6DA7QLw7qbd0CKBqVuyUVp_4.c4xZdRowJUxirUcXgiGiPYaQ.",
         "client_secret": "A8C495709B3F0BD5972D67EAF464949838E2F35EB623E514F75487A18904D70A",
-        "redirect_uri":"https://asp-internal-dev.tfs.toyota.com",
+        "redirect_uri":"https://asp-dev.mfindealerservices.com",
         "format":"json",
     }
        
