@@ -1,4 +1,4 @@
-import React, { useState ,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -11,7 +11,7 @@ import SwipableFilter from "./SwipableFilter";
 import { TableSortLabel } from "@material-ui/core";
 import Paginator from "./Pagination";
 import SortIcon from "../assets/WebFont/sort.svg";
-import {awaitManualPricing} from "../service/api"
+import { awaitManualPricing } from "../service/api";
 const useStyles = makeStyles({
   table: {
     border: "1px solid #e1e1e1",
@@ -695,6 +695,7 @@ export default function ManualPricing(props) {
   const [vehicleList, setVehicleList] = useState(rows);
   const [pageCount, setPageCount] = React.useState(10);
   const [manualPricingList, setManualPricingList] = useState([]);
+  const [manualPricingListRows, setManualPricingListRows] = useState([]);
   //const [pageCount, setPageCount] = React.useState(10);
 
   /*   const handleChangePageCount = (event) => {
@@ -714,8 +715,8 @@ export default function ManualPricing(props) {
   }, []);
   async function getManualPricingDetails() {
     let apiResponse = await awaitManualPricing();
-    console.log('ManualPricing------->', apiResponse)
-    setManualPricingList(apiResponse.data.data);
+    console.log("ManualPricing------->", apiResponse.data);
+    setManualPricingListRows(apiResponse.data);
   }
   const handleChangePageCount = (event) => {
     setPageCount(event.target.value);
@@ -799,7 +800,8 @@ export default function ManualPricing(props) {
   };
 
   const onChangePage = (data) => {
-    setRowsPerPage(data);
+    console.log("data", data);
+    setManualPricingList(data);
   };
 
   return (
@@ -939,13 +941,15 @@ export default function ManualPricing(props) {
             </TableBody>
           </Table>
         </TableContainer>
-        <Paginator
-          label="Result per page"
-          showItemsPerPage={10}
-          pages={[10, 20, 30, 40]}
-          data={rows}
-          onChangePage={onChangePage}
-        />
+        {manualPricingListRows.length != 0 ? (
+          <Paginator
+            label="Result per page"
+            showItemsPerPage={10}
+            pages={[10, 20, 30, 40]}
+            data={manualPricingListRows}
+            onChangePage={onChangePage}
+          />
+        ) : null}
       </div>
     </>
   );

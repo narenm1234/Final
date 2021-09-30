@@ -1007,6 +1007,7 @@ export default function RRMApproval(props) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = useState([]);
   const [rrmList, setRrmList] = useState([]);
+  const [rrmListRows, setRrmListRows] = useState([]);
   //const [pageCount, setPageCount] = React.useState(10);
 
   /*   const handleChangePageCount = (event) => {
@@ -1027,7 +1028,7 @@ export default function RRMApproval(props) {
   async function getRRMApprovalDetails() {
     let apiResponse = await RRMList();
     console.log('RRMList------->', apiResponse)
-    setRrmList(apiResponse.data.data);
+    setRrmListRows(apiResponse.data);
   }
   const openConditionReport = (VINumber) => {
     props.props.history.push("/conditionreportRequests", {
@@ -1036,17 +1037,17 @@ export default function RRMApproval(props) {
     });
   };
   const onChangePage = (data) => {
-    setRowsPerPage(data);
+    setRrmList(data);
   };
 
   const onChangeApprove = (row) => {
-    let updatedRowsPerPage = rowsPerPage.map((item) => {
-      if (item.VIN === row.VIN) {
-        item.approve = !item.approve;
-      }
-      return item;
-    });
-    setRowsPerPage(updatedRowsPerPage);
+    // let updatedRowsPerPage = rrmList.map((item) => {
+    //   if (item.vin === row.vin) {
+    //     item.approve = !item.approve;
+    //   }
+    //   return item;
+    // });
+    // setRrmList(updatedRowsPerPage);
   };
 
   return (
@@ -1223,13 +1224,13 @@ export default function RRMApproval(props) {
             </TableBody>
           </Table>
         </TableContainer>
-        <Paginator
+       {rrmListRows.length != 0? <Paginator
           label="Result per page"
           showItemsPerPage={10}
           pages={[10, 20, 30, 40]}
-          data={rows}
+          data={rrmListRows}
           onChangePage={onChangePage}
-        />
+        /> : null }
       </div>
     </>
   );
