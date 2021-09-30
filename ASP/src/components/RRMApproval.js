@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -14,6 +14,7 @@ import Checkbox from "@material-ui/core/Checkbox";
 import Paginator from "./Pagination";
 import SortIcon from "../assets/WebFont/sort.svg";
 import Check from "@material-ui/icons/Check";
+import {RRMList} from "../service/api"
 
 const useStyles = makeStyles({
   table: {
@@ -1005,6 +1006,7 @@ export default function RRMApproval(props) {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = useState([]);
+  const [rrmList, setRrmList] = useState([]);
   //const [pageCount, setPageCount] = React.useState(10);
 
   /*   const handleChangePageCount = (event) => {
@@ -1018,6 +1020,15 @@ export default function RRMApproval(props) {
           setRowsPerPage(parseInt(event.target.value, 10));
           setPage(0);
       }; */
+
+  useEffect(() => {
+    getRRMApprovalDetails();
+  }, []);
+  async function getRRMApprovalDetails() {
+    let apiResponse = await RRMList();
+    console.log('RRMList------->', apiResponse)
+    setRrmList(apiResponse.data.data);
+  }
   const openConditionReport = (VINumber) => {
     props.props.history.push("/conditionreportRequests", {
       vin: VINumber,
@@ -1172,7 +1183,7 @@ export default function RRMApproval(props) {
               </TableRow>
             </TableHead>
             <TableBody>
-             {/* {rowsPerPage.map((row, index) => (
+              {rrmList?.map((row, index) => (
                 <TableRow key={index} className={classes.tableRow}>
                   <TableCell align="center">
                     <span className="textStyle">
@@ -1181,25 +1192,25 @@ export default function RRMApproval(props) {
                         onClick={() => openConditionReport(row.VIN)}
                       >
                         {" "}
-                        {row.VIN}
+                        {row.vin}
                       </a>
                     </span>
                   </TableCell>
-                  <TableCell align="center">{row.Year}</TableCell>
-                  <TableCell align="center">{row.Make}</TableCell>
-                  <TableCell align="center">{row.Model_Trim}</TableCell>
+                  <TableCell align="center">{row.modelYear}</TableCell>
+                  <TableCell align="center">{row.make}</TableCell>
+                  <TableCell align="center">{row.model}</TableCell>
                   <TableCell align="center">{row.auction}</TableCell>
                   <TableCell align="center">{row.mmr}</TableCell>
                   <TableCell align="center">{row.mmb}</TableCell>
                   <TableCell align="center">{row.percent}</TableCell>
-                  <TableCell align="center">{row.priced_rate}</TableCell>
-                  <TableCell align="center">{row.priced_by}</TableCell>
+                  <TableCell align="center">{row.pricedDate}</TableCell>
+                  <TableCell align="center">{row.pricedBy}</TableCell>
                   <TableCell align="center">
-                    {row.approve}
+                    {/* {row.approve} */}
                    <FormControlLabel
                       control={
                         <Checkbox
-                          checked={row.approve}
+                          checked={false}
                           onChange={() => onChangeApprove(row)}
                           checkedIcon={<Check className={classes.checkedIcon} />}
                         />
@@ -1208,7 +1219,7 @@ export default function RRMApproval(props) {
                     />
                   </TableCell>
                 </TableRow>
-                    ))} */}
+              ))}
             </TableBody>
           </Table>
         </TableContainer>

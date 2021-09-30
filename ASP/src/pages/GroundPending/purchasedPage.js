@@ -6,7 +6,8 @@ import LinearProgress from "@material-ui/core/LinearProgress";
 import SwipeableTextMobileStepper from "./Carousel";
 import moment from "moment";
 import CurrencyFormat from "react-currency-format";
-import { getAccessTokenEndpoint, getPurchasedList } from "../../service/api";
+import { getAccessTokenEndpoint, getPurchasedList, getUserInfoToken } from "../../service/api";
+import { getAuth } from "../../service/apii";
 let resp = [
   {
     account_type: "LEASE",
@@ -99,7 +100,11 @@ function getParameterByName(name, url = window.location.href) {
 }
 useEffect(() => {
   getToken();
+  getUserAccessInfoToken();
 }, [value]);
+async function getUserAccessInfoToken(){
+  let resp = await getUserInfoToken();
+}
 async function getToken() {
   let apiResponse = await getAccessTokenEndpoint(data);
   console.log("--->",apiResponse)

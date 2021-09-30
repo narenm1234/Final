@@ -25,21 +25,25 @@ const AdminHome = (props) => {
 }
 
   const handleSubmitbtn = () =>{
-    setisSubmit(true);
+    //setisSubmit(true);
   }
   const handleSearch = (text) => {
     console.log("home",text)
-    setSearchText(text)
-    openConditionScreen(text,"")
+    setSearchText(text);
+    if(text.length > 15){
+      setisSubmit(true);
+    }
+    
+    //openConditionScreen(text,"")
   }
   const openConditionScreen = (VINumber, vehicle) => {
-    props.history.push("/conditionreport", {
-      vin: VINumber,
-      vehicleDetails: vehicle,
-    });
+    // props.history.push("/conditionreport", {
+    //   vin: VINumber,
+    //   vehicleDetails: vehicle,
+    // });
   };
   return (
-    (searchText.length==15) ? (<Grid container><Grid xs={10}><VehicleSearchTabs inspectiondata={inspectiondata} /></Grid><Grid xs={2}><NotesSection /></Grid></Grid>) : (<AdminVehicleSearch fromchildhandleSubmitbtn={handleSubmitbtn} searchdetails={(text) => handleSearch(text)} />)
+    (isSubmit) ? (<Grid container><Grid xs={10}><VehicleSearchTabs inspectiondata={inspectiondata} /></Grid><Grid xs={2}><NotesSection /></Grid></Grid>) : (<AdminVehicleSearch fromchildhandleSubmitbtn={handleSubmitbtn} searchdetails={(text) => handleSearch(text)} />)
   );
 };
 

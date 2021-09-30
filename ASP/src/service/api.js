@@ -18,6 +18,11 @@ let getTokenSSO;
 let client_id='3MVG9_I_oWkIqLrmNgl8unCGrAPmcPODjDz6DA7QLw7qbd0CKBqVuyUVp_4.c4xZdRowJUxirUcXgiGiPYaQ.';
 let rrm;
 let AMP;
+// let code ='aPrxyoOWGvXqBxqwZTQG7bATs.5vkEP2UmwQ_Eeu7GT7g4TQrfoMjW6F_s7s__kGco4_nvPVrg==';
+// let grant_type='authorization_code';
+// let client_secret= 'A8C495709B3F0BD5972D67EAF464949838E2F35EB623E514F75487A18904D70A';
+//  let  redirect_uri='http://localhost:3000/purchased'
+
 
 
 
@@ -28,7 +33,7 @@ if (hostname.includes('dev')) {
     tokenUrl = 'https://aspservices-internal-dev.tfs.toyota.com/asp-services/tokenData'
     passedVehicleUrl = 'https://aspservices-internal-dev.tfs.toyota.com/asp-services/getPassedVehicles'
     purchasedVehicleUrl = 'https://aspservices-internal-dev.tfs.toyota.com/asp-services/getPurchasedVehicles'
-    inspectionAccessoryDetailsUrl = 'https://aspservices-internal-dev.tfs.toyota.com/asp-services/getInspectionAccessoryDetails'
+    inspectionAccessoryDetailsUrl = 'https://aspservices-internal-dev.tfs.toyota.com/asp-services/getAccessoryDetails'
     inspectionWheelTiresDetailsUrl = 'https://aspservices-internal-dev.tfs.toyota.com/asp-services/getInspectionWheelTiresDetails'
     inspectionVehicleDetails = 'https://aspservices-internal-dev.tfs.toyota.com/asp-services/getVehicleInspectionDetails'
     getInspectionDamageDetailsUrl = 'https://aspservices-internal-dev.tfs.toyota.com/asp-services/getInspectionDamageDetails'
@@ -43,7 +48,7 @@ else if (hostname.includes('local')) {
     tokenUrl = 'http://internal-a3e2a8608d24e4c5f8b42aed9c3587d7-2044184104.us-east-1.elb.amazonaws.com/tokenData'
     passedVehicleUrl = 'https://aspservices-internal-dev.tfs.toyota.com/asp-services/getPassedVehicles'
     purchasedVehicleUrl = 'https://aspservices-internal-dev.tfs.toyota.com/asp-services/getPurchasedVehicles'
-    inspectionAccessoryDetailsUrl = 'https://aspservices-internal-dev.tfs.toyota.com/asp-services/getInspectionAccessoryDetails'
+    inspectionAccessoryDetailsUrl = 'https://aspservices-internal-dev.tfs.toyota.com/asp-services/getAccessoryDetails'
     inspectionWheelTiresDetailsUrl = 'https://aspservices-internal-dev.tfs.toyota.com/asp-services/getInspectionWheelTiresDetails'
     inspectionVehicleDetails = 'https://aspservices-internal-dev.tfs.toyota.com/asp-services/getVehicleInspectionDetails'
     getInspectionDamageDetailsUrl = 'https://aspservices-internal-dev.tfs.toyota.com/asp-services/getInspectionDamageDetails'
@@ -61,7 +66,7 @@ else if (hostname.includes('stage')) {
     tokenUrl = 'http://internal-a3e2a8608d24e4c5f8b42aed9c3587d7-2044184104.us-east-1.elb.amazonaws.com/tokenData'
     passedVehicleUrl = 'https://aspservices-internal-stage.tfs.toyota.com/asp-services/getPassedVehicles'
     purchasedVehicleUrl = 'https://aspservices-internal-stage.tfs.toyota.com/asp-services/getPurchasedVehicles'
-    inspectionAccessoryDetailsUrl = 'https://aspservices-internal-stage.tfs.toyota.com/asp-services/getInspectionAccessoryDetails'
+    inspectionAccessoryDetailsUrl = 'https://aspservices-internal-stage.tfs.toyota.com/asp-services/getAccessoryDetails'
     inspectionWheelTiresDetailsUrl = 'https://aspservices-internal-stage.tfs.toyota.com/asp-services/getInspectionWheelTiresDetails'
     inspectionVehicleDetails = 'https://aspservices-internal-stage.tfs.toyota.com/asp-services/getVehicleInspectionDetails'
     getInspectionDamageDetailsUrl = 'https://aspservices-internal-stage.tfs.toyota.com/asp-services/getInspectionDamageDetails'
@@ -76,7 +81,7 @@ else if (hostname.includes('test')) {
     tokenUrl = 'http://internal-a3e2a8608d24e4c5f8b42aed9c3587d7-2044184104.us-east-1.elb.amazonaws.com/tokenData'
     passedVehicleUrl = 'https://aspservices-internal-test.tfs.toyota.com/asp-services/getPassedVehicles'
     purchasedVehicleUrl = 'https://aspservices-internal-test.tfs.toyota.com/asp-services/getPurchasedVehicles'
-    inspectionAccessoryDetailsUrl = 'https://aspservices-internal-test.tfs.toyota.com/asp-services/getInspectionAccessoryDetails'
+    inspectionAccessoryDetailsUrl = 'https://aspservices-internal-test.tfs.toyota.com/asp-services/getAccessoryDetails'
     inspectionWheelTiresDetailsUrl = 'https://aspservices-internal-test.tfs.toyota.com/asp-services/getInspectionWheelTiresDetails'
     inspectionVehicleDetails = 'https://aspservices-internal-test.tfs.toyota.com/asp-services/getVehicleInspectionDetails'
     getInspectionDamageDetailsUrl = 'https://aspservices-internal-test.tfs.toyota.com/asp-services/getInspectionDamageDetails'
@@ -91,7 +96,7 @@ else if (hostname.includes('prod')) {
     tokenUrl = 'http://internal-a3e2a8608d24e4c5f8b42aed9c3587d7-2044184104.us-east-1.elb.amazonaws.com/tokenData'
     passedVehicleUrl = 'https://aspservices-internal.tfs.toyota.com/asp-services/getPassedVehicles'
     purchasedVehicleUrl = 'https://aspservices-internal.tfs.toyota.com/asp-services/getPurchasedVehicles'
-    inspectionAccessoryDetailsUrl = 'https://aspservices-internal.tfs.toyota.com/asp-services/getInspectionAccessoryDetails'
+    inspectionAccessoryDetailsUrl = 'https://aspservices-internal.tfs.toyota.com/asp-services/getAccessoryDetails'
     inspectionWheelTiresDetailsUrl = 'https://aspservices-internal.tfs.toyota.com/asp-services/getInspectionWheelTiresDetails'
     inspectionVehicleDetails = 'https://aspservices-internal.tfs.toyota.com/asp-services/getVehicleInspectionDetails'
     getInspectionDamageDetailsUrl = 'https://aspservices-internal.tfs.toyota.com/asp-services/getInspectionDamageDetails'
@@ -274,27 +279,26 @@ export async function getAuthTokenSSO() {
         "Access-Control-Allow-Origin": "*",
     }
        
-    return await axios.get(`https://stratus-stg3.mfindealerservices.com/services/oauth2/authorize?client_id=${client_id}&redirect_uri=https://asp-dev.mfindealerservices.com&response_type=code&scope=refresh_token`,requestData);
+    return await axios.get(`https://srmstg3-stratus2.cs194.force.com/services/oauth2/authorize?client_id=${client_id}&redirect_uri=https://asp-dev.mfindealerservices.com/purchased&response_type=code&scope=refresh_token`,requestData);
 
 }
 export async function getUserInfo(accessToken) {
        
-    return await axios.post(`https://stratus-stg3.mfindealerservices.com/services/oauth2/userinfo?access_token=${accessToken}`);
+    return await axios.post(`https://srmstg3-stratus2.cs194.force.com/services/oauth2/userinfo?access_token=${accessToken}`);
 
 }
-export async function getAccessTokenEndpoint(code) {
-    const requestData = {
-        "code": code,
-        "grant_type": "authorization_code",
-        "client_id": "3MVG9_I_oWkIqLrmNgl8unCGrAPmcPODjDz6DA7QLw7qbd0CKBqVuyUVp_4.c4xZdRowJUxirUcXgiGiPYaQ.",
-        "client_secret": "A8C495709B3F0BD5972D67EAF464949838E2F35EB623E514F75487A18904D70A",
-        "redirect_uri":"https://asp-dev.mfindealerservices.com",
-        "format":"json",
-    }
+// export async function getAccessTokenEndpoint() {
+//     const options = {
+//         headers: {
+//             "Access-Control-Allow-Origin": "*",
+//             "Content-type": "application/x-www-form-urlencoded",
+//         }
+//     }
+   
        
-    return await axios.post(`https://stratus-stg3.mfindealerservices.com/services/oauth2/token`,requestData);
+//     return await axios.post(`https://tfs-srm--srmstg3.my.salesforce.com/services/oauth2/token?code=${code}&client_id=${client_id}&client_secret=${client_secret}&redirect_uri=${redirect_uri}&grant_type=${grant_type}`,options);
 
-}
+
 export async function awaitManualPricing() {
     const options = {
         headers: {
@@ -311,5 +315,111 @@ export async function awaitManualPricing() {
         }
         return await axios.post(rrm,options)
         };
+    
+
+        //var querystring = require('querystring');
+        // export async function getAccessTokenEndpoint(code) {
+            
+        //     const options = {
+        //         headers: {
+        //             "Access-Control-Allow-Origin": "*",
+        //             "content-type": 'application/x-www-form-urlencoded'
+        //         }
+        //     }
+            
+        //     return await axios.post(`https://srmstg3-tfs-srm.cs194.force.com/stratus2/services/oauth2/token`,querystring.stringify({
+        //         "code": code,
+        //         "grant_type": "authorization_code",
+        //         "client_id": "3MVG9_I_oWkIqLrmNgl8unCGrAPmcPODjDz6DA7QLw7qbd0CKBqVuyUVp_4.c4xZdRowJUxirUcXgiGiPYaQ.",
+        //         "client_secret": "A8C495709B3F0BD5972D67EAF464949838E2F35EB623E514F75487A18904D70A",
+        //         "redirect_uri":"https://asp-dev.mfindealerservices.com/purchased",
+        //      }),options);
+        
+        // }
+
+        //var axios = require('axios');
+        // module.exports = typeof self == 'object' ? self.FormData : window.FormData;
+
+// var FormData = require('form-data');
+// var data = new FormData();
+// data.append('code', 'aPrxyoOWGvXqBxqwZTQG7bATs2Ckp_5Qy7bslY.WBV6GFmJQDg8gvg1uHZunOlYpobQYuTxDUQ==');
+// data.append('grant_type', 'authorization_code');
+// data.append('client_id', '3MVG9_I_oWkIqLrmNgl8unCGrAPmcPODjDz6DA7QLw7qbd0CKBqVuyUVp_4.c4xZdRowJUxirUcXgiGiPYaQ.');
+// data.append('client_secret', 'A8C495709B3F0BD5972D67EAF464949838E2F35EB623E514F75487A18904D70A\n\n');
+// data.append('redirect_uri', 'http://localhost:3000/purchased');
+// const http = require('http');
+
+
+// var config = {
+//   method: 'post',
+//   url: 'https://srmstg3-stratus2.cs194.force.com/services/oauth2/token',
+//   headers: { 
+//     'Content-Type': 'application/x-www-form-urlencoded',  
+//     ...data.getHeaders()
+//   },
+//   data : data
+// };
+
+
+// export async function getAccessTokenEndpoint(code) {
+            
+//     axios(config)
+// .then(function (response) {
+//   console.log(JSON.stringify(response.data));
+// })
+// .catch(function (error) {
+//   console.log(error);
+// });
+
+// }
+// var FormData = require('form-data');
+var qs = require('qs');
+export async function getAccessTokenEndpoint(code) {
+    var data = qs.stringify({
+        'grant_type': 'authorization_code',
+        'client_id': '3MVG9_I_oWkIqLrmNgl8unCGrAPmcPODjDz6DA7QLw7qbd0CKBqVuyUVp_4.c4xZdRowJUxirUcXgiGiPYaQ.',
+        'code': code,
+        'client_secret': 'A8C495709B3F0BD5972D67EAF464949838E2F35EB623E514F75487A18904D70A',
+        'redirect_uri': 'https://asp-dev.mfindealerservices.com/purchased' 
+      });
+      var config = {
+        method: 'post',
+        url: 'https://srmstg3-tfs-srm.cs194.force.com/stratus2/services/oauth2/token',
+        headers: { 
+          'Content-Type': 'application/x-www-form-urlencoded', 
+          'Cookie': 'BrowserId=LAkGcCGXEeyO6WviLU7-xw; CookieConsentPolicy=0:1; LSKey-c$CookieConsentPolicy=0:1'
+        },
+        data : data
+      };
+      
+      axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+        return response.data;
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+      
+
+ }
+ export async function getUserInfoToken(){
+    var qs = require('qs');
+    var config = {
+      method: 'post',
+      url: 'https://tfs-srm--sdeaug21.my.salesforce.com/services/oauth2/userinfo?access_token=00D010000004bGI!AQcAQAG4G4uHV4JQm_s2sgs9kFMp_TNtHUTWbNx9zk6adBxixTauYAu29FFV.YiHwjXepjkdD8bvyNe1d1iP6bSewx5z8GXB',
+    };
+    
+    axios(config)
+    .then(function (response) {
+      console.log(JSON.stringify(response.data));
+      return response.data;
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
+ }
+//var axios = require('axios');
 
 

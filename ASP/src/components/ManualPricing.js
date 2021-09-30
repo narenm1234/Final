@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -11,7 +11,7 @@ import SwipableFilter from "./SwipableFilter";
 import { TableSortLabel } from "@material-ui/core";
 import Paginator from "./Pagination";
 import SortIcon from "../assets/WebFont/sort.svg";
-
+import {awaitManualPricing} from "../service/api"
 const useStyles = makeStyles({
   table: {
     border: "1px solid #e1e1e1",
@@ -694,7 +694,29 @@ export default function ManualPricing(props) {
   const [rowsPerPage, setRowsPerPage] = useState([]);
   const [vehicleList, setVehicleList] = useState(rows);
   const [pageCount, setPageCount] = React.useState(10);
+  const [manualPricingList, setManualPricingList] = useState([]);
+  //const [pageCount, setPageCount] = React.useState(10);
 
+  /*   const handleChangePageCount = (event) => {
+          setPageCount(event.target.value);
+      };
+      const handleChangePage = (event, newPage) => {
+          setPage(newPage);
+      };
+  
+      const handleChangeRowsPerPage = (event) => {
+          setRowsPerPage(parseInt(event.target.value, 10));
+          setPage(0);
+      }; */
+
+  useEffect(() => {
+    getManualPricingDetails();
+  }, []);
+  async function getManualPricingDetails() {
+    let apiResponse = await awaitManualPricing();
+    console.log('ManualPricing------->', apiResponse)
+    setManualPricingList(apiResponse.data.data);
+  }
   const handleChangePageCount = (event) => {
     setPageCount(event.target.value);
   };
@@ -892,7 +914,7 @@ export default function ManualPricing(props) {
               </TableRow>
             </TableHead>
             <TableBody>
-            {/*  {rowsPerPage.map((row, index) => (
+              {manualPricingList?.map((row, index) => (
                 <TableRow key={index} className={classes.tableRow}>
                   <TableCell align="center">
                     <span className="textStyle">
@@ -901,19 +923,19 @@ export default function ManualPricing(props) {
                         onClick={() => openConditionReport(row.VIN)}
                       >
                         {" "}
-                        {row.VIN}
+                        {row.vin}
                       </a>
                     </span>
                   </TableCell>
-                  <TableCell align="center">{row.Year}</TableCell>
-                  <TableCell align="center">{row.Make}</TableCell>
-                  <TableCell align="center">{row.Model_Trim}</TableCell>
-                  <TableCell align="center">{row.Grounding_Region}</TableCell>
-                  <TableCell align="center">{row.Inspection_Date}</TableCell>
-                  <TableCell align="center">{row.Inspection_Status}</TableCell>
-                  <TableCell align="center">{row.Action_Code}</TableCell>
+                  <TableCell align="center">{row.modelYear}</TableCell>
+                  <TableCell align="center">{row.make}</TableCell>
+                  <TableCell align="center">{row.model}</TableCell>
+                  <TableCell align="center">{row.groundingRegion}</TableCell>
+                  <TableCell align="center">{row.inspectionDate}</TableCell>
+                  <TableCell align="center">{row.inspectionStatus}</TableCell>
+                  <TableCell align="center">{row.actionCode}</TableCell>
                 </TableRow>
-            ))} */}
+              ))}
             </TableBody>
           </Table>
         </TableContainer>
