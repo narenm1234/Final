@@ -79,14 +79,17 @@ export default function ListingPage(props) {
   const [progress, setProgress] = React.useState(0);
   const [time, setTime] = React.useState("00:00");
   const [passVin, setPassVin] = React.useState("");
+
   useEffect(() => {
     getVehicleDetails();
   }, [value]);
-  async function getVehicleDetails() {
+
+  const getVehicleDetails = async () => {
     let apiResponse = await getGroundingList("ALL");
     setVehicleResponse(apiResponse.data.data);
     //console.log('------->', apiResponse)
-  }
+  };
+
   useEffect(() => {
     getAuthTokenSSO1();
   }, [value]);
@@ -158,7 +161,7 @@ export default function ListingPage(props) {
             <div className="listingPageCard" key={index}>
               <Grid container spacing={3}>
                 <Grid item xs={4}>
-                  <SwipeableTextMobileStepper />
+                  <SwipeableTextMobileStepper vehical={vehicle} />
                 </Grid>
                 <Grid item xs={4}>
                   <div className="Year-Make-Model-Col">
@@ -214,7 +217,6 @@ export default function ListingPage(props) {
                       <span className="textStyle">
                         <span className="textBold"> Inspection Mileage:</span>{" "}
                         Pending
-                        {vehicle.account_type}
                       </span>
                       <span className="textStyle">
                         <span className="textBold"> Account Type: </span>{" "}
@@ -239,7 +241,7 @@ export default function ListingPage(props) {
                           <span className="textSize">
                             <CurrencyFormat
                               value={
-                                vehicle.pay_off_amt ? vehicle.pay_off_amt:""
+                                vehicle.pay_off_amt ? vehicle.pay_off_amt : ""
                               }
                               displayType={"text"}
                               thousandSeparator={true}
@@ -268,7 +270,6 @@ export default function ListingPage(props) {
                               thousandSeparator={true}
                               prefix={"$"}
                             />
-                          
                           </span>
                         </ListItemSecondaryAction>
                       </ListItem>
@@ -304,7 +305,6 @@ export default function ListingPage(props) {
                               prefix={"$"}
                             /> */}
                             Pending
-                      
                           </span>
                         </ListItemSecondaryAction>
                       </ListItem>
@@ -316,7 +316,6 @@ export default function ListingPage(props) {
                       >
                         Pass on vehicle
                       </Button>
-
                       <Button
                         variant="contained"
                         color="primary"
@@ -336,12 +335,18 @@ export default function ListingPage(props) {
             </div>
           );
         })
-      ) : (<div className='listingPageCardNoData'>
-      <img src="noDataFound.jpeg" className='nodataImage'/>
-      <span className='nodataText'>No  Vehicles found</span>
+      ) : (
+        <div className="listingPageCardNoData">
+          <img src="noDataFound.jpeg" className="nodataImage" />
+          <span className="nodataText">No Vehicles found</span>
         </div>
       )}
-      <PassOnVehicle open={open} close={handleClose} vin={passVin} />
+      <PassOnVehicle
+        open={open}
+        close={handleClose}
+        vin={passVin}
+        reload={getVehicleDetails}
+      />
     </>
   );
 }

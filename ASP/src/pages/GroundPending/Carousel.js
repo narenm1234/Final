@@ -1,75 +1,121 @@
-import React from 'react';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import MobileStepper from '@material-ui/core/MobileStepper';
-import Button from '@material-ui/core/Button';
-import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
-import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
+import React, { useEffect } from "react";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
+import MobileStepper from "@material-ui/core/MobileStepper";
+import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
+import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
+
+import Carousel from "react-material-ui-carousel";
+import { Paper, Button } from "@material-ui/core";
 
 const tutorialSteps = [
-    {
-        imgPath:
-            'maz.png',
-    },
-    {
-        imgPath:
-            'maz.png',
-    },
-    {
-        imgPath:
-            'maz.png',
-    },
-    {
-        imgPath:
-            'maz.png',
-    },
+  {
+    imgPath: "maz.png",
+  },
+  {
+    imgPath: "car.png",
+  },
+  {
+    imgPath: "maz.png",
+  },
+  {
+    imgPath: "maz.png",
+  },
 ];
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-        maxWidth: 400,
-        flexGrow: 1,
-        border: "solid 1px #dddbda",
-        margin: "20px",
-        borderRadius: "4px",
-        boxShadow: "0 2px 2px 0 rgba(0, 0, 0, 0.1)",
-    },
-    header: {
-        display: 'flex',
-        alignItems: 'center',
-        height: 50,
-        paddingLeft: theme.spacing(4),
-        backgroundColor: theme.palette.background.default,
-    },
-    img: {
-        height: 255,
-        display: 'block',
-        maxWidth: 400,
-        overflow: 'hidden',
-        width: '80%',
-    },
+  root: {
+    maxWidth: 400,
+    flexGrow: 1,
+    // border: "solid 1px #dddbda",
+    margin: "20px",
+    borderRadius: "4px",
+    // boxShadow: "0 2px 2px 0 rgba(0, 0, 0, 0.1)",
+  },
+  header: {
+    display: "flex",
+    alignItems: "center",
+    height: 50,
+    paddingLeft: theme.spacing(4),
+    backgroundColor: theme.palette.background.default,
+  },
+  img: {
+    height: 255,
+    display: "block",
+    maxWidth: 400,
+    overflow: "hidden",
+    width: "80%",
+  },
+  card: {
+    boxShadow: "unset !important",
+    // border: "1px solid gray",
+  },
 }));
 
-function SwipeableTextMobileStepper() {
-    const classes = useStyles();
-    const theme = useTheme();
-    const [activeStep, setActiveStep] = React.useState(0);
-    const maxSteps = tutorialSteps.length;
+const Item = ({ imgPath }) => {
+  const classes = useStyles();
+  const [activeStep, setActiveStep] = React.useState(0);
+  return (
+    <Paper className={classes.card}>
+      <img className="img" src={imgPath} alt={imgPath} />
+    </Paper>
+  );
+};
 
-    const handleNext = () => {
-        setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    };
+function SwipeableTextMobileStepper(props) {
+  const classes = useStyles();
+  const theme = useTheme();
 
-    const handleBack = () => {
-        setActiveStep((prevActiveStep) => prevActiveStep - 1);
-    };
+  const maxSteps = tutorialSteps.length;
 
-    const handleStepChange = (step) => {
-        setActiveStep(step);
-    };
+  useEffect(() => {
+    // console.log("vehical:::", props.vehical);
+  }, []);
 
-    return (
-        <div className={classes.root}>
-            <img className="img" src={tutorialSteps[activeStep].imgPath} alt={tutorialSteps[activeStep].label} />
+  //   const handleNext = () => {
+  //     setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  //   };
+
+  //   const handleBack = () => {
+  //     setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  //   };
+
+  //   const handleStepChange = (step) => {
+  //     setActiveStep(step);
+  //   };
+
+  return (
+    <div className={classes.root}>
+      <Carousel
+        navButtonsAlwaysVisible={true}
+        autoPlay={false}
+        navButtonsProps={{
+          // Change the colors and radius of the actual buttons. THIS STYLES BOTH BUTTONS
+          style: {
+            backgroundColor: "white",
+            color: "gray",
+          },
+        }}
+        // indicatorIconButtonProps={{
+        //     style: {
+        //         // padding: '10px',    // 1
+        //         color: 'l'       // 3
+        //     }
+        // }}
+
+        // activeIndicatorIconButtonProps={{
+        //     style: {
+        //         backgroundColor: 'blue' // 2
+        //     }
+        // }}
+      >
+        {tutorialSteps.map((item, i) => (
+          <Item key={i} {...item} />
+        ))}
+      </Carousel>
+
+      {/* <img className="img" src={tutorialSteps[0].imgPath} alt={tutorialSteps[0].imgPath} /> */}
+
+      {/* <img className="img" src={tutorialSteps[activeStep].imgPath} alt={tutorialSteps[activeStep].label} />
             <MobileStepper
                 steps={maxSteps}
                 position="static"
@@ -86,9 +132,9 @@ function SwipeableTextMobileStepper() {
 
                     </Button>
                 }
-            />
-        </div>
-    );
+            /> */}
+    </div>
+  );
 }
 
 export default SwipeableTextMobileStepper;
