@@ -7,7 +7,7 @@ import SwipeableTextMobileStepper from "./Carousel";
 import moment from "moment";
 import CurrencyFormat from "react-currency-format";
 import { getAccessTokenEndpoint, getPurchasedList, getUserInfoToken } from "../../service/api";
-import { getAuth } from "../../service/apii";
+import { getAuth } from "../../service/api";
 let resp = [
   {
     account_type: "LEASE",

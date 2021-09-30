@@ -1,149 +1,148 @@
 .searchLabel {
-  height        : 18px;
-  font-size     : 15px;
-  font-weight   : normal;
-  font-stretch  : normal;
-  font-style    : normal;
-  line-height   : 1.5;
+  height: 18px;
+  font-size: 15px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
   letter-spacing: normal;
-  color         : #3e3e3c;
+  color: #3e3e3c;
 }
 
 .searchLabelHeader {
-  height        : 28px;
-  font-size     : 18px;
-  font-weight   : bold;
-  font-stretch  : normal;
-  font-style    : normal;
-  line-height   : 1.5;
+  height: 28px;
+  font-size: 18px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
   letter-spacing: normal;
-  color         : #3e3e3c;
-  margin-bottom : 20px;
+  color: #3e3e3c;
+  margin-bottom: 20px;
 }
 
 .grounding {
   margin-left: 40%;
-  position   : relative;
-  margin-top : 10%;
+  position: relative;
+  margin-top: 10%;
 }
 
 .noMatchesFrame {
-  width           : 425px;
-  height          : 76px;
-  padding         : 14px 30px 16px 16px;
-  border-radius   : 4px;
-  box-shadow      : 0 2px 2px 0 rgba(0, 0, 0, 0.1);
-  border          : solid 1px #dddbda;
+  width: 425px;
+  height: 76px;
+  padding: 14px 30px 16px 16px;
+  border-radius: 4px;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1);
+  border: solid 1px #dddbda;
   background-color: #ffffff;
-  display         : block;
-  margin          : 1% 0 0 0;
-
+  display: block;
+  margin: 1% 0 0 0;
 }
 
 .noMatches {
-  height        : 18px;
-  font-size     : 16px;
-  font-weight   : normal;
-  font-stretch  : normal;
-  font-style    : normal;
-  line-height   : 1.5;
+  height: 18px;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
   letter-spacing: normal;
-  color         : #3e3e3c;
+  color: #3e3e3c;
 }
 
 .carRecordFound {
-  width           : 425px;
-  height          : 50px;
-  margin-top      : 8px;
-  padding         : 16px;
-  border-radius   : 4px;
-  box-shadow      : 0 2px 2px 0 rgba(0, 0, 0, 0.1);
-  border          : solid 1px #dddbda;
+  width: 425px;
+  height: 50px;
+  margin-top: 8px;
+  padding: 16px;
+  border-radius: 4px;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1);
+  border: solid 1px #dddbda;
   background-color: #ffffff;
 }
 
 .imageFound {
-  width        : 162px;
-  height       : 130px;
-  margin       : 18px 10px 2px 2px;
+  width: 162px;
+  height: 130px;
+  margin: 18px 10px 2px 2px;
   border-radius: 4px;
-  box-shadow   : 0 2px 2px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1);
 }
 
 .line {
-  width : 340px;
+  width: 340px;
   height: 1px;
   margin: 4px 0 8px;
   border: solid 1px #c23934;
 }
 
 .label {
-  width         : 85px;
-  height        : 18px;
-  margin        : 8px 24px 4px 0;
-  font-family   : ToyotaTypeBook;
-  font-size     : 12px;
-  font-weight   : 600;
-  font-stretch  : normal;
-  font-style    : normal;
-  line-height   : 1.5;
+  width: 85px;
+  height: 18px;
+  margin: 8px 24px 4px 0;
+  font-family: ToyotaTypeBook;
+  font-size: 12px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
   letter-spacing: normal;
-  color         : #3e3e3c;
+  color: #3e3e3c;
 }
 
 .value {
-  width         : 85px;
-  height        : 18px;
-  margin        : 8px 24px 4px 0;
-  font-family   : ToyotaTypeBook;
-  font-size     : 12px;
-  font-weight   : 600;
-  font-style    : normal;
-  line-height   : 1.5;
+  width: 85px;
+  height: 18px;
+  margin: 8px 24px 4px 0;
+  font-family: ToyotaTypeBook;
+  font-size: 12px;
+  font-weight: 600;
+  font-style: normal;
+  line-height: 1.5;
   letter-spacing: normal;
-  color         : #3e3e3c;
-  font-weight   : normal;
+  color: #3e3e3c;
+  font-weight: normal;
 }
 
 .cardSection {
-  display       : flex;
+  display: flex;
   flex-direction: row;
 }
 
 .cardContent {
-  display       : flex;
+  display: flex;
   flex-direction: row;
 }
 
 .vehicleMakeModel {
-  width         : 300px;
-  height        : 24px;
-  margin        : 0 69px 0 0;
-  font-size     : 16px;
-  font-weight   : bold;
-  font-stretch  : normal;
-  font-style    : normal;
-  line-height   : 1.5;
+  width: 300px;
+  height: 24px;
+  margin: 0 69px 0 0;
+  font-size: 16px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
   letter-spacing: normal;
-  color         : #080707;
+  color: #080707;
   padding-bottom: 20px;
 }
 
 .home {
   background: #f3f2f2;
-  height    : 100vh;
+  height: 100vh;
   overflow: scroll;
 }
 
 .form {
-  height  : 70vh;
+  height: 70vh;
   overflow: auto;
 }
 
 .customerReturnDate {
-  width           : 425px;
-  height          : 32px;
-  margin-top      : 10px !important;
+  width: 425px;
+  height: 32px;
+  margin-top: 10px !important;
   background-color: #ffffff !important;
 }
 
@@ -152,60 +151,60 @@
 }
 
 .groundVehicleMFS {
-  width           : 425px;
-  height          : 70px;
-  margin-top      : 20px;
-  padding         : 8px 16px;
-  border-radius   : 4px;
-  border          : solid 1px #dddbda;
+  width: 425px;
+  height: 70px;
+  margin-top: 20px;
+  padding: 8px 16px;
+  border-radius: 4px;
+  border: solid 1px #dddbda;
   background-color: #faffbd;
 }
 
 .groundVehicleMFS p {
-  width         : 339px;
-  height        : 54px;
-  font-family   : "ToyotaTypeBook";
-  font-size     : 13px;
-  font-weight   : normal;
-  font-stretch  : normal;
-  font-style    : normal;
-  line-height   : 1.5;
+  width: 339px;
+  height: 54px;
+  font-family: "ToyotaTypeBook";
+  font-size: 13px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
   letter-spacing: normal;
-  color         : #3e3e3c;
+  color: #3e3e3c;
 }
 
 .odometer {
-  width           : 425px;
-  margin-top      : 20px !important;
+  width: 425px;
+  margin-top: 20px !important;
   background-color: #ffffff !important;
 }
 
 .odometerBox {
-  width     : 450px;
+  width: 450px;
   margin-top: 20px !important;
 }
 
 .groundVehiclePLV {
-  width           : 425px;
-  height          : 70px;
-  margin-top      : 20px;
-  padding         : 8px 16px;
-  border-radius   : 4px;
-  border          : solid 1px #dddbda;
+  width: 425px;
+  height: 70px;
+  margin-top: 20px;
+  padding: 8px 16px;
+  border-radius: 4px;
+  border: solid 1px #dddbda;
   background-color: #faffbd;
 }
 
 .groundVehiclePLV p {
-  width         : 339px;
-  height        : 54px;
-  font-family   : "ToyotaTypeBook";
-  font-size     : 13px;
-  font-weight   : normal;
-  font-stretch  : normal;
-  font-style    : normal;
-  line-height   : 1.5;
+  width: 339px;
+  height: 54px;
+  font-family: "ToyotaTypeBook";
+  font-size: 13px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
   letter-spacing: normal;
-  color         : #3e3e3c;
+  color: #3e3e3c;
 }
 
 .keysReturnedBox {
@@ -213,21 +212,21 @@
 }
 
 .keysReturned {
-  margin-top      : 20px !important;
-  margin-right    : 10px !important;
+  margin-top: 20px !important;
+  margin-right: 10px !important;
   background-color: #ffffff !important;
 }
 
 .Rectangle-3 {
-  width           : 174px;
-  height          : 52px;
-  margin          : 8px 23px 0 0;
-  padding         : 16px;
-  border-radius   : 4px;
-  box-shadow      : 0 2px 2px 0 rgba(0, 0, 0, 0.1);
-  border          : solid 1px #dddbda;
+  width: 174px;
+  height: 52px;
+  margin: 8px 23px 0 0;
+  padding: 16px;
+  border-radius: 4px;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1);
+  border: solid 1px #dddbda;
   background-color: #ffffff;
-  display         : inline-flex;
+  display: inline-flex;
 }
 
 .vehicleCondition {
@@ -235,13 +234,13 @@
 }
 
 .pickUpLocationBox {
-  width           : 371px;
-  height          : 100px;
-  margin          : 8px 0 0;
-  padding         : 8px 16px;
-  border-radius   : 4px;
-  box-shadow      : 0 2px 2px 0 rgba(0, 0, 0, 0.1);
-  border          : solid 1px #dddbda;
+  width: 371px;
+  height: 100px;
+  margin: 8px 0 0;
+  padding: 8px 16px;
+  border-radius: 4px;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1);
+  border: solid 1px #dddbda;
   background-color: #ffffff;
 }
 
@@ -258,8 +257,7 @@
 }
 
 .MuiButton-containedPrimary {
-  background-color: 
-  #0070d2 !important;
+  background-color: #0070d2 !important;
 }
 .listingPageCard {
   width: 80%;
@@ -271,27 +269,26 @@
   margin-bottom: 20px;
 }
 .Year-Make-Model-Col {
-  width           : 90%;
-  border-radius   : 4px;
+  width: 90%;
+  border-radius: 4px;
   margin-top: 8px;
   background-color: #ffffff;
 }
 .Vehicle-Price-Option {
-  margin-top      : 8px;
-  border-radius   : 4px;
+  margin-top: 8px;
+  border-radius: 4px;
   background-color: #ffffff;
-  
 }
-div.vehicleMakeModel{
+div.vehicleMakeModel {
   font-size: 13px;
   width: 350px;
 }
-div.vehicleMakeModel1{
+div.vehicleMakeModel1 {
   font-size: 16px;
   width: 350px;
   font-weight: bold;
 }
-.textStyle{
+.textStyle {
   font-family: ToyotaTypeBook;
   font-size: 13px;
   font-weight: normal;
@@ -302,44 +299,44 @@ div.vehicleMakeModel1{
   color: #080707;
   display: block;
 }
-.margin__space{
-  margin-left:19%;
+.margin__space {
+  margin-left: 19%;
 }
-.margin__space1{
-  margin-left:55%;
+.margin__space1 {
+  margin-left: 55%;
 }
-.margin__space2{
-  margin-left:21.5%;
+.margin__space2 {
+  margin-left: 21.5%;
 }
-.margin__space3{
-  margin-left:56%;
+.margin__space3 {
+  margin-left: 56%;
 }
-.margin__space4{
-  margin-left:26%;
+.margin__space4 {
+  margin-left: 26%;
 }
-.margin__space5{
-  margin-left:20%;
+.margin__space5 {
+  margin-left: 20%;
 }
-.margin__space6{
-  margin-left:27.5% !important;
+.margin__space6 {
+  margin-left: 27.5% !important;
 }
-.textStyleTotalFee{
+.textStyleTotalFee {
   font-size: 14px;
   font-weight: 800 !important;
   font-family: ToyotaTypeBook;
-  color:#cc0000;
+  color: #cc0000;
 }
-.totalFeeSum{
+.totalFeeSum {
   font-size: 21px;
   font-weight: 1000 !important;
   font-family: ToyotaTypeBook;
   margin-left: 20%;
 }
-.textBold{
+.textBold {
   font-weight: 1000 !important;
   font-family: ToyotaTypeBook;
 }
-.textSize{
+.textSize {
   font-size: 14px;
 }
 .MuiCheckbox-root {
@@ -353,49 +350,56 @@ div.vehicleMakeModel1{
   background-color: #fff !important;
 }
 .PassonVehicleStyle {
-  width: 50%;
+  // width: 50%;
+  width: 120px;
   height: 32px;
-  margin: 2px 9px 0 0!important;
-  padding: 1px 28px 1px 29px;
+  margin: 2px 9px 0 0 !important;
+  padding: 1px 0px !important;
   border-radius: 4px;
   border: solid 1px #0070d2 !important;
-  color:#0070d2 !important;
+  color: #0070d2 !important;
   background-color: #ffffff;
   text-transform: initial !important;
+  margin-bottom: 10px !important;
 }
-.progressStyle{
-  width:70%;
-  margin: 10px 0  10px 0;
+.progressStyle {
+  width: 70%;
+  margin: 10px 0 10px 0;
   display: flex;
 }
 .img {
-  height: 168px;
+  height: 120px;
   display: block;
   max-width: 400px;
   overflow: hidden;
-  width: 100%;
-  padding: 0 15px;
+  width: 65%;
+  margin: auto;
+  border: 1px solid lightgray;
 }
-.NavigatorButtons{
+
+.NavigatorButtons {
   margin-top: 5px;
 }
-.textStyleWarning{
-  color:#cc0000;
+.textStyleWarning {
+  color: #cc0000;
 }
-.MuiLinearProgress-root{
-  height: 10px!important;
+.MuiLinearProgress-root {
+  height: 10px !important;
   width: inherit;
 }
 .MuiLinearProgress-barColorSecondary {
-  background-color: #cc0000!important;
+  background-color: #cc0000 !important;
 }
 .MuiLinearProgress-colorSecondary {
-  background-color: #d8d8d8!important;
+  background-color: #d8d8d8 !important;
 }
-.button{
-  width: 46%;
+.button {
+  // width: 46%;
+  width: 135px;
   height: 32px;
-text-transform: initial !important;
+  text-transform: initial !important;
+  margin-bottom: 10px !important;
+  padding: 1px 0px !important;
 }
 .purchasedScreenTotal {
   width: 240px;
@@ -404,21 +408,21 @@ text-transform: initial !important;
   background-color: #dddbda;
 }
 
-.paddingCSS{
-  padding: 0px!important;
+.paddingCSS {
+  padding: 0px !important;
 }
 
-.MuiCheckbox-colorSecondary.Mui-checked  {
-  color:#0070d2 !important;
+.MuiCheckbox-colorSecondary.Mui-checked {
+  color: #0070d2 !important;
 }
 .checkedIcon {
   width: 20px;
   height: 20px;
   border: solid 1px #dddbda !important;
-  border-Radius: 3px;
+  border-radius: 3px;
 }
 
-.nodataImage{
+.nodataImage {
   width: 500px;
   height: 300px;
 }
@@ -429,12 +433,17 @@ text-transform: initial !important;
   left: 30%;
   display: grid;
 }
-.nodataText{
+.nodataText {
   font-size: 22px;
   padding-left: 13%;
   font-weight: 300;
 }
-.vin{
+.vin {
   color: #0070d2;
   cursor: pointer;
 }
+
+// .MuiIconButton-root{
+//   background-color: white !important;
+//   color:gray !important;
+// }
