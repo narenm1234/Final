@@ -206,12 +206,9 @@ export async function getInspectionWheelTiresDetails(inspectionId) {
         }
 
     };
-    // const requestData = {
-    //     // "inspectinId": inspectionId
-    //     inspectionId
-    // };
 
-    return await axios.post(inspectionWheelTiresDetailsUrl, inspectionId, options);
+
+    return await axios.post(inspectionWheelTiresDetailsUrl,inspectionId , options);
 
 }
 export async function getInspectionAccessoryDetails(vin) {
@@ -244,7 +241,7 @@ export async function getInspectionDamageDetailsApi(inspectionId, vin) {
     };
 
 
-    return await axios.post(`${getInspectionDamageDetailsUrl}?inpsectionId=${inspectionId}&vin=${vin}`);
+    return await axios.post(`${getInspectionDamageDetailsUrl}?inpsectionId=18495852&vin=${vin}`);
 }
 
 

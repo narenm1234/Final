@@ -14,6 +14,7 @@ import ConditionReport from "./pages/ConditionReport";
 import AdminHome from "./pages/AdminHome";
 import ConditionReportRequests from "./pages/ConditionReportRequests";
 import InventoryRequestsTabs from "./components/InventoryRequestsTabs";
+import Login2 from "./pages/Login2";
 function App() {
   return (
     <>
@@ -36,7 +37,7 @@ function App() {
                   exact
                   render={(props) => <GroundPending {...props} />}
                 />
-                <Route path="/passed" exact component={GroundPending1} />
+                <Route path="/passed" exact render={(props) => <GroundPending1 {...props} />} />
                 <Route path="/purchased" exact component={GroundPending2} />
                 <Route
                   path="/grounded/lastchance"
@@ -63,6 +64,11 @@ function App() {
                   path="/conditionreport"
                   exact
                   render={(props) => <ConditionReport {...props} />}
+                />
+                <Route
+                  path="/login2"
+                  exact
+                  render={(props) => <Login2 {...props} />}
                 />
               </Switch>
             </Sidebar>

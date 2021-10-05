@@ -72,6 +72,13 @@ export default function ListingPage1(props) {
     let apiResponse = await getPassedList();
     setVehicleResponse(apiResponse.data.data);
   }
+  const openConditionScreen = (VINumber, vehicle) => {
+    
+    props.history.push("/conditionreport", {
+      vin: VINumber,
+      vehicleDetails: vehicle,
+    });
+  };
 
   return vehicleResponse.length > 0 ? (
     vehicleResponse.map((vehicle, index) => {
@@ -99,7 +106,11 @@ export default function ListingPage1(props) {
 
                   <span className="textStyle">
                     <span className="textBold"> VIN:</span>
-                    <a className="vin" href={`/conditionreport${vehicle.vin}`}>
+                    <a className="vin"  onClick={openConditionScreen.bind(
+                            this,
+                            vehicle.vin,
+                            vehicle
+                          )}>
                       {" "}
                       {vehicle.vin}
                     </a>

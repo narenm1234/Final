@@ -4,7 +4,7 @@ export default function Overview(props) {
 
   return (
     <div className='home'>
-      <ListingPage1></ListingPage1>
+      <ListingPage1 {...props}></ListingPage1>
     </div>
   );
 };
