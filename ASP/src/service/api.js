@@ -306,7 +306,7 @@ export async function getInspectionDamageDetailsApi(inspectionId, vin) {
   };
 
   return await axios.post(
-    `${getInspectionDamageDetailsUrl}?inpsectionId=18495852&vin=${vin}`
+    `${getInspectionDamageDetailsUrl}?inpsectionId=${inspectionId}&vin=${vin}`
   );
 }
 
@@ -449,7 +449,7 @@ export async function getAccessTokenEndpoint(code) {
     code: code,
     client_secret:
       "A8C495709B3F0BD5972D67EAF464949838E2F35EB623E514F75487A18904D70A",
-    redirect_uri: "https://asp-dev.mfindealerservices.com/purchased",
+    redirect_uri: "https://asp-dev.mfindealerservices.com/login2",
   });
   var config = {
     method: "post",
@@ -471,11 +471,11 @@ export async function getAccessTokenEndpoint(code) {
       console.log(error);
     });
 }
-export async function getUserInfoToken() {
+export async function getUserInfoToken(token) {
   var qs = require("qs");
   var config = {
     method: "post",
-    url: "https://tfs-srm--sdeaug21.my.salesforce.com/services/oauth2/userinfo?access_token=00D010000004bGI!AQcAQAG4G4uHV4JQm_s2sgs9kFMp_TNtHUTWbNx9zk6adBxixTauYAu29FFV.YiHwjXepjkdD8bvyNe1d1iP6bSewx5z8GXB",
+    url: `https://tfs-srm--sdeaug21.my.salesforce.com/services/oauth2/userinfo?access_token=${token}`,
   };
 
   axios(config)

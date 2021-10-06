@@ -2,7 +2,7 @@ import ImageGallery from "react-image-gallery";
 import React, { useEffect, useState } from "react";
 import "react-image-gallery/styles/css/image-gallery.css";
 import { getCarXml, getImageData } from "../service/api";
-const parseString = require("xml2js").parseString;
+// const parseString = require("xml2js").parseString;
 // const images = [
 //   {
 //     original: "car.jpg",
