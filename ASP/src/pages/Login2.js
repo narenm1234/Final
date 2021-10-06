@@ -1,6 +1,8 @@
 import React,{ useState, useEffect } from 'react'
 import { getAccessTokenEndpoint, getUserInfoToken } from '../service/api';
 
+
+
 let data = getParameterByName("code");
 function getParameterByName(name, url = window.location.href) {
   name = name.replace(/[\[\]]/g, '\\$&');
@@ -13,16 +15,19 @@ function getParameterByName(name, url = window.location.href) {
 
 
 function Login2() {
+  const [token, setToken] = useState([]);
   useEffect(() => {
     getToken();
     getUserAccessInfoToken();
   }, []);
-  async function getUserAccessInfoToken(){
-    let resp = await getUserInfoToken();
-  }
+
   async function getToken() {
     let apiResponse = await getAccessTokenEndpoint(data);
     console.log("--->",apiResponse)
+    setToken(apiResponse.data.access_token);
+  }
+  async function getUserAccessInfoToken(){
+  let resp = await getUserInfoToken(token);
   }
     return (
         <div>

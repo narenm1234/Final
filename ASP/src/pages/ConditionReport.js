@@ -201,7 +201,7 @@ export default function ConditionReport(props) {
                   onClick={handleOpen}
                   disabled={!condionVehicleDetails?.inspection_date}
                 >
-                  View Full Detailed Report
+                  View Full Damage Report
                 </Button>
               </Grid>
               <Grid item xs={12}>
@@ -535,7 +535,7 @@ export default function ConditionReport(props) {
                     {accessoryDetails.length > 0 && accessoryDetails.map(list => {
                       return (
                         <Box className="accessoriestinlineextStyle">
-                          <Typography variant="span">{list.description}</Typography>
+                          <Typography variant="span">{list.description.toLowerCase()}</Typography>
                         </Box>
                       )
                     })}

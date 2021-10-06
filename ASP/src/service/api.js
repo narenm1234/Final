@@ -344,11 +344,11 @@ export async function getAccessTokenEndpoint(code) {
       
 
  }
- export async function getUserInfoToken(){
+ export async function getUserInfoToken(token){
     var qs = require('qs');
     var config = {
       method: 'post',
-      url: 'https://stratus-stg3.mfindealerservices.com/services/oauth2/userinfo?access_token=00D010000004bGI!AQcAQAG4G4uHV4JQm_s2sgs9kFMp_TNtHUTWbNx9zk6adBxixTauYAu29FFV.YiHwjXepjkdD8bvyNe1d1iP6bSewx5z8GXB',
+      url: `https://stratus-stg3.mfindealerservices.com/services/oauth2/userinfo?access_token=${token}`,
     };
     
     axios(config)
