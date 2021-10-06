@@ -3,7 +3,11 @@ import { getAccessTokenEndpoint, getUserInfoToken } from '../service/api';
 
 
 
-let data = getParameterByName("code");
+
+
+
+function Login2() {
+  let data = getParameterByName("code");
 function getParameterByName(name, url = window.location.href) {
   name = name.replace(/[\[\]]/g, '\\$&');
   var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
@@ -12,9 +16,6 @@ function getParameterByName(name, url = window.location.href) {
   if (!results[2]) return '';
   return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
-
-
-function Login2() {
   const [token, setToken] = useState([]);
   useEffect(() => {
     getToken();

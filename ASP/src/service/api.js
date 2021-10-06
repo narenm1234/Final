@@ -324,7 +324,7 @@ export async function getAccessTokenEndpoint(code) {
       });
       var config = {
         method: 'post',
-        url: 'https://stratus-stg3.mfindealerservices.com/services/oauth2/token',
+        url: 'https://srmstg3-tfs-srm.cs194.force.com/stratus2/services/oauth2/token',
         headers: { 
           'Access-Control-Allow-Origin':'*',
           'Content-Type': 'application/x-www-form-urlencoded', 
@@ -348,7 +348,7 @@ export async function getAccessTokenEndpoint(code) {
     var qs = require('qs');
     var config = {
       method: 'post',
-      url: `https://stratus-stg3.mfindealerservices.com/services/oauth2/userinfo?access_token=${token}`,
+      url: `https://srmstg3-tfs-srm.cs194.force.com/stratus2/services/oauth2/userinfo?access_token=${token}`,
     };
     
     axios(config)
