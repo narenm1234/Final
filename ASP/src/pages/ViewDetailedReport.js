@@ -62,6 +62,51 @@ const DialogActions = withStyles((theme) => ({
     },
 }))(MuiDialogActions);
 
+let serviceData = {
+    "damageDetails": [
+        {
+            "inspection_id": 19234370,
+            "vin": "JM3KFBCY5M0384441",
+            "damage_area": "",
+            "partlabor_hours": 0,
+            "total": null,
+            "paint_rate": 46.0,
+            "chargeable_flag": "false",
+            "paint_hours": 2,
+            "part_cost": 0.0,
+            "damage_type": "1"
+        },
+        {
+            "inspection_id": 19234370,
+            "vin": "JM3KFBCY5M0384441",
+            "damage_area": "",
+            "partlabor_hours": 0,
+            "total": null,
+            "paint_rate": 46.0,
+            "chargeable_flag": "false",
+            "paint_hours": 2,
+            "part_cost": 0.0,
+            "damage_type": "1"
+        },
+        {
+            "inspection_id": 19234370,
+            "vin": "JM3KFBCY5M0384441",
+            "damage_area": "",
+            "partlabor_hours": 0,
+            "total": null,
+            "paint_rate": 46.0,
+            "chargeable_flag": "false",
+            "paint_hours": 2,
+            "part_cost": 0.0,
+            "damage_type": "1"
+        }
+    ],
+    "interiorCost": null,
+    "exteriorCost": null,
+    "maintainenceCost": null,
+    "excessiveWandT": 0.0,
+    "normal": 0.0
+};
 export default function ViewDetailedReport(props) {
     const [open, setOpen] = React.useState(false);
     let wheelTyrelistOfItem = ['LF', 'RF']
@@ -108,11 +153,11 @@ export default function ViewDetailedReport(props) {
                                         </ListItem>
                                         <ListItem>
                                             <ListItemText className="smallCardTitle"><span className="textBold alignleft">Normal W and T</span></ListItemText>
-                                            <ListItemSecondaryAction className="smallCardBody warningColor">$00,000.00</ListItemSecondaryAction>
+                                            <ListItemSecondaryAction className="smallCardBody warningColor">{DamageDetails.normal?$`${DamageDetails.normal}`:'NA'}</ListItemSecondaryAction>
                                         </ListItem>
                                         <ListItem>
                                             <ListItemText className="smallCardTitle"><span className="textBold alignleft ">Excessive W and T</span></ListItemText>
-                                            <ListItemSecondaryAction className="smallCardBody errorColor">$00,000.00</ListItemSecondaryAction>
+                                            <ListItemSecondaryAction className="smallCardBody errorColor">{DamageDetails.excessiveWandT?$`${DamageDetails.excessiveWandT}`:'N/A'}</ListItemSecondaryAction>
                                         </ListItem>
                                     </List>
 
@@ -155,7 +200,17 @@ export default function ViewDetailedReport(props) {
                                     </TableCell>
 
                                 </TableRow>
-                                {wheelTyrelistOfItem.map(list => {
+                                <TableRow key={list}>
+                                            <TableCell component="th" scope="row">
+                                                {DamageDetails.damageDetails.length > 0 ? DamageDetails.damageDetails[0].damage_area : 'N/A'}
+                                            </TableCell>
+                                            <TableCell style={{ width: 90 }} align="right">{DamageDetails.damageDetails.length > 0 ?DamageDetails.damageDetails[0].damage_type : 'N/A'}</TableCell>
+                                            <TableCell style={{ width: 90 }} align="right">{DamageDetails.damageDetails.length > 0 ? DamageDetails.damageDetails[0].partlabor_hours: 'N/A'}</TableCell>
+                                            <TableCell style={{ width: 90 }} align="right">{DamageDetails.damageDetails.length > 0 ? DamageDetails.damageDetails[0].paint_hours? DamageDetails.damageDetails[0].paint_hours:0: 'N/A'}</TableCell>
+                                            <TableCell style={{ width: 90 }} align="right">{DamageDetails.damageDetails.length > 0 ? DamageDetails.damageDetails[0].part_cost ? DamageDetails.damageDetails[0].part_cost : 0: 'N/A'}</TableCell>
+                                            <TableCell astyle={{ width: 90 }} align="right">{DamageDetails.damageDetails.length > 0 ? DamageDetails.damageDetails[0].total ? DamageDetails.damageDetails[0].total : 0: 'N/A'}</TableCell>
+                                </TableRow>
+                                {/* {wheelTyrelistOfItem.map(list => {
                                     return (
                                         <TableRow key={list}>
                                             <TableCell component="th" scope="row">
@@ -169,7 +224,7 @@ export default function ViewDetailedReport(props) {
                                         </TableRow>
                                     )
                                 })
-                                }
+                                } */}
                                 <TableRow>
                                     <TableCell colSpan={6} component="th" scope="row" className="warningColorTable">
                                         Exterior
@@ -182,8 +237,17 @@ export default function ViewDetailedReport(props) {
                                     </TableCell>
 
                                 </TableRow>
-
-                                {wheelTyrelistOfItem.map(list => {
+                                <TableRow key={list}>
+                                            <TableCell component="th" scope="row">
+                                                {DamageDetails.damageDetails.length > 0 ? DamageDetails.damageDetails[1].damage_area : 'N/A'}
+                                            </TableCell>
+                                            <TableCell style={{ width: 90 }} align="right">{DamageDetails.damageDetails.length > 0 ?DamageDetails.damageDetails[1].damage_type : 'N/A'}</TableCell>
+                                            <TableCell style={{ width: 90 }} align="right">{DamageDetails.damageDetails.length > 0 ? DamageDetails.damageDetails[1].partlabor_hours: 'N/A'}</TableCell>
+                                            <TableCell style={{ width: 90 }} align="right">{DamageDetails.damageDetails.length > 0 ? DamageDetails.damageDetails[1].paint_hours? DamageDetails.damageDetails[0].paint_hours:0: 'N/A'}</TableCell>
+                                            <TableCell style={{ width: 90 }} align="right">{DamageDetails.damageDetails.length > 0 ? DamageDetails.damageDetails[1].part_cost ? DamageDetails.damageDetails[0].part_cost : 0: 'N/A'}</TableCell>
+                                            <TableCell astyle={{ width: 90 }} align="right">{DamageDetails.damageDetails.length > 0 ? DamageDetails.damageDetails[1].total ? DamageDetails.damageDetails[0].total : 0: 'N/A'}</TableCell>
+                                </TableRow>
+                                {/* {wheelTyrelistOfItem.map(list => {
                                     return (
                                         <TableRow key={list}>
                                             <TableCell component="th" scope="row">
@@ -197,7 +261,7 @@ export default function ViewDetailedReport(props) {
                                         </TableRow>
                                     )
                                 })
-                                }
+                                } */}
                                 <TableRow>
                                     <TableCell colSpan={6} component="th" scope="row" className="warningColorTable">
                                         Mechanical
@@ -210,7 +274,17 @@ export default function ViewDetailedReport(props) {
                                     </TableCell>
 
                                 </TableRow>
-                                {wheelTyrelistOfItem.map(list => {
+                                <TableRow key={list}>
+                                            <TableCell component="th" scope="row">
+                                                {DamageDetails.damageDetails.length > 0 ? DamageDetails.damageDetails[2].damage_area : 'N/A'}
+                                            </TableCell>
+                                            <TableCell style={{ width: 90 }} align="right">{DamageDetails.damageDetails.length > 0 ?DamageDetails.damageDetails[2].damage_type : 'N/A'}</TableCell>
+                                            <TableCell style={{ width: 90 }} align="right">{DamageDetails.damageDetails.length > 0 ? DamageDetails.damageDetails[2].partlabor_hours: 'N/A'}</TableCell>
+                                            <TableCell style={{ width: 90 }} align="right">{DamageDetails.damageDetails.length > 0 ? DamageDetails.damageDetails[2].paint_hours? DamageDetails.damageDetails[0].paint_hours:0: 'N/A'}</TableCell>
+                                            <TableCell style={{ width: 90 }} align="right">{DamageDetails.damageDetails.length > 0 ? DamageDetails.damageDetails[2].part_cost ? DamageDetails.damageDetails[0].part_cost : 0: 'N/A'}</TableCell>
+                                            <TableCell astyle={{ width: 90 }} align="right">{DamageDetails.damageDetails.length > 0 ? DamageDetails.damageDetails[2].total ? DamageDetails.damageDetails[0].total : 0: 'N/A'}</TableCell>
+                                </TableRow>
+                                {/* {wheelTyrelistOfItem.map(list => {
                                     return (
                                         <TableRow key={list}>
                                             <TableCell component="th" scope="row">
@@ -224,7 +298,7 @@ export default function ViewDetailedReport(props) {
                                         </TableRow>
                                     )
                                 })
-                                }
+                                } */}
                                 <TableRow >
                                     <TableCell colSpan={2} component="th" scope="row">
                                     </TableCell>
