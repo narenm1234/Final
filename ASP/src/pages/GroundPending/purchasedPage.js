@@ -88,26 +88,7 @@ export default function ListingPage2(props) {
     console.log(vehicleResponse);
     console.log(apiResponse.data.data);
   }
-  let data = getParameterByName("code");
-function getParameterByName(name, url = window.location.href) {
-  name = name.replace(/[\[\]]/g, '\\$&');
-  var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
-      results = regex.exec(url);
-  if (!results) return null;
-  if (!results[2]) return '';
-  return decodeURIComponent(results[2].replace(/\+/g, ' '));
-}
-useEffect(() => {
-  getToken();
-  getUserAccessInfoToken();
-}, [value]);
-async function getUserAccessInfoToken(){
-  let resp = await getUserInfoToken();
-}
-async function getToken() {
-  let apiResponse = await getAccessTokenEndpoint(data);
-  console.log("--->",apiResponse)
-}
+
   return vehicleResponse.length > 0 ? (
     vehicleResponse.map((vehicle, index) => {
       return (
