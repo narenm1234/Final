@@ -2,6 +2,7 @@ import "./App.css";
 import Sidebar from "./components/Sidebar";
 import Header from "./components/Header/Header";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import React, { useState } from "react";
 import Home from "./pages/Home";
 import GroundPending from "./pages/GroundPending/GroundPending";
 import GroundPending1 from "./pages/GroundPending/GroundPending1";
@@ -15,13 +16,18 @@ import AdminHome from "./pages/AdminHome";
 import ConditionReportRequests from "./pages/ConditionReportRequests";
 import InventoryRequestsTabs from "./components/InventoryRequestsTabs";
 function App() {
+  const [stateUpdate, setStateUpdate] = useState(1);
+  const fireEvents = () => {
+    setStateUpdate(stateUpdate + 1);
+  };
+
   return (
     <>
       <div>
         <Router>
           <Header></Header>
           <div>
-            <Sidebar>
+            <Sidebar stateUpdate={stateUpdate}>
               <Switch>
                 <Route
                   path="/home"
@@ -34,7 +40,8 @@ function App() {
                   path="/grounded"
                   exact
                   exact
-                  render={(props) => <GroundPending {...props} />}
+                  render={(props) => <GroundPending {...props} fireEvents={fireEvents}
+                  />}
                 />
                 <Route path="/passed" exact component={GroundPending1} />
                 <Route path="/purchased" exact component={GroundPending2} />

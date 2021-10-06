@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import MobileStepper from "@material-ui/core/MobileStepper";
 import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
@@ -6,6 +6,8 @@ import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
 
 import Carousel from "react-material-ui-carousel";
 import { Paper, Button } from "@material-ui/core";
+
+import { getImageData } from "../../service/api";
 
 const tutorialSteps = [
   {
@@ -51,12 +53,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Item = ({ imgPath }) => {
+const Item = ({ binImageArray }) => {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   return (
     <Paper className={classes.card}>
-      <img className="img" src={imgPath} alt={imgPath} />
+      <img className="img" src={binImageArray} alt={binImageArray} />
     </Paper>
   );
 };
@@ -64,12 +66,14 @@ const Item = ({ imgPath }) => {
 function SwipeableTextMobileStepper(props) {
   const classes = useStyles();
   const theme = useTheme();
-
   const maxSteps = tutorialSteps.length;
 
   useEffect(() => {
-    // console.log("vehical:::", props.vehical);
+   console.log(" props.images", props.images)
+
   }, []);
+
+ 
 
   //   const handleNext = () => {
   //     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -108,7 +112,7 @@ function SwipeableTextMobileStepper(props) {
         //     }
         // }}
       >
-        {tutorialSteps.map((item, i) => (
+        { props.images && props.images.map((item, i) => (
           <Item key={i} {...item} />
         ))}
       </Carousel>

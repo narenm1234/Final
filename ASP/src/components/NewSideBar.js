@@ -78,7 +78,7 @@ const sidebarItems = [
   },
 ];
 
-export default function NewSidebar() {
+export default function NewSidebar(props) {
   const location = useLocation();
   const [list, setList] = React.useState([]);
   const [open, setOpen] = React.useState([]);
@@ -90,12 +90,12 @@ export default function NewSidebar() {
     let getPassedListRes = await getPassedList();
     let getPurchasedListRes = await getPurchasedList("ALL");
     // setVehicleResponse(apiResponse.data.data);
-    console.log("setVehicleResponse::", getGroundingListRes.data.data);
-    // console.log("setVehicleResponse::", getPassedListRes.data.data)
-    // console.log("setVehicleResponse::", getPurchasedListRes.data.data)
+    // console.log("setVehicleResponse::", getGroundingListRes.data.data);
+    // console.log("setVehicleResponse::", getPassedListRes.data.data);
+    // console.log("setVehicleResponse::", getPurchasedListRes.data.data);
 
-    sidebarItems.forEach((item) => {
-      item.childs.forEach((child) => {
+    sidebarItems.map((item) => {
+      item.childs.map((child) => {
         if (activeChild == child.link) {
           item.open = true;
         }
@@ -111,8 +111,9 @@ export default function NewSidebar() {
         }
       });
     });
-    setList(sidebarItems);
-  }, []);
+
+      setList([...sidebarItems]);
+  }, [props.stateUpdate]);
 
   const handleClick = (item) => {
     let updatedList = list.map((litem) => {

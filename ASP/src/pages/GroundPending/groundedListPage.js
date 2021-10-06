@@ -11,12 +11,16 @@ import {
   getAuthTokenSSO,
   getAccessTokenEndpoint,
   getUserInfo,
+  getImageData,
+  // getCarXml,
 } from "../../service/api";
 import CurrencyFormat from "react-currency-format";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItemText from "@material-ui/core/ListItemText";
 import PassOnVehicle from "../PassOnVehicle";
+// const parseString = require("xml2js").parseString;
+
 let resp = [
   // {
   //   account_type: "LEASE",
@@ -79,9 +83,11 @@ export default function ListingPage(props) {
   const [progress, setProgress] = React.useState(0);
   const [time, setTime] = React.useState("00:00");
   const [passVin, setPassVin] = React.useState("");
+  const [images, setImages] = React.useState([]);
 
   useEffect(() => {
     getVehicleDetails();
+    getImages();
   }, [value]);
 
   const getVehicleDetails = async () => {
@@ -93,11 +99,45 @@ export default function ListingPage(props) {
   useEffect(() => {
     getAuthTokenSSO1();
   }, [value]);
+
   async function getAuthTokenSSO1() {
     let apiResponse = await getAuthTokenSSO();
     setSSOAuth(apiResponse.data.data);
     console.log("-------0------>", SSOAuth);
   }
+
+  const getImages = async () => {
+    let reqObj = {
+      inspectionId: 18495852,
+      paramForImage: "Inspection_Front_Page",
+      tenantId: "t002",
+    };
+    let getimagesRes = await getImageData(reqObj);
+    console.log("get image data::", getimagesRes);
+
+    getimagesRes &&
+      getimagesRes.data &&
+      getimagesRes.data.imageDetails.map((item) => {
+        item.binImageArray = "data:image/jpeg;base64," + item.binImageArray;
+      });
+    setImages(getimagesRes.data.imageDetails);
+  };
+
+  // const getImages = async () => {
+  //   // let obj = {
+  //   //     "inspectionId": 0,
+  //   //     "paramForImage": "string",
+  //   //     "tenantId": "string"
+  //   //   }
+
+  //     // let getimagesRes = getImageData(null);
+  //     // console.log("get image data::", getimagesRes)
+
+  //   // let getXmlImages = await getCarXml();
+  //   // parseString(getXmlImages.data, (err, body) => {
+  //   //   console.log("get Xml Images::", body);
+  //   // });
+  // };
 
   const openConditionReport = (VINumber, vehicle) => {
     props.history.push("/conditionreport", {
@@ -161,7 +201,10 @@ export default function ListingPage(props) {
             <div className="listingPageCard" key={index}>
               <Grid container spacing={3}>
                 <Grid item xs={4}>
-                  <SwipeableTextMobileStepper vehical={vehicle} />
+                  <SwipeableTextMobileStepper
+                    vehical={vehicle}
+                    images={images}
+                  />
                 </Grid>
                 <Grid item xs={4}>
                   <div className="Year-Make-Model-Col">
@@ -345,7 +388,10 @@ export default function ListingPage(props) {
         open={open}
         close={handleClose}
         vin={passVin}
-        reload={getVehicleDetails}
+        reload={() => {
+          getVehicleDetails();
+          props.fireEvents();
+        }}
       />
     </>
   );
