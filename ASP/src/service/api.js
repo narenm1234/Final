@@ -1,6 +1,5 @@
 import axios from "axios";
-let xmlFile = require('../assets/car.xml');
-
+let xmlFile = require("../assets/car.xml");
 
 // const DEV_BASE = 'https://aspservices-internal-dev.tfs.toyota.com/asp-services/';
 // const TEST_BASE = 'https://aspservices-internal-test.tfs.toyota.com/asp-services/';
@@ -22,6 +21,7 @@ let client_id =
   "3MVG9_I_oWkIqLrmNgl8unCGrAPmcPODjDz6DA7QLw7qbd0CKBqVuyUVp_4.c4xZdRowJUxirUcXgiGiPYaQ.";
 let rrm;
 let AMP;
+let MileageDiscList;
 
 let getImages;
 // let code ='aPrxyoOWGvXqBxqwZTQG7bATs.5vkEP2UmwQ_Eeu7GT7g4TQrfoMjW6F_s7s__kGco4_nvPVrg==';
@@ -57,6 +57,8 @@ if (hostname.includes("dev")) {
     "https://aspservices-internal-dev.tfs.toyota.com/asp-services/GetManualPricingList";
   rrm =
     "https://aspservices-internal-dev.tfs.toyota.com/asp-services/RRMApprovalList";
+  MileageDiscList =
+    "https://aspservices-internal-dev.tfs.toyota.com/asp-services/getMileageDiscList";
   getImages =
     "https://aspservices-internal-dev.tfs.toyota.com/asp-services/getImage";
 } else if (hostname.includes("local")) {
@@ -89,6 +91,8 @@ if (hostname.includes("dev")) {
     "https://aspservices-internal-dev.tfs.toyota.com/asp-services/GetManualPricingList";
   rrm =
     "https://aspservices-internal-dev.tfs.toyota.com/asp-services/RRMApprovalList";
+  MileageDiscList =
+    "https://aspservices-internal-dev.tfs.toyota.com/asp-services/getMileageDiscList";
   getImages =
     "https://aspservices-internal-dev.tfs.toyota.com/asp-services/getImage";
 } else if (hostname.includes("stage")) {
@@ -118,6 +122,8 @@ if (hostname.includes("dev")) {
     "https://aspservices-internal-stage.tfs.toyota.com/asp-services/GetManualPricingList";
   rrm =
     "https://aspservices-internal-stage.tfs.toyota.com/asp-services/RRMApprovalList";
+  MileageDiscList =
+    "https://aspservices-internal-stage.tfs.toyota.com/asp-services/getMileageDiscList";
   getImages =
     "https://aspservices-internal-stage.tfs.toyota.com/asp-services/getImage";
 } else if (hostname.includes("test")) {
@@ -147,6 +153,8 @@ if (hostname.includes("dev")) {
     "https://aspservices-internal-test.tfs.toyota.com/asp-services/GetManualPricingList";
   rrm =
     "https://aspservices-internal-test.tfs.toyota.com/asp-services/RRMApprovalList";
+  MileageDiscList =
+    "https://aspservices-internal-test.tfs.toyota.com/asp-services/getMileageDiscList";
   getImages =
     "https://aspservices-internal-test.tfs.toyota.com/asp-services/getImage";
 } else if (hostname.includes("prod")) {
@@ -176,6 +184,8 @@ if (hostname.includes("dev")) {
     "https://aspservices-internal.tfs.toyota.com/asp-services/GetManualPricingList";
   rrm =
     "https://aspservices-internal.tfs.toyota.com/asp-services/RRMApprovalList";
+  MileageDiscList =
+    "https://aspservices-internal.tfs.toyota.com/asp-services/getMileageDiscList";
   getImages =
     "https://aspservices-internal.tfs.toyota.com/asp-services/getImage";
 }
@@ -258,16 +268,17 @@ export async function getInspectionVehicleDetails(vin) {
   return await axios.post(`${inspectionVehicleDetails}?vin=${vin}`, options);
 }
 export async function getInspectionWheelTiresDetails(inspectionId) {
-    const options = {
-        headers: {
-            "Content-Type": "application/json"
-        }
+  const options = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
 
-    };
-
-
-    return await axios.post(inspectionWheelTiresDetailsUrl,inspectionId , options);
-
+  return await axios.post(
+    inspectionWheelTiresDetailsUrl,
+    inspectionId,
+    options
+  );
 }
 export async function getInspectionAccessoryDetails(vin) {
   const options = {
@@ -285,19 +296,18 @@ export async function getInspectionAccessoryDetails(vin) {
 //getInspectionDamageDetails
 
 export async function getInspectionDamageDetailsApi(inspectionId, vin) {
+  console.log("inspectionId", inspectionId);
+  console.log("Vin", vin);
 
-    console.log("inspectionId", inspectionId)
-    console.log("Vin", vin)
+  const options = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
 
-    const options = {
-        headers: {
-            "Content-Type": "application/json"
-        }
-
-    };
-
-
-    return await axios.post(`${getInspectionDamageDetailsUrl}?inpsectionId=18495852&vin=${vin}`);
+  return await axios.post(
+    `${getInspectionDamageDetailsUrl}?inpsectionId=18495852&vin=${vin}`
+  );
 }
 
 export async function getOEMBuildDetailsApi(vin) {
@@ -362,6 +372,18 @@ export async function RRMList() {
     },
   };
   return await axios.post(rrm, options);
+}
+export async function getMileageDiscList() {
+  const options = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  return await axios.post(
+    "https://aspservices-internal-dev.tfs.toyota.com/asp-services/getMileageDiscList?vin=JM3KFACM0M0366307",
+    options
+  );
+  //return await axios.post(MileageDiscList, options);
 }
 
 //var querystring = require('querystring');
@@ -478,7 +500,7 @@ export async function getImageData(obj) {
     headers: {
       "Content-Type": "application/json",
     },
-    data: obj
+    data: obj,
   };
   return await axios(config).then(
     (res) => {
@@ -490,19 +512,13 @@ export async function getImageData(obj) {
   );
 }
 
-
 export async function getCarXml() {
-    return await axios(xmlFile.default).then(
-      (res) => {
-       return res
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
-  }
-
-
-
-
-  
+  return await axios(xmlFile.default).then(
+    (res) => {
+      return res;
+    },
+    (err) => {
+      console.log(err);
+    }
+  );
+}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -12,6 +12,7 @@ import InputBase from "@material-ui/core/InputBase";
 import SwipableFilterMileage from "./SwipableFilterMileage";
 import Paginator from "./Pagination";
 import SortIcon from "../assets/WebFont/sort.svg";
+import { getMileageDiscList } from "../service/api";
 
 const useStyles = makeStyles({
   table: {
@@ -32,510 +33,510 @@ const useStyles = makeStyles({
   },
 });
 
-function createVehicleData(
-  VIN,
-  Year,
-  Make,
-  Model_Trim,
-  region,
-  ground_mileage,
-  inspection_mileage,
-  difference
-) {
-  return {
-    VIN,
-    Year,
-    Make,
-    Model_Trim,
-    region,
-    ground_mileage,
-    inspection_mileage,
-    difference,
-  };
-}
+// function createVehicleData(
+//   VIN,
+//   Year,
+//   Make,
+//   Model_Trim,
+//   region,
+//   ground_mileage,
+//   inspection_mileage,
+//   difference
+// ) {
+//   return {
+//     VIN,
+//     Year,
+//     Make,
+//     Model_Trim,
+//     region,
+//     ground_mileage,
+//     inspection_mileage,
+//     difference,
+//   };
+// }
 
-const rows = [
-  createVehicleData(
-    "0000000000000000",
-    "2021",
-    "Make Name",
-    "Model/Trim",
-    "Region Label",
-    "00,0000",
-    "00,0000",
-    "00/00/000"
-  ),
-  createVehicleData(
-    "0000000000000000",
-    "2021",
-    "Make Name",
-    "Model/Trim",
-    "Region Label",
-    "00,0000",
-    "00,0000",
-    "00/00/000"
-  ),
-  createVehicleData(
-    "0000000000000000",
-    "2021",
-    "Make Name",
-    "Model/Trim",
-    "Region Label",
-    "00,0000",
-    "00,0000",
-    "00/00/000"
-  ),
-  createVehicleData(
-    "0000000000000000",
-    "2021",
-    "Make Name",
-    "Model/Trim",
-    "Region Label",
-    "00,0000",
-    "00,0000",
-    "00/00/000"
-  ),
-  createVehicleData(
-    "0000000000000000",
-    "2021",
-    "Make Name",
-    "Model/Trim",
-    "Region Label",
-    "00,0000",
-    "00,0000",
-    "00/00/000"
-  ),
-  createVehicleData(
-    "0000000000000000",
-    "2021",
-    "Make Name",
-    "Model/Trim",
-    "Region Label",
-    "00,0000",
-    "00,0000",
-    "00/00/000"
-  ),
-  createVehicleData(
-    "0000000000000000",
-    "2021",
-    "Make Name",
-    "Model/Trim",
-    "Region Label",
-    "00,0000",
-    "00,0000",
-    "00/00/000"
-  ),
-  createVehicleData(
-    "0000000000000000",
-    "2021",
-    "Make Name",
-    "Model/Trim",
-    "Region Label",
-    "00,0000",
-    "00,0000",
-    "00/00/000"
-  ),
-  createVehicleData(
-    "0000000000000000",
-    "2021",
-    "Make Name",
-    "Model/Trim",
-    "Region Label",
-    "00,0000",
-    "00,0000",
-    "00/00/000"
-  ),
-  createVehicleData(
-    "0000000000000000",
-    "2021",
-    "Make Name",
-    "Model/Trim",
-    "Region Label",
-    "00,0000",
-    "00,0000",
-    "00/00/000"
-  ),
-  createVehicleData(
-    "0000000000000000",
-    "2021",
-    "Make Name",
-    "Model/Trim",
-    "Region Label",
-    "00,0000",
-    "00,0000",
-    "00/00/000"
-  ),
-  createVehicleData(
-    "0000000000000000",
-    "2021",
-    "Make Name",
-    "Model/Trim",
-    "Region Label",
-    "00,0000",
-    "00,0000",
-    "00/00/000"
-  ),
-  createVehicleData(
-    "0000000000000000",
-    "2021",
-    "Make Name",
-    "Model/Trim",
-    "Region Label",
-    "00,0000",
-    "00,0000",
-    "00/00/000"
-  ),
-  createVehicleData(
-    "0000000000000000",
-    "2021",
-    "Make Name",
-    "Model/Trim",
-    "Region Label",
-    "00,0000",
-    "00,0000",
-    "00/00/000"
-  ),
-  createVehicleData(
-    "0000000000000000",
-    "2021",
-    "Make Name",
-    "Model/Trim",
-    "Region Label",
-    "00,0000",
-    "00,0000",
-    "00/00/000"
-  ),
-  createVehicleData(
-    "0000000000000000",
-    "2021",
-    "Make Name",
-    "Model/Trim",
-    "Region Label",
-    "00,0000",
-    "00,0000",
-    "00/00/000"
-  ),
-  createVehicleData(
-    "0000000000000000",
-    "2021",
-    "Make Name",
-    "Model/Trim",
-    "Region Label",
-    "00,0000",
-    "00,0000",
-    "00/00/000"
-  ),
-  createVehicleData(
-    "0000000000000000",
-    "2021",
-    "Make Name",
-    "Model/Trim",
-    "Region Label",
-    "00,0000",
-    "00,0000",
-    "00/00/000"
-  ),
-  createVehicleData(
-    "0000000000000000",
-    "2021",
-    "Make Name",
-    "Model/Trim",
-    "Region Label",
-    "00,0000",
-    "00,0000",
-    "00/00/000"
-  ),
-  createVehicleData(
-    "0000000000000000",
-    "2021",
-    "Make Name",
-    "Model/Trim",
-    "Region Label",
-    "00,0000",
-    "00,0000",
-    "00/00/000"
-  ),
-  createVehicleData(
-    "0000000000000000",
-    "2021",
-    "Make Name",
-    "Model/Trim",
-    "Region Label",
-    "00,0000",
-    "00,0000",
-    "00/00/000"
-  ),
-  createVehicleData(
-    "0000000000000000",
-    "2021",
-    "Make Name",
-    "Model/Trim",
-    "Region Label",
-    "00,0000",
-    "00,0000",
-    "00/00/000"
-  ),
-  createVehicleData(
-    "0000000000000000",
-    "2021",
-    "Make Name",
-    "Model/Trim",
-    "Region Label",
-    "00,0000",
-    "00,0000",
-    "00/00/000"
-  ),
-  createVehicleData(
-    "0000000000000000",
-    "2021",
-    "Make Name",
-    "Model/Trim",
-    "Region Label",
-    "00,0000",
-    "00,0000",
-    "00/00/000"
-  ),
-  createVehicleData(
-    "0000000000000000",
-    "2021",
-    "Make Name",
-    "Model/Trim",
-    "Region Label",
-    "00,0000",
-    "00,0000",
-    "00/00/000"
-  ),
-  createVehicleData(
-    "0000000000000000",
-    "2021",
-    "Make Name",
-    "Model/Trim",
-    "Region Label",
-    "00,0000",
-    "00,0000",
-    "00/00/000"
-  ),
-  createVehicleData(
-    "0000000000000000",
-    "2021",
-    "Make Name",
-    "Model/Trim",
-    "Region Label",
-    "00,0000",
-    "00,0000",
-    "00/00/000"
-  ),
-  createVehicleData(
-    "0000000000000000",
-    "2021",
-    "Make Name",
-    "Model/Trim",
-    "Region Label",
-    "00,0000",
-    "00,0000",
-    "00/00/000"
-  ),
-  createVehicleData(
-    "0000000000000000",
-    "2021",
-    "Make Name",
-    "Model/Trim",
-    "Region Label",
-    "00,0000",
-    "00,0000",
-    "00/00/000"
-  ),
-  createVehicleData(
-    "0000000000000000",
-    "2021",
-    "Make Name",
-    "Model/Trim",
-    "Region Label",
-    "00,0000",
-    "00,0000",
-    "00/00/000"
-  ),
-  createVehicleData(
-    "0000000000000000",
-    "2021",
-    "Make Name",
-    "Model/Trim",
-    "Region Label",
-    "00,0000",
-    "00,0000",
-    "00/00/000"
-  ),
-  createVehicleData(
-    "0000000000000000",
-    "2021",
-    "Make Name",
-    "Model/Trim",
-    "Region Label",
-    "00,0000",
-    "00,0000",
-    "00/00/000"
-  ),
-  createVehicleData(
-    "0000000000000000",
-    "2021",
-    "Make Name",
-    "Model/Trim",
-    "Region Label",
-    "00,0000",
-    "00,0000",
-    "00/00/000"
-  ),
-  createVehicleData(
-    "0000000000000000",
-    "2021",
-    "Make Name",
-    "Model/Trim",
-    "Region Label",
-    "00,0000",
-    "00,0000",
-    "00/00/000"
-  ),
-  createVehicleData(
-    "0000000000000000",
-    "2021",
-    "Make Name",
-    "Model/Trim",
-    "Region Label",
-    "00,0000",
-    "00,0000",
-    "00/00/000"
-  ),
-  createVehicleData(
-    "0000000000000000",
-    "2021",
-    "Make Name",
-    "Model/Trim",
-    "Region Label",
-    "00,0000",
-    "00,0000",
-    "00/00/000"
-  ),
-  createVehicleData(
-    "0000000000000000",
-    "2021",
-    "Make Name",
-    "Model/Trim",
-    "Region Label",
-    "00,0000",
-    "00,0000",
-    "00/00/000"
-  ),
-  createVehicleData(
-    "0000000000000000",
-    "2021",
-    "Make Name",
-    "Model/Trim",
-    "Region Label",
-    "00,0000",
-    "00,0000",
-    "00/00/000"
-  ),
-  createVehicleData(
-    "0000000000000000",
-    "2021",
-    "Make Name",
-    "Model/Trim",
-    "Region Label",
-    "00,0000",
-    "00,0000",
-    "00/00/000"
-  ),
-  createVehicleData(
-    "0000000000000000",
-    "2021",
-    "Make Name",
-    "Model/Trim",
-    "Region Label",
-    "00,0000",
-    "00,0000",
-    "00/00/000"
-  ),
-  createVehicleData(
-    "0000000000000000",
-    "2021",
-    "Make Name",
-    "Model/Trim",
-    "Region Label",
-    "00,0000",
-    "00,0000",
-    "00/00/000"
-  ),
-  createVehicleData(
-    "0000000000000000",
-    "2021",
-    "Make Name",
-    "Model/Trim",
-    "Region Label",
-    "00,0000",
-    "00,0000",
-    "00/00/000"
-  ),
-  createVehicleData(
-    "0000000000000000",
-    "2021",
-    "Make Name",
-    "Model/Trim",
-    "Region Label",
-    "00,0000",
-    "00,0000",
-    "00/00/000"
-  ),
-  createVehicleData(
-    "0000000000000000",
-    "2021",
-    "Make Name",
-    "Model/Trim",
-    "Region Label",
-    "00,0000",
-    "00,0000",
-    "00/00/000"
-  ),
-  createVehicleData(
-    "0000000000000000",
-    "2021",
-    "Make Name",
-    "Model/Trim",
-    "Region Label",
-    "00,0000",
-    "00,0000",
-    "00/00/000"
-  ),
-  createVehicleData(
-    "0000000000000000",
-    "2021",
-    "Make Name",
-    "Model/Trim",
-    "Region Label",
-    "00,0000",
-    "00,0000",
-    "00/00/000"
-  ),
-  createVehicleData(
-    "0000000000000000",
-    "2021",
-    "Make Name",
-    "Model/Trim",
-    "Region Label",
-    "00,0000",
-    "00,0000",
-    "00/00/000"
-  ),
-  createVehicleData(
-    "0000000000000000",
-    "2021",
-    "Make Name",
-    "Model/Trim",
-    "Region Label",
-    "00,0000",
-    "00,0000",
-    "00/00/000"
-  ),
-];
+// const rows = [
+//   createVehicleData(
+//     "0000000000000000",
+//     "2021",
+//     "Make Name",
+//     "Model/Trim",
+//     "Region Label",
+//     "00,0000",
+//     "00,0000",
+//     "00/00/000"
+//   ),
+//   createVehicleData(
+//     "0000000000000000",
+//     "2021",
+//     "Make Name",
+//     "Model/Trim",
+//     "Region Label",
+//     "00,0000",
+//     "00,0000",
+//     "00/00/000"
+//   ),
+//   createVehicleData(
+//     "0000000000000000",
+//     "2021",
+//     "Make Name",
+//     "Model/Trim",
+//     "Region Label",
+//     "00,0000",
+//     "00,0000",
+//     "00/00/000"
+//   ),
+//   createVehicleData(
+//     "0000000000000000",
+//     "2021",
+//     "Make Name",
+//     "Model/Trim",
+//     "Region Label",
+//     "00,0000",
+//     "00,0000",
+//     "00/00/000"
+//   ),
+//   createVehicleData(
+//     "0000000000000000",
+//     "2021",
+//     "Make Name",
+//     "Model/Trim",
+//     "Region Label",
+//     "00,0000",
+//     "00,0000",
+//     "00/00/000"
+//   ),
+//   createVehicleData(
+//     "0000000000000000",
+//     "2021",
+//     "Make Name",
+//     "Model/Trim",
+//     "Region Label",
+//     "00,0000",
+//     "00,0000",
+//     "00/00/000"
+//   ),
+//   createVehicleData(
+//     "0000000000000000",
+//     "2021",
+//     "Make Name",
+//     "Model/Trim",
+//     "Region Label",
+//     "00,0000",
+//     "00,0000",
+//     "00/00/000"
+//   ),
+//   createVehicleData(
+//     "0000000000000000",
+//     "2021",
+//     "Make Name",
+//     "Model/Trim",
+//     "Region Label",
+//     "00,0000",
+//     "00,0000",
+//     "00/00/000"
+//   ),
+//   createVehicleData(
+//     "0000000000000000",
+//     "2021",
+//     "Make Name",
+//     "Model/Trim",
+//     "Region Label",
+//     "00,0000",
+//     "00,0000",
+//     "00/00/000"
+//   ),
+//   createVehicleData(
+//     "0000000000000000",
+//     "2021",
+//     "Make Name",
+//     "Model/Trim",
+//     "Region Label",
+//     "00,0000",
+//     "00,0000",
+//     "00/00/000"
+//   ),
+//   createVehicleData(
+//     "0000000000000000",
+//     "2021",
+//     "Make Name",
+//     "Model/Trim",
+//     "Region Label",
+//     "00,0000",
+//     "00,0000",
+//     "00/00/000"
+//   ),
+//   createVehicleData(
+//     "0000000000000000",
+//     "2021",
+//     "Make Name",
+//     "Model/Trim",
+//     "Region Label",
+//     "00,0000",
+//     "00,0000",
+//     "00/00/000"
+//   ),
+//   createVehicleData(
+//     "0000000000000000",
+//     "2021",
+//     "Make Name",
+//     "Model/Trim",
+//     "Region Label",
+//     "00,0000",
+//     "00,0000",
+//     "00/00/000"
+//   ),
+//   createVehicleData(
+//     "0000000000000000",
+//     "2021",
+//     "Make Name",
+//     "Model/Trim",
+//     "Region Label",
+//     "00,0000",
+//     "00,0000",
+//     "00/00/000"
+//   ),
+//   createVehicleData(
+//     "0000000000000000",
+//     "2021",
+//     "Make Name",
+//     "Model/Trim",
+//     "Region Label",
+//     "00,0000",
+//     "00,0000",
+//     "00/00/000"
+//   ),
+//   createVehicleData(
+//     "0000000000000000",
+//     "2021",
+//     "Make Name",
+//     "Model/Trim",
+//     "Region Label",
+//     "00,0000",
+//     "00,0000",
+//     "00/00/000"
+//   ),
+//   createVehicleData(
+//     "0000000000000000",
+//     "2021",
+//     "Make Name",
+//     "Model/Trim",
+//     "Region Label",
+//     "00,0000",
+//     "00,0000",
+//     "00/00/000"
+//   ),
+//   createVehicleData(
+//     "0000000000000000",
+//     "2021",
+//     "Make Name",
+//     "Model/Trim",
+//     "Region Label",
+//     "00,0000",
+//     "00,0000",
+//     "00/00/000"
+//   ),
+//   createVehicleData(
+//     "0000000000000000",
+//     "2021",
+//     "Make Name",
+//     "Model/Trim",
+//     "Region Label",
+//     "00,0000",
+//     "00,0000",
+//     "00/00/000"
+//   ),
+//   createVehicleData(
+//     "0000000000000000",
+//     "2021",
+//     "Make Name",
+//     "Model/Trim",
+//     "Region Label",
+//     "00,0000",
+//     "00,0000",
+//     "00/00/000"
+//   ),
+//   createVehicleData(
+//     "0000000000000000",
+//     "2021",
+//     "Make Name",
+//     "Model/Trim",
+//     "Region Label",
+//     "00,0000",
+//     "00,0000",
+//     "00/00/000"
+//   ),
+//   createVehicleData(
+//     "0000000000000000",
+//     "2021",
+//     "Make Name",
+//     "Model/Trim",
+//     "Region Label",
+//     "00,0000",
+//     "00,0000",
+//     "00/00/000"
+//   ),
+//   createVehicleData(
+//     "0000000000000000",
+//     "2021",
+//     "Make Name",
+//     "Model/Trim",
+//     "Region Label",
+//     "00,0000",
+//     "00,0000",
+//     "00/00/000"
+//   ),
+//   createVehicleData(
+//     "0000000000000000",
+//     "2021",
+//     "Make Name",
+//     "Model/Trim",
+//     "Region Label",
+//     "00,0000",
+//     "00,0000",
+//     "00/00/000"
+//   ),
+//   createVehicleData(
+//     "0000000000000000",
+//     "2021",
+//     "Make Name",
+//     "Model/Trim",
+//     "Region Label",
+//     "00,0000",
+//     "00,0000",
+//     "00/00/000"
+//   ),
+//   createVehicleData(
+//     "0000000000000000",
+//     "2021",
+//     "Make Name",
+//     "Model/Trim",
+//     "Region Label",
+//     "00,0000",
+//     "00,0000",
+//     "00/00/000"
+//   ),
+//   createVehicleData(
+//     "0000000000000000",
+//     "2021",
+//     "Make Name",
+//     "Model/Trim",
+//     "Region Label",
+//     "00,0000",
+//     "00,0000",
+//     "00/00/000"
+//   ),
+//   createVehicleData(
+//     "0000000000000000",
+//     "2021",
+//     "Make Name",
+//     "Model/Trim",
+//     "Region Label",
+//     "00,0000",
+//     "00,0000",
+//     "00/00/000"
+//   ),
+//   createVehicleData(
+//     "0000000000000000",
+//     "2021",
+//     "Make Name",
+//     "Model/Trim",
+//     "Region Label",
+//     "00,0000",
+//     "00,0000",
+//     "00/00/000"
+//   ),
+//   createVehicleData(
+//     "0000000000000000",
+//     "2021",
+//     "Make Name",
+//     "Model/Trim",
+//     "Region Label",
+//     "00,0000",
+//     "00,0000",
+//     "00/00/000"
+//   ),
+//   createVehicleData(
+//     "0000000000000000",
+//     "2021",
+//     "Make Name",
+//     "Model/Trim",
+//     "Region Label",
+//     "00,0000",
+//     "00,0000",
+//     "00/00/000"
+//   ),
+//   createVehicleData(
+//     "0000000000000000",
+//     "2021",
+//     "Make Name",
+//     "Model/Trim",
+//     "Region Label",
+//     "00,0000",
+//     "00,0000",
+//     "00/00/000"
+//   ),
+//   createVehicleData(
+//     "0000000000000000",
+//     "2021",
+//     "Make Name",
+//     "Model/Trim",
+//     "Region Label",
+//     "00,0000",
+//     "00,0000",
+//     "00/00/000"
+//   ),
+//   createVehicleData(
+//     "0000000000000000",
+//     "2021",
+//     "Make Name",
+//     "Model/Trim",
+//     "Region Label",
+//     "00,0000",
+//     "00,0000",
+//     "00/00/000"
+//   ),
+//   createVehicleData(
+//     "0000000000000000",
+//     "2021",
+//     "Make Name",
+//     "Model/Trim",
+//     "Region Label",
+//     "00,0000",
+//     "00,0000",
+//     "00/00/000"
+//   ),
+//   createVehicleData(
+//     "0000000000000000",
+//     "2021",
+//     "Make Name",
+//     "Model/Trim",
+//     "Region Label",
+//     "00,0000",
+//     "00,0000",
+//     "00/00/000"
+//   ),
+//   createVehicleData(
+//     "0000000000000000",
+//     "2021",
+//     "Make Name",
+//     "Model/Trim",
+//     "Region Label",
+//     "00,0000",
+//     "00,0000",
+//     "00/00/000"
+//   ),
+//   createVehicleData(
+//     "0000000000000000",
+//     "2021",
+//     "Make Name",
+//     "Model/Trim",
+//     "Region Label",
+//     "00,0000",
+//     "00,0000",
+//     "00/00/000"
+//   ),
+//   createVehicleData(
+//     "0000000000000000",
+//     "2021",
+//     "Make Name",
+//     "Model/Trim",
+//     "Region Label",
+//     "00,0000",
+//     "00,0000",
+//     "00/00/000"
+//   ),
+//   createVehicleData(
+//     "0000000000000000",
+//     "2021",
+//     "Make Name",
+//     "Model/Trim",
+//     "Region Label",
+//     "00,0000",
+//     "00,0000",
+//     "00/00/000"
+//   ),
+//   createVehicleData(
+//     "0000000000000000",
+//     "2021",
+//     "Make Name",
+//     "Model/Trim",
+//     "Region Label",
+//     "00,0000",
+//     "00,0000",
+//     "00/00/000"
+//   ),
+//   createVehicleData(
+//     "0000000000000000",
+//     "2021",
+//     "Make Name",
+//     "Model/Trim",
+//     "Region Label",
+//     "00,0000",
+//     "00,0000",
+//     "00/00/000"
+//   ),
+//   createVehicleData(
+//     "0000000000000000",
+//     "2021",
+//     "Make Name",
+//     "Model/Trim",
+//     "Region Label",
+//     "00,0000",
+//     "00,0000",
+//     "00/00/000"
+//   ),
+//   createVehicleData(
+//     "0000000000000000",
+//     "2021",
+//     "Make Name",
+//     "Model/Trim",
+//     "Region Label",
+//     "00,0000",
+//     "00,0000",
+//     "00/00/000"
+//   ),
+//   createVehicleData(
+//     "0000000000000000",
+//     "2021",
+//     "Make Name",
+//     "Model/Trim",
+//     "Region Label",
+//     "00,0000",
+//     "00,0000",
+//     "00/00/000"
+//   ),
+//   createVehicleData(
+//     "0000000000000000",
+//     "2021",
+//     "Make Name",
+//     "Model/Trim",
+//     "Region Label",
+//     "00,0000",
+//     "00,0000",
+//     "00/00/000"
+//   ),
+//   createVehicleData(
+//     "0000000000000000",
+//     "2021",
+//     "Make Name",
+//     "Model/Trim",
+//     "Region Label",
+//     "00,0000",
+//     "00,0000",
+//     "00/00/000"
+//   ),
+//   createVehicleData(
+//     "0000000000000000",
+//     "2021",
+//     "Make Name",
+//     "Model/Trim",
+//     "Region Label",
+//     "00,0000",
+//     "00,0000",
+//     "00/00/000"
+//   ),
+// ];
 
 const BootstrapInput = withStyles((theme) => ({
   root: {
@@ -578,7 +579,17 @@ export default function MileageDisc(props) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = useState([]);
   const [pageCount, setPageCount] = React.useState(10);
+  const [mdList, setMdList] = useState([]);
+  const [mdListRows, setMdListRows] = useState([]);
 
+  useEffect(() => {
+    getMdList();
+  }, []);
+  async function getMdList() {
+    let apiResponse = await getMileageDiscList();
+    console.log("RRMList------->", apiResponse);
+    setMdListRows(apiResponse.data);
+  }
   const handleChangePageCount = (event) => {
     setPageCount(event.target.value);
   };
@@ -591,7 +602,7 @@ export default function MileageDisc(props) {
   };
 
   const onChangePage = (data) => {
-    setRowsPerPage(data);
+    setMdList(data);
   };
   return (
     <>
@@ -699,37 +710,39 @@ export default function MileageDisc(props) {
             </TableRow>
           </TableHead>
           <TableBody>
-           {/* {rowsPerPage.map((row) => (
-              <TableRow key={row.name} className={classes.tableRow}>
+            {mdList.map((row) => (
+              <TableRow key={row.model} className={classes.tableRow}>
                 <TableCell align="center">
                   <span className="textStyle">
                     <a
                       className="vin"
-                      onClick={() => openConditionReport(row.VIN)}
+                      onClick={() => openConditionReport(row.vin)}
                     >
                       {" "}
-                      {row.VIN}
+                      {row.vin}
                     </a>
                   </span>
                 </TableCell>
-                <TableCell align="center">{row.Year}</TableCell>
-                <TableCell align="center">{row.Make}</TableCell>
-                <TableCell align="center">{row.Model_Trim}</TableCell>
+                <TableCell align="center">{row.modelyear}</TableCell>
+                <TableCell align="center">{row.make}</TableCell>
+                <TableCell align="center">{row.model}</TableCell>
                 <TableCell align="center">{row.region}</TableCell>
-                <TableCell align="center">{row.inspection_mileage}</TableCell>
-                <TableCell align="center">{row.ground_mileage}</TableCell>
-                <TableCell align="center">{row.difference}</TableCell>
+                <TableCell align="center">{row.inspectionmileage}</TableCell>
+                <TableCell align="center">{row.groundingmileage}</TableCell>
+                <TableCell align="center">{row.mileagediff}</TableCell>
               </TableRow>
-           ))} */}
+           ))}
           </TableBody>
         </Table>
-        <Paginator
-          label="Result per page"
-          showItemsPerPage={10}
-          pages={[10, 20, 30, 40]}
-          data={rows}
-          onChangePage={onChangePage}
-        />
+        {mdListRows.length != 0 ? (
+          <Paginator
+            label="Result per page"
+            showItemsPerPage={10}
+            pages={[10, 20, 30, 40]}
+            data={mdListRows}
+            onChangePage={onChangePage}
+          />
+        ) : null}
       </TableContainer>
     </>
   );
