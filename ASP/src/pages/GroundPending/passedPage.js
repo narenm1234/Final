@@ -3,7 +3,7 @@ import Grid from "@material-ui/core/Grid";
 import List from "@material-ui/core/List";
 import SwipeableTextMobileStepper from "./Carousel";
 import moment from "moment";
-import { getPassedList } from "../../service/api";
+import { getPassedList, getImageData } from "../../service/api";
 import CurrencyFormat from "react-currency-format";
 import VerticalVehicleStepper from "../../components/Stepper/VerticalStepper";
 let resp = [
@@ -64,20 +64,38 @@ export default function ListingPage1(props) {
   const [vehicleResponse, setVehicleResponse] = useState([]);
   //const [vehicleResponse, setVehicleResponse] = useState(resp)
   const [value, setValue] = useState([]);
+  const [images, setImages] = React.useState([]);
 
   useEffect(() => {
     getVehicleDetails();
+    getImages();
   }, [value]);
   async function getVehicleDetails() {
     let apiResponse = await getPassedList();
     setVehicleResponse(apiResponse.data.data);
   }
   const openConditionScreen = (VINumber, vehicle) => {
-    
     props.history.push("/conditionreport", {
       vin: VINumber,
       vehicleDetails: vehicle,
     });
+  };
+
+  const getImages = async () => {
+    let reqObj = {
+      inspectionId: 18495852,
+      paramForImage: "Inspection_Front_Page",
+      tenantId: "t002",
+    };
+    let getimagesRes = await getImageData(reqObj);
+    console.log("get image data::", getimagesRes);
+
+    getimagesRes &&
+      getimagesRes.data &&
+      getimagesRes.data.imageDetails.map((item) => {
+        item.binImageArray = "data:image/jpeg;base64," + item.binImageArray;
+      });
+    setImages(getimagesRes.data.imageDetails);
   };
 
   return vehicleResponse.length > 0 ? (
@@ -86,7 +104,7 @@ export default function ListingPage1(props) {
         <div className="listingPageCard" key={index}>
           <Grid container spacing={3}>
             <Grid item xs={4}>
-              <SwipeableTextMobileStepper />
+              <SwipeableTextMobileStepper vehical={vehicle} images={images} />
             </Grid>
             <Grid item xs={4}>
               <div className="Year-Make-Model-Col">
@@ -106,11 +124,14 @@ export default function ListingPage1(props) {
 
                   <span className="textStyle">
                     <span className="textBold"> VIN:</span>
-                    <a className="vin"  onClick={openConditionScreen.bind(
-                            this,
-                            vehicle.vin,
-                            vehicle
-                          )}>
+                    <a
+                      className="vin"
+                      onClick={openConditionScreen.bind(
+                        this,
+                        vehicle.vin,
+                        vehicle
+                      )}
+                    >
                       {" "}
                       {vehicle.vin}
                     </a>
@@ -149,8 +170,10 @@ export default function ListingPage1(props) {
         </div>
       );
     })
-  ) : (<div className='listingPageCardNoData'>
-  <img src="noDataFound.jpeg" className='nodataImage'/>
-  <span className='nodataText'>No  Vehicles found</span>
-</div>)
+  ) : (
+    <div className="listingPageCardNoData">
+      <img src="noDataFound.jpeg" className="nodataImage" />
+      <span className="nodataText">No Vehicles found</span>
+    </div>
+  );
 }
