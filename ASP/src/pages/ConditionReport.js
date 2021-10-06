@@ -101,7 +101,7 @@ export default function ConditionReport(props) {
   useEffect(() => {
     
     getInspectionWheelTires(inspectionId);
-    getInspectionDamageDetails();
+    getInspectionDamageDetails(inspectionId);
   }, [inspectionId]);
 
   async function getConditionVehicleDetails() {
@@ -675,4 +675,5 @@ export default function ConditionReport(props) {
       </Box>
     </>
   );
-}
+
+        }
