@@ -324,7 +324,7 @@ export async function getAccessTokenEndpoint(code) {
       });
       var config = {
         method: 'post',
-        url: 'https://stratus-stg3.mfindealerservices.com/stratus2/services/oauth2/token',
+        url: 'https://stratus-stg3.mfindealerservices.com/services/oauth2/token',
         headers: { 
           'Access-Control-Allow-Origin':'*',
           'Content-Type': 'application/x-www-form-urlencoded', 
