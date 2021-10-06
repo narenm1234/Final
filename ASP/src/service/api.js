@@ -453,11 +453,11 @@ export async function getAccessTokenEndpoint(code) {
   });
   var config = {
     method: "post",
-    url: "https://srmstg3-tfs-srm.cs194.force.com/stratus2/services/oauth2/token",
+    url: "https://stratus-stg3.mfindealerservices.com/services/oauth2/token",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
-      Cookie:
-        "BrowserId=LAkGcCGXEeyO6WviLU7-xw; CookieConsentPolicy=0:1; LSKey-c$CookieConsentPolicy=0:1",
+    //   Cookie:
+    //     "BrowserId=LAkGcCGXEeyO6WviLU7-xw; CookieConsentPolicy=0:1; LSKey-c$CookieConsentPolicy=0:1",
     },
     data: data,
   };
@@ -475,7 +475,7 @@ export async function getUserInfoToken(token) {
   var qs = require("qs");
   var config = {
     method: "post",
-    url: `https://tfs-srm--sdeaug21.my.salesforce.com/services/oauth2/userinfo?access_token=${token}`,
+    url: `https://stratus-stg3.mfindealerservices.com/services/oauth2/userinfo?access_token=${token}`,
   };
 
   axios(config)
