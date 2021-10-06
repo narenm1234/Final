@@ -123,7 +123,7 @@ const Sidebar = (props) => {
           </IconButton>
         </div>
         <Divider />
-        {open ? <NewSidebar></NewSidebar> : ""}
+        {open ? <NewSidebar stateUpdate={props.stateUpdate}></NewSidebar> : ""}
       </Drawer>
       <main className={classes.content}>
         {children}
