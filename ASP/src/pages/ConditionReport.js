@@ -51,6 +51,7 @@ export default function ConditionReport(props) {
     "Grounding Mileage",
     "Account Type",
   ];
+
   let wheelTyrelistOfItem = ["LF", "RF", "LR", "RR", "SP", "RR"];
   const [open, setOpen] = React.useState(false);
   const [condionVehicleDetails, setCondionVehicleDetails] = React.useState({});
@@ -530,38 +531,15 @@ export default function ConditionReport(props) {
                 <CardContent>
                   <Typography variant="h6">Accessories</Typography>
                   <hr />
-                  <TableContainer component={Paper}>
-                    <Table
-                      className="table"
-                      size="small"
-                      aria-label="a dense table"
-                    >
-                      {/*  <TableHead>
-                                            <TableRow>
-                                                <TableCell>Item Name</TableCell>
-                                                <TableCell align="right">Item Name</TableCell>
-                                                <TableCell align="right">Item Name</TableCell>
-                                                <TableCell align="right">Item Name</TableCell>
-                                            </TableRow>
-                                       </TableHead>*/}
-                      <TableBody>
-                         {accessoryDetails.length>0 && accessoryDetails.map(list => {
-                                                return ( 
-                        <TableRow key="10074">
-                          <TableCell component="th" scope="row">
-                            {list.description}
-                          </TableCell>
-                          {/* <TableCell align="right">{accessoryDetails.description}</TableCell> */}
-                          {/* <TableCell align="right">y</TableCell>
-                                                        <TableCell align="right">z</TableCell> */}
-                        </TableRow>
-                                                )
-                                                      })}
-                                                    
-              
-                      </TableBody>
-                    </Table>
-                  </TableContainer>
+                  <Box className="accessoriestextStyle">
+                    {accessoryDetails.length > 0 && accessoryDetails.map(list => {
+                      return (
+                        <Box className="accessoriestinlineextStyle">
+                          <Typography variant="span">{list.description}</Typography>
+                        </Box>
+                      )
+                    })}
+                  </Box>
                 </CardContent>
                 <CardContent>
                   <Typography variant="h6">Build Data</Typography>

@@ -327,3 +327,19 @@
 .errorColor {
   color: #c23934;
 }
+.accessoriestextStyle{
+  display: flex; 
+  flex-wrap: wrap;
+  align-content: flex-start;
+  justify-content: center;
+  padding: 5px;
+}
+.accessoriestinlineextStyle{
+  width: 200px;
+  font-size: 13px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.54;
+  letter-spacing: normal;
+}
