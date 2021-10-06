@@ -54,7 +54,7 @@ export default function ConditionReport(props) {
   let wheelTyrelistOfItem = ["LF", "RF", "LR", "RR", "SP", "RR"];
   const [open, setOpen] = React.useState(false);
   const [condionVehicleDetails, setCondionVehicleDetails] = React.useState({});
-  const [accessoryDetails, setAccessoryDetails] = React.useState({});
+  const [accessoryDetails, setAccessoryDetails] = React.useState([]);
   const [wheelTiresDetails, setWheelTiresDetails] = useState([]);
   const [vin, setVin] = React.useState(props?.location?.state?.vin);
   const [purchaseSection, setPurchaseSection] = React.useState(
@@ -77,6 +77,7 @@ export default function ConditionReport(props) {
     getOEMBuildDetails();
     getConditionVehicleDetails();
     getVehicleDetails();
+    getInspectionAccessory(vin);
   }, [vin]);
 
   async function getOEMBuildDetails() {
@@ -84,7 +85,7 @@ export default function ConditionReport(props) {
     setOEMBuildDetailsData(apiResponse.data);
   }
   useEffect(() => {
-    getInspectionDamageDetails();
+    
   }, []);
 
   async function getInspectionDamageDetails() {
@@ -98,28 +99,33 @@ export default function ConditionReport(props) {
   }
 
   useEffect(() => {
-    getInspectionAccessory(vin);
+    
     getInspectionWheelTires(inspectionId);
+    getInspectionDamageDetails();
   }, [inspectionId]);
 
   async function getConditionVehicleDetails() {
     let apiResponse = await getInspectionVehicleDetails(vin);
     console.log("getConditionVehicleDetailsresponse", apiResponse);
-    setCondionVehicleDetails(apiResponse.data);
-    setInspectionId(apiResponse.data.inspection_id);
+    let length = apiResponse.data.length;
+    if(length > 0){
+    setCondionVehicleDetails(apiResponse.data[length-1]);
+    setInspectionId(apiResponse.data[length-1].inspection_id);
+    }
+    
   }
 
   async function getInspectionAccessory(vin) {
     let apiResponse = await getInspectionAccessoryDetails(vin);
     setAccessoryDetails(apiResponse.data);
-    console.log(vin);
+    console.log("xxxxxxxxx",apiResponse.data);
   }
 
   async function getInspectionWheelTires(inspectionId) {
     let apiResponse = await getInspectionWheelTiresDetails(inspectionId);
     console.log("wheelTiresDetailsapires", apiResponse);
     setWheelTiresDetails(apiResponse.data);
-    console.log("-------------", inspectionId);
+    console.log("-------------xxxxxx", inspectionId);
   }
 
   const handleOpen = () => {
@@ -192,7 +198,7 @@ export default function ConditionReport(props) {
                   color="primary"
                   className="detailedReport"
                   onClick={handleOpen}
-                  disabled={!condionVehicleDetails.inspection_date}
+                  disabled={!condionVehicleDetails?.inspection_date}
                 >
                   View Full Detailed Report
                 </Button>
@@ -222,8 +228,8 @@ export default function ConditionReport(props) {
                   {vehicleDetails && vehicleDetails.model_year}
                 </span>
               </div>
-              {!!condionVehicleDetails.inspection_date &&
-              condionVehicleDetails.inspection_date.length > 0 ? (
+              {!!condionVehicleDetails?.inspection_date &&
+              condionVehicleDetails?.inspection_date.length > 0 ? (
                 <span className="ConditionReportInspection">
                   <span className="BadgeValue">Inspection Complete</span>
                 </span>
@@ -239,8 +245,8 @@ export default function ConditionReport(props) {
                   <CardContent>
                     <div className="smallCardTitle">Payoff</div>
                     <div className="smallCardBody">
-                      Pending
-                      {/* <span className="textSize"><CurrencyFormat value={vehicleDetails.pay_off_amt ? vehicleDetails.pay_off_amt : ""} displayType={'text'} thousandSeparator={true} prefix={'$'} />.00</span> */}
+                    
+                      <span className="textSize"><CurrencyFormat value={vehicleDetails.pay_off_amt ? vehicleDetails.pay_off_amt : ""} displayType={'text'} thousandSeparator={true} prefix={'$'} />.00</span>
                     </div>
                   </CardContent>
                 </Card>
@@ -250,8 +256,7 @@ export default function ConditionReport(props) {
                   <CardContent>
                     <div className="smallCardTitle1">Residual + Remaining</div>
                     <div className="smallCardBody">
-                      Pending
-                      {/* <span className="textSize"><CurrencyFormat value={vehicleDetails.residual_amt + vehicleDetails.remaining_pmts} displayType={'text'} thousandSeparator={true} prefix={'$'} />.00</span> */}
+                      <span className="textSize"><CurrencyFormat value={vehicleDetails.residual_amt + vehicleDetails.remaining_pmts} displayType={'text'} thousandSeparator={true} prefix={'$'} />.00</span>
                     </div>
                   </CardContent>
                 </Card>
@@ -269,8 +274,7 @@ export default function ConditionReport(props) {
                   <CardContent>
                     <div className="smallCardTitle">Inspection Grade</div>
                     <div className="smallCardBody">
-                      Pending
-                      {/* {condionVehicleDetails.condition_grade} */}
+                      {condionVehicleDetails?.condition_grade}
                     </div>
                   </CardContent>
                 </Card>
@@ -280,8 +284,8 @@ export default function ConditionReport(props) {
                   <CardContent>
                     <div className="smallCardTitle">Odometer</div>
                     <div className="smallCardBody">
-                      Pending
-                      {/* <CurrencyFormat value={condionVehicleDetails.inspection_mileage ? condionVehicleDetails.inspection_mileage : ""} displayType={'text'} thousandSeparator={true} suffix={'  miles'} /> */}
+                    
+                      <CurrencyFormat value={condionVehicleDetails?.inspection_mileage ? condionVehicleDetails.inspection_mileage : ""} displayType={'text'} thousandSeparator={true} suffix={'  miles'} />
                     </div>
                   </CardContent>
                 </Card>
@@ -310,7 +314,7 @@ export default function ConditionReport(props) {
                     </ListItemText>
                     <ListItemSecondaryAction>
                       <span className="textSize">
-                        {moment(condionVehicleDetails.inspection_date).format(
+                        {moment(condionVehicleDetails?.inspection_date).format(
                           "MM/DD/YYYY"
                         )}
                       </span>
@@ -324,7 +328,7 @@ export default function ConditionReport(props) {
                     </ListItemText>
                     <ListItemSecondaryAction>
                       <span className="textSize">
-                        {condionVehicleDetails.location_name}
+                        {condionVehicleDetails?.location_name}
                       </span>
                     </ListItemSecondaryAction>
                   </List>
@@ -336,7 +340,7 @@ export default function ConditionReport(props) {
                     </ListItemText>
                     <ListItemSecondaryAction>
                       <span className="textSize">
-                        {condionVehicleDetails.location_address}
+                        {condionVehicleDetails?.location_address}
                       </span>
                     </ListItemSecondaryAction>
                   </List>
@@ -348,8 +352,8 @@ export default function ConditionReport(props) {
                     </ListItemText>
                     <ListItemSecondaryAction>
                       <span className="textSize">
-                        {condionVehicleDetails.location_address2}
-                        {condionVehicleDetails.location_city}
+                        {condionVehicleDetails?.location_address2}
+                        {condionVehicleDetails?.location_city}
                       </span>
                     </ListItemSecondaryAction>
                   </List>
@@ -361,8 +365,8 @@ export default function ConditionReport(props) {
                     </ListItemText>
                     <ListItemSecondaryAction>
                       <span className="textSize">
-                        {condionVehicleDetails.location_state}-
-                        {condionVehicleDetails.location_zip}
+                        {condionVehicleDetails?.location_state}-
+                        {condionVehicleDetails?.location_zip}
                       </span>
                     </ListItemSecondaryAction>
                   </List>
@@ -374,7 +378,7 @@ export default function ConditionReport(props) {
                     </ListItemText>
                     <ListItemSecondaryAction>
                       <span className="textSize">
-                        {condionVehicleDetails.location_phone}
+                        {condionVehicleDetails?.location_phone}
                       </span>
                     </ListItemSecondaryAction>
                   </List>
@@ -541,19 +545,20 @@ export default function ConditionReport(props) {
                                             </TableRow>
                                        </TableHead>*/}
                       <TableBody>
-                        {/* {['Item Name', 'Item Name', 'Item Name', 'Item Name'].map(list => {
-                                                return ( */}
+                         {accessoryDetails.length>0 && accessoryDetails.map(list => {
+                                                return ( 
                         <TableRow key="10074">
                           <TableCell component="th" scope="row">
-                            {accessoryDetails.description}
+                            {list.description}
                           </TableCell>
                           {/* <TableCell align="right">{accessoryDetails.description}</TableCell> */}
                           {/* <TableCell align="right">y</TableCell>
                                                         <TableCell align="right">z</TableCell> */}
                         </TableRow>
-                        {/* )
-                                            })
-                                            } */}
+                                                )
+                                                      })}
+                                                    
+              
                       </TableBody>
                     </Table>
                   </TableContainer>
@@ -602,10 +607,10 @@ export default function ConditionReport(props) {
                       <TableHead>
                         <TableRow>
                           <TableCell>Location</TableCell>
-                          <TableCell align="right">Brand</TableCell>
-                          <TableCell align="right">Size</TableCell>
-                          <TableCell align="right">Wheel</TableCell>
-                          <TableCell align="right">Tread Depth</TableCell>
+                          <TableCell align="center">Brand</TableCell>
+                          <TableCell align="center">Size</TableCell>
+                          <TableCell align="center">Wheel</TableCell>
+                          <TableCell align="center">Tread Depth</TableCell>
                         </TableRow>
                       </TableHead>
                       <TableBody>
@@ -615,15 +620,15 @@ export default function ConditionReport(props) {
                               {/* <TableCell component="th" scope="row">
                                                                 {wheelTiresDetails?.tire_location}
                                                             </TableCell> */}
-                              <TableCell align="right">
-                                {list.tire_location}
+                              <TableCell align="center">
+                                {list.inspectionWheelTiresId.tire_location}
                               </TableCell>
-                              <TableCell align="right">
+                              <TableCell align="center">
                                 {list.manufracturer}
                               </TableCell>
-                              <TableCell align="right">{list.size}</TableCell>
-                              <TableCell align="right">{list.wheel}</TableCell>
-                              <TableCell align="right">{list.tread}</TableCell>
+                              <TableCell align="center">{list.size}</TableCell>
+                              <TableCell align="center">{list.wheel}</TableCell>
+                              <TableCell align="center">{list.tread}</TableCell>
                             </TableRow>
                           );
                         })}

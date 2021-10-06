@@ -15,6 +15,7 @@ import ConditionReport from "./pages/ConditionReport";
 import AdminHome from "./pages/AdminHome";
 import ConditionReportRequests from "./pages/ConditionReportRequests";
 import InventoryRequestsTabs from "./components/InventoryRequestsTabs";
+import Login2 from "./pages/Login2";
 function App() {
   const [stateUpdate, setStateUpdate] = useState(1);
   const fireEvents = () => {
@@ -43,7 +44,7 @@ function App() {
                   render={(props) => <GroundPending {...props} fireEvents={fireEvents}
                   />}
                 />
-                <Route path="/passed" exact component={GroundPending1} />
+                <Route path="/passed" exact render={(props) => <GroundPending1 {...props} />} />
                 <Route path="/purchased" exact component={GroundPending2} />
                 <Route
                   path="/grounded/lastchance"
@@ -70,6 +71,11 @@ function App() {
                   path="/conditionreport"
                   exact
                   render={(props) => <ConditionReport {...props} />}
+                />
+                <Route
+                  path="/login2"
+                  exact
+                  render={(props) => <Login2 {...props} />}
                 />
               </Switch>
             </Sidebar>

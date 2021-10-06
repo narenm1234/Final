@@ -258,21 +258,16 @@ export async function getInspectionVehicleDetails(vin) {
   return await axios.post(`${inspectionVehicleDetails}?vin=${vin}`, options);
 }
 export async function getInspectionWheelTiresDetails(inspectionId) {
-  const options = {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
-  // const requestData = {
-  //     // "inspectinId": inspectionId
-  //     inspectionId
-  // };
+    const options = {
+        headers: {
+            "Content-Type": "application/json"
+        }
 
-  return await axios.post(
-    inspectionWheelTiresDetailsUrl,
-    inspectionId,
-    options
-  );
+    };
+
+
+    return await axios.post(inspectionWheelTiresDetailsUrl,inspectionId , options);
+
 }
 export async function getInspectionAccessoryDetails(vin) {
   const options = {
@@ -290,18 +285,19 @@ export async function getInspectionAccessoryDetails(vin) {
 //getInspectionDamageDetails
 
 export async function getInspectionDamageDetailsApi(inspectionId, vin) {
-  console.log("inspectionId", inspectionId);
-  console.log("Vin", vin);
 
-  const options = {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
+    console.log("inspectionId", inspectionId)
+    console.log("Vin", vin)
 
-  return await axios.post(
-    `${getInspectionDamageDetailsUrl}?inpsectionId=${inspectionId}&vin=${vin}`
-  );
+    const options = {
+        headers: {
+            "Content-Type": "application/json"
+        }
+
+    };
+
+
+    return await axios.post(`${getInspectionDamageDetailsUrl}?inpsectionId=18495852&vin=${vin}`);
 }
 
 export async function getOEMBuildDetailsApi(vin) {
