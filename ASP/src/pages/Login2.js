@@ -16,16 +16,18 @@ function getParameterByName(name, url = window.location.href) {
   if (!results[2]) return '';
   return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
-  const [token, setToken] = useState([]);
+  const [token, setToken] = useState('');
   useEffect(() => {
     getToken();
-    getUserAccessInfoToken();
+    // getUserAccessInfoToken();
   }, []);
-
+  useEffect(() => {
+    getUserAccessInfoToken();
+  }, [token]);
   async function getToken() {
     let apiResponse = await getAccessTokenEndpoint(data);
     console.log("--->",apiResponse)
-    setToken(apiResponse.data.access_token);
+    setToken(apiResponse?.access_token);
   }
   async function getUserAccessInfoToken(){
   let resp = await getUserInfoToken(token);
