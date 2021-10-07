@@ -254,12 +254,17 @@ export default function ListingPage(props) {
                           value={vehicle.odometer_reading}
                           displayType={"text"}
                           thousandSeparator={true}
-                          suffix={"  miles"}
+                          suffix={" miles"}
                         />
                       </span>
                       <span className="textStyle">
                         <span className="textBold"> Inspection Mileage:</span>{" "}
-                        Pending
+                        <CurrencyFormat
+                          value={vehicle.inspection_mileage?vehicle.inspection_mileage:"Pending"}
+                          displayType={"text"}
+                          thousandSeparator={true}
+                          suffix={"miles"}
+                        />
                       </span>
                       <span className="textStyle">
                         <span className="textBold"> Account Type: </span>{" "}
@@ -323,7 +328,16 @@ export default function ListingPage(props) {
                           </span>
                         </ListItemText>
                         <ListItemSecondaryAction>
-                          <span className="textSize">Pending</span>
+                        <span className="textSize">
+                            <CurrencyFormat
+                              value={
+                                vehicle.vehicle_price?vehicle.vehicle_price:"Pending"
+                              }
+                              displayType={"text"}
+                              thousandSeparator={true}
+                              prefix={"$"}
+                            />
+                          </span>
                         </ListItemSecondaryAction>
                       </ListItem>
                       <ListItem className="paddingCSS">
