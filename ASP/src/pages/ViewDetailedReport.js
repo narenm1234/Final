@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -109,6 +109,11 @@ let serviceData = {
 };
 export default function ViewDetailedReport(props) {
     const [open, setOpen] = React.useState(false);
+    const [interior,setInterior] = React.useState([]);
+    const [exterior,setExterior] = React.useState([]);
+    const [mechanical,setMechanical] = React.useState([]);
+    const [finalTotal,setFinalTotal] = React.useState([]);
+
     let wheelTyrelistOfItem = ['LF', 'RF']
     const handleClickOpen = () => {
         setOpen(true);
@@ -117,10 +122,34 @@ export default function ViewDetailedReport(props) {
         setOpen(false);
         props.close()
     };
+    
 
     const {DamageDetails}=props;
-    console.log(DamageDetails,"fffffffffffff")
-
+    const handleSeperation = () => {
+        let interior = []
+        let exterior = []
+        let mechanical = []
+        let total = 0;
+      if(DamageDetails?.damageDetails?.length > 0){
+        DamageDetails?.damageDetails?.map(row => {
+            if(row.damage_type == "X"){
+                exterior.push(row);
+            } else if(row.damage_type == "I"){
+                interior.push(row);
+            } else if(row.damage_type == "M"){
+                mechanical.push(row);
+            }
+            total = total + (row.total ? row.total: 0);
+        });
+        setExterior(exterior);
+        setInterior(interior);
+        setMechanical(mechanical);
+        setFinalTotal(total);
+      }
+    }
+    useEffect(() =>{
+        handleSeperation();
+    });
     return (
         <div>
             <Dialog onClose={handleClose} maxWidth={'lg'} aria-labelledby="max-width-dialog-title" open={props.open}>
@@ -201,7 +230,7 @@ export default function ViewDetailedReport(props) {
                                     </TableCell>
 
                                 </TableRow>
-                                <TableRow >
+                                {/* <TableRow >
                                             <TableCell component="th" scope="row">
                                                 {DamageDetails?.damageDetails?.length > 0 ? DamageDetails.damageDetails[0].damage_area : 'N/A'}
                                             </TableCell>
@@ -210,22 +239,21 @@ export default function ViewDetailedReport(props) {
                                             <TableCell style={{ width: 90 }} align="right">{DamageDetails?.damageDetails?.length > 0 ? DamageDetails.damageDetails[0].paint_hours? DamageDetails.damageDetails[0].paint_hours:0: 'N/A'}</TableCell>
                                             <TableCell style={{ width: 90 }} align="right">{DamageDetails?.damageDetails?.length > 0 ? DamageDetails.damageDetails[0].part_cost ? DamageDetails.damageDetails[0].part_cost : 0: 'N/A'}</TableCell>
                                             <TableCell astyle={{ width: 90 }} align="right">{DamageDetails?.damageDetails?.length > 0 ? DamageDetails.damageDetails[0].total ? DamageDetails.damageDetails[0].total : 0: 'N/A'}</TableCell>
-                                </TableRow>
-                                {/* {wheelTyrelistOfItem.map(list => {
-                                    return (
-                                        <TableRow key={list}>
+                                </TableRow> */}
+                                {
+                                    interior.length > 0 && interior.map(inter => {
+                                    <TableRow >
                                             <TableCell component="th" scope="row">
-                                                Damage area name and description
+                                                {DamageDetails?.damageDetails?.length > 0 ? exter.damage_area : 'N/A'}
                                             </TableCell>
-                                            <TableCell style={{ width: 90 }} align="right">N</TableCell>
-                                            <TableCell style={{ width: 90 }} align="right">000</TableCell>
-                                            <TableCell style={{ width: 90 }} align="right">000</TableCell>
-                                            <TableCell style={{ width: 90 }} align="right">$000,000</TableCell>
-                                            <TableCell astyle={{ width: 90 }} align="right">$000,000</TableCell>
-                                        </TableRow>
-                                    )
-                                })
-                                } */}
+                                            <TableCell style={{ width: 90 }} align="right">{DamageDetails?.damageDetails?.length > 0 ?inter.damage_type : 'N/A'}</TableCell>
+                                            <TableCell style={{ width: 90 }} align="right">{DamageDetails?.damageDetails?.length > 0 ? inter.partlabor_hours: 'N/A'}</TableCell>
+                                            <TableCell style={{ width: 90 }} align="right">{DamageDetails?.damageDetails?.length > 0 ? inter.paint_hours? inter.paint_hours:0: 'N/A'}</TableCell>
+                                            <TableCell style={{ width: 90 }} align="right">{DamageDetails?.damageDetails?.length > 0 ? inter.part_cost ? inter.part_cost : 0: 'N/A'}</TableCell>
+                                            <TableCell astyle={{ width: 90 }} align="right">{DamageDetails?.damageDetails?.length > 0 ? inter.total ? inter.total : 0: 'N/A'}</TableCell>
+                                  </TableRow>
+                                    })
+                                }
                                 <TableRow>
                                     <TableCell colSpan={6} component="th" scope="row" className="warningColorTable">
                                         Exterior
@@ -238,7 +266,7 @@ export default function ViewDetailedReport(props) {
                                     </TableCell>
 
                                 </TableRow>
-                                <TableRow >
+                                {/* <TableRow >
                                             <TableCell component="th" scope="row">
                                                 {DamageDetails?.damageDetails?.length > 0 ? DamageDetails.damageDetails[1].damage_area : 'N/A'}
                                             </TableCell>
@@ -247,22 +275,21 @@ export default function ViewDetailedReport(props) {
                                             <TableCell style={{ width: 90 }} align="right">{DamageDetails?.damageDetails?.length > 0 ? DamageDetails.damageDetails[1].paint_hours? DamageDetails.damageDetails[0].paint_hours:0: 'N/A'}</TableCell>
                                             <TableCell style={{ width: 90 }} align="right">{DamageDetails?.damageDetails?.length > 0 ? DamageDetails.damageDetails[1].part_cost ? DamageDetails.damageDetails[0].part_cost : 0: 'N/A'}</TableCell>
                                             <TableCell astyle={{ width: 90 }} align="right">{DamageDetails?.damageDetails?.length > 0 ? DamageDetails.damageDetails[1].total ? DamageDetails.damageDetails[0].total : 0: 'N/A'}</TableCell>
-                                </TableRow>
-                                {/* {wheelTyrelistOfItem.map(list => {
-                                    return (
-                                        <TableRow key={list}>
+                                </TableRow> */}
+                                {
+                                    exterior.length > 0 && exterior.map(exter => {
+                                    <TableRow >
                                             <TableCell component="th" scope="row">
-                                                Damage area name and description
+                                                {DamageDetails?.damageDetails?.length > 0 ? exter.damage_area : 'N/A'}
                                             </TableCell>
-                                            <TableCell style={{ width: 90 }} align="right">N</TableCell>
-                                            <TableCell style={{ width: 90 }} align="right">000</TableCell>
-                                            <TableCell style={{ width: 90 }} align="right">000</TableCell>
-                                            <TableCell style={{ width: 90 }} align="right">$000,000</TableCell>
-                                            <TableCell astyle={{ width: 90 }} align="right">$000,000</TableCell>
-                                        </TableRow>
-                                    )
-                                })
-                                } */}
+                                            <TableCell style={{ width: 90 }} align="right">{DamageDetails?.damageDetails?.length > 0 ?exter.damage_type : 'N/A'}</TableCell>
+                                            <TableCell style={{ width: 90 }} align="right">{DamageDetails?.damageDetails?.length > 0 ? exter.partlabor_hours: 'N/A'}</TableCell>
+                                            <TableCell style={{ width: 90 }} align="right">{DamageDetails?.damageDetails?.length > 0 ? exter.paint_hours? exter.paint_hours:0: 'N/A'}</TableCell>
+                                            <TableCell style={{ width: 90 }} align="right">{DamageDetails?.damageDetails?.length > 0 ? exter.part_cost ? exter.part_cost : 0: 'N/A'}</TableCell>
+                                            <TableCell astyle={{ width: 90 }} align="right">{DamageDetails?.damageDetails?.length > 0 ? exter.total ? exter.total : 0: 'N/A'}</TableCell>
+                                  </TableRow>
+                                    })
+                                }
                                 <TableRow>
                                     <TableCell colSpan={6} component="th" scope="row" className="warningColorTable">
                                         Mechanical
@@ -275,16 +302,21 @@ export default function ViewDetailedReport(props) {
                                     </TableCell>
 
                                 </TableRow>
-                                <TableRow >
+                                {
+                                    mechanical.length > 0 && mechanical.map(mech => {
+                                    <TableRow >
                                             <TableCell component="th" scope="row">
-                                                {DamageDetails?.damageDetails?.length > 0 ? DamageDetails.damageDetails[2].damage_area : 'N/A'}
+                                                {DamageDetails?.damageDetails?.length > 0 ? mech.damage_area : 'N/A'}
                                             </TableCell>
-                                            <TableCell style={{ width: 90 }} align="right">{DamageDetails?.damageDetails?.length > 0 ?DamageDetails.damageDetails[2].damage_type : 'N/A'}</TableCell>
-                                            <TableCell style={{ width: 90 }} align="right">{DamageDetails?.damageDetails?.length > 0 ? DamageDetails.damageDetails[2].partlabor_hours: 'N/A'}</TableCell>
-                                            <TableCell style={{ width: 90 }} align="right">{DamageDetails?.damageDetails?.length > 0 ? DamageDetails.damageDetails[2].paint_hours? DamageDetails.damageDetails[0].paint_hours:0: 'N/A'}</TableCell>
-                                            <TableCell style={{ width: 90 }} align="right">{DamageDetails?.damageDetails?.length > 0 ? DamageDetails.damageDetails[2].part_cost ? DamageDetails.damageDetails[0].part_cost : 0: 'N/A'}</TableCell>
-                                            <TableCell astyle={{ width: 90 }} align="right">{DamageDetails?.damageDetails?.length > 0 ? DamageDetails.damageDetails[2].total ? DamageDetails.damageDetails[0].total : 0: 'N/A'}</TableCell>
-                                </TableRow>
+                                            <TableCell style={{ width: 90 }} align="right">{DamageDetails?.damageDetails?.length > 0 ?mech.damage_type : 'N/A'}</TableCell>
+                                            <TableCell style={{ width: 90 }} align="right">{DamageDetails?.damageDetails?.length > 0 ? mech.partlabor_hours: 'N/A'}</TableCell>
+                                            <TableCell style={{ width: 90 }} align="right">{DamageDetails?.damageDetails?.length > 0 ? mech.paint_hours? mech.paint_hours:0: 'N/A'}</TableCell>
+                                            <TableCell style={{ width: 90 }} align="right">{DamageDetails?.damageDetails?.length > 0 ? mech.part_cost ? mech.part_cost : 0: 'N/A'}</TableCell>
+                                            <TableCell astyle={{ width: 90 }} align="right">{DamageDetails?.damageDetails?.length > 0 ? mech.total ? mech.total : 0: 'N/A'}</TableCell>
+                                  </TableRow>
+                                    })
+                                }
+                                
                                 {/* {wheelTyrelistOfItem.map(list => {
                                     return (
                                         <TableRow key={list}>
@@ -313,7 +345,7 @@ export default function ViewDetailedReport(props) {
                                     <TableCell colSpan={1} style={{ width: 90,color: '#0070d2' }} align="right">Total</TableCell>
                                     <TableCell colSpan={2} component="th" scope="row">
                                     </TableCell>
-                                    <TableCell style={{ width: 90,color: '#0070d2' }} align="right" >$000,000</TableCell>
+                                    <TableCell style={{ width: 90,color: '#0070d2' }} align="right" >${finalTotal}</TableCell>
                                 </TableRow>
                                 <TableRow >
                                     <TableCell colSpan={2} component="th" scope="row">
