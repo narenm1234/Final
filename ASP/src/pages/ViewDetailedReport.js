@@ -150,7 +150,7 @@ export default function ViewDetailedReport(props) {
     }
     useEffect(() =>{
         handleSeperation();
-    });
+    },[]);
     return (
         <div>
             <Dialog onClose={handleClose} maxWidth={'lg'} aria-labelledby="max-width-dialog-title" open={props.open}>
