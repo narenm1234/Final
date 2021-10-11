@@ -179,7 +179,7 @@ export default function ViewDetailedReport(props) {
                                         </ListItem>
                                         <ListItem>
                                             <ListItemText className="smallCardTitle"><span className="textBold alignleft">Mechanical total</span></ListItemText>
-                                            <ListItemSecondaryAction className="smallCardBody ">{DamageDetails.maintainenceCost?`{"$"}${DamageDetails.maintainenceCost}`:'0'}</ListItemSecondaryAction>
+                                            <ListItemSecondaryAction className="smallCardBody ">{DamageDetails.maintainenceCost?`{"$"}${DamageDetails.mechanicalCost}`:'0'}</ListItemSecondaryAction>
                                         </ListItem>
                                         <ListItem>
                                             <ListItemText className="smallCardTitle"><span className="textBold alignleft">Normal W&T</span></ListItemText>

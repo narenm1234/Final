@@ -306,7 +306,7 @@ export async function getInspectionDamageDetailsApi(inspectionId, vin) {
   };
 
   return await axios.post(
-    `${getInspectionDamageDetailsUrl}?inpsectionId=${inspectionId}&vin=${vin}`
+    `${getInspectionDamageDetailsUrl}?inpsectionId=${inspectionId}&tenantId=t002&vin=${vin}`
   );
 }
 
