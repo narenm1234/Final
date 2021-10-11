@@ -130,8 +130,8 @@ export default function ViewDetailedReport(props) {
         let exterior = []
         let mechanical = []
         let total = 0;
-      if(DamageDetails?.damageDetails?.length > 0){
-        DamageDetails?.damageDetails?.map(row => {
+      if(props.DamageDetails?.damageDetails?.length > 0){
+        props.DamageDetails?.damageDetails?.map(row => {
             if(row.damage_type == "X"){
                 exterior.push(row);
             } else if(row.damage_type == "I"){
