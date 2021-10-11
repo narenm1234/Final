@@ -574,7 +574,7 @@ export default function ConditionReport(props) {
                   </TableContainer>
                 </CardContent>
                 <CardContent>
-                  <Typography variant="h6">Wheels and Tyres</Typography>
+                  <Typography variant="h6">Wheels and Tires</Typography>
                   <hr />
                   <TableContainer component={Paper}>
                     <Table
