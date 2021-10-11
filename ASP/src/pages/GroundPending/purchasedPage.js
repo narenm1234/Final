@@ -6,7 +6,12 @@ import LinearProgress from "@material-ui/core/LinearProgress";
 import SwipeableTextMobileStepper from "./Carousel";
 import moment from "moment";
 import CurrencyFormat from "react-currency-format";
-import { getAccessTokenEndpoint, getPurchasedList, getUserInfoToken } from "../../service/api";
+import {
+  getAccessTokenEndpoint,
+  getPurchasedList,
+  getUserInfoToken,
+  getImageData,
+} from "../../service/api";
 let resp = [
   {
     account_type: "LEASE",
@@ -77,10 +82,11 @@ export default function ListingPage2(props) {
   const [vehicleResponse, setVehicleResponse] = useState([]);
   //const [vehicleResponse, setVehicleResponse] = useState(resp)
   const [value, setValue] = useState([]);
-  
+  const [images, setImages] = React.useState([]);
 
   useEffect(() => {
     getVehicleDetails();
+    getImages();
   }, [value]);
   async function getVehicleDetails() {
     let apiResponse = await getPurchasedList("ALL");
@@ -89,13 +95,39 @@ export default function ListingPage2(props) {
     console.log(apiResponse.data.data);
   }
 
+  const getImages = async () => {
+    let reqObj = {
+      inspectionId: 18734078,
+      paramForImage: "Inspection_Front_Page",
+      tenantId: "t002",
+    };
+    let getimagesRes = await getImageData(reqObj);
+    console.log("get image data::", getimagesRes);
+
+    getimagesRes &&
+      getimagesRes.data &&
+      getimagesRes.data.imageDetails.map((item) => {
+        item.binImageArray = "data:image/jpeg;base64," + item.binImageArray;
+      });
+    setImages(getimagesRes.data.imageDetails);
+  };
+
   return vehicleResponse.length > 0 ? (
     vehicleResponse.map((vehicle, index) => {
       return (
         <div className="listingPageCard" key={index}>
           <Grid container spacing={3}>
             <Grid item xs={4}>
-              <SwipeableTextMobileStepper />
+              {/* <SwipeableTextMobileStepper /> */}
+              {vehicle.inspection_mileage > 0 ? (
+                <SwipeableTextMobileStepper vehical={vehicle} images={images} />
+              ) : (
+                <img
+                  className="pendingImg"
+                  src="inspection_pending.png"
+                  alt="pending"
+                />
+              )}
             </Grid>
             <Grid item xs={4}>
               <div className="Year-Make-Model-Col">
@@ -115,10 +147,7 @@ export default function ListingPage2(props) {
 
                   <span className="textStyle">
                     <span className="textBold"> VIN:</span>
-                    <a
-                      className="vin"
-                      href={`/conditionreport${vehicle.vin}`}
-                    >
+                    <a className="vin" href={`/conditionreport${vehicle.vin}`}>
                       {" "}
                       {vehicle.vin}
                     </a>
@@ -129,22 +158,21 @@ export default function ListingPage2(props) {
                     {moment(vehicle.purchase_date).format("MM/DD/YYYY")}
                   </span>
                   <span className="textStyle">
-                                        <span className="textBold"> Grounding Mileage:</span>  <CurrencyFormat
-                        value={
-                        vehicle.odometer_reading
-                        }
-                        displayType={"text"}
-                        thousandSeparator={true}
-                  
-                      /> miles
-                                        </span>
+                    <span className="textBold"> Grounding Mileage:</span>{" "}
+                    <CurrencyFormat
+                      value={vehicle.odometer_reading}
+                      displayType={"text"}
+                      thousandSeparator={true}
+                    />{" "}
+                    miles
+                  </span>
                   <span className="textStyle">
-                                        <span className="textBold"> Inspection Mileage:</span> Pending
-                                        </span>
+                    <span className="textBold"> Inspection Mileage:</span>{" "}
+                    Pending
+                  </span>
                   <span className="textStyle">
                     <span className="textBold"> Purchase Type:</span>{" "}
-                    {vehicle.purchase_type? vehicle.purchase_type:""}
-                  
+                    {vehicle.purchase_type ? vehicle.purchase_type : ""}
                   </span>
                 </List>
               </div>
@@ -158,26 +186,29 @@ export default function ListingPage2(props) {
                   <span className="textStyle">
                     <span className="textBold"> Payoff Price </span>{" "}
                     <span className="margin__space4">
-
                       <CurrencyFormat
-                        value={vehicle.groundingDetails && vehicle.groundingDetails.pay_off_amt}
+                        value={
+                          vehicle.groundingDetails &&
+                          vehicle.groundingDetails.pay_off_amt
+                        }
                         displayType={"text"}
                         thousandSeparator={true}
                         prefix={"$"}
                       />
-                
                     </span>
                   </span>
                   <span className="textStyle">
                     <span className="textBold"> Rem.Payments</span>{" "}
                     <span className="margin__space5">
                       <CurrencyFormat
-                        value={ vehicle.groundingDetails && vehicle.groundingDetails.remaining_pmts}
+                        value={
+                          vehicle.groundingDetails &&
+                          vehicle.groundingDetails.remaining_pmts
+                        }
                         displayType={"text"}
                         thousandSeparator={true}
                         prefix={"$"}
                       />
-              
                     </span>
                   </span>
                   <span className="textStyle">
@@ -189,7 +220,6 @@ export default function ListingPage2(props) {
                         thousandSeparator={true}
                         prefix={"$"}
                       />
-                  
                     </span>
                   </span>
                   <div className="purchasedScreenTotal" />
@@ -198,9 +228,11 @@ export default function ListingPage2(props) {
                     <span className="totalFeeSum">
                       <CurrencyFormat
                         value={
-                         vehicle.groundingDetails && vehicle.groundingDetails.pay_off_amt +
-                          vehicle.groundingDetails && vehicle.groundingDetails.remaining_pmts +
-                          vehicle.admin_fee
+                          vehicle.groundingDetails &&
+                          vehicle.groundingDetails.pay_off_amt +
+                            vehicle.groundingDetails &&
+                          vehicle.groundingDetails.remaining_pmts +
+                            vehicle.admin_fee
                         }
                         displayType={"text"}
                         thousandSeparator={true}
@@ -215,8 +247,10 @@ export default function ListingPage2(props) {
         </div>
       );
     })
-  ) : (<div className='listingPageCardNoData'>
-  <img src="noDataFound.jpeg" className='nodataImage'/>
-  <span className='nodataText'>No  Vehicles found</span>
-</div>)
+  ) : (
+    <div className="listingPageCardNoData">
+      <img src="noDataFound.jpeg" className="nodataImage" />
+      <span className="nodataText">No Vehicles found</span>
+    </div>
+  );
 }

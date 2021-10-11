@@ -1,16 +1,29 @@
+.myContainerLayout {
+  display: flex;
+  width: 100%;
+}
+
 .conditionPageCard {
-  margin: 10% 15% 10% 5%;
-  position: relative;
-  background: #f3f2f2;
+  width: 75%;
+  padding-top: 50px;
+  // border:1px solid red;
+  // margin: 10% 15% 10% 5%;
+  // position: relative;
+  // background: #f3f2f2;
+}
+.purchasesidebar {
+  width: 25%;
+  background-color: white;
+  // border:1px solid green;
 }
 .conditionPageCardReports {
-  width: 70%;
-  margin: 5% 0% 0% 20%;
-  position: absolute;
-  background: #f3f2f2;
+  // width: 70%;
+  // margin: 5% 0% 0% 20%;
+  // position: absolute;
+  // background: #f3f2f2;
 }
 .reportTitle {
-  width: 350px;
+  // width: 350px;
   height: 30px;
   font-family: ToyotaType;
   font-size: 17px;
@@ -36,8 +49,9 @@
   display: block;
 }
 .ConditionReportSection {
-  display: inline-flex;
-  margin: 20px !important;
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0px !important;
 }
 .ConditionCardBody {
   margin: 8px 0px 15px;
@@ -66,15 +80,15 @@
   color: #ffffff;
 }
 .inspectionStatusWarning {
-  width: 138px;
+  // width: 138px;
   height: 33px;
   padding: 2px 8px;
   border-radius: 100px;
   background-color: #c00;
-  margin-left: 1rem;
+  // margin-left: 1rem;
 }
 .ConditionCard {
-  width: 123%;
+  // width: 123%;
   height: 70px;
   border-radius: 4px;
   box-shadow: -1px 0 3px 0 rgba(0, 0, 0, 0.25);
@@ -89,7 +103,7 @@
   background-color: #ffffff;
 }
 .ConditionCardMargin {
-  margin-right: 25px !important;
+  // margin-right: 25px !important;
 }
 .detailedReport {
   height: 32px;
@@ -190,8 +204,8 @@
   color: #3e3e3c;
 }
 .vehicleSectionCR {
-  width: 83%;
-  margin: 16px 24px 40px 10px;
+  // width: 83%;
+  margin: 16px 10px 40px 10px;
   padding: 16px 9px 32px 24px;
   border-radius: 4px;
   background-color: #ffffff;
@@ -258,15 +272,16 @@
   height: 50px !important;
 }
 .ConditionCardReportSpace {
-  margin-top: 4% !important ;
+  // margin-top: 4% !important ;
 }
 .conditionTopBar {
-  width: 80%;
-  position: fixed;
+  // width: 64%;
+  // position: fixed;
   height: 40px;
-  top: 52px;
+  // top: 51px;
   z-index: 10;
   background-color: #ffffff;
+  border-bottom: 1px solid lightgray;
 }
 .conditionTopBarStyles {
   width: 109px;
@@ -330,7 +345,7 @@
 }
 
 .image-gallery-thumbnails-wrapper {
-  width: 465px !important;
+  width: 395px !important;
 }
 .accessoriestextStyle {
   display: flex;
@@ -348,4 +363,8 @@
   font-style: normal;
   line-height: 1.54;
   letter-spacing: normal;
+}
+
+.image-gallery-content {
+  overflow-x: hidden;
 }

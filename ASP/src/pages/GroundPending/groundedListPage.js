@@ -108,7 +108,7 @@ export default function ListingPage(props) {
 
   const getImages = async () => {
     let reqObj = {
-      inspectionId: 18495852,
+      inspectionId: 18734078,
       paramForImage: "Inspection_Front_Page",
       tenantId: "t002",
     };
@@ -201,10 +201,24 @@ export default function ListingPage(props) {
             <div className="listingPageCard" key={index}>
               <Grid container spacing={3}>
                 <Grid item xs={4}>
-                  <SwipeableTextMobileStepper
-                    vehical={vehicle}
-                    images={images}
-                  />
+                  {vehicle.inspection_mileage > 0 ? (
+                    <SwipeableTextMobileStepper
+                      vehical={vehicle}
+                      images={images}
+                    />
+                  ) : (
+                    <img
+                      className="pendingImg"
+                      src="inspection_pending.png"
+                      alt="pending"
+                    />
+                  )}
+
+                  {/* <img
+                    className="pendingImg"
+                    src="inspection_pending.png"
+                    alt="pending"
+                  /> */}
                 </Grid>
                 <Grid item xs={4}>
                   <div className="Year-Make-Model-Col">
@@ -260,7 +274,11 @@ export default function ListingPage(props) {
                       <span className="textStyle">
                         <span className="textBold"> Inspection Mileage:</span>{" "}
                         <CurrencyFormat
-                          value={vehicle.inspection_mileage?vehicle.inspection_mileage:"Pending"}
+                          value={
+                            vehicle.inspection_mileage
+                              ? vehicle.inspection_mileage
+                              : "Pending"
+                          }
                           displayType={"text"}
                           thousandSeparator={true}
                           suffix={"miles"}
@@ -328,10 +346,12 @@ export default function ListingPage(props) {
                           </span>
                         </ListItemText>
                         <ListItemSecondaryAction>
-                        <span className="textSize">
+                          <span className="textSize">
                             <CurrencyFormat
                               value={
-                                vehicle.vehicle_price?vehicle.vehicle_price:"Pending"
+                                vehicle.vehicle_price
+                                  ? vehicle.vehicle_price
+                                  : "Pending"
                               }
                               displayType={"text"}
                               thousandSeparator={true}
