@@ -63,7 +63,7 @@ export default function MyGallery(props) {
     // });
 
     let reqObj = {
-      inspectionId: 18495852,
+      inspectionId: 18734078,
       paramForImage: "ALL",
       tenantId: "t002",
     };
@@ -72,17 +72,17 @@ export default function MyGallery(props) {
     console.log("get image data::", getimagesRes);
 
     setImages(getimagesRes.data.imageDetails);
-      let imgagesdata = [];
-      for (let img of getimagesRes.data.imageDetails) {
-        let imgobj = {
-          original: "data:image/jpeg;base64," + img.binImageArray,
-          thumbnail: "data:image/jpeg;base64," + img.binImageArray,
-        };
-        imgagesdata.push(imgobj);
-      }
+    let imgagesdata = [];
+    for (let img of getimagesRes.data.imageDetails) {
+      let imgobj = {
+        original: "data:image/jpeg;base64," + img.binImageArray,
+        thumbnail: "data:image/jpeg;base64," + img.binImageArray,
+      };
+      imgagesdata.push(imgobj);
+    }
 
-      console.log("imgagesdata", imgagesdata);
-      setImages(imgagesdata);
+    console.log("imgagesdata", imgagesdata);
+    setImages(imgagesdata);
   };
 
   return (

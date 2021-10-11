@@ -83,7 +83,7 @@ export default function ListingPage1(props) {
 
   const getImages = async () => {
     let reqObj = {
-      inspectionId: 18495852,
+      inspectionId: 18734078,
       paramForImage: "Inspection_Front_Page",
       tenantId: "t002",
     };
@@ -104,7 +104,15 @@ export default function ListingPage1(props) {
         <div className="listingPageCard" key={index}>
           <Grid container spacing={3}>
             <Grid item xs={4}>
-              <SwipeableTextMobileStepper vehical={vehicle} images={images} />
+              {vehicle.inspection_mileage > 0 ? (
+                <SwipeableTextMobileStepper vehical={vehicle} images={images} />
+              ) : (
+                <img
+                  className="pendingImg"
+                  src="inspection_pending.png"
+                  alt="pending"
+                />
+              )}
             </Grid>
             <Grid item xs={4}>
               <div className="Year-Make-Model-Col">
