@@ -148,7 +148,7 @@ export default function ViewDetailedReport(props) {
         setExterior(exterior);
         setInterior(interior);
         setMechanical(mechanical);
-        setFinalTotal(total);
+        setFinalTotal(total)
       }
       
     }
