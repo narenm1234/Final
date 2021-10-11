@@ -146,6 +146,7 @@ export default function ViewDetailedReport(props) {
         setMechanical(mechanical);
         setFinalTotal(total);
       }
+      
     }
     useEffect(() =>{
         handleSeperation();
@@ -244,7 +245,7 @@ export default function ViewDetailedReport(props) {
                                     interior.length > 0 && interior.map(inter => {
                                     <TableRow >
                                             <TableCell component="th" scope="row">
-                                                {DamageDetails?.damageDetails?.length > 0 ? exter.damage_area : 'N/A'}
+                                                {DamageDetails?.damageDetails?.length > 0 ? inter.damage_area : 'N/A'}
                                             </TableCell>
                                             <TableCell style={{ width: 90 }} align="right">{DamageDetails?.damageDetails?.length > 0 ?inter.damage_type : 'N/A'}</TableCell>
                                             <TableCell style={{ width: 90 }} align="right">{DamageDetails?.damageDetails?.length > 0 ? inter.partlabor_hours: 'N/A'}</TableCell>
