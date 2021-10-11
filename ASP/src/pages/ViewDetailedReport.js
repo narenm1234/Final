@@ -215,8 +215,8 @@ export default function ViewDetailedReport(props) {
                             <TableHead>
                                 <TableRow>
                                     <TableCell>Damaged Area</TableCell>
-                                    <TableCell align="right">Wear&Tear</TableCell>
-                                    <TableCell align="right">Labour Hours</TableCell>
+                                    <TableCell align="right">Wear & Tear</TableCell>
+                                    <TableCell align="right">Labor Hours</TableCell>
                                     <TableCell align="right">Paint Hours</TableCell>
                                     <TableCell align="right">Part Cost</TableCell>
                                     <TableCell align="right">Estimate</TableCell>
@@ -224,7 +224,7 @@ export default function ViewDetailedReport(props) {
                             </TableHead>
                             <TableBody>
                                 <TableRow>
-                                    <TableCell colSpan={6} component="th" scope="row" className="warningColorTable">
+                                    <TableCell colSpan={6} component="th" scope="row" className="textBold alignleft">
                                         Interior
                                     </TableCell>
 
@@ -260,7 +260,7 @@ export default function ViewDetailedReport(props) {
                                     })
                                 }
                                 <TableRow>
-                                    <TableCell colSpan={6} component="th" scope="row" className="warningColorTable">
+                                    <TableCell colSpan={6} component="th" scope="row" className="textBold alignleft">
                                         Exterior
                                     </TableCell>
 
@@ -296,7 +296,7 @@ export default function ViewDetailedReport(props) {
                                     })
                                 }
                                 <TableRow>
-                                    <TableCell colSpan={6} component="th" scope="row" className="warningColorTable">
+                                    <TableCell colSpan={6} component="th" scope="row" className="textBold alignleft">
                                         Mechanical
                                     </TableCell>
 
@@ -347,10 +347,10 @@ export default function ViewDetailedReport(props) {
                                 <TableRow >
                                     <TableCell colSpan={2} component="th" scope="row">
                                     </TableCell>
-                                    <TableCell colSpan={1} style={{ width: 90,color: '#0070d2' }} align="right">Total</TableCell>
+                                    <TableCell colSpan={1} style={{ width: 90 }} align="right">Total</TableCell>
                                     <TableCell colSpan={2} component="th" scope="row">
                                     </TableCell>
-                                    <TableCell style={{ width: 90,color: '#0070d2' }} align="right" >${finalTotal}</TableCell>
+                                    <TableCell style={{ width: 90 }} align="right" >${finalTotal}</TableCell>
                                 </TableRow>
                                 <TableRow >
                                     <TableCell colSpan={2} component="th" scope="row">
