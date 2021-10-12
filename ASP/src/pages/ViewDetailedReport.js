@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -21,6 +21,7 @@ import MyGallery from './ImageGallery';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
+import CurrencyFormat from "react-currency-format";
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 const styles = (theme) => ({
     root: {
@@ -109,6 +110,11 @@ let serviceData = {
 };
 export default function ViewDetailedReport(props) {
     const [open, setOpen] = React.useState(false);
+    const [interior,setInterior] = React.useState([]);
+    const [exterior,setExterior] = React.useState([]);
+    const [mechanical,setMechanical] = React.useState([]);
+    const [finalTotal,setFinalTotal] = React.useState([]);
+
     let wheelTyrelistOfItem = ['LF', 'RF']
     const handleClickOpen = () => {
         setOpen(true);
@@ -117,10 +123,40 @@ export default function ViewDetailedReport(props) {
         setOpen(false);
         props.close()
     };
+    
 
     const {DamageDetails}=props;
-    console.log(DamageDetails,"fffffffffffff")
-
+    const handleSeperation = () => {
+        let interior = []
+        let exterior = []
+        let mechanical = []
+        let total = 0;
+      if(DamageDetails?.damageDetails?.length > 0)
+    {
+        DamageDetails?.damageDetails?.map(row => {
+            if(row.damage_type == "X"){
+                exterior.push(row);
+            } else if(row.damage_type == "I"){
+                interior.push(row);
+            } else if(row.damage_type == "M"){
+                mechanical.push(row);
+            }
+            total = total + (row.total ? parseInt(row.total): 0);
+            
+        });
+        console.log(exterior,"iiiiiiii");
+        console.log(interior,"iiiiiiii");
+        console.log(mechanical,"iiiiiiii");
+        setExterior(exterior);
+        setInterior(interior);
+        setMechanical(mechanical);
+        setFinalTotal(total)
+      }
+      
+    }
+    useEffect(() =>{
+        handleSeperation();
+    },[props.DamageDetails]);
     return (
         <div>
             <Dialog onClose={handleClose} maxWidth={'lg'} aria-labelledby="max-width-dialog-title" open={props.open}>
@@ -142,23 +178,23 @@ export default function ViewDetailedReport(props) {
                                     <List >
                                         <ListItem >
                                             <ListItemText className="smallCardTitle"><span className="textBold alignleft">Interior</span></ListItemText>
-                                            <ListItemSecondaryAction className="smallCardBody ">{DamageDetails.interiorCost?`{"$"}${DamageDetails.interiorCost}`:'0'}</ListItemSecondaryAction>
+                                            <ListItemSecondaryAction className="smallCardBody ">{DamageDetails.interiorCost?`$${DamageDetails.interiorCost}`:'0'}</ListItemSecondaryAction>
                                         </ListItem>
                                         <ListItem>
                                             <ListItemText className="smallCardTitle"><span className="textBold alignleft">Exterior</span></ListItemText>
-                                            <ListItemSecondaryAction className="smallCardBody ">{DamageDetails.exteriorCost?`{"$"}${DamageDetails.exteriorCost}`:'0'}</ListItemSecondaryAction>
+                                            <ListItemSecondaryAction className="smallCardBody ">{DamageDetails.exteriorCost?`$${DamageDetails.exteriorCost}`:'0'}</ListItemSecondaryAction>
                                         </ListItem>
                                         <ListItem>
                                             <ListItemText className="smallCardTitle"><span className="textBold alignleft">Mechanical total</span></ListItemText>
-                                            <ListItemSecondaryAction className="smallCardBody ">{DamageDetails.maintainenceCost?`{"$"}${DamageDetails.maintainenceCost}`:'0'}</ListItemSecondaryAction>
+                                            <ListItemSecondaryAction className="smallCardBody ">{DamageDetails.maintainenceCost?`$${DamageDetails.mechanicalCost}`:'0'}</ListItemSecondaryAction>
                                         </ListItem>
                                         <ListItem>
                                             <ListItemText className="smallCardTitle"><span className="textBold alignleft">Normal W&T</span></ListItemText>
-                                            <ListItemSecondaryAction className="smallCardBody ">{DamageDetails.normal?`{"$"}${DamageDetails.normal}`:'0'}</ListItemSecondaryAction>
+                                            <ListItemSecondaryAction className="smallCardBody ">{DamageDetails.normal?`$${DamageDetails.normal}`:'0'}</ListItemSecondaryAction>
                                         </ListItem>
                                         <ListItem>
                                             <ListItemText className="smallCardTitle"><span className="textBold alignleft ">Excessive W&T</span></ListItemText>
-                                            <ListItemSecondaryAction className="smallCardBody ">{DamageDetails.excessiveWandT?DamageDetails.excessiveWandT:'0'}</ListItemSecondaryAction>
+                                            <ListItemSecondaryAction className="smallCardBody ">{DamageDetails.excessiveWandT?`$${DamageDetails.excessiveWandT}`:'0'}</ListItemSecondaryAction>
                                         </ListItem>
                                     </List>
 
@@ -181,16 +217,16 @@ export default function ViewDetailedReport(props) {
                             <TableHead>
                                 <TableRow>
                                     <TableCell>Damaged Area</TableCell>
-                                    <TableCell align="right">Wear&Tear</TableCell>
-                                    <TableCell align="right">Labour Hours</TableCell>
-                                    <TableCell align="right">Paint Hours</TableCell>
-                                    <TableCell align="right">Part Cost</TableCell>
-                                    <TableCell align="right">Estimate</TableCell>
+                                    <TableCell align="left">Wear & Tear</TableCell>
+                                    <TableCell align="left">Labor Hours</TableCell>
+                                    <TableCell align="left">Paint Hours</TableCell>
+                                    <TableCell align="left">Part Cost</TableCell>
+                                    <TableCell align="left">Estimate</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
                                 <TableRow>
-                                    <TableCell colSpan={6} component="th" scope="row" className="warningColorTable">
+                                    <TableCell colSpan={6} component="th" scope="row" className="textBold alignleft">
                                         Interior
                                     </TableCell>
 
@@ -201,7 +237,7 @@ export default function ViewDetailedReport(props) {
                                     </TableCell>
 
                                 </TableRow>
-                                <TableRow >
+                                {/* <TableRow >
                                             <TableCell component="th" scope="row">
                                                 {DamageDetails?.damageDetails?.length > 0 ? DamageDetails.damageDetails[0].damage_area : 'N/A'}
                                             </TableCell>
@@ -210,24 +246,23 @@ export default function ViewDetailedReport(props) {
                                             <TableCell style={{ width: 90 }} align="right">{DamageDetails?.damageDetails?.length > 0 ? DamageDetails.damageDetails[0].paint_hours? DamageDetails.damageDetails[0].paint_hours:0: 'N/A'}</TableCell>
                                             <TableCell style={{ width: 90 }} align="right">{DamageDetails?.damageDetails?.length > 0 ? DamageDetails.damageDetails[0].part_cost ? DamageDetails.damageDetails[0].part_cost : 0: 'N/A'}</TableCell>
                                             <TableCell astyle={{ width: 90 }} align="right">{DamageDetails?.damageDetails?.length > 0 ? DamageDetails.damageDetails[0].total ? DamageDetails.damageDetails[0].total : 0: 'N/A'}</TableCell>
-                                </TableRow>
-                                {/* {wheelTyrelistOfItem.map(list => {
-                                    return (
-                                        <TableRow key={list}>
+                                </TableRow> */}
+                                {
+                                    interior.map(inter => {
+                                   return(<TableRow >
                                             <TableCell component="th" scope="row">
-                                                Damage area name and description
+                                                {DamageDetails?.damageDetails?.length > 0 ? `${inter.damage_location_detail} - ${inter.damage_description}` : 'N/A'}
                                             </TableCell>
-                                            <TableCell style={{ width: 90 }} align="right">N</TableCell>
-                                            <TableCell style={{ width: 90 }} align="right">000</TableCell>
-                                            <TableCell style={{ width: 90 }} align="right">000</TableCell>
-                                            <TableCell style={{ width: 90 }} align="right">$000,000</TableCell>
-                                            <TableCell astyle={{ width: 90 }} align="right">$000,000</TableCell>
-                                        </TableRow>
-                                    )
-                                })
-                                } */}
+                                            <TableCell style={{ width: 90 }} align="left">{DamageDetails?.damageDetails?.length > 0 ?inter.chargeable_flag : 'N/A'}</TableCell>
+                                            <TableCell style={{ width: 90 }} align="left">{DamageDetails?.damageDetails?.length > 0 ? inter.partlabor_hours: 'N/A'}</TableCell>
+                                            <TableCell style={{ width: 90 }} align="left">{DamageDetails?.damageDetails?.length > 0 ? inter.paint_hours? inter.paint_hours:0: 'N/A'}</TableCell>
+                                            <TableCell style={{ width: 90 }} align="left">{DamageDetails?.damageDetails?.length > 0 ? inter.part_cost ? inter.part_cost : 0: 'N/A'}</TableCell>
+                                            <TableCell astyle={{ width: 90 }} align="left">{DamageDetails?.damageDetails?.length > 0 ? inter.total ? inter.total : 0: 'N/A'}</TableCell>
+                                  </TableRow>)
+                                    })
+                                }
                                 <TableRow>
-                                    <TableCell colSpan={6} component="th" scope="row" className="warningColorTable">
+                                    <TableCell colSpan={6} component="th" scope="row" className="textBold alignleft">
                                         Exterior
                                     </TableCell>
 
@@ -238,7 +273,7 @@ export default function ViewDetailedReport(props) {
                                     </TableCell>
 
                                 </TableRow>
-                                <TableRow >
+                                {/* <TableRow >
                                             <TableCell component="th" scope="row">
                                                 {DamageDetails?.damageDetails?.length > 0 ? DamageDetails.damageDetails[1].damage_area : 'N/A'}
                                             </TableCell>
@@ -247,24 +282,23 @@ export default function ViewDetailedReport(props) {
                                             <TableCell style={{ width: 90 }} align="right">{DamageDetails?.damageDetails?.length > 0 ? DamageDetails.damageDetails[1].paint_hours? DamageDetails.damageDetails[0].paint_hours:0: 'N/A'}</TableCell>
                                             <TableCell style={{ width: 90 }} align="right">{DamageDetails?.damageDetails?.length > 0 ? DamageDetails.damageDetails[1].part_cost ? DamageDetails.damageDetails[0].part_cost : 0: 'N/A'}</TableCell>
                                             <TableCell astyle={{ width: 90 }} align="right">{DamageDetails?.damageDetails?.length > 0 ? DamageDetails.damageDetails[1].total ? DamageDetails.damageDetails[0].total : 0: 'N/A'}</TableCell>
-                                </TableRow>
-                                {/* {wheelTyrelistOfItem.map(list => {
-                                    return (
-                                        <TableRow key={list}>
+                                </TableRow> */}
+                                {
+                                    exterior.map(exter => {
+                                    return (<TableRow >
                                             <TableCell component="th" scope="row">
-                                                Damage area name and description
+                                                {DamageDetails?.damageDetails?.length > 0 ?  `${exter.damage_location_detail} - ${exter.damage_description}` : 'N/A'}
                                             </TableCell>
-                                            <TableCell style={{ width: 90 }} align="right">N</TableCell>
-                                            <TableCell style={{ width: 90 }} align="right">000</TableCell>
-                                            <TableCell style={{ width: 90 }} align="right">000</TableCell>
-                                            <TableCell style={{ width: 90 }} align="right">$000,000</TableCell>
-                                            <TableCell astyle={{ width: 90 }} align="right">$000,000</TableCell>
-                                        </TableRow>
-                                    )
-                                })
-                                } */}
+                                            <TableCell style={{ width: 90 }} align="left">{DamageDetails?.damageDetails?.length > 0 ?exter.chargeable_flag : 'N/A'}</TableCell>
+                                            <TableCell style={{ width: 90 }} align="left">{DamageDetails?.damageDetails?.length > 0 ? exter.partlabor_hours: 'N/A'}</TableCell>
+                                            <TableCell style={{ width: 90 }} align="left">{DamageDetails?.damageDetails?.length > 0 ? exter.paint_hours? exter.paint_hours:0: 'N/A'}</TableCell>
+                                            <TableCell style={{ width: 90 }} align="left">{DamageDetails?.damageDetails?.length > 0 ? exter.part_cost ? exter.part_cost : 0: 'N/A'}</TableCell>
+                                            <TableCell astyle={{ width: 90 }} align="left">{DamageDetails?.damageDetails?.length > 0 ? exter.total ? exter.total : 0: 'N/A'}</TableCell>
+                                  </TableRow>)
+                                    })
+                                }
                                 <TableRow>
-                                    <TableCell colSpan={6} component="th" scope="row" className="warningColorTable">
+                                    <TableCell colSpan={6} component="th" scope="row" className="textBold alignleft">
                                         Mechanical
                                     </TableCell>
 
@@ -275,16 +309,21 @@ export default function ViewDetailedReport(props) {
                                     </TableCell>
 
                                 </TableRow>
-                                <TableRow >
+                                {
+                                    mechanical.map(mech => {
+                                   return(<TableRow >
                                             <TableCell component="th" scope="row">
-                                                {DamageDetails?.damageDetails?.length > 0 ? DamageDetails.damageDetails[2].damage_area : 'N/A'}
+                                                {DamageDetails?.damageDetails?.length > 0 ? `${mech.damage_location_detail} - ${mech.damage_description} ` : 'N/A'}
                                             </TableCell>
-                                            <TableCell style={{ width: 90 }} align="right">{DamageDetails?.damageDetails?.length > 0 ?DamageDetails.damageDetails[2].damage_type : 'N/A'}</TableCell>
-                                            <TableCell style={{ width: 90 }} align="right">{DamageDetails?.damageDetails?.length > 0 ? DamageDetails.damageDetails[2].partlabor_hours: 'N/A'}</TableCell>
-                                            <TableCell style={{ width: 90 }} align="right">{DamageDetails?.damageDetails?.length > 0 ? DamageDetails.damageDetails[2].paint_hours? DamageDetails.damageDetails[0].paint_hours:0: 'N/A'}</TableCell>
-                                            <TableCell style={{ width: 90 }} align="right">{DamageDetails?.damageDetails?.length > 0 ? DamageDetails.damageDetails[2].part_cost ? DamageDetails.damageDetails[0].part_cost : 0: 'N/A'}</TableCell>
-                                            <TableCell astyle={{ width: 90 }} align="right">{DamageDetails?.damageDetails?.length > 0 ? DamageDetails.damageDetails[2].total ? DamageDetails.damageDetails[0].total : 0: 'N/A'}</TableCell>
-                                </TableRow>
+                                            <TableCell style={{ width: 90 }} align="left">{DamageDetails?.damageDetails?.length > 0 ?mech.chargeable_flag : 'N/A'}</TableCell>
+                                            <TableCell style={{ width: 90 }} align="left">{DamageDetails?.damageDetails?.length > 0 ? mech.partlabor_hours: 'N/A'}</TableCell>
+                                            <TableCell style={{ width: 90 }} align="left">{DamageDetails?.damageDetails?.length > 0 ? mech.paint_hours? mech.paint_hours:0: 'N/A'}</TableCell>
+                                            <TableCell style={{ width: 90 }} align="left">{DamageDetails?.damageDetails?.length > 0 ? mech.part_cost ? mech.part_cost : 0: 'N/A'}</TableCell>
+                                            <TableCell astyle={{ width: 90 }} align="left">{DamageDetails?.damageDetails?.length > 0 ? mech.total ? mech.total : 0: 'N/A'}</TableCell>
+                                  </TableRow>)
+                                    })
+                                }
+                                
                                 {/* {wheelTyrelistOfItem.map(list => {
                                     return (
                                         <TableRow key={list}>
@@ -310,10 +349,15 @@ export default function ViewDetailedReport(props) {
                                 <TableRow >
                                     <TableCell colSpan={2} component="th" scope="row">
                                     </TableCell>
-                                    <TableCell colSpan={1} style={{ width: 90,color: '#0070d2' }} align="right">Total</TableCell>
+                                    <TableCell colSpan={1} style={{ width: 90 }} align="right">Total</TableCell>
                                     <TableCell colSpan={2} component="th" scope="row">
                                     </TableCell>
-                                    <TableCell style={{ width: 90,color: '#0070d2' }} align="right" >$000,000</TableCell>
+                                    <TableCell style={{ width: 90 }} align="left" >$<CurrencyFormat
+                          value={finalTotal}
+                          displayType={"text"}
+                          thousandSeparator={true}
+        
+                        /></TableCell>
                                 </TableRow>
                                 <TableRow >
                                     <TableCell colSpan={2} component="th" scope="row">
