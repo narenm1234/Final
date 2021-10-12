@@ -63,51 +63,134 @@ const DialogActions = withStyles((theme) => ({
     },
 }))(MuiDialogActions);
 
-let serviceData = {
+let DamageDetails = {
     "damageDetails": [
-        {
-            "inspection_id": 19234370,
-            "vin": "JM3KFBCY5M0384441",
-            "damage_area": "",
-            "partlabor_hours": 0,
-            "total": null,
-            "paint_rate": 46.0,
-            "chargeable_flag": "false",
-            "paint_hours": 2,
-            "part_cost": 0.0,
-            "damage_type": "1"
-        },
-        {
-            "inspection_id": 19234370,
-            "vin": "JM3KFBCY5M0384441",
-            "damage_area": "",
-            "partlabor_hours": 0,
-            "total": null,
-            "paint_rate": 46.0,
-            "chargeable_flag": "false",
-            "paint_hours": 2,
-            "part_cost": 0.0,
-            "damage_type": "1"
-        },
-        {
-            "inspection_id": 19234370,
-            "vin": "JM3KFBCY5M0384441",
-            "damage_area": "",
-            "partlabor_hours": 0,
-            "total": null,
-            "paint_rate": 46.0,
-            "chargeable_flag": "false",
-            "paint_hours": 2,
-            "part_cost": 0.0,
-            "damage_type": "1"
-        }
+      {
+        "inspection_id": 232211,
+        "vin": "JM3KFADM6L0797974",
+        "damage_location_detail": "Windshield",
+        "partlabor_hours": 0,
+        "total": "285.00",
+        "paint_rate": 46,
+        "chargeable_flag": "true",
+        "paint_hours": 0,
+        "part_cost": 200,
+        "damage_type": "X",
+        "damage_description": "w/s glass mazda w/o wiper deicer w/o smart city br - 1X2.0\" Cracked (Replace)"
+      },
+      {
+        "inspection_id": 232211,
+        "vin": "JM3KFADM6L0797974",
+        "damage_location_detail": "Front Bumper",
+        "partlabor_hours": 0,
+        "total": "221.60",
+        "paint_rate": 46,
+        "chargeable_flag": "true",
+        "paint_hours": 2,
+        "part_cost": 0,
+        "damage_type": "X",
+        "damage_description": "bmpr cvr w/parking sensors hiroshima plant - 1X8.0\" Cracked (Repair)"
+      },
+      {
+        "inspection_id": 232211,
+        "vin": "JM3KFADM6L0797974",
+        "damage_location_detail": "Right Fender",
+        "partlabor_hours": 0,
+        "total": "0.00",
+        "paint_rate": 46,
+        "chargeable_flag": "false",
+        "paint_hours": 0,
+        "part_cost": 0,
+        "damage_type": "X",
+        "damage_description": "Fndr pnl -  Previous repair (REPORT)"
+      },
+      {
+        "inspection_id": 232211,
+        "vin": "JM3KFADM6L0797974",
+        "damage_location_detail": "Right Front Door",
+        "partlabor_hours": 0,
+        "total": "0.00",
+        "paint_rate": 46,
+        "chargeable_flag": "false",
+        "paint_hours": 0,
+        "part_cost": 0,
+        "damage_type": "X",
+        "damage_description": "Door shell -  SSR-Dirt in Paint (REPORT)"
+      },
+      {
+        "inspection_id": 232211,
+        "vin": "JM3KFADM6L0797974",
+        "damage_location_detail": "Left 1/4 Panel",
+        "partlabor_hours": 0,
+        "total": "169.20",
+        "paint_rate": 46,
+        "chargeable_flag": "false",
+        "paint_hours": 2,
+        "part_cost": 0,
+        "damage_type": "X",
+        "damage_description": "Otr 1/4 pnl - 1X3.0\" Dented / dinged - paint broken (Repair)"
+      },
+      {
+        "inspection_id": 232211,
+        "vin": "JM3KFADM6L0797974",
+        "damage_location_detail": "Left Rear Door",
+        "partlabor_hours": 0,
+        "total": "55.00",
+        "paint_rate": 46,
+        "chargeable_flag": "false",
+        "paint_hours": 0,
+        "part_cost": 55,
+        "damage_type": "X",
+        "damage_description": "Door shell - 1X1.5\" Dented / dinged - paint not broken (Repair)"
+      },
+      {
+        "inspection_id": 232211,
+        "vin": "JM3KFADM6L0797974",
+        "damage_location_detail": "Front Left Tire",
+        "partlabor_hours": 0,
+        "total": "200.00",
+        "paint_rate": 46,
+        "chargeable_flag": "true",
+        "paint_hours": 0,
+        "part_cost": 200,
+        "damage_type": "X",
+        "damage_description": "19 Inch Tire - 1X3.0\" Cut (Replace)"
+      },
+      {
+        "inspection_id": 232211,
+        "vin": "JM3KFADM6L0797974",
+        "damage_location_detail": "Warning Light",
+        "partlabor_hours": 0,
+        "total": "34.00",
+        "paint_rate": 46,
+        "chargeable_flag": "false",
+        "paint_hours": 0,
+        "part_cost": 0,
+        "damage_type": "M",
+        "damage_description": "Check engine warning light -  Stays on (FurtherDiagnosis)"
+      },
+      {
+        "inspection_id": 232211,
+        "vin": "JM3KFADM6L0797974",
+        "damage_location_detail": "Rear Left Wheel/Cover",
+        "partlabor_hours": 0,
+        "total": "100.00",
+        "paint_rate": 46,
+        "chargeable_flag": "false",
+        "paint_hours": 0,
+        "part_cost": 100,
+        "damage_type": "X",
+        "damage_description": "aly whl 19\" type 1 dicastal brand - 1X2.0\" Scratched (Repair)"
+      }
     ],
-    "interiorCost": null,
-    "exteriorCost": null,
-    "maintainenceCost": null,
-    "excessiveWandT": 0.0,
-    "normal": 0.0
-};
+    "interiorCost": 0,
+    "exteriorCost": 1030.8,
+    "mechanicalCost": 34,
+    "excessiveWandT": 706.6,
+    "normal": 358.2,
+    "inspectionPaintRate": 50,
+    "inspectionLaborRate": 60
+  };
 export default function ViewDetailedReport(props) {
     const [open, setOpen] = React.useState(false);
     const [interior,setInterior] = React.useState([]);
@@ -125,15 +208,15 @@ export default function ViewDetailedReport(props) {
     };
     
 
-    const {DamageDetails}=props;
+    //const {DamageDetails}=props;
     const handleSeperation = () => {
         let interior = []
         let exterior = []
         let mechanical = []
         let total = 0;
-      if(props.DamageDetails?.damageDetails?.length > 0)
+      if(DamageDetails?.damageDetails?.length > 0)
     {
-        props.DamageDetails?.damageDetails?.map(row => {
+        DamageDetails?.damageDetails?.map(row => {
             if(row.damage_type == "X"){
                 exterior.push(row);
             } else if(row.damage_type == "I"){
@@ -228,11 +311,11 @@ export default function ViewDetailedReport(props) {
                             <TableHead>
                                 <TableRow>
                                     <TableCell>Damaged Area</TableCell>
-                                    <TableCell align="left">Wear & Tear</TableCell>
-                                    <TableCell align="left">Labor Hours</TableCell>
-                                    <TableCell align="left">Paint Hours</TableCell>
-                                    <TableCell align="left">Part Cost</TableCell>
-                                    <TableCell align="left">Estimate</TableCell>
+                                    <TableCell align="left" className="textWidth">Wear & Tear</TableCell>
+                                    <TableCell align="left" className="textWidth">Labor Hours</TableCell>
+                                    <TableCell align="left" className="textWidth">Paint Hours</TableCell>
+                                    <TableCell align="left" className="textWidth">Part Cost</TableCell>
+                                    <TableCell align="left" className="textWidth">Estimate</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
@@ -264,11 +347,11 @@ export default function ViewDetailedReport(props) {
                                             <TableCell component="th" scope="row">
                                                 {DamageDetails?.damageDetails?.length > 0 ? `${inter.damage_location_detail} - ${inter.damage_description}` : 'N/A'}
                                             </TableCell>
-                                            <TableCell style={{ width: 90 }} align="left">{DamageDetails?.damageDetails?.length > 0 ?inter.chargeable_flag : 'N/A'}</TableCell>
-                                            <TableCell style={{ width: 90 }} align="left">{DamageDetails?.damageDetails?.length > 0 ? inter.partlabor_hours: 'N/A'}</TableCell>
-                                            <TableCell style={{ width: 90 }} align="left">{DamageDetails?.damageDetails?.length > 0 ? inter.paint_hours? inter.paint_hours:0: 'N/A'}</TableCell>
-                                            <TableCell style={{ width: 90 }} align="left">{DamageDetails?.damageDetails?.length > 0 ? inter.part_cost ? inter.part_cost : 0: 'N/A'}</TableCell>
-                                            <TableCell astyle={{ width: 90 }} align="left">{DamageDetails?.damageDetails?.length > 0 ? inter.total ? inter.total : 0: 'N/A'}</TableCell>
+                                            <TableCell style={{ width: 150 }} align="left">{DamageDetails?.damageDetails?.length > 0 ?inter.chargeable_flag : 'N/A'}</TableCell>
+                                            <TableCell style={{ width: 150 }} align="left">{DamageDetails?.damageDetails?.length > 0 ? inter.partlabor_hours: 'N/A'}</TableCell>
+                                            <TableCell style={{ width: 150 }} align="left">{DamageDetails?.damageDetails?.length > 0 ? inter.paint_hours? inter.paint_hours:0: 'N/A'}</TableCell>
+                                            <TableCell style={{ width: 150 }} align="left">{DamageDetails?.damageDetails?.length > 0 ? inter.part_cost ? inter.part_cost : 0: 'N/A'}</TableCell>
+                                            <TableCell astyle={{ width: 150 }} align="left">{DamageDetails?.damageDetails?.length > 0 ? inter.total ? inter.total : 0: 'N/A'}</TableCell>
                                   </TableRow>)
                                     })
                                 }
@@ -297,7 +380,7 @@ export default function ViewDetailedReport(props) {
                                 {
                                     exterior.map(exter => {
                                     return (<TableRow >
-                                            <TableCell component="th" scope="row">
+                                            <TableCell >
                                                 {DamageDetails?.damageDetails?.length > 0 ?  `${exter.damage_location_detail} - ${exter.damage_description}` : 'N/A'}
                                             </TableCell>
                                             <TableCell style={{ width: 90 }} align="left">{DamageDetails?.damageDetails?.length > 0 ?exter.chargeable_flag : 'N/A'}</TableCell>
