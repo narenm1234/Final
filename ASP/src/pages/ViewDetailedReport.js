@@ -21,6 +21,7 @@ import MyGallery from './ImageGallery';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
+import CurrencyFormat from "react-currency-format";
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 const styles = (theme) => ({
     root: {
@@ -130,9 +131,9 @@ export default function ViewDetailedReport(props) {
         let exterior = []
         let mechanical = []
         let total = 0;
-      if(props.DamageDetails?.damageDetails?.length > 0)
+      if(DamageDetails?.damageDetails?.length > 0)
     {
-        props.DamageDetails?.damageDetails?.map(row => {
+        DamageDetails?.damageDetails?.map(row => {
             if(row.damage_type == "X"){
                 exterior.push(row);
             } else if(row.damage_type == "I"){
@@ -155,7 +156,7 @@ export default function ViewDetailedReport(props) {
     }
     useEffect(() =>{
         handleSeperation();
-    },[]);
+    },[props.DamageDetails]);
     return (
         <div>
             <Dialog onClose={handleClose} maxWidth={'lg'} aria-labelledby="max-width-dialog-title" open={props.open}>
@@ -351,7 +352,12 @@ export default function ViewDetailedReport(props) {
                                     <TableCell colSpan={1} style={{ width: 90 }} align="right">Total</TableCell>
                                     <TableCell colSpan={2} component="th" scope="row">
                                     </TableCell>
-                                    <TableCell style={{ width: 90 }} align="left" >${finalTotal}</TableCell>
+                                    <TableCell style={{ width: 90 }} align="left" >$<CurrencyFormat
+                          value={finalTotal}
+                          displayType={"text"}
+                          thousandSeparator={true}
+        
+                        /></TableCell>
                                 </TableRow>
                                 <TableRow >
                                     <TableCell colSpan={2} component="th" scope="row">
