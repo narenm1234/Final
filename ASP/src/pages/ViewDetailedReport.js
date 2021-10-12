@@ -22,6 +22,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
+import CurrencyFormat from "react-currency-format";
 const styles = (theme) => ({
     root: {
         margin: 0,
@@ -177,15 +178,26 @@ export default function ViewDetailedReport(props) {
                                     <List >
                                         <ListItem >
                                             <ListItemText className="smallCardTitle"><span className="textBold alignleft">Interior</span></ListItemText>
-                                            <ListItemSecondaryAction className="smallCardBody ">{DamageDetails.interiorCost?`$${DamageDetails.interiorCost}`:'0'}</ListItemSecondaryAction>
+                                            <ListItemSecondaryAction className="smallCardBody ">{DamageDetails.interiorCost ? (<CurrencyFormat
+                                                value={DamageDetails.interiorCost}
+                                                displayType={"text"}
+                                                thousandSeparator={true}
+                                            />) : '0'}</ListItemSecondaryAction>
                                         </ListItem>
                                         <ListItem>
                                             <ListItemText className="smallCardTitle"><span className="textBold alignleft">Exterior</span></ListItemText>
-                                            <ListItemSecondaryAction className="smallCardBody ">{DamageDetails.exteriorCost?`$${DamageDetails.exteriorCost}`:'0'}</ListItemSecondaryAction>
+                                            <ListItemSecondaryAction className="smallCardBody ">{DamageDetails.exteriorCost ? (<CurrencyFormat
+                                                value={DamageDetails.exteriorCost}
+                                                displayType={"text"}
+                                                thousandSeparator={true}/>) : '0'}
+                                            </ListItemSecondaryAction>
                                         </ListItem>
                                         <ListItem>
                                             <ListItemText className="smallCardTitle"><span className="textBold alignleft">Mechanical total</span></ListItemText>
-                                            <ListItemSecondaryAction className="smallCardBody ">{DamageDetails.maintainenceCost?`$${DamageDetails.mechanicalCost}`:'0'}</ListItemSecondaryAction>
+                                            <ListItemSecondaryAction className="smallCardBody ">{DamageDetails.maintainenceCost?(<CurrencyFormat
+                                                value={DamageDetails.maintainenceCost}
+                                                displayType={"text"}
+                                                thousandSeparator={true}/>) :'0'}</ListItemSecondaryAction>
                                         </ListItem>
                                         <ListItem>
                                             <ListItemText className="smallCardTitle"><span className="textBold alignleft">Normal W&T</span></ListItemText>
