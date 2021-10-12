@@ -130,7 +130,8 @@ export default function ViewDetailedReport(props) {
         let exterior = []
         let mechanical = []
         let total = 0;
-      if(props.DamageDetails?.damageDetails?.length > 0){
+      if(props.DamageDetails?.damageDetails?.length > 0)
+    {
         props.DamageDetails?.damageDetails?.map(row => {
             if(row.damage_type == "X"){
                 exterior.push(row);
@@ -215,11 +216,11 @@ export default function ViewDetailedReport(props) {
                             <TableHead>
                                 <TableRow>
                                     <TableCell>Damaged Area</TableCell>
-                                    <TableCell align="right">Wear & Tear</TableCell>
-                                    <TableCell align="right">Labor Hours</TableCell>
-                                    <TableCell align="right">Paint Hours</TableCell>
-                                    <TableCell align="right">Part Cost</TableCell>
-                                    <TableCell align="right">Estimate</TableCell>
+                                    <TableCell align="left">Wear & Tear</TableCell>
+                                    <TableCell align="left">Labor Hours</TableCell>
+                                    <TableCell align="left">Paint Hours</TableCell>
+                                    <TableCell align="left">Part Cost</TableCell>
+                                    <TableCell align="left">Estimate</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
@@ -251,11 +252,11 @@ export default function ViewDetailedReport(props) {
                                             <TableCell component="th" scope="row">
                                                 {DamageDetails?.damageDetails?.length > 0 ? `${inter.damage_location_detail} - ${inter.damage_description}` : 'N/A'}
                                             </TableCell>
-                                            <TableCell style={{ width: 90 }} align="right">{DamageDetails?.damageDetails?.length > 0 ?inter.chargeable_flag : 'N/A'}</TableCell>
-                                            <TableCell style={{ width: 90 }} align="right">{DamageDetails?.damageDetails?.length > 0 ? inter.partlabor_hours: 'N/A'}</TableCell>
-                                            <TableCell style={{ width: 90 }} align="right">{DamageDetails?.damageDetails?.length > 0 ? inter.paint_hours? inter.paint_hours:0: 'N/A'}</TableCell>
-                                            <TableCell style={{ width: 90 }} align="right">{DamageDetails?.damageDetails?.length > 0 ? inter.part_cost ? inter.part_cost : 0: 'N/A'}</TableCell>
-                                            <TableCell astyle={{ width: 90 }} align="right">{DamageDetails?.damageDetails?.length > 0 ? inter.total ? inter.total : 0: 'N/A'}</TableCell>
+                                            <TableCell style={{ width: 90 }} align="left">{DamageDetails?.damageDetails?.length > 0 ?inter.chargeable_flag : 'N/A'}</TableCell>
+                                            <TableCell style={{ width: 90 }} align="left">{DamageDetails?.damageDetails?.length > 0 ? inter.partlabor_hours: 'N/A'}</TableCell>
+                                            <TableCell style={{ width: 90 }} align="left">{DamageDetails?.damageDetails?.length > 0 ? inter.paint_hours? inter.paint_hours:0: 'N/A'}</TableCell>
+                                            <TableCell style={{ width: 90 }} align="left">{DamageDetails?.damageDetails?.length > 0 ? inter.part_cost ? inter.part_cost : 0: 'N/A'}</TableCell>
+                                            <TableCell astyle={{ width: 90 }} align="left">{DamageDetails?.damageDetails?.length > 0 ? inter.total ? inter.total : 0: 'N/A'}</TableCell>
                                   </TableRow>)
                                     })
                                 }
@@ -287,11 +288,11 @@ export default function ViewDetailedReport(props) {
                                             <TableCell component="th" scope="row">
                                                 {DamageDetails?.damageDetails?.length > 0 ?  `${exter.damage_location_detail} - ${exter.damage_description}` : 'N/A'}
                                             </TableCell>
-                                            <TableCell style={{ width: 90 }} align="right">{DamageDetails?.damageDetails?.length > 0 ?exter.chargeable_flag : 'N/A'}</TableCell>
-                                            <TableCell style={{ width: 90 }} align="right">{DamageDetails?.damageDetails?.length > 0 ? exter.partlabor_hours: 'N/A'}</TableCell>
-                                            <TableCell style={{ width: 90 }} align="right">{DamageDetails?.damageDetails?.length > 0 ? exter.paint_hours? exter.paint_hours:0: 'N/A'}</TableCell>
-                                            <TableCell style={{ width: 90 }} align="right">{DamageDetails?.damageDetails?.length > 0 ? exter.part_cost ? exter.part_cost : 0: 'N/A'}</TableCell>
-                                            <TableCell astyle={{ width: 90 }} align="right">{DamageDetails?.damageDetails?.length > 0 ? exter.total ? exter.total : 0: 'N/A'}</TableCell>
+                                            <TableCell style={{ width: 90 }} align="left">{DamageDetails?.damageDetails?.length > 0 ?exter.chargeable_flag : 'N/A'}</TableCell>
+                                            <TableCell style={{ width: 90 }} align="left">{DamageDetails?.damageDetails?.length > 0 ? exter.partlabor_hours: 'N/A'}</TableCell>
+                                            <TableCell style={{ width: 90 }} align="left">{DamageDetails?.damageDetails?.length > 0 ? exter.paint_hours? exter.paint_hours:0: 'N/A'}</TableCell>
+                                            <TableCell style={{ width: 90 }} align="left">{DamageDetails?.damageDetails?.length > 0 ? exter.part_cost ? exter.part_cost : 0: 'N/A'}</TableCell>
+                                            <TableCell astyle={{ width: 90 }} align="left">{DamageDetails?.damageDetails?.length > 0 ? exter.total ? exter.total : 0: 'N/A'}</TableCell>
                                   </TableRow>)
                                     })
                                 }
@@ -313,11 +314,11 @@ export default function ViewDetailedReport(props) {
                                             <TableCell component="th" scope="row">
                                                 {DamageDetails?.damageDetails?.length > 0 ? `${mech.damage_location_detail} - ${mech.damage_description} ` : 'N/A'}
                                             </TableCell>
-                                            <TableCell style={{ width: 90 }} align="right">{DamageDetails?.damageDetails?.length > 0 ?mech.chargeable_flag : 'N/A'}</TableCell>
-                                            <TableCell style={{ width: 90 }} align="right">{DamageDetails?.damageDetails?.length > 0 ? mech.partlabor_hours: 'N/A'}</TableCell>
-                                            <TableCell style={{ width: 90 }} align="right">{DamageDetails?.damageDetails?.length > 0 ? mech.paint_hours? mech.paint_hours:0: 'N/A'}</TableCell>
-                                            <TableCell style={{ width: 90 }} align="right">{DamageDetails?.damageDetails?.length > 0 ? mech.part_cost ? mech.part_cost : 0: 'N/A'}</TableCell>
-                                            <TableCell astyle={{ width: 90 }} align="right">{DamageDetails?.damageDetails?.length > 0 ? mech.total ? mech.total : 0: 'N/A'}</TableCell>
+                                            <TableCell style={{ width: 90 }} align="left">{DamageDetails?.damageDetails?.length > 0 ?mech.chargeable_flag : 'N/A'}</TableCell>
+                                            <TableCell style={{ width: 90 }} align="left">{DamageDetails?.damageDetails?.length > 0 ? mech.partlabor_hours: 'N/A'}</TableCell>
+                                            <TableCell style={{ width: 90 }} align="left">{DamageDetails?.damageDetails?.length > 0 ? mech.paint_hours? mech.paint_hours:0: 'N/A'}</TableCell>
+                                            <TableCell style={{ width: 90 }} align="left">{DamageDetails?.damageDetails?.length > 0 ? mech.part_cost ? mech.part_cost : 0: 'N/A'}</TableCell>
+                                            <TableCell astyle={{ width: 90 }} align="left">{DamageDetails?.damageDetails?.length > 0 ? mech.total ? mech.total : 0: 'N/A'}</TableCell>
                                   </TableRow>)
                                     })
                                 }
@@ -350,7 +351,7 @@ export default function ViewDetailedReport(props) {
                                     <TableCell colSpan={1} style={{ width: 90 }} align="right">Total</TableCell>
                                     <TableCell colSpan={2} component="th" scope="row">
                                     </TableCell>
-                                    <TableCell style={{ width: 90 }} align="right" >${finalTotal}</TableCell>
+                                    <TableCell style={{ width: 90 }} align="left" >${finalTotal}</TableCell>
                                 </TableRow>
                                 <TableRow >
                                     <TableCell colSpan={2} component="th" scope="row">
