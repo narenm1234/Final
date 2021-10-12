@@ -589,6 +589,7 @@ export default function ConditionReport(props) {
                           size="small"
                           aria-label="a dense table"
                         >
+                          
                           <TableHead>
                             <TableRow>
                               <TableCell>Code</TableCell>
