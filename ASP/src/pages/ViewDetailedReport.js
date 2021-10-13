@@ -265,6 +265,7 @@ export default function ViewDetailedReport(props) {
                                                 value={DamageDetails.interiorCost}
                                                 displayType={"text"}
                                                 thousandSeparator={true}
+                                                prefix={"$"}
                                             />) : '0'}</ListItemSecondaryAction>
                                         </ListItem>
                                         <ListItem>
@@ -272,7 +273,8 @@ export default function ViewDetailedReport(props) {
                                             <ListItemSecondaryAction className="smallCardBody ">{DamageDetails.exteriorCost ? (<CurrencyFormat
                                                 value={DamageDetails.exteriorCost}
                                                 displayType={"text"}
-                                                thousandSeparator={true}/>) : '0'}
+                                                thousandSeparator={true}
+                                                prefix={"$"}/>) : '0'}
                                             </ListItemSecondaryAction>
                                         </ListItem>
                                         <ListItem>
@@ -280,15 +282,24 @@ export default function ViewDetailedReport(props) {
                                             <ListItemSecondaryAction className="smallCardBody ">{DamageDetails.maintainenceCost?(<CurrencyFormat
                                                 value={DamageDetails.maintainenceCost}
                                                 displayType={"text"}
-                                                thousandSeparator={true}/>) :'0'}</ListItemSecondaryAction>
+                                                thousandSeparator={true}
+                                                prefix={"$"}/>) :'0'}</ListItemSecondaryAction>
                                         </ListItem>
                                         <ListItem>
                                             <ListItemText className="smallCardTitle"><span className="textBold alignleft">Normal W&T</span></ListItemText>
-                                            <ListItemSecondaryAction className="smallCardBody ">{DamageDetails.normal?`$${DamageDetails.normal}`:'0'}</ListItemSecondaryAction>
+                                            <ListItemSecondaryAction className="smallCardBody ">{DamageDetails.normal?(<CurrencyFormat
+                                                value={DamageDetails.normal}
+                                                displayType={"text"}
+                                                thousandSeparator={true}
+                                                prefix={"$"}/>):'0'}</ListItemSecondaryAction>
                                         </ListItem>
                                         <ListItem>
                                             <ListItemText className="smallCardTitle"><span className="textBold alignleft ">Excessive W&T</span></ListItemText>
-                                            <ListItemSecondaryAction className="smallCardBody ">{DamageDetails.excessiveWandT?`$${DamageDetails.excessiveWandT}`:'0'}</ListItemSecondaryAction>
+                                            <ListItemSecondaryAction className="smallCardBody ">{DamageDetails.excessiveWandT?(<CurrencyFormat
+                                                value={DamageDetails.excessiveWandT}
+                                                displayType={"text"}
+                                                thousandSeparator={true}
+                                                prefix={"$"}/>):'0'}</ListItemSecondaryAction>
                                         </ListItem>
                                     </List>
 
@@ -350,8 +361,16 @@ export default function ViewDetailedReport(props) {
                                             <TableCell style={{ width: 150 }} align="left">{DamageDetails?.damageDetails?.length > 0 ?inter.chargeable_flag : 'N/A'}</TableCell>
                                             <TableCell style={{ width: 150 }} align="left">{DamageDetails?.damageDetails?.length > 0 ? inter.partlabor_hours: 'N/A'}</TableCell>
                                             <TableCell style={{ width: 150 }} align="left">{DamageDetails?.damageDetails?.length > 0 ? inter.paint_hours? inter.paint_hours:0: 'N/A'}</TableCell>
-                                            <TableCell style={{ width: 150 }} align="left">{DamageDetails?.damageDetails?.length > 0 ? inter.part_cost ? inter.part_cost : 0: 'N/A'}</TableCell>
-                                            <TableCell astyle={{ width: 150 }} align="left">{DamageDetails?.damageDetails?.length > 0 ? inter.total ? inter.total : 0: 'N/A'}</TableCell>
+                                            <TableCell style={{ width: 150 }} align="left">{DamageDetails?.damageDetails?.length > 0 ? inter.part_cost ? (<CurrencyFormat
+                                                value={inter.part_cost}
+                                                displayType={"text"}
+                                                thousandSeparator={true}
+                                                prefix={"$"}/>) : 0: 'N/A'}</TableCell>
+                                            <TableCell astyle={{ width: 150 }} align="left">{DamageDetails?.damageDetails?.length > 0 ? inter.total ? (<CurrencyFormat
+                                                value={inter.total}
+                                                displayType={"text"}
+                                                thousandSeparator={true}
+                                                prefix={"$"}/>) : 0: 'N/A'}</TableCell>
                                   </TableRow>)
                                     })
                                 }
@@ -386,8 +405,16 @@ export default function ViewDetailedReport(props) {
                                             <TableCell style={{ width: 90 }} align="left">{DamageDetails?.damageDetails?.length > 0 ?exter.chargeable_flag : 'N/A'}</TableCell>
                                             <TableCell style={{ width: 90 }} align="left">{DamageDetails?.damageDetails?.length > 0 ? exter.partlabor_hours: 'N/A'}</TableCell>
                                             <TableCell style={{ width: 90 }} align="left">{DamageDetails?.damageDetails?.length > 0 ? exter.paint_hours? exter.paint_hours:0: 'N/A'}</TableCell>
-                                            <TableCell style={{ width: 90 }} align="left">{DamageDetails?.damageDetails?.length > 0 ? exter.part_cost ? exter.part_cost : 0: 'N/A'}</TableCell>
-                                            <TableCell astyle={{ width: 90 }} align="left">{DamageDetails?.damageDetails?.length > 0 ? exter.total ? exter.total : 0: 'N/A'}</TableCell>
+                                            <TableCell style={{ width: 90 }} align="left">{DamageDetails?.damageDetails?.length > 0 ? exter.part_cost ?(<CurrencyFormat
+                                                value={exter.part_cost}
+                                                displayType={"text"}
+                                                thousandSeparator={true}
+                                                prefix={"$"}/>) : 0: 'N/A'}</TableCell>
+                                            <TableCell astyle={{ width: 90 }} align="left">{DamageDetails?.damageDetails?.length > 0 ? exter.total ? (<CurrencyFormat
+                                                value={exter.total}
+                                                displayType={"text"}
+                                                thousandSeparator={true}
+                                                prefix={"$"}/>) : 0: 'N/A'}</TableCell>
                                   </TableRow>)
                                     })
                                 }
@@ -412,8 +439,16 @@ export default function ViewDetailedReport(props) {
                                             <TableCell style={{ width: 90 }} align="left">{DamageDetails?.damageDetails?.length > 0 ?mech.chargeable_flag : 'N/A'}</TableCell>
                                             <TableCell style={{ width: 90 }} align="left">{DamageDetails?.damageDetails?.length > 0 ? mech.partlabor_hours: 'N/A'}</TableCell>
                                             <TableCell style={{ width: 90 }} align="left">{DamageDetails?.damageDetails?.length > 0 ? mech.paint_hours? mech.paint_hours:0: 'N/A'}</TableCell>
-                                            <TableCell style={{ width: 90 }} align="left">{DamageDetails?.damageDetails?.length > 0 ? mech.part_cost ? mech.part_cost : 0: 'N/A'}</TableCell>
-                                            <TableCell astyle={{ width: 90 }} align="left">{DamageDetails?.damageDetails?.length > 0 ? mech.total ? mech.total : 0: 'N/A'}</TableCell>
+                                            <TableCell style={{ width: 90 }} align="left">{DamageDetails?.damageDetails?.length > 0 ? mech.part_cost ? (<CurrencyFormat
+                                                value={mech.part_cost}
+                                                displayType={"text"}
+                                                thousandSeparator={true}
+                                                prefix={"$"}/>) : 0: 'N/A'}</TableCell>
+                                            <TableCell astyle={{ width: 90 }} align="left">{DamageDetails?.damageDetails?.length > 0 ? mech.total ? (<CurrencyFormat
+                                                value={mech.total}
+                                                displayType={"text"}
+                                                thousandSeparator={true}
+                                                prefix={"$"}/>) : 0: 'N/A'}</TableCell>
                                   </TableRow>)
                                     })
                                 }
