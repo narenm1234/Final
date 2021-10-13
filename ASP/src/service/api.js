@@ -24,12 +24,15 @@ let AMP;
 let MileageDiscList;
 
 let getImages;
+
+let getDealerPayments;
 // let code ='aPrxyoOWGvXqBxqwZTQG7bATs.5vkEP2UmwQ_Eeu7GT7g4TQrfoMjW6F_s7s__kGco4_nvPVrg==';
 // let grant_type='authorization_code';
 // let client_secret= 'A8C495709B3F0BD5972D67EAF464949838E2F35EB623E514F75487A18904D70A';
 //  let  redirect_uri='http://localhost:3000/purchased'
 
 const hostname = window.location.hostname;
+
 if (hostname.includes("dev")) {
   url =
     "https://aspservices-internal-dev.tfs.toyota.com/asp-services/getAccountDetailsBykey";
@@ -61,6 +64,8 @@ if (hostname.includes("dev")) {
     "https://aspservices-internal-dev.tfs.toyota.com/asp-services/getMileageDiscList";
   getImages =
     "https://aspservices-internal-dev.tfs.toyota.com/asp-services/getImage";
+  getDealerPayments =
+    "https://aspservices-internal-dev.tfs.toyota.com/asp-services/dealerpayment/paymentmethod";
 } else if (hostname.includes("local")) {
   url =
     "http://internal-a3e2a8608d24e4c5f8b42aed9c3587d7-2044184104.us-east-1.elb.amazonaws.com/getAccountDetailsBykey";
@@ -95,6 +100,8 @@ if (hostname.includes("dev")) {
     "https://aspservices-internal-dev.tfs.toyota.com/asp-services/getMileageDiscList";
   getImages =
     "https://aspservices-internal-dev.tfs.toyota.com/asp-services/getImage";
+  getDealerPayments =
+    "https://aspservices-internal-stage.tfs.toyota.com/asp-services/dealerpayment/paymentmethod";
 } else if (hostname.includes("stage")) {
   url =
     "http://internal-a3e2a8608d24e4c5f8b42aed9c3587d7-2044184104.us-east-1.elb.amazonaws.com/getAccountDetailsBykey";
@@ -126,6 +133,8 @@ if (hostname.includes("dev")) {
     "https://aspservices-internal-stage.tfs.toyota.com/asp-services/getMileageDiscList";
   getImages =
     "https://aspservices-internal-stage.tfs.toyota.com/asp-services/getImage";
+  getDealerPayments =
+    "https://aspservices-internal-stage.tfs.toyota.com/asp-services/dealerpayment/paymentmethod";
 } else if (hostname.includes("test")) {
   url =
     "http://internal-a3e2a8608d24e4c5f8b42aed9c3587d7-2044184104.us-east-1.elb.amazonaws.com/getAccountDetailsBykey";
@@ -157,6 +166,8 @@ if (hostname.includes("dev")) {
     "https://aspservices-internal-test.tfs.toyota.com/asp-services/getMileageDiscList";
   getImages =
     "https://aspservices-internal-test.tfs.toyota.com/asp-services/getImage";
+  getDealerPayments =
+    "https://aspservices-internal-test.tfs.toyota.com/asp-services/dealerpayment/paymentmethod";
 } else if (hostname.includes("prod")) {
   url =
     "http://internal-a3e2a8608d24e4c5f8b42aed9c3587d7-2044184104.us-east-1.elb.amazonaws.com/getAccountDetailsBykey";
@@ -188,7 +199,10 @@ if (hostname.includes("dev")) {
     "https://aspservices-internal.tfs.toyota.com/asp-services/getMileageDiscList";
   getImages =
     "https://aspservices-internal.tfs.toyota.com/asp-services/getImage";
+  getDealerPayments =
+    "https://aspservices-internal.tfs.toyota.com/asp-services/dealerpayment/paymentmethod";
 }
+
 export async function getAuthToken() {
   const options = {
     headers: {
@@ -456,8 +470,8 @@ export async function getAccessTokenEndpoint(code) {
     url: "https://stratus-stg3.mfindealerservices.com/services/oauth2/token",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
-    //   Cookie:
-    //     "BrowserId=LAkGcCGXEeyO6WviLU7-xw; CookieConsentPolicy=0:1; LSKey-c$CookieConsentPolicy=0:1",
+      //   Cookie:
+      //     "BrowserId=LAkGcCGXEeyO6WviLU7-xw; CookieConsentPolicy=0:1; LSKey-c$CookieConsentPolicy=0:1",
     },
     data: data,
   };
@@ -521,4 +535,15 @@ export async function getCarXml() {
       console.log(err);
     }
   );
+}
+
+
+
+export async function getDealerPaymentsData() {
+  const options = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  return await axios.get( getDealerPayments, options );
 }
