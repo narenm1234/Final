@@ -217,7 +217,21 @@
   border-bottom: none !important;
 }
 .MuiTableHead-root {
-  background-color: #FAFACD;
+  background-color: #FAFAF9;
+  color: #514f4d !important;
+}
+.MuiTableCell-sizeSmall {
+  padding: 6px 24px 6px 16px;
+  color: #514f4d !important;
+  font-size: 13px;
+}
+.MuiTableCell-alignRight{
+  font-weight: 900 !important;
+}
+.align_right{
+  font-weight: 900 !important;
+  font-size: 13px !important;
+  line-height: 20px !important;
 }
 .MuiTableContainer-root {
   box-shadow: none !important;
@@ -372,7 +386,7 @@
   width: 140px;
 }
 .detailedReportRates {
-  font-size: 18px;
+  font-size: 13px;
   font-weight: normal;
   font-stretch: normal;
   font-style: normal;
