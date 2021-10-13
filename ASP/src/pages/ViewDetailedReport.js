@@ -23,7 +23,6 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import CurrencyFormat from "react-currency-format";
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
-import CurrencyFormat from "react-currency-format";
 const styles = (theme) => ({
     root: {
         margin: 0,
