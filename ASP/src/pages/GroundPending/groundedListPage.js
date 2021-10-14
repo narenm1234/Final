@@ -92,7 +92,7 @@ export default function ListingPage(props) {
 
   const getVehicleDetails = async () => {
     let apiResponse = await getGroundingList("ALL");
-    setVehicleResponse(apiResponse.data.data);
+    setVehicleResponse(apiResponse?.data.data);
     //console.log('------->', apiResponse)
   };
 
@@ -195,7 +195,7 @@ export default function ListingPage(props) {
 
   return (
     <>
-      {vehicleResponse.length > 0 ? (
+      {vehicleResponse?.length > 0 ? (
         vehicleResponse.map((vehicle, index) => {
           return (
             <div className="listingPageCard" key={index}>
