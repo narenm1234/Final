@@ -127,6 +127,9 @@
   text-align: left;
   
 }
+.closeButton{
+  text-transform: capitalize !important;
+}
 .smallCardTitle {
   height: 14px;
   margin: 0 0 10px;
@@ -347,6 +350,10 @@
 }
 .alignleft {
   float: left;
+}
+
+.paddingTop{
+  margin-top: 20px !important;
 }
 .experiorSpacing {
   padding: 30px;
