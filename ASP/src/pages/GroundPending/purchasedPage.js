@@ -90,9 +90,9 @@ export default function ListingPage2(props) {
   }, [value]);
   async function getVehicleDetails() {
     let apiResponse = await getPurchasedList("ALL");
-    setVehicleResponse(apiResponse.data.data);
+    setVehicleResponse(apiResponse?.data.data);
     console.log(vehicleResponse);
-    console.log(apiResponse.data.data);
+    // console.log(apiResponse?.data.data);
   }
 
   const getImages = async () => {
@@ -112,7 +112,7 @@ export default function ListingPage2(props) {
     setImages(getimagesRes.data.imageDetails);
   };
 
-  return vehicleResponse.length > 0 ? (
+  return vehicleResponse?.length > 0 ? (
     vehicleResponse.map((vehicle, index) => {
       return (
         <div className="listingPageCard" key={index}>

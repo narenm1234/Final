@@ -231,14 +231,16 @@ export async function getVehicleDetails(token, VINumber) {
   };
   return await axios.post(url, requestData, options);
 }
-export async function getGroundingList(data) {
+export async function getGroundingList() {
+  let stringData = localStorage.getItem("dealerCode");
+  let payload = stringData ? stringData :"ALL"
 var data = JSON.stringify([
-  data
+  payload
 ]);
 
 var config = {
   method: 'post',
-  url: 'https://aspservices-internal-dev.tfs.toyota.com/asp-services/getGroundingList',
+  url: groundListUrl,
   headers: { 
     'accept': 'application/json', 
     'Content-Type': 'application/json'
@@ -246,27 +248,38 @@ var config = {
   data : data
 };
 
-axios(config)
-.then(function (response) {
-  console.log(JSON.stringify(response.data));
-})
-.catch(function (error) {
-  console.log(error);
-});
+return await axios(config);
+// .then(function (response) {
+//   console.log(JSON.stringify(response.data));
+//   return response.data;
+// })
+// .catch(function (error) {
+//   console.log(error);
+// });
 }
 
 
  
-export async function getPassedList() {
-  const options = {
-    headers: {
-      "Content-Type": "application/json",
+export async function getPassedList(data) {
+  let stringData = localStorage.getItem("dealerCode");
+  let payload = stringData ? stringData :"ALL"
+  var data = JSON.stringify([
+    payload
+  ]);
+  
+  var config = {
+    method: 'post',
+    url: passedVehicleUrl,
+    headers: { 
+      'accept': 'application/json', 
+      'Content-Type': 'application/json'
     },
+    data : data
   };
-  const requestData = "ALL";
+  
+  return await axios(config);
+  }
 
-  return await axios.post(passedVehicleUrl, requestData, options);
-}
 export async function getPassedList1() {
   const options = {
     headers: {
@@ -277,16 +290,26 @@ export async function getPassedList1() {
 
   return await axios.post(passedVehicleUrl, requestData, options);
 }
-export async function getPurchasedList(Data) {
-  const options = {
-    headers: {
-      "Content-Type": "application/json",
+export async function getPurchasedList(data) {
+  let stringData = localStorage.getItem("dealerCode");
+  let payload = stringData ? stringData :"ALL"
+  var data = JSON.stringify([
+    payload
+  ]);
+  
+  var config = {
+    method: 'post',
+    url: purchasedVehicleUrl,
+    headers: { 
+      'accept': 'application/json', 
+      'Content-Type': 'application/json'
     },
+    data : data
   };
-  const requestData = Data;
+  
+  return await axios(config);
+  }
 
-  return await axios.post(purchasedVehicleUrl, requestData, options);
-}
 export async function getInspectionVehicleDetails(vin) {
   const options = {
     headers: {
@@ -492,14 +515,8 @@ export async function getAccessTokenEndpoint(code) {
     data: data,
   };
 
-  axios(config)
-    .then(function (response) {
-      console.log(JSON.stringify(response.data));
-      return response.data;
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+ return await axios(config)
+
 }
 export async function getUserInfoToken(token) {
   var qs = require("qs");
@@ -508,14 +525,8 @@ export async function getUserInfoToken(token) {
     url: `https://stratus-stg3.mfindealerservices.com/services/oauth2/userinfo?access_token=${token}`,
   };
 
-  axios(config)
-    .then(function (response) {
-      console.log(JSON.stringify(response.data));
-      return response.data;
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+  return await axios(config)
+  
 }
 
 export async function getImageData(obj) {

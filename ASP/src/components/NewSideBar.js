@@ -101,13 +101,13 @@ export default function NewSidebar(props) {
         }
 
         if (child.link == "/grounded") {
-          child.badge = getGroundingListRes.data.data.length;
+          child.badge = getGroundingListRes?.data.data.length;
         }
         if (child.link == "/passed") {
-          child.badge = getPassedListRes.data.data.length;
+          child.badge = getPassedListRes?.data.data.length;
         }
         if (child.link == "/purchased") {
-          child.badge = getPurchasedListRes.data.data.length;
+          child.badge = getPurchasedListRes?.data.data.length;
         }
       });
     });

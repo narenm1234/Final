@@ -17,6 +17,7 @@ function getParameterByName(name, url = window.location.href) {
   return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
   const [token, setToken] = useState();
+  const [dealerCode, setDealerCode] = useState('');
   useEffect(() => {
     getToken();
     // getUserAccessInfoToken();
@@ -27,10 +28,13 @@ function getParameterByName(name, url = window.location.href) {
   async function getToken() {
     let apiResponse = await getAccessTokenEndpoint(data1);
     console.log("--->",apiResponse)
-    setToken(apiResponse?.access_token);
+    setToken(apiResponse?.data.access_token);
   }
   async function getUserAccessInfoToken(){
   let resp = await getUserInfoToken(token);
+  setDealerCode(resp.data.custom_attributes.dealerCode);
+  localStorage.setItem("dealerCode",resp.data.custom_attributes.dealerCode);
+  console.log(dealerCode);
   }
     return (
         <div>

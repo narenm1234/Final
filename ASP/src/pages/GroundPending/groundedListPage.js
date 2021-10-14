@@ -76,7 +76,7 @@ let resp = [
   // },
 ];
 export default function ListingPage(props) {
-  const [vehicleResponse, setVehicleResponse] = useState(resp);
+  const [vehicleResponse, setVehicleResponse] = useState([]);
   const [SSOAuth, setSSOAuth] = useState();
   const [value, setValue] = useState([]);
   const [open, setOpen] = React.useState(false);
@@ -90,10 +90,10 @@ export default function ListingPage(props) {
     getImages();
   }, [value]);
 
-  const getVehicleDetails = async () => {
-    let apiResponse = await getGroundingList("ALL");
-    setVehicleResponse(apiResponse?.data.data);
-    //console.log('------->', apiResponse)
+  async function getVehicleDetails () {
+    let apiResponse = await getGroundingList();
+    setVehicleResponse(apiResponse.data.data);
+    console.log('------->', apiResponse.data)
   };
 
   useEffect(() => {

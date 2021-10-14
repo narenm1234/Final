@@ -72,7 +72,7 @@ export default function ListingPage1(props) {
   }, [value]);
   async function getVehicleDetails() {
     let apiResponse = await getPassedList();
-    setVehicleResponse(apiResponse.data.data);
+    setVehicleResponse(apiResponse?.data.data);
   }
   const openConditionScreen = (VINumber, vehicle) => {
     props.history.push("/conditionreport", {
@@ -98,7 +98,7 @@ export default function ListingPage1(props) {
     setImages(getimagesRes.data.imageDetails);
   };
 
-  return vehicleResponse.length > 0 ? (
+  return vehicleResponse?.length > 0 ? (
     vehicleResponse.map((vehicle, index) => {
       return (
         <div className="listingPageCard" key={index}>
