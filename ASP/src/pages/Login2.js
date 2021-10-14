@@ -7,7 +7,7 @@ import { getAccessTokenEndpoint, getUserInfoToken } from '../service/api';
 
 
 function Login2() {
-  let data = getParameterByName("code");
+  let data1 = getParameterByName("code");
 function getParameterByName(name, url = window.location.href) {
   name = name.replace(/[\[\]]/g, '\\$&');
   var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
@@ -16,16 +16,16 @@ function getParameterByName(name, url = window.location.href) {
   if (!results[2]) return '';
   return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
-  const [token, setToken] = useState('');
+  const [token, setToken] = useState();
   useEffect(() => {
     getToken();
     // getUserAccessInfoToken();
-  }, []);
+  }, {});
   useEffect(() => {
     getUserAccessInfoToken();
   }, [token]);
   async function getToken() {
-    let apiResponse = await getAccessTokenEndpoint(data);
+    let apiResponse = await getAccessTokenEndpoint(data1);
     console.log("--->",apiResponse)
     setToken(apiResponse?.access_token);
   }

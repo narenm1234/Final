@@ -160,7 +160,7 @@ export default function ConditionReport(props) {
                           {}
                           {DamageDetails.exteriorCost
                             ? DamageDetails.exteriorCost
-                            : "Pending"}
+                            : "$0"}
                         </div>
                       </CardContent>
                     </Card>
@@ -173,7 +173,7 @@ export default function ConditionReport(props) {
                           {}
                           {DamageDetails.interiorCost
                             ? DamageDetails.interiorCost
-                            : "Pending"}
+                            : "$0"}
                         </div>
                       </CardContent>
                     </Card>
@@ -186,7 +186,7 @@ export default function ConditionReport(props) {
                           {}
                           {DamageDetails.maintainenceCost
                             ? DamageDetails.maintainenceCost
-                            : "Pending"}
+                            : "$0"}
                         </div>
                       </CardContent>
                     </Card>

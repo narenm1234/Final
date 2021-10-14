@@ -224,7 +224,7 @@ export default function ViewDetailedReport(props) {
             } else if(row.damage_type == "M"){
                 mechanical.push(row);
             }
-            total = total + (row.total ? parseInt(row.total): 0);
+            total = total + (row.total ? parseFloat(row.total): '$0');
             
         });
         console.log(exterior,"iiiiiiii");
@@ -266,7 +266,7 @@ export default function ViewDetailedReport(props) {
                                                 displayType={"text"}
                                                 thousandSeparator={true}
                                                 prefix={"$"}
-                                            />) : '0'}</ListItemSecondaryAction>
+                                            />) : '$0'}</ListItemSecondaryAction>
                                         </ListItem>
                                         <ListItem>
                                             <ListItemText className="smallCardTitle"><span className="textBold alignleft">Exterior</span></ListItemText>
@@ -274,7 +274,7 @@ export default function ViewDetailedReport(props) {
                                                 value={DamageDetails.exteriorCost}
                                                 displayType={"text"}
                                                 thousandSeparator={true}
-                                                prefix={"$"}/>) : '0'}
+                                                prefix={"$"}/>) : '$0'}
                                             </ListItemSecondaryAction>
                                         </ListItem>
                                         <ListItem>
@@ -283,7 +283,7 @@ export default function ViewDetailedReport(props) {
                                                 value={DamageDetails.maintainenceCost}
                                                 displayType={"text"}
                                                 thousandSeparator={true}
-                                                prefix={"$"}/>) :'0'}</ListItemSecondaryAction>
+                                                prefix={"$"}/>) :'$0'}</ListItemSecondaryAction>
                                         </ListItem>
                                         <ListItem>
                                             <ListItemText className="smallCardTitle"><span className="textBold alignleft">Normal W&T</span></ListItemText>
@@ -291,7 +291,7 @@ export default function ViewDetailedReport(props) {
                                                 value={DamageDetails.normal}
                                                 displayType={"text"}
                                                 thousandSeparator={true}
-                                                prefix={"$"}/>):'0'}</ListItemSecondaryAction>
+                                                prefix={"$"}/>):'$0'}</ListItemSecondaryAction>
                                         </ListItem>
                                         <ListItem>
                                             <ListItemText className="smallCardTitle"><span className="textBold alignleft ">Excessive W&T</span></ListItemText>
@@ -299,7 +299,7 @@ export default function ViewDetailedReport(props) {
                                                 value={DamageDetails.excessiveWandT}
                                                 displayType={"text"}
                                                 thousandSeparator={true}
-                                                prefix={"$"}/>):'0'}</ListItemSecondaryAction>
+                                                prefix={"$"}/>):'$0'}</ListItemSecondaryAction>
                                         </ListItem>
                                     </List>
 
@@ -370,12 +370,12 @@ export default function ViewDetailedReport(props) {
                                                 value={inter.part_cost}
                                                 displayType={"text"}
                                                 thousandSeparator={true}
-                                                prefix={"$"}/>) : 0: 'N/A'}</TableCell>
+                                                prefix={"$"}/>) : '$0': 'N/A'}</TableCell>
                                             <TableCell astyle={{ width: 150 }} align="left">{DamageDetails?.damageDetails?.length > 0 ? inter.total ? (<CurrencyFormat
                                                 value={inter.total}
                                                 displayType={"text"}
                                                 thousandSeparator={true}
-                                                prefix={"$"}/>) : 0: 'N/A'}</TableCell>
+                                                prefix={"$"}/>) : '$0': 'N/A'}</TableCell>
                                   </TableRow>)
                                     })
                                 }
@@ -414,12 +414,12 @@ export default function ViewDetailedReport(props) {
                                                 value={exter.part_cost}
                                                 displayType={"text"}
                                                 thousandSeparator={true}
-                                                prefix={"$"}/>) : 0: 'N/A'}</TableCell>
+                                                prefix={"$"}/>) : '$0': 'N/A'}</TableCell>
                                             <TableCell astyle={{ width: 90 }} align="left">{DamageDetails?.damageDetails?.length > 0 ? exter.total ? (<CurrencyFormat
                                                 value={exter.total}
                                                 displayType={"text"}
                                                 thousandSeparator={true}
-                                                prefix={"$"}/>) : 0: 'N/A'}</TableCell>
+                                                prefix={"$"}/>) : '$0': 'N/A'}</TableCell>
                                   </TableRow>)
                                     })
                                 }
@@ -448,12 +448,12 @@ export default function ViewDetailedReport(props) {
                                                 value={mech.part_cost}
                                                 displayType={"text"}
                                                 thousandSeparator={true}
-                                                prefix={"$"}/>) : 0: 'N/A'}</TableCell>
+                                                prefix={"$"}/>) : '$0': 'N/A'}</TableCell>
                                             <TableCell astyle={{ width: 90 }} align="left">{DamageDetails?.damageDetails?.length > 0 ? mech.total ? (<CurrencyFormat
                                                 value={mech.total}
                                                 displayType={"text"}
                                                 thousandSeparator={true}
-                                                prefix={"$"}/>) : 0: 'N/A'}</TableCell>
+                                                prefix={"$"}/>) : '$0': 'N/A'}</TableCell>
                                   </TableRow>)
                                     })
                                 }
@@ -515,7 +515,7 @@ export default function ViewDetailedReport(props) {
                 </DialogContent>
                 <DialogActions className="reportFooter">
                     <Button autoFocus onClick={handleClose} className="closeButton" color="secondary">
-                        close
+                        Close
                     </Button>
                 </DialogActions>
             </Dialog>
