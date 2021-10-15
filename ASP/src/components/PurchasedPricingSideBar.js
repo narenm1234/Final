@@ -168,7 +168,7 @@ export default function PurchasedPricingSideBar(props) {
               borderRadius={4}
             >
               <FormControlLabel value="3" control={<Radio />} label="Market" />
-              {/* <p> ${purchasedData.market} </p> */}
+              <p> ${purchasedData.vehiclePrice} </p>
             </Box>
             <Box
               px={2}
@@ -182,7 +182,12 @@ export default function PurchasedPricingSideBar(props) {
                 control={<Radio />}
                 label="Market + Remaining Payments "
               />
-              {/*  <p> ${parseInt(parseFloat(purchasedData.remainingPmts).toFixed(2)) + parseInt(parseFloat(purchasedData.residualAmount).toFixed(2)) } </p> */}
+              <p>
+                {" "}
+                $
+                {parseInt(purchasedData.vehiclePrice) +
+                  parseInt(purchasedData.remainingPmts)}{" "}
+              </p>
             </Box>
           </RadioGroup>
         </FormControl>
