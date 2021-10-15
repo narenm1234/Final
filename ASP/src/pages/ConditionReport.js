@@ -70,8 +70,6 @@ export default function ConditionReport(props) {
     props?.location?.state?.vehicleDetails
   );
 
-  console.log("vin:", vin);
-
   const [openTransactionPopup, setOpenTransactionPopup] = useState(false);
 
   useEffect(() => {
@@ -85,7 +83,6 @@ export default function ConditionReport(props) {
     let apiResponse = await getOEMBuildDetailsApi(vin);
     setOEMBuildDetailsData(apiResponse.data);
   }
-  useEffect(() => {}, []);
 
   async function getInspectionDamageDetails() {
     let getInspectionDamageDetailsaApiResponse =
@@ -686,6 +683,7 @@ export default function ConditionReport(props) {
               onPurchaseVehical={() => {
                 setOpenTransactionPopup(true);
               }}
+              vin={vin}
             />
           ) : (
             ""
