@@ -53,12 +53,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Item = ({ binImageArray }) => {
+const Item = ({ image_bin_value }) => {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   return (
     <Paper className={classes.card}>
-      <img className="img" src={binImageArray} alt={binImageArray} />
+      <img
+        className="img"
+        src={"data:image/jpeg;base64," + image_bin_value}
+        alt={image_bin_value}
+      />
     </Paper>
   );
 };
@@ -69,11 +73,8 @@ function SwipeableTextMobileStepper(props) {
   const maxSteps = tutorialSteps.length;
 
   useEffect(() => {
-   console.log(" props.images", props.images)
-
+    console.log(" props.images", props.images);
   }, []);
-
- 
 
   //   const handleNext = () => {
   //     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -112,9 +113,8 @@ function SwipeableTextMobileStepper(props) {
         //     }
         // }}
       >
-        { props.images && props.images.map((item, i) => (
-          <Item key={i} {...item} />
-        ))}
+        {props.images &&
+          props.images.map((item, i) => <Item key={i} {...item} />)}
       </Carousel>
 
       {/* <img className="img" src={tutorialSteps[0].imgPath} alt={tutorialSteps[0].imgPath} /> */}

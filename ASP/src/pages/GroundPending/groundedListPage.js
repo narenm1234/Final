@@ -90,11 +90,11 @@ export default function ListingPage(props) {
     getImages();
   }, [value]);
 
-  async function getVehicleDetails () {
+  async function getVehicleDetails() {
     let apiResponse = await getGroundingList();
     setVehicleResponse(apiResponse.data.data);
-    console.log('------->', apiResponse.data)
-  };
+    console.log("------->", apiResponse.data);
+  }
 
   useEffect(() => {
     getAuthTokenSSO1();
@@ -201,18 +201,18 @@ export default function ListingPage(props) {
             <div className="listingPageCard" key={index}>
               <Grid container spacing={3}>
                 <Grid item xs={4}>
-                  {vehicle.inspection_mileage > 0 ? (
-                    <SwipeableTextMobileStepper
-                      vehical={vehicle}
-                      images={images}
-                    />
-                  ) : (
+                  {/* {vehicle.inspection_mileage > 0 ? ( */}
+                  <SwipeableTextMobileStepper
+                    // vehical={vehicle}
+                    images={vehicle.groundingImage}
+                  />
+                  {/* ) : (
                     <img
                       className="pendingImg"
                       src="inspection_pending.png"
                       alt="pending"
                     />
-                  )}
+                  )} */}
 
                   {/* <img
                     className="pendingImg"

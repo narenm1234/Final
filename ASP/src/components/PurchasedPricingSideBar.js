@@ -15,9 +15,7 @@ import FormLabel from "@material-ui/core/FormLabel";
 import ListItemText from "@material-ui/core/ListItemText";
 import { Box, Select } from "@material-ui/core";
 import MenuItem from "@material-ui/core/MenuItem";
-import { 
-  getDealerPaymentsData
- } from "../service/api";
+import { getDealerPaymentsData, getPurchaseDetails } from "../service/api";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -69,23 +67,29 @@ export default function PurchasedPricingSideBar(props) {
   const [accountName, setAccountName] = React.useState("");
   const [paymentMethods, SetPaymentMethods] = React.useState([]);
   const [accountMaskNumber, setAccountMaskNumber] = React.useState(null);
+  const [purchasedData, setPurchasedData] = React.useState({});
 
+  useEffect(async () => {
+    let getDealerPaymentsRes = await getDealerPaymentsData();
+    console.log("getDealerPaymentsData", getDealerPaymentsRes);
+    getDealerPaymentsRes &&
+      getDealerPaymentsRes.data &&
+      getDealerPaymentsRes.data.PaymentMethod &&
+      SetPaymentMethods(getDealerPaymentsRes.data.PaymentMethod);
 
-  useEffect( async()=>{
-  let getDealerPaymentsRes = await getDealerPaymentsData();
-  console.log("getDealerPaymentsData", getDealerPaymentsRes)
-  getDealerPaymentsRes && getDealerPaymentsRes.data && getDealerPaymentsRes.data.PaymentMethod && SetPaymentMethods(getDealerPaymentsRes.data.PaymentMethod)
-  
-  },[])
+    let getPurchaseDetailsRes = await getPurchaseDetails(props.vin);
+    console.log("getPurchaseDetailsRes:::", getPurchaseDetailsRes);
+    setPurchasedData(getPurchaseDetailsRes.data.data);
+  }, []);
 
   const handleChangeAccountName = (event) => {
     setAccountName(event.target.value);
-    paymentMethods.forEach((item)=>{
-      if(item.achAccountName == event.target.value) {
-        console.log(item)
+    paymentMethods.forEach((item) => {
+      if (item.achAccountName == event.target.value) {
+        console.log(item);
         setAccountMaskNumber(item.achAccountNumberMask);
       }
-    })
+    });
   };
 
   const handleClick = () => {
@@ -133,6 +137,7 @@ export default function PurchasedPricingSideBar(props) {
               borderRadius={4}
             >
               <FormControlLabel value="1" control={<Radio />} label="Payoff" />
+              <p> ${purchasedData.payOffAmount} </p>
             </Box>
             <Box
               px={2}
@@ -146,6 +151,14 @@ export default function PurchasedPricingSideBar(props) {
                 control={<Radio />}
                 label="Residual + Remaining Payments"
               />
+              <p>
+                {" "}
+                $
+                {parseInt(parseFloat(purchasedData.remainingPmts).toFixed(2)) +
+                  parseInt(
+                    parseFloat(purchasedData.residualAmount).toFixed(2)
+                  )}{" "}
+              </p>
             </Box>
             <Box
               px={2}
@@ -155,6 +168,7 @@ export default function PurchasedPricingSideBar(props) {
               borderRadius={4}
             >
               <FormControlLabel value="3" control={<Radio />} label="Market" />
+              {/* <p> ${purchasedData.market} </p> */}
             </Box>
             <Box
               px={2}
@@ -168,6 +182,7 @@ export default function PurchasedPricingSideBar(props) {
                 control={<Radio />}
                 label="Market + Remaining Payments "
               />
+              {/*  <p> ${parseInt(parseFloat(purchasedData.remainingPmts).toFixed(2)) + parseInt(parseFloat(purchasedData.residualAmount).toFixed(2)) } </p> */}
             </Box>
           </RadioGroup>
         </FormControl>
@@ -197,9 +212,12 @@ export default function PurchasedPricingSideBar(props) {
               {/* <MenuItem value="">
                 <em>None</em>
               </MenuItem> */}
-              { paymentMethods && paymentMethods.map((opt,index)=>
-                <MenuItem key={index} value={opt.achAccountName}>{opt.achAccountName}</MenuItem>
-              )}
+              {paymentMethods &&
+                paymentMethods.map((opt, index) => (
+                  <MenuItem key={index} value={opt.achAccountName}>
+                    {opt.achAccountName}
+                  </MenuItem>
+                ))}
               {/* <MenuItem value={20}>BOFA</MenuItem>
               <MenuItem value={30}>CHASE</MenuItem> */}
             </Select>
@@ -211,7 +229,7 @@ export default function PurchasedPricingSideBar(props) {
           <Box px={1} mb={2}>
             <Box color={"gray"}>Dealers bank account number </Box>
             <Box color={"black"} p={1} bgcolor={"lightgray"} borderRadius={4}>
-             {accountMaskNumber || '****0000'}
+              {accountMaskNumber || "****0000"}
             </Box>
           </Box>
         </ListItemText>
