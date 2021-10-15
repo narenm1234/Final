@@ -506,8 +506,8 @@ export async function getAccessTokenEndpoint(code) {
     code: code,
     client_secret:
       "A8C495709B3F0BD5972D67EAF464949838E2F35EB623E514F75487A18904D70A",
-    // redirect_uri: "https://asp-dev.mfindealerservices.com/login2",
-    redirect_uri: "http://localhost:3000/login2",
+    redirect_uri: "https://asp-dev.mfindealerservices.com/login2",
+    // redirect_uri: "http://localhost:3000/login2",
   });
   var config = {
     method: "post",

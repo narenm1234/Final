@@ -30,6 +30,13 @@ function App() {
           <div>
             <Sidebar stateUpdate={stateUpdate}>
               <Switch>
+              <Route
+                  path="/"
+                  exact
+                  exact
+                  render={(props) => <GroundPending {...props} fireEvents={fireEvents}
+                  />}
+                />
                 <Route
                   path="/home"
                   exact

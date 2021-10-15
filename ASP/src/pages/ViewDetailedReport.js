@@ -269,7 +269,7 @@ export default function ViewDetailedReport(props) {
                                             />) : '$0'}</ListItemSecondaryAction>
                                         </ListItem>
                                         <ListItem>
-                                            <ListItemText className="smallCardTitle"><span className="textBold alignleft">Exterior</span></ListItemText>
+                                            <ListItemText className="smallCardTitle"><span className="textBold alignleft" >Exterior</span></ListItemText>
                                             <ListItemSecondaryAction className="smallCardBody ">{DamageDetails.exteriorCost ? (<CurrencyFormat
                                                 value={DamageDetails.exteriorCost}
                                                 displayType={"text"}
@@ -336,7 +336,7 @@ export default function ViewDetailedReport(props) {
                             </TableHead>
                             <TableBody>
                                 <TableRow>
-                                    <TableCell colSpan={6} component="th" scope="row" className="textBold alignleft">
+                                    <TableCell colSpan={6} component="th" scope="row" className="textBold alignleft paddingTop">
                                         Interior
                                     </TableCell>
 
@@ -380,7 +380,7 @@ export default function ViewDetailedReport(props) {
                                     })
                                 }
                                 <TableRow>
-                                    <TableCell colSpan={6} component="th" scope="row" className="textBold alignleft">
+                                    <TableCell colSpan={6} component="th" scope="row" className="textBold alignleft paddingTop">
                                         Exterior
                                     </TableCell>
 
@@ -424,7 +424,7 @@ export default function ViewDetailedReport(props) {
                                     })
                                 }
                                 <TableRow>
-                                    <TableCell colSpan={6} component="th" scope="row" className="textBold alignleft">
+                                    <TableCell colSpan={6} component="th" scope="row" className="textBold alignleft paddingTop">
                                         Mechanical
                                     </TableCell>
 
