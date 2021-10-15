@@ -17,6 +17,7 @@ const Header = (props) => {
     //props.searchdetails(SearchText);
     openConditionScreen(SearchText,"")
   }
+  let stringData = localStorage.getItem("dealerName");
   const openConditionScreen = (VINumber, vehicle) => {
     console.log(props)
     props.history.push("/conditionreport", {
@@ -36,7 +37,8 @@ const Header = (props) => {
         searchdetails={(SearchText) =>{ handleSearch(SearchText)}}
       />
       <div onClick={toggleShowDealer} className="dealerName">
-        Dealer Name
+      
+        {stringData}
       </div>
       <Menu
         id="simple-menu"

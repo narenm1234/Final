@@ -577,7 +577,7 @@ export async function getDealerPaymentsData() {
 export async function getTransportationDetails() {
 var config = {
   method: 'post',
-  url: 'https://aspservices-internal-dev.tfs.toyota.com/asp-services/getTransportationDetails?vinList=JM3KFADM6L0797974&vinList=JM3KFADM6L0797974&vinList=JM3KFADM6L0797974',
+  url: 'https://aspservices-internal-dev.tfs.toyota.com/asp-services/getTransportationDetails?vinList=JM3KFADM6L0797974&vinList=JM3KFBDM0K1698372',
   headers: { 
     'accept': 'application/json'
   }

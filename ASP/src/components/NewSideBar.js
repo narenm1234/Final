@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
     borderLeft: "3px solid #407ed2",
   },
 }));
-
+let stringData = localStorage.getItem("dealerName");
 const sidebarItems = [
   {
     label: "Grounded",
@@ -60,6 +60,7 @@ const sidebarItems = [
       },
     ],
   },
+  
   {
     label: "Admin",
     open: false,

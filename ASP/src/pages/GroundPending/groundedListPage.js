@@ -120,7 +120,7 @@ export default function ListingPage(props) {
       getimagesRes.data.imageDetails.map((item) => {
         item.binImageArray = "data:image/jpeg;base64," + item.binImageArray;
       });
-    setImages(getimagesRes.data.imageDetails);
+    setImages(getimagesRes?.data.imageDetails);
   };
 
   // const getImages = async () => {

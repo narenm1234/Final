@@ -34,6 +34,7 @@ function getParameterByName(name, url = window.location.href) {
   let resp = await getUserInfoToken(token);
   setDealerCode(resp.data.custom_attributes.dealerCode);
   localStorage.setItem("dealerCode",resp.data.custom_attributes.dealerCode);
+  localStorage.setItem("dealerName",resp.data.custom_attributes.dealerName);
   console.log(dealerCode);
   }
     return (
