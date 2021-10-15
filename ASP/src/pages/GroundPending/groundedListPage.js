@@ -201,18 +201,18 @@ export default function ListingPage(props) {
             <div className="listingPageCard" key={index}>
               <Grid container spacing={3}>
                 <Grid item xs={4}>
-                  {/* {vehicle.inspection_mileage > 0 ? ( */}
-                  <SwipeableTextMobileStepper
-                    // vehical={vehicle}
-                    images={vehicle.groundingImage}
-                  />
-                  {/* ) : (
+                  {vehicle.inspection_status === "Inspection Complete" ? (
+                    <SwipeableTextMobileStepper
+                      // vehical={vehicle}
+                      images={vehicle.groundingImage}
+                    />
+                  ) : (
                     <img
                       className="pendingImg"
                       src="inspection_pending.png"
                       alt="pending"
                     />
-                  )} */}
+                  )}
 
                   {/* <img
                     className="pendingImg"
