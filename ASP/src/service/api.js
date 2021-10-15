@@ -574,3 +574,14 @@ export async function getDealerPaymentsData() {
   };
   return await axios.get( getDealerPayments, options );
 }
+export async function getTransportationDetails() {
+var config = {
+  method: 'post',
+  url: 'https://aspservices-internal-dev.tfs.toyota.com/asp-services/getTransportationDetails?vinList=JM3KFADM6L0797974&vinList=JM3KFADM6L0797974&vinList=JM3KFADM6L0797974',
+  headers: { 
+    'accept': 'application/json'
+  }
+};
+
+return await axios(config);
+}

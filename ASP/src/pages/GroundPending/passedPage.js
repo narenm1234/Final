@@ -3,7 +3,7 @@ import Grid from "@material-ui/core/Grid";
 import List from "@material-ui/core/List";
 import SwipeableTextMobileStepper from "./Carousel";
 import moment from "moment";
-import { getPassedList, getImageData } from "../../service/api";
+import { getPassedList, getImageData, getTransportationDetails } from "../../service/api";
 import CurrencyFormat from "react-currency-format";
 import VerticalVehicleStepper from "../../components/Stepper/VerticalStepper";
 let resp = [
@@ -65,14 +65,20 @@ export default function ListingPage1(props) {
   //const [vehicleResponse, setVehicleResponse] = useState(resp)
   const [value, setValue] = useState([]);
   const [images, setImages] = React.useState([]);
+  const [transport, setTransport] = useState();
 
   useEffect(() => {
     getVehicleDetails();
     getImages();
+    getTransportDetails();
   }, [value]);
   async function getVehicleDetails() {
     let apiResponse = await getPassedList();
     setVehicleResponse(apiResponse?.data.data);
+  }
+  async function getTransportDetails() {
+    let apiResponse = await getTransportationDetails();
+    setTransport(apiResponse.data);
   }
   const openConditionScreen = (VINumber, vehicle) => {
     props.history.push("/conditionreport", {
