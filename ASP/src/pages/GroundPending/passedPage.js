@@ -65,7 +65,7 @@ export default function ListingPage1(props) {
   //const [vehicleResponse, setVehicleResponse] = useState(resp)
   const [value, setValue] = useState([]);
   const [images, setImages] = React.useState([]);
-  const [transport, setTransport] = useState();
+  const [transport, setTransport] = useState({});
 
   useEffect(() => {
     getVehicleDetails();
@@ -177,7 +177,7 @@ export default function ListingPage1(props) {
             </Grid>
             <Grid item xs={4}>
               <div className="Vehicle-Price-Option">
-                <VerticalVehicleStepper />
+                <VerticalVehicleStepper vin={vehicle.vin} transportData={transport}/>
               </div>
             </Grid>
           </Grid>

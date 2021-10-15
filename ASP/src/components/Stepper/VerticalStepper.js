@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
@@ -12,6 +12,7 @@ import CheckCircle from '@material-ui/icons/CheckCircle';
 import StepConnector from '@material-ui/core/StepConnector';
 import Block from '@material-ui/icons/Block';
 import RadioButtonCheckedIcon from '@material-ui/icons/RadioButtonChecked';
+import {getTransportationDetails} from '../../service/api'
 const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
@@ -102,12 +103,15 @@ const QontoConnector = withStyles({
 function getSteps() {
     return ['Transportation Ordered', 'Transportation Scheduled', 'Transportation Enroute', 'Vehicle Pick Up'];
 }
-
-export default function VerticalVehicleStepper() {
+let transportMetaData = ['Transportation Ordered', 'Transportation Scheduled', 'Transportation Enroute', 'Vehicle Pick Up'];
+export default function VerticalVehicleStepper(props) {
     const classes = useStyles();
     const [activeStep, setActiveStep] = React.useState(2);
     const steps = getSteps();
-
+    const [transportDetails,setTransportDetails] = React.useState(props.transportData);
+    useEffect(() =>{
+      setTransportInformation();
+    },[props.transportData]);
     const handleNext = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
     };
@@ -120,6 +124,17 @@ export default function VerticalVehicleStepper() {
         setActiveStep(0);
     };
 
+    const setTransportInformation = () => {
+      transportDetails?.data.length > 0 && transportDetails?.data.map(row =>{
+        if(row.vin == props.vin){
+          transportMetaData.map((trp,index) =>{
+             if(trp == row.derivedStatus){
+               setActiveStep(index);
+             }
+          })
+        }
+      });
+    };
     return (
         <div className={classes.root}>
             <Stepper activeStep={activeStep} orientation="vertical">
