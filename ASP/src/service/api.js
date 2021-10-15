@@ -26,6 +26,9 @@ let MileageDiscList;
 let getImages;
 
 let getDealerPayments;
+
+let getPurchaseDetailsApi;
+
 // let code ='aPrxyoOWGvXqBxqwZTQG7bATs.5vkEP2UmwQ_Eeu7GT7g4TQrfoMjW6F_s7s__kGco4_nvPVrg==';
 // let grant_type='authorization_code';
 // let client_secret= 'A8C495709B3F0BD5972D67EAF464949838E2F35EB623E514F75487A18904D70A';
@@ -66,6 +69,8 @@ if (hostname.includes("dev")) {
     "https://aspservices-internal-dev.tfs.toyota.com/asp-services/getImage";
   getDealerPayments =
     "https://aspservices-internal-dev.tfs.toyota.com/asp-services/dealerpayment/paymentmethod";
+  getPurchaseDetailsApi =
+    "https://aspservices-internal-dev.tfs.toyota.com/asp-services/getPurchaseDetails";
 } else if (hostname.includes("local")) {
   url =
     "http://internal-a3e2a8608d24e4c5f8b42aed9c3587d7-2044184104.us-east-1.elb.amazonaws.com/getAccountDetailsBykey";
@@ -102,6 +107,8 @@ if (hostname.includes("dev")) {
     "https://aspservices-internal-dev.tfs.toyota.com/asp-services/getImage";
   getDealerPayments =
     "https://aspservices-internal-stage.tfs.toyota.com/asp-services/dealerpayment/paymentmethod";
+  getPurchaseDetailsApi =
+    "https://aspservices-internal-dev.tfs.toyota.com/asp-services/getPurchaseDetails";
 } else if (hostname.includes("stage")) {
   url =
     "http://internal-a3e2a8608d24e4c5f8b42aed9c3587d7-2044184104.us-east-1.elb.amazonaws.com/getAccountDetailsBykey";
@@ -135,6 +142,8 @@ if (hostname.includes("dev")) {
     "https://aspservices-internal-stage.tfs.toyota.com/asp-services/getImage";
   getDealerPayments =
     "https://aspservices-internal-stage.tfs.toyota.com/asp-services/dealerpayment/paymentmethod";
+  getPurchaseDetailsApi =
+    "https://aspservices-internal-stage.tfs.toyota.com/asp-services/getPurchaseDetails";
 } else if (hostname.includes("test")) {
   url =
     "http://internal-a3e2a8608d24e4c5f8b42aed9c3587d7-2044184104.us-east-1.elb.amazonaws.com/getAccountDetailsBykey";
@@ -168,6 +177,8 @@ if (hostname.includes("dev")) {
     "https://aspservices-internal-test.tfs.toyota.com/asp-services/getImage";
   getDealerPayments =
     "https://aspservices-internal-test.tfs.toyota.com/asp-services/dealerpayment/paymentmethod";
+  getPurchaseDetailsApi =
+    "https://aspservices-internal-test.tfs.toyota.com/asp-services/getPurchaseDetails";
 } else if (hostname.includes("prod")) {
   url =
     "http://internal-a3e2a8608d24e4c5f8b42aed9c3587d7-2044184104.us-east-1.elb.amazonaws.com/getAccountDetailsBykey";
@@ -201,6 +212,8 @@ if (hostname.includes("dev")) {
     "https://aspservices-internal.tfs.toyota.com/asp-services/getImage";
   getDealerPayments =
     "https://aspservices-internal.tfs.toyota.com/asp-services/dealerpayment/paymentmethod";
+  getPurchaseDetailsApi =
+    "https://aspservices-internal.tfs.toyota.com/asp-services/getPurchaseDetails";
 }
 
 export async function getAuthToken() {
@@ -233,52 +246,46 @@ export async function getVehicleDetails(token, VINumber) {
 }
 export async function getGroundingList() {
   let stringData = localStorage.getItem("dealerCode");
-  let payload = stringData ? stringData :"ALL"
-var data = JSON.stringify([
-  payload
-]);
+  let payload = stringData ? stringData : "ALL";
+  var data = JSON.stringify([payload]);
 
-var config = {
-  method: 'post',
-  url: groundListUrl,
-  headers: { 
-    'accept': 'application/json', 
-    'Content-Type': 'application/json'
-  },
-  data : data
-};
+  var config = {
+    method: "post",
+    url: groundListUrl,
+    headers: {
+      accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    data: data,
+  };
 
-return await axios(config);
-// .then(function (response) {
-//   console.log(JSON.stringify(response.data));
-//   return response.data;
-// })
-// .catch(function (error) {
-//   console.log(error);
-// });
+  return await axios(config);
+  // .then(function (response) {
+  //   console.log(JSON.stringify(response.data));
+  //   return response.data;
+  // })
+  // .catch(function (error) {
+  //   console.log(error);
+  // });
 }
 
-
- 
 export async function getPassedList(data) {
   let stringData = localStorage.getItem("dealerCode");
-  let payload = stringData ? stringData :"ALL"
-  var data = JSON.stringify([
-    payload
-  ]);
-  
+  let payload = stringData ? stringData : "ALL";
+  var data = JSON.stringify([payload]);
+
   var config = {
-    method: 'post',
+    method: "post",
     url: passedVehicleUrl,
-    headers: { 
-      'accept': 'application/json', 
-      'Content-Type': 'application/json'
+    headers: {
+      accept: "application/json",
+      "Content-Type": "application/json",
     },
-    data : data
+    data: data,
   };
-  
+
   return await axios(config);
-  }
+}
 
 export async function getPassedList1() {
   const options = {
@@ -292,23 +299,21 @@ export async function getPassedList1() {
 }
 export async function getPurchasedList(data) {
   let stringData = localStorage.getItem("dealerCode");
-  let payload = stringData ? stringData :"ALL"
-  var data = JSON.stringify([
-    payload
-  ]);
-  
+  let payload = stringData ? stringData : "ALL";
+  var data = JSON.stringify([payload]);
+
   var config = {
-    method: 'post',
+    method: "post",
     url: purchasedVehicleUrl,
-    headers: { 
-      'accept': 'application/json', 
-      'Content-Type': 'application/json'
+    headers: {
+      accept: "application/json",
+      "Content-Type": "application/json",
     },
-    data : data
+    data: data,
   };
-  
+
   return await axios(config);
-  }
+}
 
 export async function getInspectionVehicleDetails(vin) {
   const options = {
@@ -515,8 +520,7 @@ export async function getAccessTokenEndpoint(code) {
     data: data,
   };
 
- return await axios(config)
-
+  return await axios(config);
 }
 export async function getUserInfoToken(token) {
   var qs = require("qs");
@@ -525,8 +529,7 @@ export async function getUserInfoToken(token) {
     url: `https://stratus-stg3.mfindealerservices.com/services/oauth2/userinfo?access_token=${token}`,
   };
 
-  return await axios(config)
-  
+  return await axios(config);
 }
 
 export async function getImageData(obj) {
@@ -564,13 +567,35 @@ export async function getCarXml() {
   );
 }
 
-
-
 export async function getDealerPaymentsData() {
   const options = {
     headers: {
       "Content-Type": "application/json",
     },
   };
-  return await axios.get( getDealerPayments, options );
+  return await axios.get(getDealerPayments, options);
+}
+
+export async function getPurchaseDetails(vin) {
+  // let data = {
+  //   "inspectionId": 18495852,
+  //   "paramForImage": "All",
+  //   "tenantId": "t002"
+  // };
+  var config = {
+    method: "post",
+    url: getPurchaseDetailsApi,
+    headers: {
+      "Content-Type": "application/json",
+    },
+    data: vin,
+  };
+  return await axios(config).then(
+    (res) => {
+      return res;
+    },
+    (err) => {
+      console.log(err);
+    }
+  );
 }
