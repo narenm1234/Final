@@ -599,14 +599,17 @@ export async function getPurchaseDetails(vin) {
     }
   );
 }
-export async function getTransportationDetails() {
-var config = {
-  method: 'post',
-  url: 'https://aspservices-internal-dev.tfs.toyota.com/asp-services/getTransportationDetails?vinList=JM3KFADM6L0797974&vinList=JM3KFBDM0K1698372',
-  headers: { 
-    'accept': 'application/json'
-  }
-};
+export async function getTransportationDetails(vinlist) {
+  var config = {
+    method: "post",
+    url:
+      "https://aspservices-internal-dev.tfs.toyota.com/asp-services/getTransportationDetails?" +
+      vinlist,
+    // vinList=JM3KFADM6L0797974&vinList=JM3KFBDM0K1698372'
+    headers: {
+      accept: "application/json",
+    },
+  };
 
-return await axios(config);
+  return await axios(config);
 }

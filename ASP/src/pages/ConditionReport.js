@@ -145,6 +145,7 @@ export default function ConditionReport(props) {
             <Grid container spacing={3} className="ConditionCardReportSpace">
               <Grid item xs={5}>
                 <MyGallery />
+
                 <Grid container className="ConditionCardBody">
                   <div className="damageTitle">
                     <span>Damage Report</span>

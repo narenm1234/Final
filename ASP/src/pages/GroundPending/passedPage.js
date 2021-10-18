@@ -3,9 +3,15 @@ import Grid from "@material-ui/core/Grid";
 import List from "@material-ui/core/List";
 import SwipeableTextMobileStepper from "./Carousel";
 import moment from "moment";
-import { getPassedList, getImageData, getTransportationDetails } from "../../service/api";
+import {
+  getPassedList,
+  getImageData,
+  getTransportationDetails,
+} from "../../service/api";
 import CurrencyFormat from "react-currency-format";
 import VerticalVehicleStepper from "../../components/Stepper/VerticalStepper";
+import Loaderpage from "../LoaderPage";
+import { Box } from "@material-ui/core";
 let resp = [
   {
     account_type: "LEASE",
@@ -66,20 +72,38 @@ export default function ListingPage1(props) {
   const [value, setValue] = useState([]);
   const [images, setImages] = React.useState([]);
   const [transport, setTransport] = useState({});
+  const [loader, setLoader] = React.useState(true);
 
   useEffect(() => {
     getVehicleDetails();
     getImages();
-    getTransportDetails();
   }, [value]);
   async function getVehicleDetails() {
     let apiResponse = await getPassedList();
-    setVehicleResponse(apiResponse?.data.data);
+
+    getTransportDetails(apiResponse?.data.data);
   }
-  async function getTransportDetails() {
-    let apiResponse = await getTransportationDetails();
-    setTransport(apiResponse.data);
+
+  async function getTransportDetails(data) {
+    if (data.length !== 0) {
+      let vinlistqueryparams = "";
+      data.forEach((item, index) => {
+        if (data.length - 1 === index) {
+          vinlistqueryparams = vinlistqueryparams + "vinList=" + item.vin;
+        } else {
+          vinlistqueryparams = vinlistqueryparams + "vinList=" + item.vin + "&";
+        }
+      });
+
+      console.log("vinlistqueryparams", vinlistqueryparams);
+
+      let apiResponse = await getTransportationDetails(vinlistqueryparams);
+      setTransport(apiResponse.data);
+      setVehicleResponse(data);
+      setLoader(false);
+    }
   }
+
   const openConditionScreen = (VINumber, vehicle) => {
     props.history.push("/conditionreport", {
       vin: VINumber,
@@ -177,7 +201,10 @@ export default function ListingPage1(props) {
             </Grid>
             <Grid item xs={4}>
               <div className="Vehicle-Price-Option">
-                <VerticalVehicleStepper vin={vehicle.vin} transportData={transport}/>
+                <VerticalVehicleStepper
+                  vin={vehicle.vin}
+                  transportData={transport}
+                />
               </div>
             </Grid>
           </Grid>
@@ -185,9 +212,25 @@ export default function ListingPage1(props) {
       );
     })
   ) : (
-    <div className="listingPageCardNoData">
-      <img src="noDataFound.jpeg" className="nodataImage" />
-      <span className="nodataText">No Vehicles found</span>
+    <div>
+      {loader ? (
+        <Box
+          height={"90vh"}
+          display={"flex"}
+          justifyContent={"center"}
+          alignItems={"center"}
+        >
+          <div>
+            <Loaderpage />
+            <span className="nodataText">Loading...</span>
+          </div>
+        </Box>
+      ) : (
+        <div className="listingPageCardNoData">
+          <img src="noDataFound.jpeg" className="nodataImage" />
+          <span className="nodataText">No Vehicles found</span>
+        </div>
+      )}
     </div>
   );
 }

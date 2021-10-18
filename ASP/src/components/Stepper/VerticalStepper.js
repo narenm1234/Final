@@ -108,7 +108,10 @@ export default function VerticalVehicleStepper(props) {
     const classes = useStyles();
     const [activeStep, setActiveStep] = React.useState(2);
     const steps = getSteps();
-    const [transportDetails,setTransportDetails] = React.useState(props.transportData);
+
+    const [transportDetails, setTransportDetails] = React.useState(props.transportData);
+
+
     useEffect(() =>{
       setTransportInformation();
     },[props.transportData]);
@@ -138,9 +141,7 @@ export default function VerticalVehicleStepper(props) {
     return (
         <div className={classes.root}>
             <Stepper activeStep={activeStep} orientation="vertical">
-                {steps.map((label, index) => {
-
-                    
+                {steps.map((label, index) => {                    
                     return (
                         <Step key={label}>
                             <StepLabel StepIconComponent={QontoStepIcon}>{label}</StepLabel>
