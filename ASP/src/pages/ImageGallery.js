@@ -2,6 +2,8 @@ import ImageGallery from "react-image-gallery";
 import React, { useEffect, useState } from "react";
 import "react-image-gallery/styles/css/image-gallery.css";
 import { getCarXml, getImageData } from "../service/api";
+import Loaderpage from "./LoaderPage";
+import { Box } from "@material-ui/core";
 // const parseString = require("xml2js").parseString;
 // const images = [
 //   {
@@ -40,6 +42,7 @@ import { getCarXml, getImageData } from "../service/api";
 
 export default function MyGallery(props) {
   const [images, setImages] = useState([]);
+  const [loader, setLoader] = React.useState(true);
 
   useEffect(() => {
     getImages();
@@ -83,15 +86,38 @@ export default function MyGallery(props) {
 
     console.log("imgagesdata", imgagesdata);
     setImages(imgagesdata);
+    setLoader(false);
   };
 
   return (
-    <ImageGallery
-      {...props}
-      items={images}
-      showFullscreenButton={false}
-      showPlayButton={false}
-      slideOnThumbnailOver={true}
-    />
+    <div>
+      {images.length != 0 ? (
+        <ImageGallery
+          {...props}
+          items={images}
+          showFullscreenButton={false}
+          showPlayButton={false}
+          slideOnThumbnailOver={true}
+        />
+      ) : (
+        <div>
+          {loader ? (
+            <Box
+              height={"350px"}
+              display={"flex"}
+              justifyContent={"center"}
+              alignItems={"center"}
+            >
+              <div>
+                <Loaderpage />
+                <span className="nodataText">Loading...</span>
+              </div>
+            </Box>
+          ) : (
+            ""
+          )}
+        </div>
+      )}
+    </div>
   );
 }

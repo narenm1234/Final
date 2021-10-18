@@ -12,6 +12,9 @@ import {
   getUserInfoToken,
   getImageData,
 } from "../../service/api";
+import Loaderpage from "../LoaderPage";
+import { Box } from "@material-ui/core";
+
 let resp = [
   {
     account_type: "LEASE",
@@ -83,6 +86,7 @@ export default function ListingPage2(props) {
   //const [vehicleResponse, setVehicleResponse] = useState(resp)
   const [value, setValue] = useState([]);
   const [images, setImages] = React.useState([]);
+  const [loader, setLoader] = React.useState(true);
 
   useEffect(() => {
     getVehicleDetails();
@@ -93,6 +97,7 @@ export default function ListingPage2(props) {
     setVehicleResponse(apiResponse?.data.data);
     console.log(vehicleResponse);
     // console.log(apiResponse?.data.data);
+    setLoader(false);
   }
 
   const getImages = async () => {
@@ -248,9 +253,25 @@ export default function ListingPage2(props) {
       );
     })
   ) : (
-    <div className="listingPageCardNoData">
-      <img src="noDataFound.jpeg" className="nodataImage" />
-      <span className="nodataText">No Vehicles found</span>
+    <div>
+      {loader ? (
+        <Box
+          height={"90vh"}
+          display={"flex"}
+          justifyContent={"center"}
+          alignItems={"center"}
+        >
+          <div>
+            <Loaderpage />
+            <span className="nodataText">Loading...</span>
+          </div>
+        </Box>
+      ) : (
+        <div className="listingPageCardNoData">
+          <img src="noDataFound.jpeg" className="nodataImage" />
+          <span className="nodataText">No Vehicles found</span>
+        </div>
+      )}
     </div>
   );
 }

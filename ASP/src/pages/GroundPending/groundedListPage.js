@@ -19,6 +19,9 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItemText from "@material-ui/core/ListItemText";
 import PassOnVehicle from "../PassOnVehicle";
+import ExclusivityPeriod from "./ExclusivityPeriod";
+import Loaderpage from "../LoaderPage";
+import { Box } from "@material-ui/core";
 // const parseString = require("xml2js").parseString;
 
 let resp = [
@@ -80,10 +83,10 @@ export default function ListingPage(props) {
   const [SSOAuth, setSSOAuth] = useState();
   const [value, setValue] = useState([]);
   const [open, setOpen] = React.useState(false);
-  const [progress, setProgress] = React.useState(0);
   const [time, setTime] = React.useState("00:00");
   const [passVin, setPassVin] = React.useState("");
   const [images, setImages] = React.useState([]);
+  const [loader, setLoader] = React.useState(true);
 
   useEffect(() => {
     getVehicleDetails();
@@ -94,6 +97,7 @@ export default function ListingPage(props) {
     let apiResponse = await getGroundingList();
     setVehicleResponse(apiResponse.data.data);
     console.log("------->", apiResponse.data);
+    setLoader(false);
   }
 
   useEffect(() => {
@@ -241,7 +245,8 @@ export default function ListingPage(props) {
                           value={progress}
                           color="secondary"
                         />
-                      </span> */}
+                      </span>  */}
+                      <ExclusivityPeriod vehicle={vehicle} />
 
                       <span className="textStyle">
                         <span className="textBold"> VIN:</span>
@@ -413,9 +418,25 @@ export default function ListingPage(props) {
           );
         })
       ) : (
-        <div className="listingPageCardNoData">
-          <img src="noDataFound.jpeg" className="nodataImage" />
-          <span className="nodataText">No Vehicles found</span>
+        <div>
+          {loader ? (
+            <Box
+              height={"90vh"}
+              display={"flex"}
+              justifyContent={"center"}
+              alignItems={"center"}
+            >
+              <div>
+                <Loaderpage />
+                <span className="nodataText">Loading...</span>
+              </div>
+            </Box>
+          ) : (
+            <div className="listingPageCardNoData">
+              <img src="noDataFound.jpeg" className="nodataImage" />
+              <span className="nodataText">No Vehicles found</span>
+            </div>
+          )}
         </div>
       )}
       <PassOnVehicle

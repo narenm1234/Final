@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
     borderLeft: "3px solid #407ed2",
   },
 }));
-let stringData = localStorage.getItem("dealerName");
+
 const sidebarItems = [
   {
     label: "Grounded",
@@ -60,7 +60,6 @@ const sidebarItems = [
       },
     ],
   },
-  
   {
     label: "Admin",
     open: false,
@@ -102,18 +101,42 @@ export default function NewSidebar(props) {
         }
 
         if (child.link == "/grounded") {
-          child.badge = getGroundingListRes?.data.data.length;
+          if (
+            getGroundingListRes &&
+            getGroundingListRes.data &&
+            getGroundingListRes.data.data.length !== 0
+          ) {
+            child.badge = getGroundingListRes?.data.data.length;
+          } else {
+            child.badge = 0;
+          }
         }
         if (child.link == "/passed") {
-          child.badge = getPassedListRes?.data.data.length;
+          if (
+            getPassedListRes &&
+            getPassedListRes.data &&
+            getPassedListRes.data.data.length !== 0
+          ) {
+            child.badge = getPassedListRes?.data.data.length;
+          } else {
+            child.badge = 0;
+          }
         }
         if (child.link == "/purchased") {
-          child.badge = getPurchasedListRes?.data.data.length;
+          if (
+            getPurchasedListRes &&
+            getPurchasedListRes.data &&
+            getPurchasedListRes.data.data.length !== 0
+          ) {
+            child.badge = getPurchasedListRes?.data.data.length;
+          } else {
+            child.badge = 0;
+          }
         }
       });
     });
 
-      setList([...sidebarItems]);
+    setList([...sidebarItems]);
   }, [props.stateUpdate]);
 
   const handleClick = (item) => {
