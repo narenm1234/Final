@@ -110,7 +110,7 @@ export default function MyGallery(props) {
             >
               <div>
                 <Loaderpage />
-                <span className="nodataText">Loading...</span>
+                <span className="loaderText">Loading...</span>
               </div>
             </Box>
           ) : (
