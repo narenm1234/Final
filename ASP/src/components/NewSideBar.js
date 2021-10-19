@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
 let sidebarItems = [
   {
     label: "Grounded",
-    open: false,
+    open: true,
     childs: [
       {
         label: "Grounded",
@@ -62,7 +62,7 @@ let sidebarItems = [
   },
   {
     label: "Admin",
-    open: false,
+    open: true,
     childs: [
       {
         label: "Vehicle Search",
