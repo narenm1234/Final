@@ -263,7 +263,7 @@ export default function ListingPage2(props) {
         >
           <div>
             <Loaderpage />
-            <span className="nodataText">Loading...</span>
+            <span className="loaderText">Loading...</span>
           </div>
         </Box>
       ) : (
