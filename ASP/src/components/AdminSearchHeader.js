@@ -41,7 +41,7 @@ export default function AdminSearchHeader(props) {
         setSearchtext(value)
         
     }
-    
+    if(!localStorage.getItem('dealerCode')){
     return (
         <Paper component="form" className={classes.root}>
             <IconButton type="submit" className={classes.iconButton} aria-label="search">
@@ -54,5 +54,12 @@ export default function AdminSearchHeader(props) {
                 onChange={(evt) => props.searchdetails(evt.target.value)}
             />
         </Paper>
+    );
+    }
+    else 
+    return (  
+        <div>
+            
+        </div>
     );
 }
