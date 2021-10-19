@@ -6,7 +6,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import { Route , withRouter} from 'react-router-dom';
 const Header = (props) => {
   const [showDealer, setShowDealer] = useState(null);
-  const [dealerName, setDealerName] = useState('Dealer Name');
+  const [dealerName, setDealerName] = useState((localStorage.getItem("dealerName")));
   const toggleShowDealer = (event) => {
     setShowDealer(event.currentTarget);
   };
@@ -18,7 +18,7 @@ const Header = (props) => {
     //props.searchdetails(SearchText);
     openConditionScreen(SearchText,"")
   }
-  setDealerName(localStorage.getItem("dealerName"));
+  
   const openConditionScreen = (VINumber, vehicle) => {
     console.log(props)
     props.history.push("/conditionreport", {
@@ -39,7 +39,7 @@ const Header = (props) => {
       />
       <div onClick={toggleShowDealer} className="dealerName">
       
-        {dealerName}
+        {dealerName?dealerName:'Dealer Name'}
       </div>
       <Menu
         id="simple-menu"

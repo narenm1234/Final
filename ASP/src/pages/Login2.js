@@ -7,6 +7,7 @@ import { getAccessTokenEndpoint, getUserInfoToken } from '../service/api';
 
 
 function Login2(props) {
+
   let data1 = getParameterByName("code");
 function getParameterByName(name, url = window.location.href) {
   name = name.replace(/[\[\]]/g, '\\$&');
