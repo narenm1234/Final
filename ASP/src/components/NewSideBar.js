@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const sidebarItems = [
+let sidebarItems = [
   {
     label: "Grounded",
     open: false,
@@ -135,7 +135,12 @@ export default function NewSidebar(props) {
         }
       });
     });
-
+    if(localStorage.getItem('dealerCode'))
+    {
+    console.log('dealerCode')
+    
+    sidebarItems = sidebarItems.filter(row=>row.label != 'Admin')
+    }
     setList([...sidebarItems]);
   }, [props.stateUpdate]);
 

@@ -6,7 +6,7 @@ import { getAccessTokenEndpoint, getUserInfoToken } from '../service/api';
 
 
 
-function Login2() {
+function Login2(props) {
   let data1 = getParameterByName("code");
 function getParameterByName(name, url = window.location.href) {
   name = name.replace(/[\[\]]/g, '\\$&');
@@ -35,6 +35,8 @@ function getParameterByName(name, url = window.location.href) {
   setDealerCode(resp.data.custom_attributes.dealerCode);
   localStorage.setItem("dealerCode",resp.data.custom_attributes.dealerCode);
   localStorage.setItem("dealerName",resp.data.custom_attributes.dealerName);
+  props.history.push('/grounded')
+
   console.log(dealerCode);
   }
     return (
