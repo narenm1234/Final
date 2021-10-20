@@ -135,10 +135,10 @@ export default function ConditionReport(props) {
         <div className="conditionPageCard">
           <Grid>
             <div className="conditionTopBar">
-              <Grid xs={12} className="conditionTopBarLayout">
+              {/* <Grid xs={12} className="conditionTopBarLayout">
                 <PrintSharp />
                 <span className="conditionTopBarStyles">Print Report</span>
-              </Grid>
+              </Grid> */}
             </div>
           </Grid>
           {condionVehicleDetails?.inspection_date && condionVehicleDetails?.inspection_date ? (
@@ -159,7 +159,7 @@ export default function ConditionReport(props) {
                           {}
                           {DamageDetails.exteriorCost
                             ? DamageDetails.exteriorCost
-                            : "$0"}
+                            : "$0.00"}
                         </div>
                       </CardContent>
                     </Card>
@@ -172,7 +172,7 @@ export default function ConditionReport(props) {
                           {}
                           {DamageDetails.interiorCost
                             ? DamageDetails.interiorCost
-                            : "$0"}
+                            : "$0.00"}
                         </div>
                       </CardContent>
                     </Card>
@@ -185,7 +185,7 @@ export default function ConditionReport(props) {
                           {}
                           {DamageDetails.maintainenceCost
                             ? DamageDetails.maintainenceCost
-                            : "$0"}
+                            : "$0.00"}
                         </div>
                       </CardContent>
                     </Card>
@@ -243,7 +243,7 @@ export default function ConditionReport(props) {
                               value={
                                 vehicleDetails.pay_off_amt
                                   ? vehicleDetails.pay_off_amt
-                                  : ""
+                                  : "0"
                               }
                               displayType={"text"}
                               thousandSeparator={true}
@@ -672,7 +672,7 @@ export default function ConditionReport(props) {
               <Grid item xs={5}>
                 <Grid>
 <div className="imageReportSection">
-<img src="Mazda.png" alt="Mazda Logo" width="100%"/>
+<img src="TMZ.png" alt="Mazda Logo" width="100%"/>
 </div>
                 </Grid>
                 
@@ -715,7 +715,7 @@ export default function ConditionReport(props) {
                               value={
                                 vehicleDetails.pay_off_amt
                                   ? vehicleDetails.pay_off_amt
-                                  : ""
+                                  : "0"
                               }
                               displayType={"text"}
                               thousandSeparator={true}
