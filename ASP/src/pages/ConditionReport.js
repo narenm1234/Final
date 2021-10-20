@@ -102,11 +102,11 @@ export default function ConditionReport(props) {
   async function getConditionVehicleDetails() {
     let apiResponse = await getInspectionVehicleDetails(vin);
     console.log("getConditionVehicleDetailsresponse", apiResponse);
-    let length = apiResponse.data.length;
-    if (length > 0) {
-      setCondionVehicleDetails(apiResponse.data[length - 1]);
-      setInspectionId(apiResponse.data[length - 1].inspection_id);
-    }
+    //let length = apiResponse.data.length;
+    //if (length > 0) {
+      setCondionVehicleDetails(apiResponse.data);
+      setInspectionId(apiResponse.data.inspection_id);
+   // }
   }
 
   async function getInspectionAccessory(vin) {
@@ -141,8 +141,7 @@ export default function ConditionReport(props) {
               </Grid>
             </div>
           </Grid>
-          {!!condionVehicleDetails?.inspection_date &&
-                  condionVehicleDetails?.inspection_date.length > 0 ?(
+          {condionVehicleDetails?.inspection_date && condionVehicleDetails?.inspection_date ? (
           <Box px={2}>
             <Grid container spacing={3} className="ConditionCardReportSpace">
               <Grid item xs={5}>
@@ -227,16 +226,11 @@ export default function ConditionReport(props) {
                       {vehicleDetails && vehicleDetails.model_year}
                     </span>
                   </div>
-                  {!!condionVehicleDetails?.inspection_date &&
-                  condionVehicleDetails?.inspection_date.length > 0 ? (
+                  {condionVehicleDetails?.inspection_date && (
                     <span className="ConditionReportInspection">
                       <span className="BadgeValue">Inspection Complete</span>
                     </span>
-                  ) : (
-                    <span className="inspectionStatusWarning">
-                      <span className="BadgeValue">Inspection pending</span>
-                    </span>
-                  )}
+                  ) }
                 </div>
                 <Grid container spacing={1}>
                   <Grid item xs={4} className="ConditionCardMargin">
@@ -676,7 +670,12 @@ export default function ConditionReport(props) {
           </Box>):(<Box px={2}>
             <Grid container spacing={3} className="ConditionCardReportSpace">
               <Grid item xs={5}>
-                <img src="Mazda.png" alt="Mazda Logo" />
+                <Grid>
+<div className="imageReportSection">
+<img src="Mazda.png" alt="Mazda Logo" width="100%"/>
+</div>
+                </Grid>
+                
 
                 <Grid container className="ConditionCardBody">
                   <div className="damageTitle">
@@ -698,16 +697,12 @@ export default function ConditionReport(props) {
                       {vehicleDetails && vehicleDetails.model_year}
                     </span>
                   </div>
-                  {!!condionVehicleDetails?.inspection_date &&
-                  condionVehicleDetails?.inspection_date.length > 0 ? (
-                    <span className="ConditionReportInspection">
-                      <span className="BadgeValue">Inspection Complete</span>
-                    </span>
-                  ) : (
+                  
+                  
                     <span className="inspectionStatusWarning">
                       <span className="BadgeValue">Inspection pending</span>
                     </span>
-                  )}
+                
                 </div>
                 <Grid container spacing={1}>
                   <Grid item xs={4} className="ConditionCardMargin">
