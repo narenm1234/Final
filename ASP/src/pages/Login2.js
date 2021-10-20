@@ -42,7 +42,7 @@ function getParameterByName(name, url = window.location.href) {
   }
     return (
         <div>
-           <h1>login2</h1> 
+           
         </div>
     )
 }
