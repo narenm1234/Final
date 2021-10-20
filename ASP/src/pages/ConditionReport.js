@@ -141,6 +141,8 @@ export default function ConditionReport(props) {
               </Grid>
             </div>
           </Grid>
+          {!!condionVehicleDetails?.inspection_date &&
+                  condionVehicleDetails?.inspection_date.length > 0 ?(
           <Box px={2}>
             <Grid container spacing={3} className="ConditionCardReportSpace">
               <Grid item xs={5}>
@@ -671,7 +673,205 @@ export default function ConditionReport(props) {
                 </Grid>
               </Grid>
             </Grid>
-          </Box>
+          </Box>):(<Box px={2}>
+            <Grid container spacing={3} className="ConditionCardReportSpace">
+              <Grid item xs={5}>
+                <img src="Mazda.png" alt="Mazda Logo" />
+
+                <Grid container className="ConditionCardBody">
+                  <div className="damageTitle">
+                    <span>Damage Report</span>
+                  </div>
+                  <div className="pendingReport">
+                    <span>Pending Inspection Report</span>
+                  </div>
+                  
+                </Grid>
+              </Grid>
+              <Grid item xs={7}>
+                <div className="ConditionReportSection">
+                  <div className="reportTitle">
+                    <span>
+                      {vehicleDetails && vehicleDetails.brand}{" "}
+                      {vehicleDetails && vehicleDetails.model}{" "}
+                      {vehicleDetails && vehicleDetails.ext_color}{" "}
+                      {vehicleDetails && vehicleDetails.model_year}
+                    </span>
+                  </div>
+                  {!!condionVehicleDetails?.inspection_date &&
+                  condionVehicleDetails?.inspection_date.length > 0 ? (
+                    <span className="ConditionReportInspection">
+                      <span className="BadgeValue">Inspection Complete</span>
+                    </span>
+                  ) : (
+                    <span className="inspectionStatusWarning">
+                      <span className="BadgeValue">Inspection pending</span>
+                    </span>
+                  )}
+                </div>
+                <Grid container spacing={1}>
+                  <Grid item xs={4} className="ConditionCardMargin">
+                    <Card className="ConditionCard">
+                      <CardContent>
+                        <div className="smallCardTitle">Payoff</div>
+                        <div className="smallCardBody">
+                          <span className="textSize">
+                            <CurrencyFormat
+                              value={
+                                vehicleDetails.pay_off_amt
+                                  ? vehicleDetails.pay_off_amt
+                                  : ""
+                              }
+                              displayType={"text"}
+                              thousandSeparator={true}
+                              prefix={"$"}
+                            />
+                            .00
+                          </span>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </Grid>
+                  <Grid item xs={4} className="ConditionCardMargin">
+                    <Card className="ConditionCard">
+                      <CardContent>
+                        <div className="smallCardTitle1">
+                          Residual + Remaining
+                        </div>
+                        <div className="smallCardBody">
+                          <span className="textSize">
+                            <CurrencyFormat
+                              value={
+                                vehicleDetails.residual_amt +
+                                vehicleDetails.remaining_pmts
+                              }
+                              displayType={"text"}
+                              thousandSeparator={true}
+                              prefix={"$"}
+                            />
+                            .00
+                          </span>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </Grid>
+                </Grid>
+                <Grid container spacing={3}>
+                  <Card className="vehicleSectionCR">
+                    <Typography variant="h6">Vehicle Details</Typography>
+                    <hr />
+                    <CardContent>
+                      <List className="paddingCSS">
+                        <ListItemText>
+                          <span className="textStyle">
+                            <span className="textBold"> VIN </span>
+                          </span>
+                        </ListItemText>
+                        <ListItemSecondaryAction>
+                          <span className="textSize">{vin}</span>
+                        </ListItemSecondaryAction>
+                      </List>
+                      <List className="paddingCSS">
+                        <ListItemText>
+                          <span className="textStyle">
+                            <span className="textBold"> Consignor </span>
+                          </span>
+                        </ListItemText>
+                        <ListItemSecondaryAction>
+                          <span className="textSize"></span>
+                        </ListItemSecondaryAction>
+                      </List>
+                     
+                      <List className="paddingCSS">
+                        <ListItemText>
+                          <span className="textStyle">
+                            <span className="textBold">
+                              {" "}
+                              Grounding Mileage{" "}
+                            </span>
+                          </span>
+                        </ListItemText>
+                        <ListItemSecondaryAction>
+                          <span className="textSize"></span>
+                        </ListItemSecondaryAction>
+                      </List>
+                      <List className="paddingCSS">
+                        <ListItemText>
+                          <span className="textStyle">
+                            <span className="textBold"> Account Type </span>
+                          </span>
+                        </ListItemText>
+                        <ListItemSecondaryAction>
+                          <span className="textSize"></span>
+                        </ListItemSecondaryAction>
+                      </List>
+                      
+                    </CardContent>
+
+                    <CardContent>
+                      <Typography variant="h6">Accessories</Typography>
+                      <hr />
+                      
+                        <span class="Pending-Inspection-R">
+                          Pending Inspection Report
+                        </span>
+
+                  
+                    </CardContent>
+                    <CardContent>
+                      <Typography variant="h6">Build Data</Typography>
+                      <hr />
+                      <TableContainer component={Paper}>
+                        <Table
+                          className="table"
+                          size="small"
+                          aria-label="a dense table"
+                        >
+                          <TableHead>
+                            <TableRow>
+                              <TableCell>Code</TableCell>
+                              <TableCell align="right">Description</TableCell>
+                              <TableCell align="right">
+                                Package Details
+                              </TableCell>
+                            </TableRow>
+                          </TableHead>
+                          <TableBody>
+                            {["1"].map((list) => {
+                              return (
+                                <TableRow key={list}>
+                                  <TableCell component="th" scope="row">
+                                    {list}
+                                  </TableCell>
+                                  <TableCell align="right"></TableCell>
+                                  <TableCell align="right"> </TableCell>
+                                </TableRow>
+                              );
+                            })}
+                          </TableBody>
+                        </Table>
+                      </TableContainer>
+                    </CardContent>
+                    <CardContent>
+                      <Typography variant="h6">Wheels and Tyres</Typography>
+                      <hr />
+                      <span class="Pending-Inspection-R">
+                          Pending Inspection Report
+                        </span>
+                    </CardContent>
+
+                    <div className="disclaimerVRS">
+                      Disclaimer: The parts, equipment, accessories, and other
+                      information listed above are based on
+                      equipment/configuration at the time vehicle was sold by
+                      Mazda Motor Corporation to a dealer and does not mean that
+                      this vehicle is still so equipped.
+                    </div>
+                  </Card>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Box>)}
           <ViewDetailedReport
             DamageDetails={DamageDetails}
             open={open}
