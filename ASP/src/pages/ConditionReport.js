@@ -441,7 +441,7 @@ export default function ConditionReport(props) {
                           </span>
                         </ListItemText>
                         <ListItemSecondaryAction>
-                          {/* <span className="textSize">{condionVehicleDetails?.location_address}</span> */}
+                          <span className="textSize">{condionVehicleDetails?.doors}</span>
                         </ListItemSecondaryAction>
                       </List>
                       <List className="paddingCSS">
@@ -475,7 +475,7 @@ export default function ConditionReport(props) {
                           </span>
                         </ListItemText>
                         <ListItemSecondaryAction>
-                          {/* <span className="textSize">{condionVehicleDetails?.location_address}</span> */}
+                          <span className="textSize">{condionVehicleDetails?.driveTrain}</span>
                         </ListItemSecondaryAction>
                       </List>
                       <List className="paddingCSS">
@@ -555,7 +555,7 @@ export default function ConditionReport(props) {
                           </span>
                         </ListItemText>
                         <ListItemSecondaryAction>
-                          <span className="textSize"></span>
+                          <span className="textSize">{condionVehicleDetails?.odor}</span>
                         </ListItemSecondaryAction>
                       </List>
                     </CardContent>

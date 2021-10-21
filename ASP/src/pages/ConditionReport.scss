@@ -256,7 +256,10 @@
   font-size: 13px;
 }
 .MuiTableCell-alignRight {
-  font-weight: 900 !important;
+  // font-weight: 900 !important;
+}
+.MuiButton-label{
+  cursor: pointer;
 }
 .align_right {
   font-weight: 900 !important;
