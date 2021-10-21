@@ -220,10 +220,11 @@ export default function ConditionReport(props) {
                 <div className="ConditionReportSection">
                   <div className="reportTitle">
                     <span>
+                      {vehicleDetails && vehicleDetails.model_year}
                       {vehicleDetails && vehicleDetails.brand}{" "}
                       {vehicleDetails && vehicleDetails.model}{" "}
                       {vehicleDetails && vehicleDetails.ext_color}{" "}
-                      {vehicleDetails && vehicleDetails.model_year}
+                      
                     </span>
                   </div>
                   {condionVehicleDetails?.inspection_date && (
@@ -753,7 +754,7 @@ export default function ConditionReport(props) {
                 </Grid>
                 <Grid container spacing={3}>
                   <Card className="vehicleSectionCR">
-                    <Typography variant="h6">Vehicle Details</Typography>
+                    <Typography variant="h6" className="vehicleDetailsMargin">Vehicle Details</Typography>
                     <hr />
                     <CardContent>
                       <List className="paddingCSS">

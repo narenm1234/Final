@@ -266,7 +266,7 @@ export default function ViewDetailedReport(props) {
                                                 displayType={"text"}
                                                 thousandSeparator={true}
                                                 prefix={"$"}
-                                            />) : '$0'}</ListItemSecondaryAction>
+                                            />) : '$0.00'}</ListItemSecondaryAction>
                                         </ListItem>
                                         <ListItem>
                                             <ListItemText className="smallCardTitle"><span className="textBold alignleft" >Exterior</span></ListItemText>
@@ -274,7 +274,7 @@ export default function ViewDetailedReport(props) {
                                                 value={DamageDetails.exteriorCost}
                                                 displayType={"text"}
                                                 thousandSeparator={true}
-                                                prefix={"$"}/>) : '$0'}
+                                                prefix={"$"}/>) : '$0.00'}
                                             </ListItemSecondaryAction>
                                         </ListItem>
                                         <ListItem>
@@ -283,7 +283,7 @@ export default function ViewDetailedReport(props) {
                                                 value={DamageDetails.maintainenceCost}
                                                 displayType={"text"}
                                                 thousandSeparator={true}
-                                                prefix={"$"}/>) :'$0'}</ListItemSecondaryAction>
+                                                prefix={"$"}/>) :'$0.00'}</ListItemSecondaryAction>
                                         </ListItem>
                                         <ListItem>
                                             <ListItemText className="smallCardTitle"><span className="textBold alignleft">Normal W&T</span></ListItemText>
@@ -291,7 +291,7 @@ export default function ViewDetailedReport(props) {
                                                 value={DamageDetails.normal}
                                                 displayType={"text"}
                                                 thousandSeparator={true}
-                                                prefix={"$"}/>):'$0'}</ListItemSecondaryAction>
+                                                prefix={"$"}/>):'$0.00'}</ListItemSecondaryAction>
                                         </ListItem>
                                         <ListItem>
                                             <ListItemText className="smallCardTitle"><span className="textBold alignleft ">Excessive W&T</span></ListItemText>
@@ -299,7 +299,7 @@ export default function ViewDetailedReport(props) {
                                                 value={DamageDetails.excessiveWandT}
                                                 displayType={"text"}
                                                 thousandSeparator={true}
-                                                prefix={"$"}/>):'$0'}</ListItemSecondaryAction>
+                                                prefix={"$"}/>):'$0.00'}</ListItemSecondaryAction>
                                         </ListItem>
                                     </List>
 
@@ -330,8 +330,8 @@ export default function ViewDetailedReport(props) {
                                     <TableCell align="left" className="textWidth">Wear & Tear</TableCell>
                                     <TableCell align="left" className="textWidth">Labor Hours</TableCell>
                                     <TableCell align="left" className="textWidth">Paint Hours</TableCell>
-                                    <TableCell align="left" className="textWidth">Part Cost</TableCell>
-                                    <TableCell align="left" className="textWidth">Estimate</TableCell>
+                                    <TableCell align="right" className="textWidth">Part Cost</TableCell>
+                                    <TableCell align="right" className="textWidth">Estimate</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
@@ -376,7 +376,7 @@ export default function ViewDetailedReport(props) {
                                                 value={inter.total}
                                                 displayType={"text"}
                                                 thousandSeparator={true}
-                                                prefix={"$"}/>) : '$0': 'N/A'}</TableCell>
+                                                prefix={"$"}/>) : '$0.00': 'N/A'}</TableCell>
                                   </TableRow>)
                                     })
                                 }
@@ -421,7 +421,7 @@ export default function ViewDetailedReport(props) {
                                                 value={exter.total}
                                                 displayType={"text"}
                                                 thousandSeparator={true}
-                                                prefix={"$"}/>) : '$0': 'N/A'}</TableCell>
+                                                prefix={"$"}/>) : '$0.00': 'N/A'}</TableCell>
                                   </TableRow>)
                                     })
                                 }
@@ -450,7 +450,7 @@ export default function ViewDetailedReport(props) {
                                                 value={mech.part_cost}
                                                 displayType={"text"}
                                                 thousandSeparator={true}
-                                                prefix={"$"}/>) : '$0': 'N/A'}</TableCell>
+                                                prefix={"$"}/>) : '$0.00': 'N/A'}</TableCell>
                                             <TableCell astyle={{ width: 90 }} align="right">{DamageDetails?.damageDetails?.length > 0 ? mech.total ? (<CurrencyFormat
                                                 value={mech.total}
                                                 displayType={"text"}
