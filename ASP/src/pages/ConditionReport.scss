@@ -86,7 +86,6 @@
   border-radius: 4px;
   box-shadow: -1px 0 3px 0 rgba(0, 0, 0, 0.25);
   background-color: #ffffff;
-
 }
 
 .ConditionReportInspection {
@@ -154,9 +153,8 @@
   line-height: 1.6;
   letter-spacing: normal;
   text-align: left;
-  
 }
-.closeButton{
+.closeButton {
   text-transform: capitalize !important;
 }
 .smallCardTitle {
@@ -249,7 +247,7 @@
   border-bottom: none !important;
 }
 .MuiTableHead-root {
-  background-color: #FAFAF9;
+  background-color: #fafaf9;
   color: #514f4d !important;
 }
 .MuiTableCell-sizeSmall {
@@ -257,10 +255,10 @@
   color: #514f4d !important;
   font-size: 13px;
 }
-.MuiTableCell-alignRight{
+.MuiTableCell-alignRight {
   font-weight: 900 !important;
 }
-.align_right{
+.align_right {
   font-weight: 900 !important;
   font-size: 13px !important;
   line-height: 20px !important;
@@ -381,10 +379,10 @@
   float: left;
 }
 
-.paddingTop{
+.paddingTop {
   margin-top: 20px !important;
 }
-.accessoriestextStyle{
+.accessoriestextStyle {
   text-transform: capitalize !important;
 }
 .experiorSpacing {
@@ -396,10 +394,25 @@
 .errorColor {
   color: #c23934;
 }
-
-.image-gallery-thumbnails-wrapper {
-  width: 395px !important;
+.codereportimggallery {
+  // width: 26vw !important;
+  .image-gallery-thumbnails-wrapper {
+    width: 26vw !important;
+  }
+  .image-gallery-image{
+    max-height: 370px !important;
+  }
 }
+.image-gallery-thumbnail-image{
+  max-height: 70px !important;
+}
+.galleryView{
+  .image-gallery-image{
+  max-height: 440px !important;
+}
+}
+
+
 .accessoriestextStyle {
   display: flex;
   flex-wrap: wrap;
@@ -421,7 +434,7 @@
 .image-gallery-content {
   overflow-x: hidden;
 }
-.textWidth{
+.textWidth {
   width: 140px;
 }
 .detailedReportRates {
@@ -442,4 +455,4 @@
   background-color: #fff;
   box-shadow: -1px 0 3px 0 rgba(0, 0, 0, 0.25);
   padding-top: 40px;
-} 
+}

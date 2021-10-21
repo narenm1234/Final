@@ -80,6 +80,7 @@ export default function MyGallery(props) {
       let imgobj = {
         original: "data:image/jpeg;base64," + img.binImageArray,
         thumbnail: "data:image/jpeg;base64," + img.binImageArray,
+        damageDescription: img.damageDescription,
       };
       imgagesdata.push(imgobj);
     }
@@ -87,6 +88,15 @@ export default function MyGallery(props) {
     console.log("imgagesdata", imgagesdata);
     setImages(imgagesdata);
     setLoader(false);
+
+    props.getDamageDesc &&
+      props.getDamageDesc(imgagesdata[0].damageDescription);
+  };
+
+  const onSlideGetIndex = (index) => {
+    console.log("index", index);
+
+    props.getDamageDesc && props.getDamageDesc(images[index].damageDescription);
   };
 
   return (
@@ -98,6 +108,7 @@ export default function MyGallery(props) {
           showFullscreenButton={false}
           showPlayButton={false}
           slideOnThumbnailOver={true}
+          onSlide={onSlideGetIndex}
         />
       ) : (
         <div>
