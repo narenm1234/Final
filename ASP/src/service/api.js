@@ -29,6 +29,8 @@ let getDealerPayments;
 
 let getPurchaseDetailsApi;
 
+let redirectURL;
+
 // let code ='aPrxyoOWGvXqBxqwZTQG7bATs.5vkEP2UmwQ_Eeu7GT7g4TQrfoMjW6F_s7s__kGco4_nvPVrg==';
 // let grant_type='authorization_code';
 // let client_secret= 'A8C495709B3F0BD5972D67EAF464949838E2F35EB623E514F75487A18904D70A';
@@ -71,6 +73,8 @@ if (hostname.includes("dev")) {
     "https://aspservices-internal-dev.tfs.toyota.com/asp-services/dealerpayment/paymentmethod";
   getPurchaseDetailsApi =
     "https://aspservices-internal-dev.tfs.toyota.com/asp-services/getPurchaseDetails";
+  redirectURL = 
+  "https://asp-dev.mfindealerservices.com/login2"
 } else if (hostname.includes("local")) {
   url =
     "http://internal-a3e2a8608d24e4c5f8b42aed9c3587d7-2044184104.us-east-1.elb.amazonaws.com/getAccountDetailsBykey";
@@ -109,6 +113,8 @@ if (hostname.includes("dev")) {
     "https://aspservices-internal-stage.tfs.toyota.com/asp-services/dealerpayment/paymentmethod";
   getPurchaseDetailsApi =
     "https://aspservices-internal-dev.tfs.toyota.com/asp-services/getPurchaseDetails";
+    redirectURL = 
+    "https://asp-dev.mfindealerservices.com/login2"
 } else if (hostname.includes("stage")) {
   url =
     "http://internal-a3e2a8608d24e4c5f8b42aed9c3587d7-2044184104.us-east-1.elb.amazonaws.com/getAccountDetailsBykey";
@@ -144,6 +150,8 @@ if (hostname.includes("dev")) {
     "https://aspservices-internal-stage.tfs.toyota.com/asp-services/dealerpayment/paymentmethod";
   getPurchaseDetailsApi =
     "https://aspservices-internal-stage.tfs.toyota.com/asp-services/getPurchaseDetails";
+    redirectURL = 
+    "https://asp-stage.mfindealerservices.com/login2"
 } else if (hostname.includes("test")) {
   url =
     "http://internal-a3e2a8608d24e4c5f8b42aed9c3587d7-2044184104.us-east-1.elb.amazonaws.com/getAccountDetailsBykey";
@@ -179,6 +187,8 @@ if (hostname.includes("dev")) {
     "https://aspservices-internal-test.tfs.toyota.com/asp-services/dealerpayment/paymentmethod";
   getPurchaseDetailsApi =
     "https://aspservices-internal-test.tfs.toyota.com/asp-services/getPurchaseDetails";
+    redirectURL = 
+  "https://asp-test.mfindealerservices.com/login2"
 } else if (hostname.includes("prod")) {
   url =
     "http://internal-a3e2a8608d24e4c5f8b42aed9c3587d7-2044184104.us-east-1.elb.amazonaws.com/getAccountDetailsBykey";
@@ -214,6 +224,8 @@ if (hostname.includes("dev")) {
     "https://aspservices-internal.tfs.toyota.com/asp-services/dealerpayment/paymentmethod";
   getPurchaseDetailsApi =
     "https://aspservices-internal.tfs.toyota.com/asp-services/getPurchaseDetails";
+    redirectURL = 
+    "https://asp.mfindealerservices.com/login2"
 }
 
 export async function getAuthToken() {
@@ -506,7 +518,7 @@ export async function getAccessTokenEndpoint(code) {
     code: code,
     client_secret:
       "A8C495709B3F0BD5972D67EAF464949838E2F35EB623E514F75487A18904D70A",
-    redirect_uri: "https://asp-dev.mfindealerservices.com/login2",
+    redirect_uri: redirectURL,
     // redirect_uri: "http://localhost:3000/login2",
   });
   var config = {

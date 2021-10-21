@@ -319,7 +319,7 @@ export default function ConditionReport(props) {
                 </Grid>
                 <Grid container spacing={3}>
                   <Card className="vehicleSectionCR">
-                    <Typography variant="h6">Vehicle Details</Typography>
+                    <Typography variant="h6" className="vehicleDetailsMargin">Vehicle Details</Typography>
                     <hr />
                     <CardContent>
                       <List className="paddingCSS">

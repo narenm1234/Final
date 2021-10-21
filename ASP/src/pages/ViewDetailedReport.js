@@ -265,11 +265,7 @@ export default function ViewDetailedReport(props) {
         <DialogContent>
           <Grid container>
             <Grid item xs={6} className="galleryView">
-              <MyGallery
-                getDamageDesc={(e) => {
-                  e ? setDamagedesc(e) : setDamagedesc("");
-                }}
-              />
+              <MyGallery getDamageDesc={(e) =>{ e? setDamagedesc(e) :setDamagedesc("") }} />
             </Grid>
 
             <Grid xs={6}>
