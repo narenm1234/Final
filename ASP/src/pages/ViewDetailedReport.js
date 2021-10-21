@@ -23,6 +23,8 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import CurrencyFormat from "react-currency-format";
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
+import Tooltip from '@material-ui/core/Tooltip';
+import InfoIcon from '@material-ui/icons/Info';
 const styles = (theme) => ({
     root: {
         margin: 0,
@@ -35,7 +37,18 @@ const styles = (theme) => ({
         color: theme.palette.grey[500],
     },
 });
-
+const BlueTooltip = withStyles({
+    tooltip: {
+        width: "181px",
+        height: "64px",
+        fontSize: "10px",
+        lineHeight: 1.6,
+        color: "#080707",
+        borderRadius: "4px",
+  boxShadow: "0 2px 3px 0 rgba(0, 0, 0, 0.16)",
+  backgroundColor: "#fff",
+    }
+  })(Tooltip);
 const DialogTitle = withStyles(styles)((props) => {
     const { children, classes, onClose, ...other } = props;
     return (
@@ -294,12 +307,16 @@ export default function ViewDetailedReport(props) {
                                                 prefix={"$"}/>):'$0'}</ListItemSecondaryAction>
                                         </ListItem>
                                         <ListItem>
-                                            <ListItemText className="smallCardTitle"><span className="textBold alignleft ">Excessive W&T</span></ListItemText>
-                                            <ListItemSecondaryAction className="smallCardBody ">{DamageDetails.excessiveWandT?(<CurrencyFormat
+                                            <ListItemText className="smallCardTitle"><span className="textBold alignleft icontooltip">Excessive W&T<BlueTooltip title={`Excessive W&T charges are those that may be billed to the lessee on their lease end invoice`}>
+                                                <div><IconButton color='#3f51b5'>
+                                                    <InfoIcon/>
+                                                </IconButton></div>
+                                            </BlueTooltip></span></ListItemText>
+                                            <ListItemSecondaryAction className="smallCardBody ">{DamageDetails.excessiveWandT ? (<CurrencyFormat
                                                 value={DamageDetails.excessiveWandT}
                                                 displayType={"text"}
                                                 thousandSeparator={true}
-                                                prefix={"$"}/>):'$0'}</ListItemSecondaryAction>
+                                                prefix={"$"} />) : '$0'}</ListItemSecondaryAction>
                                         </ListItem>
                                     </List>
 
