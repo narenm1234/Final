@@ -377,13 +377,14 @@ div.vehicleMakeModel1 {
   border: 1px solid lightgray;
 }
 .pendingImg {
-  height: 120px;
+  // height: 120px;
   display: block;
-  max-width: 400px;
+  max-width: 263px;
   overflow: hidden;
-  width: 65%;
-  margin: auto;
-  margin-top: 35px;
+  // width: 65%;
+  // margin: auto;
+  // margin-top: 35px;
+  margin: 28px auto;
   border: 1px solid lightgray;
 }
 
@@ -454,7 +455,7 @@ div.vehicleMakeModel1 {
   text-align: center;
 }
 .vin {
-  color:#0091ff;
+  color: #0091ff;
   cursor: pointer;
   text-decoration: none;
 }
