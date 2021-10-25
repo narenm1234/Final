@@ -203,7 +203,7 @@ export default function ConditionReport(props) {
                     </Button>
                   </Grid>
                   <Grid item xs={12}>
-                    <div className="disclaimer">
+                    <div className="disclaimerVRS">
                       Disclaimer: Damage estimates are included for reference
                       and may not be reflective of the actual repair costs
                     </div>
@@ -221,7 +221,7 @@ export default function ConditionReport(props) {
                 <div className="ConditionReportSection">
                   <div className="reportTitle">
                     <span>
-                      {vehicleDetails && vehicleDetails.model_year}
+                      {vehicleDetails && vehicleDetails.model_year}{" "}
                       {vehicleDetails && vehicleDetails.brand}{" "}
                       {vehicleDetails && vehicleDetails.model}{" "}
                       {vehicleDetails && vehicleDetails.ext_color}{" "}
@@ -284,7 +284,19 @@ export default function ConditionReport(props) {
                     <Card className="ConditionCard">
                       <CardContent>
                         <div className="smallCardTitle">Market Based</div>
-                        <div className="smallCardBody">Pending</div>
+                        <div className="smallCardBody">
+                        <span className="textSize">
+                            <CurrencyFormat
+                              value={
+                                vehicleDetails.vehicle_price?vehicleDetails.vehicle_price:"0"
+                              }
+                              displayType={"text"}
+                              thousandSeparator={true}
+                              prefix={"$"}
+                            />
+                            .00
+                          </span>
+                        </div>
                       </CardContent>
                     </Card>
                   </Grid>
@@ -419,7 +431,9 @@ export default function ConditionReport(props) {
                           </span>
                         </ListItemText>
                         <ListItemSecondaryAction>
-                          <span className="textSize"></span>
+                          <span className="textSize">
+                            {condionVehicleDetails?.consignor}
+                          </span>
                         </ListItemSecondaryAction>
                       </List>
                       <List className="paddingCSS">
@@ -522,7 +536,7 @@ export default function ConditionReport(props) {
                           </span>
                         </ListItemText>
                         <ListItemSecondaryAction>
-                          {/* <span className="textSize">{condionVehicleDetails?.location_address}</span> */}
+                          <span className="textSize">Master: {condionVehicleDetails?.keys.keys}/ Valet: {condionVehicleDetails?.keys.valet}/ Smart Key: {condionVehicleDetails?.keys.smartKey} / Remotes: {condionVehicleDetails?.keys.remotes}</span>
                         </ListItemSecondaryAction>
                       </List>
                       <List className="paddingCSS">
@@ -555,7 +569,7 @@ export default function ConditionReport(props) {
                           </span>
                         </ListItemText>
                         <ListItemSecondaryAction>
-                          <span className="textSize">{condionVehicleDetails?.odor}</span>
+                          <span className="textSize">{condionVehicleDetails?.odor == "true"?"Yes":"None"}</span>
                         </ListItemSecondaryAction>
                       </List>
                     </CardContent>
@@ -693,10 +707,11 @@ export default function ConditionReport(props) {
                 <div className="ConditionReportSection">
                   <div className="reportTitle">
                     <span>
+                    {vehicleDetails && vehicleDetails.model_year}{" "}
                       {vehicleDetails && vehicleDetails.brand}{" "}
                       {vehicleDetails && vehicleDetails.model}{" "}
                       {vehicleDetails && vehicleDetails.ext_color}{" "}
-                      {vehicleDetails && vehicleDetails.model_year}
+                      
                     </span>
                   </div>
                   
@@ -775,7 +790,9 @@ export default function ConditionReport(props) {
                           </span>
                         </ListItemText>
                         <ListItemSecondaryAction>
-                          <span className="textSize"></span>
+                          <span className="textSize">
+                          {condionVehicleDetails?.consignor}
+                          </span>
                         </ListItemSecondaryAction>
                       </List>
                      
@@ -827,21 +844,21 @@ export default function ConditionReport(props) {
                           <TableHead>
                             <TableRow>
                               <TableCell>Code</TableCell>
-                              <TableCell align="right">Description</TableCell>
-                              <TableCell align="right">
+                              <TableCell align="left">Description</TableCell>
+                              <TableCell align="left">
                                 Package Details
                               </TableCell>
                             </TableRow>
                           </TableHead>
                           <TableBody>
-                            {["1"].map((list) => {
+                          {OEMBuildDetailsData.map((list) => {
                               return (
                                 <TableRow key={list}>
                                   <TableCell component="th" scope="row">
-                                    {list}
+                                    {list.accessory_code}
                                   </TableCell>
-                                  <TableCell align="right"></TableCell>
-                                  <TableCell align="right"> </TableCell>
+                                  <TableCell align="left">{list.description}</TableCell>
+                                  <TableCell align="left"> </TableCell>
                                 </TableRow>
                               );
                             })}

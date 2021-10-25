@@ -39,9 +39,9 @@ const styles = (theme) => ({
 });
 const BlueTooltip = withStyles({
     tooltip: {
-        width: "181px",
-        height: "64px",
-        fontSize: "10px",
+        width: "185px",
+        height: "68px",
+        fontSize: "12px",
         lineHeight: 1.6,
         color: "#080707",
         borderRadius: "4px",
@@ -725,11 +725,12 @@ export default function ViewDetailedReport(props) {
                     align="left"
                     className="align_right11"
                   >
-                    $
                     <CurrencyFormat
                       value={finalTotal}
                       displayType={"text"}
                       thousandSeparator={true}
+                      prefix={"$"}
+                      suffix={"0"}
                     />
                   </TableCell>
                 </TableRow>
@@ -742,7 +743,7 @@ export default function ViewDetailedReport(props) {
                 <TableRow>
                   <TableCell colSpan={2} component="th" scope="row"></TableCell>
                   <TableCell colSpan={5} component="th" scope="row">
-                    <div className="disclaimer">
+                    <div className="disclaimerVRS">
                       Disclaimer: Damage estimates are included for reference
                       and may not be reflective of the actual repair costs
                     </div>

@@ -6,7 +6,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import { Route , withRouter} from 'react-router-dom';
 const Header = (props) => {
   const [showDealer, setShowDealer] = useState(null);
-  const [dealerName, setDealerName] = useState((localStorage.getItem("dealerName")));
+  const [dealerName, setDealerName] = useState("");
   const toggleShowDealer = (event) => {
     setShowDealer(event.currentTarget);
   };
