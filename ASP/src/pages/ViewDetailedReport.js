@@ -360,9 +360,9 @@ export default function ViewDetailedReport(props) {
                       </ListItemSecondaryAction>
                     </ListItem>
                     <ListItem>
-                    <ListItemText className="smallCardTitle"><span className="textBold alignleft icontooltip">Excessive W&T<BlueTooltip title={`Excessive W&T charges are those that may be billed to the lessee on their lease end invoice`}>
-                                                <div><IconButton color='#3f51b5'>
-                                                    <InfoIcon/>
+                    <ListItemText className="smallCardTitle"><span className="textBold alignleft ">Excessive W&T<BlueTooltip title={`Excessive W&T charges are those that may be billed to the lessee on their lease end invoice`}>
+                                                <div className="icontooltip"><IconButton color='#005fb2'>
+                                                    <InfoIcon style={{width:"16px"}}color="#005fb2"/>
                                                 </IconButton></div>
                                             </BlueTooltip></span></ListItemText>
                       <ListItemSecondaryAction className="smallCardBody ">
@@ -582,6 +582,7 @@ export default function ViewDetailedReport(props) {
                               displayType={"text"}
                               thousandSeparator={true}
                               prefix={"$"}
+                              suffix={".00"}
                             />
                           ) : (
                             "$0.00"
@@ -720,9 +721,9 @@ export default function ViewDetailedReport(props) {
                   </TableCell>
                   <TableCell colSpan={2} component="th" scope="row"></TableCell>
                   <TableCell
-                    style={{ width: 90 }}
+                    style={{ width: 90, float: "right", fontWeight: "900" }}
                     align="left"
-                    className="align_right"
+                    className="align_right11"
                   >
                     $
                     <CurrencyFormat

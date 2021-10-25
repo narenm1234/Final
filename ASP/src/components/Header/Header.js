@@ -10,6 +10,9 @@ const Header = (props) => {
   const toggleShowDealer = (event) => {
     setShowDealer(event.currentTarget);
   };
+  React.useEffect(() => {
+    setDealerName(localStorage.getItem("dealerName"));
+  }, [localStorage.getItem("dealerName")])
   const handleClose = () => {
     setShowDealer(null);
   };
