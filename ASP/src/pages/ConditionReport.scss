@@ -289,7 +289,7 @@
   width: 100%;
   margin-left: 20%;
 }
-.vehicleDetailsMargin{
+.vehicleDetailsMargin {
   margin-left: 10px !important;
 }
 .viewReportCards {
@@ -402,19 +402,19 @@
   .image-gallery-thumbnails-wrapper {
     width: 26vw !important;
   }
-  .image-gallery-image{
+  .image-gallery-image {
     max-height: 370px !important;
   }
 }
-.image-gallery-thumbnail-image{
+.image-gallery-thumbnail-image {
   max-height: 70px !important;
 }
-.galleryView{
-  .image-gallery-image{
-  max-height: 440px !important;
+.galleryView {
+  .image-gallery-image {
+    // max-height: 440px !important;
+    max-height: 465px !important;
+  }
 }
-}
-
 
 .accessoriestextStyle {
   display: flex;

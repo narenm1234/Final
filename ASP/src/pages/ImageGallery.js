@@ -107,7 +107,6 @@ export default function MyGallery(props) {
           items={images}
           showFullscreenButton={false}
           showPlayButton={false}
-          slideOnThumbnailOver={true}
           onSlide={onSlideGetIndex}
         />
       ) : (

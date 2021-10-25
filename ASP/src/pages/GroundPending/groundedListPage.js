@@ -246,7 +246,12 @@ export default function ListingPage(props) {
                           color="secondary"
                         />
                       </span>  */}
-                      <ExclusivityPeriod vehicle={vehicle} />
+
+                      {vehicle.vehicle_price ? (
+                        <ExclusivityPeriod vehicle={vehicle} />
+                      ) : (
+                        ""
+                      )}
 
                       <span className="textStyle">
                         <span className="textBold"> VIN:</span>
@@ -278,16 +283,16 @@ export default function ListingPage(props) {
                       </span>
                       <span className="textStyle">
                         <span className="textBold"> Inspection Mileage:</span>{" "}
-                        <CurrencyFormat
-                          value={
-                            vehicle.inspection_mileage
-                              ? vehicle.inspection_mileage
-                              : "Pending"
-                          }
-                          displayType={"text"}
-                          thousandSeparator={true}
-                          suffix={"miles"}
-                        />
+                        {vehicle.inspection_status === "Inspection Complete" ? (
+                          <CurrencyFormat
+                            value={vehicle.inspection_mileage}
+                            displayType={"text"}
+                            thousandSeparator={true}
+                            suffix={"miles"}
+                          />
+                        ) : (
+                          "Pending"
+                        )}
                       </span>
                       <span className="textStyle">
                         <span className="textBold"> Account Type: </span>{" "}
@@ -352,16 +357,16 @@ export default function ListingPage(props) {
                         </ListItemText>
                         <ListItemSecondaryAction>
                           <span className="textSize">
-                            <CurrencyFormat
-                              value={
-                                vehicle.vehicle_price
-                                  ? vehicle.vehicle_price
-                                  : "Pending"
-                              }
-                              displayType={"text"}
-                              thousandSeparator={true}
-                              prefix={"$"}
-                            />
+                            {vehicle.vehicle_price ? (
+                              <CurrencyFormat
+                                value={vehicle.vehicle_price}
+                                displayType={"text"}
+                                thousandSeparator={true}
+                                prefix={"$"}
+                              />
+                            ) : (
+                              "Pending"
+                            )}
                           </span>
                         </ListItemSecondaryAction>
                       </ListItem>
