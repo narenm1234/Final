@@ -380,13 +380,19 @@ export async function getInspectionDamageDetailsApi(inspectionId, vin) {
 }
 
 export async function getOEMBuildDetailsApi(vin) {
-  const options = {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
+  var data = vin;
 
-  return await axios.post(`${getOEMBuildDetailsUrl}`, vin);
+var config = {
+  method: 'post',
+  url: getOEMBuildDetailsUrl,
+  headers: { 
+    'accept': 'application/json', 
+    'Content-Type': 'application/json'
+  },
+  data : data
+};
+return await axios(config);
+
 }
 
 export async function postDealerActionPassOnVehicle(VINumber) {

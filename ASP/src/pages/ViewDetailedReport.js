@@ -22,7 +22,9 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItemText from "@material-ui/core/ListItemText";
 import CurrencyFormat from "react-currency-format";
-import TextareaAutosize from "@material-ui/core/TextareaAutosize";
+import TextareaAutosize from '@material-ui/core/TextareaAutosize';
+import Tooltip from '@material-ui/core/Tooltip';
+import InfoIcon from '@material-ui/icons/Info';
 const styles = (theme) => ({
   root: {
     margin: 0,
@@ -35,7 +37,18 @@ const styles = (theme) => ({
     color: theme.palette.grey[500],
   },
 });
-
+const BlueTooltip = withStyles({
+    tooltip: {
+        width: "181px",
+        height: "64px",
+        fontSize: "10px",
+        lineHeight: 1.6,
+        color: "#080707",
+        borderRadius: "4px",
+  boxShadow: "0 2px 3px 0 rgba(0, 0, 0, 0.16)",
+  backgroundColor: "#fff",
+    }
+  })(Tooltip);
 const DialogTitle = withStyles(styles)((props) => {
   const { children, classes, onClose, ...other } = props;
   return (
@@ -289,7 +302,7 @@ export default function ViewDetailedReport(props) {
                             prefix={"$"}
                           />
                         ) : (
-                          "$0"
+                          "$0.00"
                         )}
                       </ListItemSecondaryAction>
                     </ListItem>
@@ -306,7 +319,7 @@ export default function ViewDetailedReport(props) {
                             prefix={"$"}
                           />
                         ) : (
-                          "$0"
+                          "$0.00"
                         )}
                       </ListItemSecondaryAction>
                     </ListItem>
@@ -325,7 +338,7 @@ export default function ViewDetailedReport(props) {
                             prefix={"$"}
                           />
                         ) : (
-                          "$0"
+                          "$0.00"
                         )}
                       </ListItemSecondaryAction>
                     </ListItem>
@@ -342,16 +355,16 @@ export default function ViewDetailedReport(props) {
                             prefix={"$"}
                           />
                         ) : (
-                          "$0"
+                          "$0.00"
                         )}
                       </ListItemSecondaryAction>
                     </ListItem>
                     <ListItem>
-                      <ListItemText className="smallCardTitle">
-                        <span className="textBold alignleft ">
-                          Excessive W&T
-                        </span>
-                      </ListItemText>
+                    <ListItemText className="smallCardTitle"><span className="textBold alignleft ">Excessive W&T<BlueTooltip title={`Excessive W&T charges are those that may be billed to the lessee on their lease end invoice`}>
+                                                <div className="icontooltip"><IconButton color='#005fb2'>
+                                                    <InfoIcon style={{width:"16px"}}color="#005fb2"/>
+                                                </IconButton></div>
+                                            </BlueTooltip></span></ListItemText>
                       <ListItemSecondaryAction className="smallCardBody ">
                         {DamageDetails.excessiveWandT ? (
                           <CurrencyFormat
@@ -361,7 +374,7 @@ export default function ViewDetailedReport(props) {
                             prefix={"$"}
                           />
                         ) : (
-                          "$0"
+                          "$0.00"
                         )}
                       </ListItemSecondaryAction>
                     </ListItem>
@@ -413,10 +426,10 @@ export default function ViewDetailedReport(props) {
                   <TableCell align="left" className="textWidth">
                     Paint Hours
                   </TableCell>
-                  <TableCell align="left" className="textWidth">
+                  <TableCell align="right" className="textWidth">
                     Part Cost
                   </TableCell>
-                  <TableCell align="left" className="textWidth">
+                  <TableCell align="right" className="textWidth">
                     Estimate
                   </TableCell>
                 </TableRow>
@@ -474,7 +487,7 @@ export default function ViewDetailedReport(props) {
                             : 0
                           : "N/A"}
                       </TableCell>
-                      <TableCell style={{ width: 150 }} align="left">
+                      <TableCell style={{ width: 150 }} align="right">
                         {DamageDetails?.damageDetails?.length > 0 ? (
                           inter.part_cost ? (
                             <CurrencyFormat
@@ -484,13 +497,13 @@ export default function ViewDetailedReport(props) {
                               prefix={"$"}
                             />
                           ) : (
-                            "$0"
+                            "$0.00"
                           )
                         ) : (
                           "N/A"
                         )}
                       </TableCell>
-                      <TableCell astyle={{ width: 150 }} align="left">
+                      <TableCell astyle={{ width: 150 }} align="right">
                         {DamageDetails?.damageDetails?.length > 0 ? (
                           inter.total ? (
                             <CurrencyFormat
@@ -500,7 +513,7 @@ export default function ViewDetailedReport(props) {
                               prefix={"$"}
                             />
                           ) : (
-                            "$0"
+                            "$0.00"
                           )
                         ) : (
                           "N/A"
@@ -561,7 +574,7 @@ export default function ViewDetailedReport(props) {
                             : 0
                           : "N/A"}
                       </TableCell>
-                      <TableCell style={{ width: 90 }} align="left">
+                      <TableCell style={{ width: 90 }} align="right">
                         {DamageDetails?.damageDetails?.length > 0 ? (
                           exter.part_cost ? (
                             <CurrencyFormat
@@ -569,15 +582,16 @@ export default function ViewDetailedReport(props) {
                               displayType={"text"}
                               thousandSeparator={true}
                               prefix={"$"}
+                              suffix={".00"}
                             />
                           ) : (
-                            "$0"
+                            "$0.00"
                           )
                         ) : (
                           "N/A"
                         )}
                       </TableCell>
-                      <TableCell astyle={{ width: 90 }} align="left">
+                      <TableCell astyle={{ width: 90 }} align="right">
                         {DamageDetails?.damageDetails?.length > 0 ? (
                           exter.total ? (
                             <CurrencyFormat
@@ -587,7 +601,7 @@ export default function ViewDetailedReport(props) {
                               prefix={"$"}
                             />
                           ) : (
-                            "$0"
+                            "$0.00"
                           )
                         ) : (
                           "N/A"
@@ -638,7 +652,7 @@ export default function ViewDetailedReport(props) {
                             : 0
                           : "N/A"}
                       </TableCell>
-                      <TableCell style={{ width: 90 }} align="left">
+                      <TableCell style={{ width: 90 }} align="right">
                         {DamageDetails?.damageDetails?.length > 0 ? (
                           mech.part_cost ? (
                             <CurrencyFormat
@@ -648,13 +662,13 @@ export default function ViewDetailedReport(props) {
                               prefix={"$"}
                             />
                           ) : (
-                            "$0"
+                            "$0.00"
                           )
                         ) : (
                           "N/A"
                         )}
                       </TableCell>
-                      <TableCell astyle={{ width: 90 }} align="left">
+                      <TableCell astyle={{ width: 90 }} align="right">
                         {DamageDetails?.damageDetails?.length > 0 ? (
                           mech.total ? (
                             <CurrencyFormat
@@ -664,7 +678,7 @@ export default function ViewDetailedReport(props) {
                               prefix={"$"}
                             />
                           ) : (
-                            "$0"
+                            "$0.00"
                           )
                         ) : (
                           "N/A"
@@ -707,9 +721,9 @@ export default function ViewDetailedReport(props) {
                   </TableCell>
                   <TableCell colSpan={2} component="th" scope="row"></TableCell>
                   <TableCell
-                    style={{ width: 90 }}
+                    style={{ width: 90, float: "right", fontWeight: "900" }}
                     align="left"
-                    className="align_right"
+                    className="align_right11"
                   >
                     $
                     <CurrencyFormat

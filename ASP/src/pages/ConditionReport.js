@@ -221,10 +221,11 @@ export default function ConditionReport(props) {
                 <div className="ConditionReportSection">
                   <div className="reportTitle">
                     <span>
+                      {vehicleDetails && vehicleDetails.model_year}
                       {vehicleDetails && vehicleDetails.brand}{" "}
                       {vehicleDetails && vehicleDetails.model}{" "}
                       {vehicleDetails && vehicleDetails.ext_color}{" "}
-                      {vehicleDetails && vehicleDetails.model_year}
+                      
                     </span>
                   </div>
                   {condionVehicleDetails?.inspection_date && (
@@ -440,7 +441,7 @@ export default function ConditionReport(props) {
                           </span>
                         </ListItemText>
                         <ListItemSecondaryAction>
-                          {/* <span className="textSize">{condionVehicleDetails?.location_address}</span> */}
+                          <span className="textSize">{condionVehicleDetails?.doors}</span>
                         </ListItemSecondaryAction>
                       </List>
                       <List className="paddingCSS">
@@ -474,7 +475,7 @@ export default function ConditionReport(props) {
                           </span>
                         </ListItemText>
                         <ListItemSecondaryAction>
-                          {/* <span className="textSize">{condionVehicleDetails?.location_address}</span> */}
+                          <span className="textSize">{condionVehicleDetails?.driveTrain}</span>
                         </ListItemSecondaryAction>
                       </List>
                       <List className="paddingCSS">
@@ -554,7 +555,7 @@ export default function ConditionReport(props) {
                           </span>
                         </ListItemText>
                         <ListItemSecondaryAction>
-                          <span className="textSize"></span>
+                          <span className="textSize">{condionVehicleDetails?.odor}</span>
                         </ListItemSecondaryAction>
                       </List>
                     </CardContent>
@@ -587,21 +588,21 @@ export default function ConditionReport(props) {
                           <TableHead>
                             <TableRow>
                               <TableCell>Code</TableCell>
-                              <TableCell align="right">Description</TableCell>
-                              <TableCell align="right">
+                              <TableCell align="left">Description</TableCell>
+                              <TableCell align="left">
                                 Package Details
                               </TableCell>
                             </TableRow>
                           </TableHead>
                           <TableBody>
-                            {["1"].map((list) => {
+                            {OEMBuildDetailsData.map((list) => {
                               return (
                                 <TableRow key={list}>
                                   <TableCell component="th" scope="row">
-                                    {list}
+                                    {list.accessory_code}
                                   </TableCell>
-                                  <TableCell align="right"></TableCell>
-                                  <TableCell align="right"> </TableCell>
+                                  <TableCell align="left">{list.description}</TableCell>
+                                  <TableCell align="left"> </TableCell>
                                 </TableRow>
                               );
                             })}
@@ -754,7 +755,7 @@ export default function ConditionReport(props) {
                 </Grid>
                 <Grid container spacing={3}>
                   <Card className="vehicleSectionCR">
-                    <Typography variant="h6">Vehicle Details</Typography>
+                    <Typography variant="h6" className="vehicleDetailsMargin">Vehicle Details</Typography>
                     <hr />
                     <CardContent>
                       <List className="paddingCSS">

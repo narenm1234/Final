@@ -256,7 +256,10 @@
   font-size: 13px;
 }
 .MuiTableCell-alignRight {
-  font-weight: 900 !important;
+  // font-weight: 900 !important;
+}
+.MuiButton-label{
+  cursor: pointer;
 }
 .align_right {
   font-weight: 900 !important;
@@ -458,4 +461,17 @@
   background-color: #fff;
   box-shadow: -1px 0 3px 0 rgba(0, 0, 0, 0.25);
   padding-top: 40px;
+} 
+.icontooltip{
+  display: inline-flex;
+}
+.MuiIconButton-root{
+  color: #005fb2 !important;
+}
+.align_right11{
+  font-weight: 900px !important;
+
+}
+.icontooltip{
+  margin-top: -8px;
 }
