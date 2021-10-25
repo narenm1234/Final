@@ -588,21 +588,21 @@ export default function ConditionReport(props) {
                           <TableHead>
                             <TableRow>
                               <TableCell>Code</TableCell>
-                              <TableCell align="right">Description</TableCell>
-                              <TableCell align="right">
+                              <TableCell align="left">Description</TableCell>
+                              <TableCell align="left">
                                 Package Details
                               </TableCell>
                             </TableRow>
                           </TableHead>
                           <TableBody>
-                            {["1"].map((list) => {
+                            {OEMBuildDetailsData.map((list) => {
                               return (
                                 <TableRow key={list}>
                                   <TableCell component="th" scope="row">
-                                    {list}
+                                    {list.accessory_code}
                                   </TableCell>
-                                  <TableCell align="right"></TableCell>
-                                  <TableCell align="right"> </TableCell>
+                                  <TableCell align="left">{list.description}</TableCell>
+                                  <TableCell align="left"> </TableCell>
                                 </TableRow>
                               );
                             })}
