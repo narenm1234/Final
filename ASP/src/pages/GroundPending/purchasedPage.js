@@ -138,8 +138,8 @@ export default function ListingPage2(props) {
               <div className="Year-Make-Model-Col">
                 <div className="vehicleMakeModel">
                   <span>
-                    {vehicle.brand} {vehicle.model} {vehicle.ext_color}{" "}
-                    {vehicle.model_year}
+                  {vehicle.model_year} {vehicle.brand} {vehicle.model} {vehicle.ext_color}{" "}
+                    
                   </span>
                 </div>
                 <List>

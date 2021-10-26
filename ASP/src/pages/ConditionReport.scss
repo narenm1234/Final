@@ -65,7 +65,7 @@
 .Pending-Inspection-R {
   width: 165px;
   height: 20px;
-  margin: 16px 68px 0 68px;
+  margin-left: 25%;
   font-family: ToyotaType;
   font-size: 13px;
   font-weight: normal;
@@ -109,11 +109,11 @@
 }
 .inspectionStatusWarning {
   // width: 138px;
-  width: 138px;
+  width: 238px;
     height: 33px;
-    padding: 4px 8px;
+    padding: 4px 18px;
     border-radius: 100px;
-    margin-left: 2rem;
+    //margin-left: 10px;
   background-color: #c00;
   // margin-left: 1rem;
 }
