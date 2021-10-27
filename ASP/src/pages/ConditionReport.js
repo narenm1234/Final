@@ -554,7 +554,8 @@ export default function ConditionReport(props) {
                           </span>
                         </ListItemText>
                         <ListItemSecondaryAction>
-                          <span className="textSize">Master: {condionVehicleDetails?.keys.keys}/ Valet: {condionVehicleDetails?.keys.valet}/ Smart Key: {condionVehicleDetails?.keys.smartKey} / Remotes:</span>
+                          <span className="textSize">Master: {condionVehicleDetails?.keys.keys}/ Valet: {condionVehicleDetails?.keys.valet}</span>
+                          <span className="textSize">Smart Key: {condionVehicleDetails?.keys.smartKey} / Remotes:</span>
                         </ListItemSecondaryAction>
                       </List>
                       <List className="paddingCSS">
