@@ -85,6 +85,7 @@ export default function ListingPage(props) {
   const [open, setOpen] = React.useState(false);
   const [time, setTime] = React.useState("00:00");
   const [passVin, setPassVin] = React.useState("");
+  const [groundingID, setGroundingID] = React.useState("");
   const [images, setImages] = React.useState([]);
   const [loader, setLoader] = React.useState(true);
 
@@ -97,6 +98,7 @@ export default function ListingPage(props) {
     let apiResponse = await getGroundingList();
     setVehicleResponse(apiResponse.data.data);
     console.log("------->", apiResponse.data);
+    console.log(vehicleResponse[0].groundingId)
     setLoader(false);
   }
 
@@ -156,8 +158,9 @@ export default function ListingPage(props) {
       vehicleDetails: vehicle,
     });
   };
-  const handleOpen = (vin) => {
+  const handleOpen = (vin, groundingId) => {
     setPassVin(vin);
+    setGroundingID(groundingId)
     setOpen(!open);
   };
   const handleClose = () => {
@@ -399,7 +402,7 @@ export default function ListingPage(props) {
                     <div className="NavigatorButtons">
                       <Button
                         className="PassonVehicleStyle"
-                        onClick={handleOpen.bind(this, vehicle.vin)}
+                        onClick={handleOpen.bind(this, vehicle.vin, vehicle.groundingId)}
                       >
                         Pass on vehicle
                       </Button>
@@ -448,6 +451,7 @@ export default function ListingPage(props) {
         open={open}
         close={handleClose}
         vin={passVin}
+        groundingId={groundingID}
         reload={() => {
           getVehicleDetails();
           props.fireEvents();
