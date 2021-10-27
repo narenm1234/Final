@@ -159,7 +159,13 @@ export default function ConditionReport(props) {
                         <div className="smallCardBody warningColor">
                           {}
                           {DamageDetails.exteriorCost
-                            ? DamageDetails.exteriorCost
+                            ?  <CurrencyFormat 
+                            value = {DamageDetails.exteriorCost }
+                            displayType={"text"}
+                            thousandSeparator={true}
+                            prefix={"$"}
+                            suffix={".00"}
+                          />
                             : "$0.00"}
                         </div>
                       </CardContent>
@@ -171,8 +177,14 @@ export default function ConditionReport(props) {
                         <div className="smallCardTitle">Interior total</div>
                         <div className="smallCardBody warningColor">
                           {}
-                          {DamageDetails.interiorCost
-                            ? DamageDetails.interiorCost
+                          {DamageDetails.interiorCost?
+                            <CurrencyFormat 
+                            value = {DamageDetails.interiorCost }
+                            displayType={"text"}
+                            thousandSeparator={true}
+                            prefix={"$"}
+                            suffix={".00"}
+                          />
                             : "$0.00"}
                         </div>
                       </CardContent>
@@ -185,7 +197,13 @@ export default function ConditionReport(props) {
                         <div className="smallCardBody warningColor">
                           {}
                           {DamageDetails.maintainenceCost
-                            ? DamageDetails.maintainenceCost
+                            ?  <CurrencyFormat 
+                            value = {DamageDetails.maintainenceCost }
+                            displayType={"text"}
+                            thousandSeparator={true}
+                            prefix={"$"}
+                            suffix={".00"}
+                          />
                             : "$0.00"}
                         </div>
                       </CardContent>
@@ -536,7 +554,7 @@ export default function ConditionReport(props) {
                           </span>
                         </ListItemText>
                         <ListItemSecondaryAction>
-                          <span className="textSize">Master: {condionVehicleDetails?.keys.keys}/ Valet: {condionVehicleDetails?.keys.valet}/ Smart Key: {condionVehicleDetails?.keys.smartKey} / Remotes: {condionVehicleDetails?.keys.remotes}</span>
+                          <span className="textSize">Master: {condionVehicleDetails?.keys.keys}/ Valet: {condionVehicleDetails?.keys.valet}/ Smart Key: {condionVehicleDetails?.keys.smartKey} / Remotes:</span>
                         </ListItemSecondaryAction>
                       </List>
                       <List className="paddingCSS">

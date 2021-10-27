@@ -109,13 +109,18 @@
 }
 .inspectionStatusWarning {
   // width: 138px;
-  width: 238px;
-    height: 33px;
-    padding: 4px 18px;
-    border-radius: 100px;
-    //margin-left: 10px;
+  // width: 238px;
+  //   height: 33px;
+  //   padding: 4px 18px;
+  //   border-radius: 100px;
+  //   //margin-left: 10px;
   background-color: #c00;
-  // margin-left: 1rem;
+  // // margin-left: 1rem;
+  width: 138px;
+    height: 33px;
+    padding: 4px 8px;
+    border-radius: 100px;
+    margin-left: 2rem;
 }
 .ConditionCard {
   // width: 123%;
