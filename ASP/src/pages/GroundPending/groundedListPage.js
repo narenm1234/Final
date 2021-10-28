@@ -98,7 +98,7 @@ export default function ListingPage(props) {
     let apiResponse = await getGroundingList();
     setVehicleResponse(apiResponse.data.data);
     console.log("------->", apiResponse.data);
-    console.log(vehicleResponse[0].groundingId)
+    
     setLoader(false);
   }
 
