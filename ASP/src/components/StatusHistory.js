@@ -10,9 +10,23 @@ import Paper from '@material-ui/core/Paper';
 
 const useStyles = makeStyles({
     table: {
-        minWidth: 650,
+      border: "1px solid #e1e1e1",
     },
-});
+    tableRow: {
+      borderBottom: "1px solid #e1e1e1",
+    },
+    tableHeaderRow: {
+      borderTop: "1px solid #e1e1e1",
+      borderBottom: "1px solid #e1e1e1",
+      backgroundColor:"#f7f7f8",
+    },
+    root: {
+      width: "100%",
+    },
+    paper: {
+      width: "100%",
+    },
+  });
 
 function createVehicleData(name, calories, fat, carbs, protein) {
     return { name, calories, fat, carbs, protein };
@@ -32,6 +46,7 @@ const rows = [
     createVehicleData("Vehicle Status", "Employee Name/ID", "00/00/2021", "00:00 am/pm"),
     createVehicleData("Vehicle Status", "Employee Name/ID", "00/00/2021", "00:00 am/pm"),
 ];
+
 
 export default function StatusHistory() {
     const classes = useStyles();
