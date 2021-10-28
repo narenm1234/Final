@@ -407,7 +407,7 @@ return await axios(config);
 
 }
 
-export async function postDealerActionPassOnVehicle(VINumber) {
+export async function postDealerActionPassOnVehicle(VINumber,groundId) {
   const options = {
     headers: {
       "Content-Type": "application/json",
@@ -415,7 +415,7 @@ export async function postDealerActionPassOnVehicle(VINumber) {
   };
 
   return await axios.post(
-    `${getDealerActionUrl}?dealerAction=Pass&vin=${VINumber}`,
+    `${getDealerActionUrl}?dealerAction=Pass&groundingId=${groundId}&vin=${VINumber}`,
     options
   );
 }
