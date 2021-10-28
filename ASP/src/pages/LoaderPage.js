@@ -7,7 +7,7 @@ export default function Loaderpage() {
       color="#0070d2"
       height={100}
       width={100}
-      timeout={10000} //3 secs
+      timeout={100000} 
     />
   );
 }
