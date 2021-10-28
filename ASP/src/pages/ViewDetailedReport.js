@@ -387,9 +387,9 @@ export default function ViewDetailedReport(props) {
                   <TextareaAutosize
                     className="inputFieldTextAreaDamage"
                     aria-label="maximum height"
-                    placeholder="Maximum 4 rows"
                     defaultValue={damagedesc}
                     value={damagedesc}
+                    disabled
                   />
                 </Grid>
               </Grid>
