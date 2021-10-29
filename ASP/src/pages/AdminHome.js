@@ -43,7 +43,7 @@ const AdminHome = (props) => {
     // });
   };
   return (
-    (isSubmit) ? (<Grid container><Grid xs={10}><VehicleSearchTabs inspectiondata={inspectiondata} /></Grid><Grid xs={2}><NotesSection /></Grid></Grid>) : (<AdminVehicleSearch fromchildhandleSubmitbtn={handleSubmitbtn} searchdetails={(text) => handleSearch(text)} />)
+    (isSubmit) ? (<Grid container><Grid xs={9}><VehicleSearchTabs inspectiondata={inspectiondata} /></Grid><Grid xs={3}><NotesSection /></Grid></Grid>) : (<AdminVehicleSearch fromchildhandleSubmitbtn={handleSubmitbtn} searchdetails={(text) => handleSearch(text)} />)
   );
 };
 
