@@ -33,6 +33,8 @@ let redirectURL;
 
 let dealerDrop;
 
+let submitPayment;
+
 // let code ='aPrxyoOWGvXqBxqwZTQG7bATs.5vkEP2UmwQ_Eeu7GT7g4TQrfoMjW6F_s7s__kGco4_nvPVrg==';
 // let grant_type='authorization_code';
 // let client_secret= 'A8C495709B3F0BD5972D67EAF464949838E2F35EB623E514F75487A18904D70A';
@@ -75,10 +77,11 @@ if (hostname.includes("dev")) {
     "https://aspservices-internal-dev.tfs.toyota.com/asp-services/dealerpayment/paymentmethod";
   getPurchaseDetailsApi =
     "https://aspservices-internal-dev.tfs.toyota.com/asp-services/getPurchaseDetails";
-  redirectURL = 
-  "https://asp-dev.mfindealerservices.com/login2";
+  redirectURL = "https://asp-dev.mfindealerservices.com/login2";
   dealerDrop =
     "https://aspservices-internal-dev.tfs.toyota.com/asp-services/getAllDealerDetails";
+  submitPayment =
+    "https://aspservices-internal-dev.tfs.toyota.com/asp-services/dealerpayment/submitPayment";
 } else if (hostname.includes("local")) {
   url =
     "http://internal-a3e2a8608d24e4c5f8b42aed9c3587d7-2044184104.us-east-1.elb.amazonaws.com/getAccountDetailsBykey";
@@ -117,10 +120,11 @@ if (hostname.includes("dev")) {
     "https://aspservices-internal-stage.tfs.toyota.com/asp-services/dealerpayment/paymentmethod";
   getPurchaseDetailsApi =
     "https://aspservices-internal-dev.tfs.toyota.com/asp-services/getPurchaseDetails";
-    redirectURL = 
-    "https://asp-dev.mfindealerservices.com/login2";
-    dealerDrop =
+  redirectURL = "https://asp-dev.mfindealerservices.com/login2";
+  dealerDrop =
     "https://aspservices-internal-dev.tfs.toyota.com/asp-services/getAllDealerDetails";
+  submitPayment =
+    "https://aspservices-internal-dev.tfs.toyota.com/asp-services/dealerpayment/submitPayment";
 } else if (hostname.includes("stage")) {
   url =
     "http://internal-a3e2a8608d24e4c5f8b42aed9c3587d7-2044184104.us-east-1.elb.amazonaws.com/getAccountDetailsBykey";
@@ -156,10 +160,11 @@ if (hostname.includes("dev")) {
     "https://aspservices-internal-stage.tfs.toyota.com/asp-services/dealerpayment/paymentmethod";
   getPurchaseDetailsApi =
     "https://aspservices-internal-stage.tfs.toyota.com/asp-services/getPurchaseDetails";
-    redirectURL = 
-    "https://asp-stage.mfindealerservices.com/login2";
-    dealerDrop =
+  redirectURL = "https://asp-stage.mfindealerservices.com/login2";
+  dealerDrop =
     "https://aspservices-internal-stage.tfs.toyota.com/asp-services/getAllDealerDetails";
+  submitPayment =
+    "https://aspservices-internal-stage.tfs.toyota.com/asp-services/dealerpayment/submitPayment";
 } else if (hostname.includes("test")) {
   url =
     "http://internal-a3e2a8608d24e4c5f8b42aed9c3587d7-2044184104.us-east-1.elb.amazonaws.com/getAccountDetailsBykey";
@@ -195,10 +200,11 @@ if (hostname.includes("dev")) {
     "https://aspservices-internal-test.tfs.toyota.com/asp-services/dealerpayment/paymentmethod";
   getPurchaseDetailsApi =
     "https://aspservices-internal-test.tfs.toyota.com/asp-services/getPurchaseDetails";
-    redirectURL = 
-  "https://asp-test.mfindealerservices.com/login2";
+  redirectURL = "https://asp-test.mfindealerservices.com/login2";
   dealerDrop =
     "https://aspservices-internal-test.tfs.toyota.com/asp-services/getAllDealerDetails";
+  submitPayment =
+    "https://aspservices-internal-test.tfs.toyota.com/asp-services/dealerpayment/submitPayment";
 } else if (hostname.includes("prod")) {
   url =
     "http://internal-a3e2a8608d24e4c5f8b42aed9c3587d7-2044184104.us-east-1.elb.amazonaws.com/getAccountDetailsBykey";
@@ -234,10 +240,11 @@ if (hostname.includes("dev")) {
     "https://aspservices-internal.tfs.toyota.com/asp-services/dealerpayment/paymentmethod";
   getPurchaseDetailsApi =
     "https://aspservices-internal.tfs.toyota.com/asp-services/getPurchaseDetails";
-    redirectURL = 
-    "https://asp.mfindealerservices.com/login2";
-    dealerDrop =
+  redirectURL = "https://asp.mfindealerservices.com/login2";
+  dealerDrop =
     "https://aspservices-internal.tfs.toyota.com/asp-services/getAllDealerDetails";
+  submitPayment =
+    "https://aspservices-internal.tfs.toyota.com/asp-services/dealerpayment/submitPayment";
 }
 
 export async function getAuthToken() {
@@ -394,20 +401,19 @@ export async function getInspectionDamageDetailsApi(inspectionId, vin) {
 export async function getOEMBuildDetailsApi(vin) {
   var data = vin;
 
-var config = {
-  method: 'post',
-  url: getOEMBuildDetailsUrl,
-  headers: { 
-    'accept': 'application/json', 
-    'Content-Type': 'application/json'
-  },
-  data : data
-};
-return await axios(config);
-
+  var config = {
+    method: "post",
+    url: getOEMBuildDetailsUrl,
+    headers: {
+      accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    data: data,
+  };
+  return await axios(config);
 }
 
-export async function postDealerActionPassOnVehicle(VINumber,groundId) {
+export async function postDealerActionPassOnVehicle(VINumber, groundId) {
   const options = {
     headers: {
       "Content-Type": "application/json",
@@ -603,6 +609,8 @@ export async function getDealerPaymentsData() {
       "Content-Type": "application/json",
     },
   };
+
+  getDealerPayments = getDealerPayments + "?KintoId=t002-51690";
   return await axios.get(getDealerPayments, options);
 }
 
@@ -655,4 +663,26 @@ export async function getDealerDropData() {
   };
 
   return await axios(config);
+}
+
+
+
+export async function onSubmitPayment(data) {
+
+  var config = {
+    method: "post",
+    url: submitPayment,
+    headers: {
+      "Content-Type": "application/json",
+    },
+    data: data,
+  };
+  return await axios(config).then(
+    (res) => {
+      return res;
+    },
+    (err) => {
+      console.log(err);
+    }
+  );
 }
