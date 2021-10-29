@@ -122,6 +122,8 @@ export default function ConditionReport(props) {
     console.log("-------------xxxxxx", inspectionId);
   }
 
+  let kintoID = localStorage.getItem("kintoId");
+
   const handleOpen = () => {
     setOpen(!open);
   };
