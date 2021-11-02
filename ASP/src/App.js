@@ -18,15 +18,19 @@ import InventoryRequestsTabs from "./components/InventoryRequestsTabs";
 import Login2 from "./pages/Login2";
 function App() {
   const [stateUpdate, setStateUpdate] = useState(1);
+  const [selectedDealersDate, setSelectedDealersData] = useState([]);
   const fireEvents = () => {
     setStateUpdate(stateUpdate + 1);
   };
+  const selectedDealers = (data) =>{
+    setSelectedDealersData(data)
+  }
 
   return (
     <>
       <div>
         <Router>
-          <Header></Header>
+          <Header selectedDealers={selectedDealers}></Header>
           <div>
             <Sidebar stateUpdate={stateUpdate}>
               <Switch>
@@ -49,6 +53,7 @@ function App() {
                   exact
                   exact
                   render={(props) => <GroundPending {...props} fireEvents={fireEvents}
+                  selectedDealersDate={selectedDealersDate}
                   />}
                 />
                 <Route path="/passed" exact render={(props) => <GroundPending1 {...props} />} />

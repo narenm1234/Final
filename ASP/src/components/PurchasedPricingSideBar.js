@@ -15,7 +15,11 @@ import FormLabel from "@material-ui/core/FormLabel";
 import ListItemText from "@material-ui/core/ListItemText";
 import { Box, Select } from "@material-ui/core";
 import MenuItem from "@material-ui/core/MenuItem";
-import { getDealerPaymentsData, getPurchaseDetails, onSubmitPayment } from "../service/api";
+import {
+  getDealerPaymentsData,
+  getPurchaseDetails,
+  onSubmitPayment,
+} from "../service/api";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -65,6 +69,7 @@ export default function PurchasedPricingSideBar(props) {
   const classes = useStyles();
 
   const [accountName, setAccountName] = React.useState("");
+  const [accountInfo, setAccountInfo] = React.useState({});
   const [paymentMethods, SetPaymentMethods] = React.useState([]);
   const [accountMaskNumber, setAccountMaskNumber] = React.useState(null);
   const [purchasedData, setPurchasedData] = React.useState({});
@@ -80,36 +85,33 @@ export default function PurchasedPricingSideBar(props) {
     let getPurchaseDetailsRes = await getPurchaseDetails(props.vin);
     setPurchasedData(getPurchaseDetailsRes.data.data);
 
+    // let reqObj = {
+    //   "accountId": "8adc9a4170c2d2f80170c56d9be24c8f",
+    //   "accountNumber": "t002-51690",
+    //   "achAbaCode": "111111111",
+    //   "achAccountNumberMask": "**************************2222",
+    //   "achAccountType": "Checking",
+    //   "paymentDetails": [
+    //     {
+    //       "amount": 200,
+    //       "paymentCategory": "Payoff",
+    //       "priceType": "Price"
+    //     },
+    //     {
+    //       "amount": 300,
+    //       "paymentCategory": "Residual",
+    //       "priceType": "Price"
+    //     }
+    //   ],
+    //   "paymentMethodId": "8adcd9eb74353a7101744ee82b2e0cdd",
+    //   "paymentMethodType": "ACH",
+    //   "tenantId": "t002",
+    //   "vin": "JM1GL1XY6L1513120",
+    //   // "vin": "KM3KFADM0L0797963",
 
-
-    let reqObj = {
-      "accountId": "8adc9a4170c2d2f80170c56d9be24c8f",
-      "accountNumber": "t002-51690",
-      "achAbaCode": "111111111",
-      "achAccountNumberMask": "**************************2222",
-      "achAccountType": "Checking",
-      "paymentDetails": [
-        {
-          "amount": 200,
-          "paymentCategory": "Payoff",
-          "priceType": "Price"
-        },
-        {
-          "amount": 300,
-          "paymentCategory": "Residual",
-          "priceType": "Price"
-        }
-      ],
-      "paymentMethodId": "8adcd9eb74353a7101744ee82b2e0cdd",
-      "paymentMethodType": "ACH",
-      "tenantId": "t002",
-      "vin": "JM1GL1XY6L1513120",
-      // "vin": "KM3KFADM0L0797963",
-    
-    }
-    let submitPaymentRes = await onSubmitPayment(reqObj);
-    console.log("submitPaymentRes:::", submitPaymentRes);
-
+    // }
+    // let submitPaymentRes = await onSubmitPayment(reqObj);
+    // console.log("submitPaymentRes:::", submitPaymentRes);
   }, []);
 
   const handleChangeAccountName = (event) => {
@@ -117,6 +119,7 @@ export default function PurchasedPricingSideBar(props) {
     paymentMethods.forEach((item) => {
       if (item.achAccountName == event.target.value) {
         console.log(item);
+        setAccountInfo(item);
         setAccountMaskNumber(item.achAccountNumberMask);
       }
     });
@@ -143,10 +146,93 @@ export default function PurchasedPricingSideBar(props) {
     auctionCode: "",
   });
   const [value, setValue] = React.useState("");
+  const [amount, setAmount] = React.useState("");
 
   const handleChange = (event) => {
     setValue(event.target.value);
   };
+
+  const purchaseVehical = async () => {
+    let makepaymentdetails = [];
+    // [
+    //   {
+    //     "amount": 200,
+    //     "paymentCategory": "Payoff",
+    //     "priceType": "Price"
+    //   },
+    //   {
+    //     "amount": 300,
+    //     "paymentCategory": "Residual",
+    //     "priceType": "Price"
+    //   }
+    // ]
+    if (value == "1") {
+      let payment = {
+        amount: purchasedData.payOffAmount,
+        paymentCategory: "Payoff",
+        priceType: "Price",
+      };
+      makepaymentdetails.push(payment);
+    } else if (value == "2") {
+      let payment = [
+        {
+          amount: purchasedData.remainingPmts,
+          paymentCategory: "remainingPmts",
+          priceType: "Price",
+        },
+        {
+          amount: purchasedData.residualAmount,
+          paymentCategory: "residualAmount",
+          priceType: "Price",
+        },
+      ];
+      makepaymentdetails = payment;
+    } else if (value == "3") {
+      let payment = {
+        amount: purchasedData.vehiclePrice,
+        paymentCategory: "vehiclePrice",
+        priceType: "Price",
+      };
+      makepaymentdetails.push(payment);
+    } else if (value == "4") {
+      let payment = [
+        {
+          amount: purchasedData.vehiclePrice,
+          paymentCategory: "vehiclePrice",
+          priceType: "Price",
+        },
+        {
+          amount: purchasedData.remainingPmts,
+          paymentCategory: "remainingPmts",
+          priceType: "Price",
+        },
+      ];
+      makepaymentdetails = payment;
+    }
+
+
+    let reqObj = {
+      accountId: accountInfo?.accountId,
+      accountNumber: localStorage.getItem("KintoID")? localStorage.getItem("KintoID") : null,
+      achAbaCode: "111111111",
+      achAccountNumberMask: accountInfo?.achAccountNumberMask,
+      achAccountType: accountInfo?.achAccountType,
+      paymentDetails: makepaymentdetails,
+      paymentMethodId:accountInfo?.id,
+      paymentMethodType: accountInfo?.type,
+      tenantId: "t002",
+      vin: props.vin,
+      // "vin": "KM3KFADM0L0797963",
+    };
+    let submitPaymentRes = await onSubmitPayment(reqObj);
+    console.log("submitPaymentRes:::", submitPaymentRes);
+
+    if(submitPaymentRes.data.success){
+      props.onPurchaseVehical()
+    }
+
+  };
+
   return (
     <div className="manualPricingSidebar">
       <ListItem className="notesSectionHeader">Purchase Page</ListItem>
@@ -166,7 +252,11 @@ export default function PurchasedPricingSideBar(props) {
               boxShadow={"0px 0px 4px lightgray"}
               borderRadius={4}
             >
-              <FormControlLabel value="1" control={<Radio />} label="Payoff" />
+              <FormControlLabel
+                value={"1"}
+                control={<Radio />}
+                label="Payoff"
+              />
               <p> ${purchasedData.payOffAmount} </p>
             </Box>
             <Box
@@ -177,7 +267,7 @@ export default function PurchasedPricingSideBar(props) {
               borderRadius={4}
             >
               <FormControlLabel
-                value="2"
+                value={"2"}
                 control={<Radio />}
                 label="Residual + Remaining Payments"
               />
@@ -197,7 +287,11 @@ export default function PurchasedPricingSideBar(props) {
               boxShadow={"0px 0px 4px lightgray"}
               borderRadius={4}
             >
-              <FormControlLabel value="3" control={<Radio />} label="Market" />
+              <FormControlLabel
+                value={"3"}
+                control={<Radio />}
+                label="Market"
+              />
               <p> ${purchasedData.vehiclePrice} </p>
             </Box>
             <Box
@@ -208,7 +302,7 @@ export default function PurchasedPricingSideBar(props) {
               borderRadius={4}
             >
               <FormControlLabel
-                value="4"
+                value={"4"}
                 control={<Radio />}
                 label="Market + Remaining Payments "
               />
@@ -278,7 +372,8 @@ export default function PurchasedPricingSideBar(props) {
           disabled={!accountName || !value}
           className="purchaseButton"
           color="secondary"
-          onClick={props.onPurchaseVehical}
+          // onClick={props.onPurchaseVehical}
+          onClick={purchaseVehical}
         >
           Purchase Vehicle
         </Button>

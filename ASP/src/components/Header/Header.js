@@ -62,7 +62,8 @@ const Header = (props) => {
       }
     });
     setDealerDrop([...dealerData]);
-
+    let selectedDealerData = dealerData.filter(x=> x.checked);
+    props.selectedDealers(selectedDealerData)
   };
 
   return (

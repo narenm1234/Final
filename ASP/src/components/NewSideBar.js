@@ -86,9 +86,11 @@ export default function NewSidebar(props) {
   const classes = useStyles();
 
   useEffect(async () => {
-    let getGroundingListRes = await getGroundingList();
-    let getPassedListRes = await getPassedList();
-    let getPurchasedListRes = await getPurchasedList("ALL");
+    // let getGroundingListRes = await getGroundingList();
+    // let getPassedListRes = await getPassedList();
+    // let getPurchasedListRes = await getPurchasedList("ALL");
+
+
     // setVehicleResponse(apiResponse.data.data);
     // console.log("setVehicleResponse::", getGroundingListRes.data.data);
     // console.log("setVehicleResponse::", getPassedListRes.data.data);
@@ -100,39 +102,39 @@ export default function NewSidebar(props) {
           item.open = true;
         }
 
-        if (child.link == "/grounded") {
-          if (
-            getGroundingListRes &&
-            getGroundingListRes.data &&
-            getGroundingListRes.data.data.length !== 0
-          ) {
-            child.badge = getGroundingListRes?.data.data.length;
-          } else {
-            child.badge = 0;
-          }
-        }
-        if (child.link == "/passed") {
-          if (
-            getPassedListRes &&
-            getPassedListRes.data &&
-            getPassedListRes.data.data.length !== 0
-          ) {
-            child.badge = getPassedListRes?.data.data.length;
-          } else {
-            child.badge = 0;
-          }
-        }
-        if (child.link == "/purchased") {
-          if (
-            getPurchasedListRes &&
-            getPurchasedListRes.data &&
-            getPurchasedListRes.data.data.length !== 0
-          ) {
-            child.badge = getPurchasedListRes?.data.data.length;
-          } else {
-            child.badge = 0;
-          }
-        }
+        // if (child.link == "/grounded") {
+        //   if (
+        //     getGroundingListRes &&
+        //     getGroundingListRes.data &&
+        //     getGroundingListRes.data.data.length !== 0
+        //   ) {
+        //     child.badge = getGroundingListRes?.data.data.length;
+        //   } else {
+        //     child.badge = 0;
+        //   }
+        // }
+        // if (child.link == "/passed") {
+        //   if (
+        //     getPassedListRes &&
+        //     getPassedListRes.data &&
+        //     getPassedListRes.data.data.length !== 0
+        //   ) {
+        //     child.badge = getPassedListRes?.data.data.length;
+        //   } else {
+        //     child.badge = 0;
+        //   }
+        // }
+        // if (child.link == "/purchased") {
+        //   if (
+        //     getPurchasedListRes &&
+        //     getPurchasedListRes.data &&
+        //     getPurchasedListRes.data.data.length !== 0
+        //   ) {
+        //     child.badge = getPurchasedListRes?.data.data.length;
+        //   } else {
+        //     child.badge = 0;
+        //   }
+        // }
       });
     });
     if(localStorage.getItem('dealerCode'))
