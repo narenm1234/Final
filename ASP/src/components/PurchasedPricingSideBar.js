@@ -71,14 +71,13 @@ export default function PurchasedPricingSideBar(props) {
 
   useEffect(async () => {
     let getDealerPaymentsRes = await getDealerPaymentsData();
-    console.log("getDealerPaymentsData", getDealerPaymentsRes);
+    console.log("getDealerPaymentsData==>", getDealerPaymentsRes);
     getDealerPaymentsRes &&
       getDealerPaymentsRes.data &&
       getDealerPaymentsRes.data.PaymentMethod &&
       SetPaymentMethods(getDealerPaymentsRes.data.PaymentMethod);
 
     let getPurchaseDetailsRes = await getPurchaseDetails(props.vin);
-    console.log("getPurchaseDetailsRes:::", getPurchaseDetailsRes);
     setPurchasedData(getPurchaseDetailsRes.data.data);
 
 

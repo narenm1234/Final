@@ -610,6 +610,10 @@ export async function getDealerPaymentsData() {
     },
   };
 
+  // if (!!localStorage.getItem("KintoID")) {
+  //   getDealerPayments =
+  //     getDealerPayments + "?KintoId=" + localStorage.getItem("KintoID");
+  // }
   getDealerPayments = getDealerPayments + "?KintoId=t002-51690";
   return await axios.get(getDealerPayments, options);
 }
@@ -665,10 +669,7 @@ export async function getDealerDropData() {
   return await axios(config);
 }
 
-
-
 export async function onSubmitPayment(data) {
-
   var config = {
     method: "post",
     url: submitPayment,

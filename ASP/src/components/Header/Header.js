@@ -102,7 +102,7 @@ const Header = (props) => {
                       value={ditem.dealer_number}
                     />
                   }
-                  label={ditem.dealer_name}
+                  label={ditem.dealer_name + '('+ditem.dealer_number+')'}
                 />
               </FormGroup>
             </MenuItem>
