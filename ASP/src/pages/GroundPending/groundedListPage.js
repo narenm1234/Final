@@ -343,7 +343,7 @@ export default function ListingPage(props) {
                           <span className="textSize">
                             <CurrencyFormat
                               value={
-                                vehicle.residual_amt + vehicle.remaining_pmts
+                               parseFloat(vehicle.residual_amt + vehicle.remaining_pmts).toFixed(2) 
                               }
                               displayType={"text"}
                               thousandSeparator={true}
