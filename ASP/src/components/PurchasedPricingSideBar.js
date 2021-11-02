@@ -15,7 +15,7 @@ import FormLabel from "@material-ui/core/FormLabel";
 import ListItemText from "@material-ui/core/ListItemText";
 import { Box, Select } from "@material-ui/core";
 import MenuItem from "@material-ui/core/MenuItem";
-import { getDealerPaymentsData, getPurchaseDetails } from "../service/api";
+import { getDealerPaymentsData, getPurchaseDetails, onSubmitPayment } from "../service/api";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -71,15 +71,45 @@ export default function PurchasedPricingSideBar(props) {
 
   useEffect(async () => {
     let getDealerPaymentsRes = await getDealerPaymentsData();
-    console.log("getDealerPaymentsData", getDealerPaymentsRes);
+    console.log("getDealerPaymentsData==>", getDealerPaymentsRes);
     getDealerPaymentsRes &&
       getDealerPaymentsRes.data &&
       getDealerPaymentsRes.data.PaymentMethod &&
       SetPaymentMethods(getDealerPaymentsRes.data.PaymentMethod);
 
     let getPurchaseDetailsRes = await getPurchaseDetails(props.vin);
-    console.log("getPurchaseDetailsRes:::", getPurchaseDetailsRes);
     setPurchasedData(getPurchaseDetailsRes.data.data);
+
+
+
+    let reqObj = {
+      "accountId": "8adc9a4170c2d2f80170c56d9be24c8f",
+      "accountNumber": "t002-51690",
+      "achAbaCode": "111111111",
+      "achAccountNumberMask": "**************************2222",
+      "achAccountType": "Checking",
+      "paymentDetails": [
+        {
+          "amount": 200,
+          "paymentCategory": "Payoff",
+          "priceType": "Price"
+        },
+        {
+          "amount": 300,
+          "paymentCategory": "Residual",
+          "priceType": "Price"
+        }
+      ],
+      "paymentMethodId": "8adcd9eb74353a7101744ee82b2e0cdd",
+      "paymentMethodType": "ACH",
+      "tenantId": "t002",
+      "vin": "JM1GL1XY6L1513120",
+      // "vin": "KM3KFADM0L0797963",
+    
+    }
+    let submitPaymentRes = await onSubmitPayment(reqObj);
+    console.log("submitPaymentRes:::", submitPaymentRes);
+
   }, []);
 
   const handleChangeAccountName = (event) => {
