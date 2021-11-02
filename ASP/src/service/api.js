@@ -31,6 +31,8 @@ let getPurchaseDetailsApi;
 
 let redirectURL;
 
+let dealerDrop;
+
 // let code ='aPrxyoOWGvXqBxqwZTQG7bATs.5vkEP2UmwQ_Eeu7GT7g4TQrfoMjW6F_s7s__kGco4_nvPVrg==';
 // let grant_type='authorization_code';
 // let client_secret= 'A8C495709B3F0BD5972D67EAF464949838E2F35EB623E514F75487A18904D70A';
@@ -74,7 +76,9 @@ if (hostname.includes("dev")) {
   getPurchaseDetailsApi =
     "https://aspservices-internal-dev.tfs.toyota.com/asp-services/getPurchaseDetails";
   redirectURL = 
-  "https://asp-dev.mfindealerservices.com/login2"
+  "https://asp-dev.mfindealerservices.com/login2";
+  dealerDrop =
+    "https://aspservices-internal-dev.tfs.toyota.com/asp-services/getAllDealerDetails";
 } else if (hostname.includes("local")) {
   url =
     "http://internal-a3e2a8608d24e4c5f8b42aed9c3587d7-2044184104.us-east-1.elb.amazonaws.com/getAccountDetailsBykey";
@@ -114,7 +118,9 @@ if (hostname.includes("dev")) {
   getPurchaseDetailsApi =
     "https://aspservices-internal-dev.tfs.toyota.com/asp-services/getPurchaseDetails";
     redirectURL = 
-    "https://asp-dev.mfindealerservices.com/login2"
+    "https://asp-dev.mfindealerservices.com/login2";
+    dealerDrop =
+    "https://aspservices-internal-dev.tfs.toyota.com/asp-services/getAllDealerDetails";
 } else if (hostname.includes("stage")) {
   url =
     "http://internal-a3e2a8608d24e4c5f8b42aed9c3587d7-2044184104.us-east-1.elb.amazonaws.com/getAccountDetailsBykey";
@@ -151,7 +157,9 @@ if (hostname.includes("dev")) {
   getPurchaseDetailsApi =
     "https://aspservices-internal-stage.tfs.toyota.com/asp-services/getPurchaseDetails";
     redirectURL = 
-    "https://asp-stage.mfindealerservices.com/login2"
+    "https://asp-stage.mfindealerservices.com/login2";
+    dealerDrop =
+    "https://aspservices-internal-stage.tfs.toyota.com/asp-services/getAllDealerDetails";
 } else if (hostname.includes("test")) {
   url =
     "http://internal-a3e2a8608d24e4c5f8b42aed9c3587d7-2044184104.us-east-1.elb.amazonaws.com/getAccountDetailsBykey";
@@ -188,7 +196,9 @@ if (hostname.includes("dev")) {
   getPurchaseDetailsApi =
     "https://aspservices-internal-test.tfs.toyota.com/asp-services/getPurchaseDetails";
     redirectURL = 
-  "https://asp-test.mfindealerservices.com/login2"
+  "https://asp-test.mfindealerservices.com/login2";
+  dealerDrop =
+    "https://aspservices-internal-test.tfs.toyota.com/asp-services/getAllDealerDetails";
 } else if (hostname.includes("prod")) {
   url =
     "http://internal-a3e2a8608d24e4c5f8b42aed9c3587d7-2044184104.us-east-1.elb.amazonaws.com/getAccountDetailsBykey";
@@ -225,7 +235,9 @@ if (hostname.includes("dev")) {
   getPurchaseDetailsApi =
     "https://aspservices-internal.tfs.toyota.com/asp-services/getPurchaseDetails";
     redirectURL = 
-    "https://asp.mfindealerservices.com/login2"
+    "https://asp.mfindealerservices.com/login2";
+    dealerDrop =
+    "https://aspservices-internal.tfs.toyota.com/asp-services/getAllDealerDetails";
 }
 
 export async function getAuthToken() {
@@ -395,7 +407,7 @@ return await axios(config);
 
 }
 
-export async function postDealerActionPassOnVehicle(VINumber) {
+export async function postDealerActionPassOnVehicle(VINumber,groundId) {
   const options = {
     headers: {
       "Content-Type": "application/json",
@@ -403,7 +415,7 @@ export async function postDealerActionPassOnVehicle(VINumber) {
   };
 
   return await axios.post(
-    `${getDealerActionUrl}?dealerAction=Pass&vin=${VINumber}`,
+    `${getDealerActionUrl}?dealerAction=Pass&groundingId=${groundId}&vin=${VINumber}`,
     options
   );
 }
@@ -617,6 +629,7 @@ export async function getPurchaseDetails(vin) {
     }
   );
 }
+
 export async function getTransportationDetails(vinlist) {
   var config = {
     method: "post",
@@ -624,6 +637,18 @@ export async function getTransportationDetails(vinlist) {
       "https://aspservices-internal-dev.tfs.toyota.com/asp-services/getTransportationDetails?" +
       vinlist,
     // vinList=JM3KFADM6L0797974&vinList=JM3KFBDM0K1698372'
+    headers: {
+      accept: "application/json",
+    },
+  };
+
+  return await axios(config);
+}
+
+export async function getDealerDropData() {
+  var config = {
+    method: "post",
+    url: dealerDrop,
     headers: {
       accept: "application/json",
     },

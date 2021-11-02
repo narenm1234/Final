@@ -44,8 +44,9 @@
   }
   .dealerName {
     width: 300px;
-    height: 20px;
-    padding: 15px 0 7px 8px;
+    height: 50px;
+    // padding: 15px 0 7px 8px;
+    padding: 0px 0px 0px 10px;
     font-family: ToyotaType;
     font-size: 13px;
     font-weight: 600;
@@ -57,4 +58,5 @@
     display: inline-flex;
     float: right;
     cursor: pointer;
+    align-items:center
   }

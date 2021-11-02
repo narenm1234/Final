@@ -78,7 +78,8 @@ export default function PassOnVehicle(props) {
   // }, [noCall]);
 
   async function getPassOnDetails() {
-    let apiResponse = await postDealerActionPassOnVehicle(props.vin);
+    let apiResponse = await postDealerActionPassOnVehicle(props.vin,props.groundingId);
+    
     props.reload();
   }
   return (

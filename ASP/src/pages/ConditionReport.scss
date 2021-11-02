@@ -66,7 +66,7 @@
 .Pending-Inspection-R {
   width: 165px;
   height: 20px;
-  margin-left: 25%;
+  margin-left: 31%;
   font-family: ToyotaType;
   font-size: 13px;
   font-weight: normal;
@@ -90,12 +90,13 @@
 }
 
 .ConditionReportInspection {
-  width: 138px;
+  width: 140px;
   height: 33px;
   padding: 4px 8px;
   border-radius: 100px;
   background-color: #04844b;
-  margin-left: 2rem;
+  margin-left: 245px;
+  float: right;
 }
 .BadgeValue {
   width: 122px;
@@ -120,7 +121,8 @@
     height: 33px;
     padding: 4px 8px;
     border-radius: 100px;
-    margin-left: 2rem;
+    margin-left: 50px;
+    width: 140px;
 }
 .ConditionCard {
   // width: 123%;

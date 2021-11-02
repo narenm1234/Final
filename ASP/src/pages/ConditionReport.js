@@ -236,7 +236,9 @@ export default function ConditionReport(props) {
                 />
               </Grid>
               <Grid item xs={7}>
+              <Grid container spacing={1}>
                 <div className="ConditionReportSection">
+                <Grid item xs={5} >
                   <div className="reportTitle">
                     <span>
                       {vehicleDetails && vehicleDetails.model_year}{" "}
@@ -246,12 +248,21 @@ export default function ConditionReport(props) {
                       
                     </span>
                   </div>
+                  </Grid>
+                  <Grid item xs={7} >
                   {condionVehicleDetails?.inspection_date && (
+                    
+                    
                     <span className="ConditionReportInspection">
+
                       <span className="BadgeValue">Inspection Complete</span>
                     </span>
+                    
                   ) }
+                  </Grid>
                 </div>
+                
+                </Grid>
                 <Grid container spacing={1}>
                   <Grid item xs={4} className="ConditionCardMargin">
                     <Card className="ConditionCard">
@@ -644,7 +655,7 @@ export default function ConditionReport(props) {
                       </TableContainer>
                     </CardContent>
                     <CardContent>
-                      <Typography variant="h6">Wheels and Tyres</Typography>
+                      <Typography variant="h6">Wheels and Tires</Typography>
                       <hr />
                       <TableContainer component={Paper}>
                         <Table
@@ -668,19 +679,19 @@ export default function ConditionReport(props) {
                                   {/* <TableCell component="th" scope="row">
                                                                 {wheelTiresDetails?.tire_location}
                                                             </TableCell> */}
-                                  <TableCell align="center">
+                                  <TableCell align="left">
                                     {list.inspectionWheelTiresId.tire_location}
                                   </TableCell>
-                                  <TableCell align="center">
+                                  <TableCell align="left">
                                     {list.manufracturer}
                                   </TableCell>
-                                  <TableCell align="center">
+                                  <TableCell align="left">
                                     {list.size}
                                   </TableCell>
-                                  <TableCell align="center">
+                                  <TableCell align="left">
                                     {list.wheel}
                                   </TableCell>
-                                  <TableCell align="center">
+                                  <TableCell align="left">
                                     {list.tread}
                                   </TableCell>
                                 </TableRow>
@@ -723,7 +734,9 @@ export default function ConditionReport(props) {
                 </Grid>
               </Grid>
               <Grid item xs={7}>
+              <Grid container spacing={1}>
                 <div className="ConditionReportSection">
+                <Grid item xs={7} >
                   <div className="reportTitle">
                     <span>
                     {vehicleDetails && vehicleDetails.model_year}{" "}
@@ -734,12 +747,14 @@ export default function ConditionReport(props) {
                     </span>
                   </div>
                   
-                  
-                    <span className="inspectionStatusWarning">
+                  </Grid>
+                  <Grid item xs={5} >
+                    <div className="inspectionStatusWarning">
                       <span className="BadgeValue">Inspection pending</span>
-                    </span>
-                
+                    </div>
+                </Grid>
                 </div>
+                </Grid>
                 <Grid container spacing={1}>
                   <Grid item xs={4} className="ConditionCardMargin">
                     <Card className="ConditionCard">
@@ -886,7 +901,7 @@ export default function ConditionReport(props) {
                       </TableContainer>
                     </CardContent>
                     <CardContent>
-                      <Typography variant="h6">Wheels and Tyres</Typography>
+                      <Typography variant="h6">Wheels and Tires</Typography>
                       <hr />
                       <span class="Pending-Inspection-R">
                           Pending Inspection Report
