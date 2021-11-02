@@ -37,6 +37,7 @@ function getParameterByName(name, url = window.location.href) {
   localStorage.setItem("dealerCode",resp.data.custom_attributes.dealerCode);
   localStorage.setItem("dealerName",resp.data.custom_attributes.dealerName);
   localStorage.setItem("KintoID",resp.data.custom_attributes.kintoId);
+  localStorage.setItem("accessToken",resp.data.custom_attributes.accessToken);
   props.history.push('/grounded')
 
   console.log(dealerCode);
