@@ -80,6 +80,7 @@ let resp = [
 ];
 export default function ListingPage(props) {
   const [vehicleResponse, setVehicleResponse] = useState([]);
+  const [allVehicleResponse, setAllVehicleResponse] = useState([]);
   const [SSOAuth, setSSOAuth] = useState();
   const [value, setValue] = useState([]);
   const [open, setOpen] = React.useState(false);
@@ -97,10 +98,28 @@ export default function ListingPage(props) {
   async function getVehicleDetails() {
     let apiResponse = await getGroundingList();
     setVehicleResponse(apiResponse.data.data);
+    setAllVehicleResponse(apiResponse.data.data);
     console.log("------->", apiResponse.data);
     
     setLoader(false);
   }
+
+  useEffect(() => {
+    console.log("==>", props.selectedDealersDate)
+    if(props.selectedDealersDate.length != 0){
+      let filterbydealer = [];
+      props.selectedDealersDate.forEach(dealer=>{
+        allVehicleResponse.forEach(vehical=>{
+          if(dealer.dealer_number === vehical.dealer_number){
+            filterbydealer.push(vehical);
+          }
+        })
+      })
+      setVehicleResponse(filterbydealer);
+    }else{
+      setVehicleResponse(allVehicleResponse);
+    }
+  }, [props.selectedDealersDate]);
 
   useEffect(() => {
     getAuthTokenSSO1();

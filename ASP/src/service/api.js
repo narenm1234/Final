@@ -610,11 +610,11 @@ export async function getDealerPaymentsData() {
     },
   };
 
-  // if (!!localStorage.getItem("KintoID")) {
-  //   getDealerPayments =
-  //     getDealerPayments + "?KintoId=" + localStorage.getItem("KintoID");
-  // }
-  getDealerPayments = getDealerPayments + "?KintoId=t002-51690";
+  if (!!localStorage.getItem("KintoID")) {
+    getDealerPayments =
+      getDealerPayments + "?KintoId=" + localStorage.getItem("KintoID");
+  }
+  // getDealerPayments = getDealerPayments + "?KintoId=t002-51690";
   return await axios.get(getDealerPayments, options);
 }
 
