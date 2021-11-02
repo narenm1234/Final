@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import AdminDetailedReport from '../pages/AdminDetailedReport';
 import StatusHistory from './StatusHistory';
+import UpdateMileage from './UpdateMileage';
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
 
@@ -51,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
 export default function VehicleSearchTabs(props) {
     const classes = useStyles();
     const [value, setValue] = React.useState(0);
-
+    const [vin,setVin] = React.useState(props.searchText);
     const{inspectiondata}=props;
 
     const handleChange = (event, newValue) => {
@@ -67,14 +68,14 @@ export default function VehicleSearchTabs(props) {
                 </Tabs>
             </AppBar>
             <TabPanel value={value} index={0}>
-                <AdminDetailedReport inspectiondata={inspectiondata}/>
+                <AdminDetailedReport inspectiondata={inspectiondata} value={props.hideShow(value)}/>
             </TabPanel>
             <TabPanel value={value} index={1}>
                 <div className='adminTabsSection'><StatusHistory /></div>
 
             </TabPanel>
             <TabPanel value={value} index={2}>
-                <div className='adminTabsSection'>Update Mileage/price</div>
+                <div className='adminTabsSection'><UpdateMileage vin={vin}/></div>
             </TabPanel>
         </div>
     );
