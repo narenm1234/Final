@@ -9,7 +9,8 @@ import {getInspectionVehicleDetails} from '../service/api';
 const AdminHome = (props) => {
   const [searchText, setSearchText] = React.useState("");
   const [isSubmit,setisSubmit] = useState(false);
-  const [inspectiondata,setinspectiondata]=useState([])
+  const [inspectiondata,setinspectiondata]=useState([]);
+  const [hide,setHide]=useState(0)
 
   console.log("inspectiondata",inspectiondata)
 
@@ -36,14 +37,11 @@ const AdminHome = (props) => {
     
     //openConditionScreen(text,"")
   }
-  const openConditionScreen = (VINumber, vehicle) => {
-    // props.history.push("/conditionreport", {
-    //   vin: VINumber,
-    //   vehicleDetails: vehicle,
-    // });
+  const hideShow = (value) => {
+    setHide(value)
   };
   return (
-    (isSubmit) ? (<Grid container><Grid xs={9}><VehicleSearchTabs inspectiondata={inspectiondata} /></Grid><Grid xs={3}><NotesSection /></Grid></Grid>) : (<AdminVehicleSearch fromchildhandleSubmitbtn={handleSubmitbtn} searchdetails={(text) => handleSearch(text)} />)
+    (isSubmit) ? (<Grid container><Grid xs={9}><VehicleSearchTabs inspectiondata={inspectiondata} searchText={searchText} hideShow={(hide)=> hideShow(hide)}/></Grid><Grid xs={3}>{(hide == 0)? <NotesSection /> : ''}</Grid></Grid>) : (<AdminVehicleSearch fromchildhandleSubmitbtn={handleSubmitbtn} searchdetails={(text) => handleSearch(text)} />)
   );
 };
 
