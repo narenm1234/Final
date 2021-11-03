@@ -106,9 +106,9 @@ export default function ListingPage(props) {
 
   useEffect(() => {
     console.log("==>", props.selectedDealersDate)
-    if(props.selectedDealersDate.length != 0){
+    if(props.selectedDealersDate?.length != 0){
       let filterbydealer = [];
-      props.selectedDealersDate.forEach(dealer=>{
+      props.selectedDealersDate?.forEach(dealer=>{
         allVehicleResponse.forEach(vehical=>{
           if(dealer.dealer_number === vehical.dealer_number){
             filterbydealer.push(vehical);
