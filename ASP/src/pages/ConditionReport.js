@@ -661,9 +661,9 @@ export default function ConditionReport(props) {
                               <TableRow>
                                 <TableCell>Code</TableCell>
                                 <TableCell align="left">Description</TableCell>
-                                <TableCell align="left">
+                                {/* <TableCell align="left">
                                   Package Details
-                                </TableCell>
+                                </TableCell> */}
                               </TableRow>
                             </TableHead>
                             <TableBody>
@@ -676,7 +676,7 @@ export default function ConditionReport(props) {
                                     <TableCell align="left">
                                       {list.description}
                                     </TableCell>
-                                    <TableCell align="left"> </TableCell>
+                                    {/* <TableCell align="left"> </TableCell> */}
                                   </TableRow>
                                 );
                               })}
@@ -875,7 +875,7 @@ export default function ConditionReport(props) {
                             </span>
                           </ListItemText>
                           <ListItemSecondaryAction>
-                            <span className="textSize"></span>
+                            <span className="textSize">{condionVehicleDetails?.grounding_mileage }</span>
                           </ListItemSecondaryAction>
                         </List>
                         <List className="paddingCSS">
@@ -885,7 +885,7 @@ export default function ConditionReport(props) {
                             </span>
                           </ListItemText>
                           <ListItemSecondaryAction>
-                            <span className="textSize"></span>
+                            <span className="textSize"> {condionVehicleDetails?.account_type }</span>
                           </ListItemSecondaryAction>
                         </List>
                       </CardContent>
@@ -911,9 +911,9 @@ export default function ConditionReport(props) {
                               <TableRow>
                                 <TableCell>Code</TableCell>
                                 <TableCell align="left">Description</TableCell>
-                                <TableCell align="left">
+                                {/* <TableCell align="left">
                                   Package Details
-                                </TableCell>
+                                </TableCell> */}
                               </TableRow>
                             </TableHead>
                             <TableBody>
@@ -926,7 +926,7 @@ export default function ConditionReport(props) {
                                     <TableCell align="left">
                                       {list.description}
                                     </TableCell>
-                                    <TableCell align="left"> </TableCell>
+                                    {/* <TableCell align="left"> </TableCell> */}
                                   </TableRow>
                                 );
                               })}

@@ -127,11 +127,13 @@ export default function ListingPage2(props) {
               {vehicle.inspection_mileage > 0 ? (
                 <SwipeableTextMobileStepper vehical={vehicle} images={images} />
               ) : (
+                <div className="pendingImgBlock">
                 <img
                   className="pendingImg"
                   src="inspection_pending.png"
                   alt="pending"
                 />
+                </div>
               )}
             </Grid>
             <Grid item xs={4}>

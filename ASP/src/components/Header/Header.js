@@ -88,8 +88,9 @@ const Header = (props) => {
         id="simple-menu"
         anchorEl={showDealer}
         keepMounted
-        open={Boolean(showDealer)}
+        open={Boolean(showDealer)} 
         onClose={handleClose}
+        className="dealermenu"
       >
         {dealerDrop &&
           dealerDrop.map((ditem, index) => (

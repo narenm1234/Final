@@ -51,6 +51,9 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: "unset !important",
     // border: "1px solid gray",
   },
+  Carousel:{
+    width : "80%"
+  }
 }));
 
 const Item = ({ image_bin_value }) => {
@@ -91,6 +94,7 @@ function SwipeableTextMobileStepper(props) {
   return (
     <div className={classes.root}>
       <Carousel
+      className={classes.Carousel}
         navButtonsAlwaysVisible={true}
         autoPlay={false}
         navButtonsProps={{
