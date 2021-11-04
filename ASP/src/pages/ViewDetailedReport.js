@@ -730,7 +730,7 @@ export default function ViewDetailedReport(props) {
                       displayType={"text"}
                       thousandSeparator={true}
                       prefix={"$"}
-                      suffix={"0"}
+                      suffix={".00"}
                     />
                   </TableCell>
                 </TableRow>
