@@ -22,18 +22,13 @@ let client_id =
 let rrm;
 let AMP;
 let MileageDiscList;
-
 let getImages;
-
 let getDealerPayments;
-
 let getPurchaseDetailsApi;
-
 let redirectURL;
-
 let dealerDrop;
-
 let submitPayment;
+let dealerVehicleCount;
 
 // let code ='aPrxyoOWGvXqBxqwZTQG7bATs.5vkEP2UmwQ_Eeu7GT7g4TQrfoMjW6F_s7s__kGco4_nvPVrg==';
 // let grant_type='authorization_code';
@@ -82,6 +77,8 @@ if (hostname.includes("dev")) {
     "https://aspservices-internal-dev.tfs.toyota.com/asp-services/getAllDealerDetails";
   submitPayment =
     "https://aspservices-internal-dev.tfs.toyota.com/asp-services/dealerpayment/submitPayment";
+  dealerVehicleCount =
+    "https://aspservices-internal-dev.tfs.toyota.com/asp-services/getDealerVehicleCount";
 } else if (hostname.includes("local")) {
   url =
     "http://internal-a3e2a8608d24e4c5f8b42aed9c3587d7-2044184104.us-east-1.elb.amazonaws.com/getAccountDetailsBykey";
@@ -125,6 +122,8 @@ if (hostname.includes("dev")) {
     "https://aspservices-internal-dev.tfs.toyota.com/asp-services/getAllDealerDetails";
   submitPayment =
     "https://aspservices-internal-dev.tfs.toyota.com/asp-services/dealerpayment/submitPayment";
+  dealerVehicleCount =
+    "https://aspservices-internal-dev.tfs.toyota.com/asp-services/getDealerVehicleCount";
 } else if (hostname.includes("stage")) {
   url =
     "http://internal-a3e2a8608d24e4c5f8b42aed9c3587d7-2044184104.us-east-1.elb.amazonaws.com/getAccountDetailsBykey";
@@ -165,6 +164,8 @@ if (hostname.includes("dev")) {
     "https://aspservices-internal-stage.tfs.toyota.com/asp-services/getAllDealerDetails";
   submitPayment =
     "https://aspservices-internal-stage.tfs.toyota.com/asp-services/dealerpayment/submitPayment";
+  dealerVehicleCount =
+    "https://aspservices-internal-stage.tfs.toyota.com/asp-services/getDealerVehicleCount";
 } else if (hostname.includes("test")) {
   url =
     "http://internal-a3e2a8608d24e4c5f8b42aed9c3587d7-2044184104.us-east-1.elb.amazonaws.com/getAccountDetailsBykey";
@@ -205,6 +206,8 @@ if (hostname.includes("dev")) {
     "https://aspservices-internal-test.tfs.toyota.com/asp-services/getAllDealerDetails";
   submitPayment =
     "https://aspservices-internal-test.tfs.toyota.com/asp-services/dealerpayment/submitPayment";
+  dealerVehicleCount =
+    "https://aspservices-internal-test.tfs.toyota.com/asp-services/getDealerVehicleCount";
 } else if (hostname.includes("prod")) {
   url =
     "http://internal-a3e2a8608d24e4c5f8b42aed9c3587d7-2044184104.us-east-1.elb.amazonaws.com/getAccountDetailsBykey";
@@ -245,6 +248,8 @@ if (hostname.includes("dev")) {
     "https://aspservices-internal.tfs.toyota.com/asp-services/getAllDealerDetails";
   submitPayment =
     "https://aspservices-internal.tfs.toyota.com/asp-services/dealerpayment/submitPayment";
+  dealerVehicleCount =
+    "https://aspservices-internal.tfs.toyota.com/asp-services/getDealerVehicleCount";
 }
 
 export async function getAuthToken() {
@@ -673,6 +678,30 @@ export async function onSubmitPayment(data) {
   var config = {
     method: "post",
     url: submitPayment,
+    headers: {
+      "Content-Type": "application/json",
+    },
+    data: data,
+  };
+  return await axios(config).then(
+    (res) => {
+      return res;
+    },
+    (err) => {
+      console.log(err);
+    }
+  );
+}
+
+export async function getDealerVehicleCount() {
+  
+  let stringData = localStorage.getItem("dealerCode");
+  let payload = stringData ? stringData : "ALL";
+  var data = JSON.stringify([payload]);
+
+  var config = {
+    method: "post",
+    url: dealerVehicleCount,
     headers: {
       "Content-Type": "application/json",
     },

@@ -18,7 +18,7 @@ import InventoryRequestsTabs from "./components/InventoryRequestsTabs";
 import Login2 from "./pages/Login2";
 function App() {
   const [stateUpdate, setStateUpdate] = useState(1);
-  const [selectedDealersDate, setSelectedDealersData] = useState([]);
+  const [selectedDealersData, setSelectedDealersData] = useState([]);
   const fireEvents = () => {
     setStateUpdate(stateUpdate + 1);
   };
@@ -53,7 +53,7 @@ function App() {
                   exact
                   exact
                   render={(props) => <GroundPending {...props} fireEvents={fireEvents}
-                  selectedDealersDate={selectedDealersDate}
+                  selectedDealersData={selectedDealersData}
                   />}
                 />
                 <Route path="/passed" exact render={(props) => <GroundPending1 {...props} />} />

@@ -105,10 +105,10 @@ export default function ListingPage(props) {
   }
 
   useEffect(() => {
-    console.log("==>", props.selectedDealersDate);
-    if (props.selectedDealersDate.length != 0) {
+    console.log("==>", props.selectedDealersData);
+    if (props.selectedDealersData && props.selectedDealersData.length != 0) {
       let filterbydealer = [];
-      props.selectedDealersDate.forEach((dealer) => {
+      props.selectedDealersData.forEach((dealer) => {
         allVehicleResponse.forEach((vehical) => {
           if (dealer.dealer_number === vehical.dealer_number) {
             filterbydealer.push(vehical);
@@ -119,7 +119,7 @@ export default function ListingPage(props) {
     } else {
       setVehicleResponse(allVehicleResponse);
     }
-  }, [props.selectedDealersDate]);
+  }, [props.selectedDealersData]);
 
   useEffect(() => {
     getAuthTokenSSO1();
