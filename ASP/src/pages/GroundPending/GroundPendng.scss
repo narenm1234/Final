@@ -115,8 +115,8 @@
 }
 
 .vehicleMakeModel {
-  width: 300px;
-  height: 24px;
+  // width: 300px;
+  // height: 24px;
   margin: 0 69px 0 0;
   font-size: 16px;
   font-weight: bold;
@@ -125,7 +125,7 @@
   line-height: 1.5;
   letter-spacing: normal;
   color: #080707;
-  padding-bottom: 20px;
+  // padding-bottom: 20px;
 }
 
 .home {
@@ -260,32 +260,45 @@
   background-color: #0070d2 !important;
 }
 .listingPageCard {
-  width: 80%;
+  // width: 80%;
+  // position: relative;
+  // top: 60px;
+  // left: 5%;
+  // background-color: #ffffff;
+  // display: flex;
+  // margin-bottom: 20px;
   position: relative;
   top: 60px;
-  left: 5%;
   background-color: #ffffff;
-  display: flex;
-  margin-bottom: 20px;
+  margin: 2% 3%;
 }
 .Year-Make-Model-Col {
-  width: 90%;
+  // width: 90%;
   border-radius: 4px;
-  margin-top: 8px;
+  margin-top: 5%;
+  background-color: #ffffff;
+}
+.Year-Make-Model-Col-details {
+  border-radius: 4px;
+  margin-top: 3%;
   background-color: #ffffff;
 }
 .Vehicle-Price-Option {
-  margin-top: 8px;
+  margin-top: 5%;
   border-radius: 4px;
   background-color: #ffffff;
 }
+.VehicleStepper {
+  margin-top: -2%;
+  border-radius: 4px;
+}
 div.vehicleMakeModel {
   font-size: 13px;
-  width: 350px;
+  // width: 350px;
 }
 div.vehicleMakeModel1 {
   font-size: 16px;
-  width: 350px;
+  // width: 350px;
   font-weight: bold;
 }
 .textStyle {
@@ -294,7 +307,7 @@ div.vehicleMakeModel1 {
   font-weight: normal;
   font-stretch: normal;
   font-style: normal;
-  line-height: 1.54;
+  line-height: 1.9;
   letter-spacing: normal;
   color: #080707;
   display: block;
@@ -368,23 +381,24 @@ div.vehicleMakeModel1 {
   display: flex;
 }
 .img {
-  height: 120px;
+  // height: 120px;
   display: block;
   max-width: 400px;
   overflow: hidden;
-  width: 65%;
+  width: 78%;
   margin: auto;
   border: 1px solid lightgray;
 }
+
+.pendingImgBlock {
+  padding: 4% 10% !important;
+}
+
 .pendingImg {
-  // height: 120px;
   display: block;
   max-width: 263px;
+  width: 100%;
   overflow: hidden;
-  // width: 65%;
-  // margin: auto;
-  // margin-top: 35px;
-  margin: 28px auto;
   border: 1px solid lightgray;
 }
 
@@ -464,3 +478,13 @@ div.vehicleMakeModel1 {
 //   background-color: white !important;
 //   color:gray !important;
 // }
+
+.vehicalPriceOptions {
+  padding: 3px 15px 3px 0px;
+}
+.vehiclepriceopt {
+  display: flex;
+  justify-content: space-between;
+  padding: 1px;
+}
+

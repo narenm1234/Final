@@ -100,23 +100,23 @@ export default function ListingPage(props) {
     setVehicleResponse(apiResponse.data.data);
     setAllVehicleResponse(apiResponse.data.data);
     console.log("------->", apiResponse.data);
-    
+
     setLoader(false);
   }
 
   useEffect(() => {
-    console.log("==>", props.selectedDealersDate)
-    if(props.selectedDealersDate?.length != 0){
+    console.log("==>", props.selectedDealersDate);
+    if (props.selectedDealersDate.length != 0) {
       let filterbydealer = [];
-      props.selectedDealersDate?.forEach(dealer=>{
-        allVehicleResponse.forEach(vehical=>{
-          if(dealer.dealer_number === vehical.dealer_number){
+      props.selectedDealersDate.forEach((dealer) => {
+        allVehicleResponse.forEach((vehical) => {
+          if (dealer.dealer_number === vehical.dealer_number) {
             filterbydealer.push(vehical);
           }
-        })
-      })
+        });
+      });
       setVehicleResponse(filterbydealer);
-    }else{
+    } else {
       setVehicleResponse(allVehicleResponse);
     }
   }, [props.selectedDealersDate]);
@@ -179,7 +179,7 @@ export default function ListingPage(props) {
   };
   const handleOpen = (vin, groundingId) => {
     setPassVin(vin);
-    setGroundingID(groundingId)
+    setGroundingID(groundingId);
     setOpen(!open);
   };
   const handleClose = () => {
@@ -226,18 +226,20 @@ export default function ListingPage(props) {
           return (
             <div className="listingPageCard" key={index}>
               <Grid container spacing={3}>
-                <Grid item xs={4}>
+                <Grid item xs={4} >
                   {vehicle.inspection_status === "Inspection Complete" ? (
                     <SwipeableTextMobileStepper
                       // vehical={vehicle}
                       images={vehicle.groundingImage}
                     />
                   ) : (
+                    <div className="pendingImgBlock">
                     <img
                       className="pendingImg"
                       src="inspection_pending.png"
                       alt="pending"
                     />
+                    </div>
                   )}
 
                   {/* <img
@@ -250,8 +252,8 @@ export default function ListingPage(props) {
                   <div className="Year-Make-Model-Col">
                     <div className="vehicleMakeModel">
                       <span>
-                      {vehicle.model_year} {vehicle.brand} {vehicle.model} {vehicle.ext_color}{" "}
-                        
+                        {vehicle.model_year} {vehicle.brand} {vehicle.model}{" "}
+                        {vehicle.ext_color}{" "}
                       </span>
                     </div>
                     <List>
@@ -328,14 +330,11 @@ export default function ListingPage(props) {
                     <div className="vehicleMakeModel1">
                       <span>Vehicle Price Options </span>
                     </div>
-                    <List>
-                      <ListItem className="paddingCSS">
-                        <ListItemText>
-                          <span className="textStyle">
+                          <div className="vehicalPriceOptions">
+                    <div className="vehiclepriceopt">
+                    <span className="textStyle">
                             <span className="textBold"> Payoff </span>
-                          </span>
-                        </ListItemText>
-                        <ListItemSecondaryAction>
+                          </span> 
                           <span className="textSize">
                             <CurrencyFormat
                               value={
@@ -345,39 +344,27 @@ export default function ListingPage(props) {
                               thousandSeparator={true}
                               prefix={"$"}
                             />
-                          </span>
-                        </ListItemSecondaryAction>
-                      </ListItem>
-
-                      <ListItem className="paddingCSS">
-                        <ListItemText>
-                          <span className="textStyle">
-                            <span className="textBold">
-                              {" "}
-                              Residual + Remaining Payments{" "}
-                            </span>
-                          </span>
-                        </ListItemText>
-                        <ListItemSecondaryAction>
+                          </span>  
+                    </div>
+                    <div className="vehiclepriceopt">
+                    <span className="textStyle">
+                            <span className="textBold">  Residual + Remaining Payments </span>
+                          </span> 
                           <span className="textSize">
                             <CurrencyFormat
-                              value={
-                               parseFloat(vehicle.residual_amt + vehicle.remaining_pmts).toFixed(2) 
-                              }
+                              value={parseFloat(
+                                vehicle.residual_amt + vehicle.remaining_pmts
+                              ).toFixed(2)}
                               displayType={"text"}
                               thousandSeparator={true}
                               prefix={"$"}
                             />
-                          </span>
-                        </ListItemSecondaryAction>
-                      </ListItem>
-                      <ListItem className="paddingCSS">
-                        <ListItemText>
-                          <span className="textStyle">
+                          </span> 
+                    </div>
+                    <div className="vehiclepriceopt">
+                    <span className="textStyle">
                             <span className="textBold"> Market </span>
-                          </span>
-                        </ListItemText>
-                        <ListItemSecondaryAction>
+                          </span> 
                           <span className="textSize">
                             {vehicle.vehicle_price ? (
                               <CurrencyFormat
@@ -389,19 +376,12 @@ export default function ListingPage(props) {
                             ) : (
                               "Pending"
                             )}
-                          </span>
-                        </ListItemSecondaryAction>
-                      </ListItem>
-                      <ListItem className="paddingCSS">
-                        <ListItemText>
-                          <span className="textStyle">
-                            <span className="textBold">
-                              {" "}
-                              Market + Remaining Payments{" "}
-                            </span>
-                          </span>
-                        </ListItemText>
-                        <ListItemSecondaryAction>
+                          </span> 
+                    </div>
+                    <div className="vehiclepriceopt">
+                    <span className="textStyle">
+                            <span className="textBold">  Market + Remaining Payments </span>
+                          </span> 
                           <span className="textSize">
                             {/* <CurrencyFormat
                               value={
@@ -415,13 +395,17 @@ export default function ListingPage(props) {
                             /> */}
                             Pending
                           </span>
-                        </ListItemSecondaryAction>
-                      </ListItem>
-                    </List>
+                    </div>
+                    </div>
+ 
                     <div className="NavigatorButtons">
                       <Button
                         className="PassonVehicleStyle"
-                        onClick={handleOpen.bind(this, vehicle.vin, vehicle.groundingId)}
+                        onClick={handleOpen.bind(
+                          this,
+                          vehicle.vin,
+                          vehicle.groundingId
+                        )}
                       >
                         Pass on vehicle
                       </Button>
