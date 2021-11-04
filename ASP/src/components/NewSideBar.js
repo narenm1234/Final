@@ -11,9 +11,7 @@ import Chip from "@material-ui/core/Chip";
 import { makeStyles } from "@material-ui/core/styles";
 import { useLocation } from "react-router-dom";
 import {
-  getGroundingList,
-  getPassedList,
-  getPurchasedList,
+  getDealerVehicleCount
 } from "../service/api";
 
 const useStyles = makeStyles((theme) => ({
@@ -86,55 +84,22 @@ export default function NewSidebar(props) {
   const classes = useStyles();
 
   useEffect(async () => {
-    // let getGroundingListRes = await getGroundingList();
-    // let getPassedListRes = await getPassedList();
-    // let getPurchasedListRes = await getPurchasedList("ALL");
-
-
-    // setVehicleResponse(apiResponse.data.data);
-    // console.log("setVehicleResponse::", getGroundingListRes.data.data);
-    // console.log("setVehicleResponse::", getPassedListRes.data.data);
-    // console.log("setVehicleResponse::", getPurchasedListRes.data.data);
-
+    let DealerVehicleCountRes = await getDealerVehicleCount();
     sidebarItems.map((item) => {
       item.childs.map((child) => {
         if (activeChild == child.link) {
           item.open = true;
         }
 
-        // if (child.link == "/grounded") {
-        //   if (
-        //     getGroundingListRes &&
-        //     getGroundingListRes.data &&
-        //     getGroundingListRes.data.data.length !== 0
-        //   ) {
-        //     child.badge = getGroundingListRes?.data.data.length;
-        //   } else {
-        //     child.badge = 0;
-        //   }
-        // }
-        // if (child.link == "/passed") {
-        //   if (
-        //     getPassedListRes &&
-        //     getPassedListRes.data &&
-        //     getPassedListRes.data.data.length !== 0
-        //   ) {
-        //     child.badge = getPassedListRes?.data.data.length;
-        //   } else {
-        //     child.badge = 0;
-        //   }
-        // }
-        // if (child.link == "/purchased") {
-        //   if (
-        //     getPurchasedListRes &&
-        //     getPurchasedListRes.data &&
-        //     getPurchasedListRes.data.data.length !== 0
-        //   ) {
-        //     child.badge = getPurchasedListRes?.data.data.length;
-        //   } else {
-        //     child.badge = 0;
-        //   }
-        // }
+        if (child.link == "/grounded") {
+            child.badge = DealerVehicleCountRes?.data.data.groundedVehicleCount;
+        }
+        if (child.link == "/passed") {
+            child.badge = DealerVehicleCountRes?.data.data.passedVehicleCount;
+        }
+        if (child.link == "/purchased") {
+            child.badge = DealerVehicleCountRes?.data.data.purchasedVehicleCount;
+        }
       });
     });
     if(localStorage.getItem('dealerCode'))

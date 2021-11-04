@@ -106,7 +106,7 @@ function getSteps() {
 let transportMetaData = ['Transportation Ordered', 'Transportation Scheduled', 'Transportation Enroute', 'Vehicle Pick Up'];
 export default function VerticalVehicleStepper(props) {
     const classes = useStyles();
-    const [activeStep, setActiveStep] = React.useState(2);
+    const [activeStep, setActiveStep] = React.useState(null);
     const steps = getSteps();
 
     const [transportDetails, setTransportDetails] = React.useState(props.transportData);
@@ -115,6 +115,7 @@ export default function VerticalVehicleStepper(props) {
     useEffect(() =>{
       setTransportInformation();
     },[props.transportData]);
+
     const handleNext = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
     };
