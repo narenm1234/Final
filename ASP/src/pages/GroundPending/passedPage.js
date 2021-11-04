@@ -137,15 +137,17 @@ export default function ListingPage1(props) {
               {vehicle.inspection_mileage > 0 ? (
                 <SwipeableTextMobileStepper vehical={vehicle} images={images} />
               ) : (
+                <div className="pendingImgBlock">
                 <img
                   className="pendingImg"
                   src="inspection_pending.png"
                   alt="pending"
                 />
+                </div>
               )}
             </Grid>
             <Grid item xs={4}>
-              <div className="Year-Make-Model-Col">
+              <div className="Year-Make-Model-Col-details">
                 <div className="vehicleMakeModel">
                   <span>
                   {vehicle.model_year} {vehicle.brand} {vehicle.model} {vehicle.ext_color}{" "}
@@ -200,7 +202,7 @@ export default function ListingPage1(props) {
               </div>
             </Grid>
             <Grid item xs={4}>
-              <div className="Vehicle-Price-Option">
+              <div className="VehicleStepper">
                 <VerticalVehicleStepper
                   vin={vehicle.vin}
                   transportData={transport}
