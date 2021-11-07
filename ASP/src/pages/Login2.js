@@ -1,5 +1,7 @@
 import React,{ useState, useEffect } from 'react'
-import { getAccessTokenEndpoint, getUserInfoToken } from '../service/api';
+import { getAccessTokenEndpoint, getForgeRockToken, getUserInfoToken } from '../service/api';
+import jwt_decode from "jwt-decode";
+import { ControlPointDuplicateOutlined } from '@material-ui/icons';
 
 
 
@@ -18,6 +20,7 @@ function getParameterByName(name, url = window.location.href) {
   return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
   const [token, setToken] = useState();
+  const [Idtoken, setIdToken] = useState();
   const [dealerCode, setDealerCode] = useState('');
   useEffect(() => {
     getToken();
@@ -30,14 +33,18 @@ function getParameterByName(name, url = window.location.href) {
     let apiResponse = await getAccessTokenEndpoint(data1);
     console.log("--->",apiResponse)
     setToken(apiResponse?.data.access_token);
+    setIdToken(apiResponse?.data.id_token);
   }
+  var userInfo = jwt_decode(Idtoken);
+  console.log("testUser", userInfo);
   async function getUserAccessInfoToken(){
-  let resp = await getUserInfoToken(token);
-  setDealerCode(resp.data.custom_attributes.dealerCode);
-  localStorage.setItem("dealerCode",resp.data.custom_attributes.dealerCode);
-  localStorage.setItem("dealerName",resp.data.custom_attributes.dealerName);
-  localStorage.setItem("KintoID",resp.data.custom_attributes.kintoId);
-  localStorage.setItem("accessToken",resp.data.custom_attributes.accessToken);
+  let resp = await getForgeRockToken(token);
+  console.log("forgerock", resp);
+  // setDealerCode(resp.data.custom_attributes.dealerCode);
+  // localStorage.setItem("dealerCode",resp.data.custom_attributes.dealerCode);
+  // localStorage.setItem("dealerName",resp.data.custom_attributes.dealerName);
+  // localStorage.setItem("KintoID",resp.data.custom_attributes.kintoId);
+  // localStorage.setItem("accessToken",resp.data.custom_attributes.accessToken);
   props.history.push('/grounded')
 
   console.log(dealerCode);
