@@ -26,25 +26,31 @@ function getParameterByName(name, url = window.location.href) {
     getToken();
     // getUserAccessInfoToken();
   }, {});
-  useEffect(() => {
-    getUserAccessInfoToken();
-  }, [token]);
+  
   async function getToken() {
     let apiResponse = await getAccessTokenEndpoint(data1);
     console.log("--->",apiResponse)
-    setToken(apiResponse?.data.access_token);
-    setIdToken(apiResponse?.data.id_token);
+    localStorage.setItem("bearerToken",apiResponse.data.access_token);
+    localStorage.setItem("userToken",apiResponse.data.id_token);
+    let usertoken=localStorage.getItem("userToken");  
+    let userInfo = jwt_decode(usertoken);
+    console.log(userInfo);
+    
+  setDealerCode(userInfo.custom_attributes.dealerCode);
+  localStorage.setItem("dealerCode",userInfo.custom_attributes.dealerCode);
+  localStorage.setItem("dealerName",userInfo.custom_attributes.dealerName);
+  localStorage.setItem("KintoID",userInfo.custom_attributes.kintoId);
+  localStorage.setItem("accessToken",userInfo.custom_attributes.accessToken);
+    
   }
-  var userInfo = jwt_decode(Idtoken);
-  console.log("testUser", userInfo);
+  useEffect(() => {
+    getUserAccessInfoToken();
+  }, {});
+
   async function getUserAccessInfoToken(){
-  let resp = await getForgeRockToken(token);
+  let resp = await getForgeRockToken();
   console.log("forgerock", resp);
-  // setDealerCode(resp.data.custom_attributes.dealerCode);
-  // localStorage.setItem("dealerCode",resp.data.custom_attributes.dealerCode);
-  // localStorage.setItem("dealerName",resp.data.custom_attributes.dealerName);
-  // localStorage.setItem("KintoID",resp.data.custom_attributes.kintoId);
-  // localStorage.setItem("accessToken",resp.data.custom_attributes.accessToken);
+
   props.history.push('/grounded')
 
   console.log(dealerCode);

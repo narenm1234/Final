@@ -543,16 +543,16 @@ export async function getAccessTokenEndpoint(code) {
   var data = qs.stringify({
     grant_type: "authorization_code",
     client_id:
-      "3MVG9Eroh42Z9.iX.MtFAU7OREmQl3nLs7Kmfi9V1URQvsFxFqb46_Srme9DxYCu._LPDbUufv8__VWp.AXRV",
+      "3MVG9_I_oWkIqLrmNgl8unCGrAPmcPODjDz6DA7QLw7qbd0CKBqVuyUVp_4.c4xZdRowJUxirUcXgiGiPYaQ.",
     code: code,
     client_secret:
-      "A604297A76C82F37CBDE9AAE30475D00A62B349BAE1E0FCAA4E4D17F198C8FA9",
-    redirect_uri: redirectURL,
-    // redirect_uri: "http://localhost:3000/login2",
+      "A8C495709B3F0BD5972D67EAF464949838E2F35EB623E514F75487A18904D70A",
+    // redirect_uri: redirectURL,
+    redirect_uri: "http://localhost:3000/login2",
   });
   var config = {
     method: "post",
-    url: "https://stratus-stg.mfindealerservices.com/services/oauth2/token",
+    url: "https://stratus-stg3.mfindealerservices.com/services/oauth2/token",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
       //   Cookie:
@@ -567,9 +567,21 @@ export async function getUserInfoToken(token) {
   var qs = require("qs");
   var config = {
     method: "post",
-    url: `https://stratus-stg.mfindealerservices.com/services/oauth2/userinfo?access_token=${token}`,
+    url: `https://stratus-stg3.mfindealerservices.com/services/oauth2/userinfo?access_token=${token}`,
   };
 
+  return await axios(config);
+}
+export async function getForgeRockToken(){
+  let token=localStorage.getItem("bearerToken")
+  var config = {
+    method: 'get',
+    url: 'https://stratus-stg.mfindealerservices.com/services/apexrest/getToken',
+    headers: { 
+      'Authorization': `${token}`, 
+      'Cookie': 'CookieConsentPolicy=0:1; LSKey-c$CookieConsentPolicy=0:1'
+    }
+  };
   return await axios(config);
 }
 
