@@ -6,7 +6,7 @@
 .conditionPageCard {
     width: 100%;
     padding-top: 50px;
-    margin-top: 4%;
+    // margin-top: 4%;
   // border:1px solid red;
   // margin: 10% 15% 10% 5%;
   // position: relative;
@@ -80,6 +80,7 @@
   display: flex;
   justify-content: space-between;
   margin: 20px 0px !important;
+  width: 100%;
 }
 .ConditionCardBody {
   margin: 8px 0px 15px;
@@ -143,9 +144,6 @@
   // margin-right: 25px !important;
 }
 .detailedReport {
-  //height: 32px;
-  margin: 10% 20% !important;
-  //padding: 5px 50px !important;
   font-size: 0.685rem !important;
   font-weight: bold !important;
   border-radius: 4px;
@@ -168,12 +166,12 @@
 }
 .smallCardTitle {
   height: 14px;
-  margin: 0 0 10px;
+  // margin: 0 0 10px;
   font-size: 12px;
   font-weight: bold;
   font-stretch: normal;
   font-style: normal;
-  line-height: 1.17;
+  // line-height: 1.17;
   letter-spacing: normal;
   text-align: center;
   color: #3e3e3c !important;
@@ -209,6 +207,7 @@
   border-radius: 4px;
   border: solid 1px #dddbda;
   background-color: #ffffff;
+  resize: none;
 }
 .inputFieldTextAreaDamage {
   width: 100%;
@@ -218,6 +217,7 @@
   border-radius: 4px;
   border: solid 1px #dddbda;
   background-color: #ffffff;
+  resize: none;
 }
 .LabelTextTextArea {
   width: 94px;
@@ -232,8 +232,8 @@
   color: #3e3e3c;
 }
 .LabelTextTextAreaDamage {
-  height: 18px;
-  margin: 0 6px 0 0;
+  // height: 18px;
+  margin: 5px 6px 0 0;
   font-size: 12px;
   font-weight: normal;
   font-stretch: normal;
@@ -303,6 +303,7 @@
 }
 .vehicleDetailsMargin {
   margin-left: 10px !important;
+  margin-right: 10px !important;
 }
 .viewReportCards {
   box-shadow: none !important;
@@ -315,11 +316,12 @@
   font-weight: 900 !important;
 }
 .viewReportCenter {
-  text-align: center;
+  // text-align: center;
   font-size: 20px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  height: 35px;
+  // margin-top: 10px;
+  // margin-bottom: 10px;
+  // height: 35px;
+  margin: 0px 30px;
   font-weight: normal;
   font-stretch: normal;
   font-style: normal;
@@ -332,6 +334,7 @@
 }
 .ConditionCardReportSpace {
   // margin-top: 4% !important ;
+  padding-top: 15px;
 }
 .conditionTopBar {
   // width: 64%;
@@ -387,7 +390,7 @@
 }
 .hrLine {
   height: 1px;
-  margin: 8px 16px 14px;
+  margin: 8px 0px;
   background-color: #dddbda;
 }
 .alignleft {
@@ -401,7 +404,15 @@
   text-transform: capitalize !important;
 }
 .experiorSpacing {
-  padding: 30px;
+  padding: 0px 30px;
+
+  .MuiList-padding{
+    padding-top: 0px !important;
+  }
+  .MuiListItem-gutters{
+    padding-left: 0px !important;
+  }
+
 }
 .textStyle1 {
   color: white;
@@ -409,24 +420,25 @@
 .errorColor {
   color: #c23934;
 }
-.codereportimggallery {
-  // width: 26vw !important;
-  .image-gallery-thumbnails-wrapper {
-    width: 26vw !important;
-  }
-  .image-gallery-image {
-    max-height: 370px !important;
-  }
-}
-.image-gallery-thumbnail-image {
-  max-height: 70px !important;
-}
 .galleryView {
   .image-gallery-image {
     // max-height: 440px !important;
     max-height: 465px !important;
   }
 }
+.codereportimggallery {
+  // width: 26vw !important;
+  .image-gallery-thumbnails-wrapper {
+    width: 35vw !important;
+  }
+  // .image-gallery-image {
+  //   max-height: 370px !important;
+  // }
+}
+.image-gallery-thumbnail-image {
+  max-height: 70px !important;
+}
+
 
 .accessoriestextStyle {
   display: flex;

@@ -238,7 +238,7 @@ export default function ViewDetailedReport(props) {
     let mechanical = [];
     let total = 0;
     if (DamageDetails?.damageDetails?.length > 0) {
-      DamageDetails?.damageDetails?.map((row) => {
+      DamageDetails?.damageDetails?.map((row, index) => {
         if (row.damage_type == "X") {
           exterior.push(row);
         } else if (row.damage_type == "I") {
@@ -284,8 +284,9 @@ export default function ViewDetailedReport(props) {
             <Grid xs={6}>
               <div className="viewReportCenter">
                 Estimated Damage Repair Totals
+                 <div className="hrLine" />
               </div>
-              <div className="hrLine" />
+             
               <Grid container className="experiorSpacing">
                 <Grid item xs={12}>
                   <List>
@@ -460,9 +461,9 @@ export default function ViewDetailedReport(props) {
                                             <TableCell style={{ width: 90 }} align="right">{DamageDetails?.damageDetails?.length > 0 ? DamageDetails.damageDetails[0].part_cost ? DamageDetails.damageDetails[0].part_cost : 0: 'N/A'}</TableCell>
                                             <TableCell astyle={{ width: 90 }} align="right">{DamageDetails?.damageDetails?.length > 0 ? DamageDetails.damageDetails[0].total ? DamageDetails.damageDetails[0].total : 0: 'N/A'}</TableCell>
                                 </TableRow> */}
-                {interior.map((inter) => {
+                {interior.map((inter, index) => {
                   return (
-                    <TableRow>
+                    <TableRow key={index}>
                       <TableCell component="th" scope="row">
                         {DamageDetails?.damageDetails?.length > 0
                           ? `${inter.damage_location_detail} - ${inter.damage_description}`
@@ -547,9 +548,9 @@ export default function ViewDetailedReport(props) {
                                             <TableCell style={{ width: 90 }} align="right">{DamageDetails?.damageDetails?.length > 0 ? DamageDetails.damageDetails[1].part_cost ? DamageDetails.damageDetails[0].part_cost : 0: 'N/A'}</TableCell>
                                             <TableCell astyle={{ width: 90 }} align="right">{DamageDetails?.damageDetails?.length > 0 ? DamageDetails.damageDetails[1].total ? DamageDetails.damageDetails[0].total : 0: 'N/A'}</TableCell>
                                 </TableRow> */}
-                {exterior.map((exter) => {
+                {exterior.map((exter, index) => {
                   return (
-                    <TableRow>
+                    <TableRow key={index}>
                       <TableCell>
                         {DamageDetails?.damageDetails?.length > 0
                           ? `${exter.damage_location_detail} - ${exter.damage_description}`
@@ -625,9 +626,9 @@ export default function ViewDetailedReport(props) {
                     <hr />
                   </TableCell>
                 </TableRow>
-                {mechanical.map((mech) => {
+                {mechanical.map((mech, index) => {
                   return (
-                    <TableRow>
+                    <TableRow key={index}>
                       <TableCell component="th" scope="row">
                         {DamageDetails?.damageDetails?.length > 0
                           ? `${mech.damage_location_detail} - ${mech.damage_description} `
