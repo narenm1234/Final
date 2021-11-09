@@ -240,10 +240,10 @@ export default function ConditionReport(props) {
                   </Grid>
                   <div className="LabelTextTextArea">Announcements</div>
                   <TextareaAutosize
+                    disabled
                     className="inputFieldTextArea"
                     aria-label="maximum height"
-                    placeholder="Maximum 4 rows"
-                    defaultValue="Text area describes when a vehicle may have possible structural damage. This is non editable text/container, but you can drag the container corner for more height if the user wants to see more info without having to scroll, if there is a lot of copy. "
+                    defaultValue=""
                   />
                 </Grid>
                 <Grid item xs={7}>
@@ -606,7 +606,16 @@ export default function ConditionReport(props) {
                           </ListItemText>
                           <ListItemSecondaryAction>
                             <span className="textSize">
-                              {condionVehicleDetails?.grounding_mileage}
+                            <CurrencyFormat
+                              value={
+                                condionVehicleDetails?.grounding_mileage
+                                  ? condionVehicleDetails.grounding_mileage
+                                  : ""
+                              }
+                              displayType={"text"}
+                              thousandSeparator={true}
+                              suffix={""}
+                            />
                             </span>
                           </ListItemSecondaryAction>
                         </List>
@@ -881,7 +890,16 @@ export default function ConditionReport(props) {
                           </ListItemText>
                           <ListItemSecondaryAction>
                             <span className="textSize">
-                              {condionVehicleDetails?.grounding_mileage}
+                            <CurrencyFormat
+                              value={
+                                condionVehicleDetails?.grounding_mileage
+                                  ? condionVehicleDetails.grounding_mileage
+                                  : ""
+                              }
+                              displayType={"text"}
+                              thousandSeparator={true}
+                              suffix={""}
+                            />
                             </span>
                           </ListItemSecondaryAction>
                         </List>

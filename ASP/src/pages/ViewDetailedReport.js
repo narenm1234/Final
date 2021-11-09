@@ -297,7 +297,7 @@ export default function ViewDetailedReport(props) {
                       <ListItemSecondaryAction className="smallCardBody ">
                         {DamageDetails.interiorCost ? (
                           <CurrencyFormat
-                            value={DamageDetails.interiorCost}
+                            value={parseFloat(DamageDetails.interiorCost).toFixed(2)}
                             displayType={"text"}
                             thousandSeparator={true}
                             prefix={"$"}
@@ -314,7 +314,7 @@ export default function ViewDetailedReport(props) {
                       <ListItemSecondaryAction className="smallCardBody ">
                         {DamageDetails.exteriorCost ? (
                           <CurrencyFormat
-                            value={DamageDetails.exteriorCost}
+                            value={parseFloat(DamageDetails.exteriorCost).toFixed(2)}
                             displayType={"text"}
                             thousandSeparator={true}
                             prefix={"$"}
@@ -333,7 +333,7 @@ export default function ViewDetailedReport(props) {
                       <ListItemSecondaryAction className="smallCardBody ">
                         {DamageDetails.maintainenceCost ? (
                           <CurrencyFormat
-                            value={DamageDetails.maintainenceCost}
+                            value={parseFloat(DamageDetails.maintainenceCost).toFixed(2)}
                             displayType={"text"}
                             thousandSeparator={true}
                             prefix={"$"}
@@ -350,7 +350,7 @@ export default function ViewDetailedReport(props) {
                       <ListItemSecondaryAction className="smallCardBody ">
                         {DamageDetails.normal ? (
                           <CurrencyFormat
-                            value={DamageDetails.normal}
+                            value={parseFloat(DamageDetails.normal).toFixed(2)}
                             displayType={"text"}
                             thousandSeparator={true}
                             prefix={"$"}
@@ -369,7 +369,7 @@ export default function ViewDetailedReport(props) {
                       <ListItemSecondaryAction className="smallCardBody ">
                         {DamageDetails.excessiveWandT ? (
                           <CurrencyFormat
-                            value={DamageDetails.excessiveWandT}
+                            value={parseFloat(DamageDetails.excessiveWandT).toFixed(2)}
                             displayType={"text"}
                             thousandSeparator={true}
                             prefix={"$"}
