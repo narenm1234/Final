@@ -219,15 +219,17 @@ export default function ConditionReport(props) {
                       </Card>
                     </Grid>
                     <Grid item xs={12}>
-                      <Button
-                        variant="outlined"
-                        color="primary"
-                        className="detailedReport"
-                        onClick={handleOpen}
-                        disabled={!condionVehicleDetails?.inspection_date}
-                      >
-                        View Full Damage Report
-                      </Button>
+                      <Box py={6} textAlign="center">
+                        <Button
+                          variant="outlined"
+                          color="primary"
+                          className="detailedReport"
+                          onClick={handleOpen}
+                          disabled={!condionVehicleDetails?.inspection_date}
+                        >
+                          View Full Damage Report
+                        </Button>
+                      </Box>
                     </Grid>
                     <Grid item xs={12}>
                       <div className="disclaimerVRS">
@@ -372,8 +374,8 @@ export default function ConditionReport(props) {
                     <Card className="vehicleSectionCR">
                       <Typography variant="h6" className="vehicleDetailsMargin">
                         Vehicle Details
-                      </Typography>
                       <hr />
+                      </Typography>
                       <CardContent>
                         <List className="paddingCSS">
                           <ListItemText>
@@ -603,7 +605,9 @@ export default function ConditionReport(props) {
                             </span>
                           </ListItemText>
                           <ListItemSecondaryAction>
-                            <span className="textSize"></span>
+                            <span className="textSize">
+                              {condionVehicleDetails?.grounding_mileage}
+                            </span>
                           </ListItemSecondaryAction>
                         </List>
                         <List className="paddingCSS">
@@ -613,7 +617,10 @@ export default function ConditionReport(props) {
                             </span>
                           </ListItemText>
                           <ListItemSecondaryAction>
-                            <span className="textSize"></span>
+                            <span className="textSize">
+                              {" "}
+                              {condionVehicleDetails?.account_type}
+                            </span>
                           </ListItemSecondaryAction>
                         </List>
                         <List className="paddingCSS">
@@ -637,9 +644,9 @@ export default function ConditionReport(props) {
                         <hr />
                         <Box className="accessoriestextStyle">
                           {accessoryDetails.length > 0 &&
-                            accessoryDetails.map((list) => {
+                            accessoryDetails.map((list, index) => {
                               return (
-                                <Box className="accessoriestinlineextStyle">
+                                <Box className="accessoriestinlineextStyle" key={index}>
                                   <Typography variant="span">
                                     {list.description.toLowerCase()}
                                   </Typography>
@@ -667,9 +674,9 @@ export default function ConditionReport(props) {
                               </TableRow>
                             </TableHead>
                             <TableBody>
-                              {OEMBuildDetailsData.map((list) => {
+                              {OEMBuildDetailsData.map((list, index) => {
                                 return (
-                                  <TableRow key={list}>
+                                  <TableRow key={index}>
                                     <TableCell component="th" scope="row">
                                       {list.accessory_code}
                                     </TableCell>
@@ -696,18 +703,16 @@ export default function ConditionReport(props) {
                             <TableHead>
                               <TableRow>
                                 <TableCell>Location</TableCell>
-                                <TableCell align="center">Brand</TableCell>
-                                <TableCell align="center">Size</TableCell>
-                                <TableCell align="center">Wheel</TableCell>
-                                <TableCell align="center">
-                                  Tread Depth
-                                </TableCell>
+                                <TableCell>Brand</TableCell>
+                                <TableCell>Size</TableCell>
+                                <TableCell>Wheel</TableCell>
+                                <TableCell>Tread Depth </TableCell>
                               </TableRow>
                             </TableHead>
                             <TableBody>
-                              {wheelTiresDetails?.map((list) => {
+                              {wheelTiresDetails?.map((list, index) => {
                                 return (
-                                  <TableRow key={list}>
+                                  <TableRow key={index}>
                                     {/* <TableCell component="th" scope="row">
                                                                 {wheelTiresDetails?.tire_location}
                                                             </TableCell> */}
@@ -875,7 +880,9 @@ export default function ConditionReport(props) {
                             </span>
                           </ListItemText>
                           <ListItemSecondaryAction>
-                            <span className="textSize">{condionVehicleDetails?.grounding_mileage }</span>
+                            <span className="textSize">
+                              {condionVehicleDetails?.grounding_mileage}
+                            </span>
                           </ListItemSecondaryAction>
                         </List>
                         <List className="paddingCSS">
@@ -885,7 +892,10 @@ export default function ConditionReport(props) {
                             </span>
                           </ListItemText>
                           <ListItemSecondaryAction>
-                            <span className="textSize"> {condionVehicleDetails?.account_type }</span>
+                            <span className="textSize">
+                              {" "}
+                              {condionVehicleDetails?.account_type}
+                            </span>
                           </ListItemSecondaryAction>
                         </List>
                       </CardContent>
@@ -894,7 +904,7 @@ export default function ConditionReport(props) {
                         <Typography variant="h6">Accessories</Typography>
                         <hr />
 
-                        <span class="Pending-Inspection-R">
+                        <span className="Pending-Inspection-R">
                           Pending Inspection Report
                         </span>
                       </CardContent>
@@ -917,9 +927,9 @@ export default function ConditionReport(props) {
                               </TableRow>
                             </TableHead>
                             <TableBody>
-                              {OEMBuildDetailsData.map((list) => {
+                              {OEMBuildDetailsData.map((list, index) => {
                                 return (
-                                  <TableRow key={list}>
+                                  <TableRow key={index}>
                                     <TableCell component="th" scope="row">
                                       {list.accessory_code}
                                     </TableCell>
@@ -937,7 +947,7 @@ export default function ConditionReport(props) {
                       <CardContent>
                         <Typography variant="h6">Wheels and Tires</Typography>
                         <hr />
-                        <span class="Pending-Inspection-R">
+                        <span className="Pending-Inspection-R">
                           Pending Inspection Report
                         </span>
                       </CardContent>

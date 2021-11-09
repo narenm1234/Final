@@ -106,7 +106,9 @@ function getSteps() {
 let transportMetaData = ['Transportation Ordered', 'Transportation Scheduled', 'Transportation Enroute', 'Vehicle Pick Up'];
 export default function VerticalVehicleStepper(props) {
     const classes = useStyles();
-    const [activeStep, setActiveStep] = React.useState(null);
+    // const [activeStep, setActiveStep] = React.useState(null);
+    const [completed, setCompleted] = React.useState([]);
+
     const steps = getSteps();
 
     const [transportDetails, setTransportDetails] = React.useState(props.transportData);
@@ -116,16 +118,26 @@ export default function VerticalVehicleStepper(props) {
       setTransportInformation();
     },[props.transportData]);
 
-    const handleNext = () => {
-        setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    const handleComplete = (completedSteps) => {
+      let completedsteps = []
+      for(let i =0; i<=completedSteps; i++ ){
+        completedsteps.push(true)
+      }
+      setCompleted(completedsteps);
     };
 
-    const handleBack = () => {
-        setActiveStep((prevActiveStep) => prevActiveStep - 1);
-    };
+    // const handleNext = () => {
+    //     setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    // };
+
+    // const handleBack = () => {
+    //     setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    // };
 
     const handleReset = () => {
-        setActiveStep(0);
+        // setActiveStep(0);
+      setCompleted([]);
+
     };
 
     const setTransportInformation = () => {
@@ -133,7 +145,7 @@ export default function VerticalVehicleStepper(props) {
         if(row.vin == props.vin){
           transportMetaData.map((trp,index) =>{
              if(trp == row.derivedStatus){
-               setActiveStep(index);
+               handleComplete(index)
              }
           })
         }
@@ -141,10 +153,10 @@ export default function VerticalVehicleStepper(props) {
     };
     return (
         <div className={classes.root}>
-            <Stepper activeStep={activeStep} orientation="vertical">
+            <Stepper  nonLinear orientation="vertical"  >
                 {steps.map((label, index) => {                    
                     return (
-                        <Step key={label}>
+                        <Step key={label} active={completed[index]}>
                             <StepLabel StepIconComponent={QontoStepIcon}>{label}</StepLabel>
                         </Step>
                     )
@@ -152,7 +164,7 @@ export default function VerticalVehicleStepper(props) {
 
                 )}
             </Stepper>
-            {activeStep === steps.length && (
+            {completed.length === steps.length && (
                 <Paper square elevation={0} className={classes.resetContainer}>
                     <Typography>All steps completed - you&apos;re finished</Typography>
                     <Button onClick={handleReset} className={classes.button}>
