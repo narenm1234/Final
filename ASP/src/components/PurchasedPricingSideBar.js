@@ -176,34 +176,38 @@ export default function PurchasedPricingSideBar(props) {
     } else if (value == "2") {
       let payment = [
         {
-          amount: purchasedData.RemainingPayments,
+          amount: purchasedData.remainingPmts,
           paymentCategory: "RemainingPayments",
           priceType: "Price",
         },
         {
           amount: purchasedData.residualAmount,
-          paymentCategory: "residualAmount",
+         // paymentCategory: "residualAmount",
+          paymentCategory: "Residual",
+
           priceType: "Price",
         },
       ];
       makepaymentdetails = payment;
     } else if (value == "3") {
       let payment = {
-        amount: purchasedData.Market,
-        paymentCategory: "Market",
+        amount: purchasedData.vehiclePrice,
+         // paymentCategory: "vehiclePrice",
+         paymentCategory: "Market",
         priceType: "Price",
       };
       makepaymentdetails.push(payment);
     } else if (value == "4") {
       let payment = [
         {
-          amount: purchasedData.Market,
-          paymentCategory: "Market",
+          amount: purchasedData.vehiclePrice,
+           // paymentCategory: "vehiclePrice",
+           paymentCategory: "Market",
           priceType: "Price",
         },
         {
-          amount: purchasedData.RemainingPayments,
-          paymentCategory: "RemainingPayments",
+          amount: purchasedData.remainingPmts,
+          paymentCategory: 'RemainingPayments',//"remainingPmts",
           priceType: "Price",
         },
       ];
@@ -274,7 +278,7 @@ export default function PurchasedPricingSideBar(props) {
               <p>
                 {" "}
                 $
-                {parseInt(parseFloat(purchasedData.RemainingPayments).toFixed(2)) +
+                {parseInt(parseFloat(purchasedData.remainingPmts).toFixed(2)) +
                   parseInt(
                     parseFloat(purchasedData.residualAmount).toFixed(2)
                   )}{" "}
@@ -292,7 +296,7 @@ export default function PurchasedPricingSideBar(props) {
                 control={<Radio />}
                 label="Market"
               />
-              <p> ${purchasedData.Market} </p>
+              <p> ${purchasedData.vehiclePrice} </p>
             </Box>
             <Box
               px={2}
@@ -309,8 +313,8 @@ export default function PurchasedPricingSideBar(props) {
               <p>
                 {" "}
                 $
-                {parseInt(purchasedData.Market) +
-                  parseInt(purchasedData.RemainingPayments)}{" "}
+                {parseInt(purchasedData.vehiclePrice) +
+                  parseInt(purchasedData.remainingPmts)}{" "}
               </p>
             </Box>
           </RadioGroup>
