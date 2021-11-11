@@ -176,8 +176,8 @@ export default function PurchasedPricingSideBar(props) {
     } else if (value == "2") {
       let payment = [
         {
-          amount: purchasedData.remainingPmts,
-          paymentCategory: "remainingPmts",
+          amount: purchasedData.RemainingPayments,
+          paymentCategory: "RemainingPayments",
           priceType: "Price",
         },
         {
@@ -189,21 +189,21 @@ export default function PurchasedPricingSideBar(props) {
       makepaymentdetails = payment;
     } else if (value == "3") {
       let payment = {
-        amount: purchasedData.vehiclePrice,
-        paymentCategory: "vehiclePrice",
+        amount: purchasedData.Market,
+        paymentCategory: "Market",
         priceType: "Price",
       };
       makepaymentdetails.push(payment);
     } else if (value == "4") {
       let payment = [
         {
-          amount: purchasedData.vehiclePrice,
-          paymentCategory: "vehiclePrice",
+          amount: purchasedData.Market,
+          paymentCategory: "Market",
           priceType: "Price",
         },
         {
-          amount: purchasedData.remainingPmts,
-          paymentCategory: "remainingPmts",
+          amount: purchasedData.RemainingPayments,
+          paymentCategory: "RemainingPayments",
           priceType: "Price",
         },
       ];
@@ -274,7 +274,7 @@ export default function PurchasedPricingSideBar(props) {
               <p>
                 {" "}
                 $
-                {parseInt(parseFloat(purchasedData.remainingPmts).toFixed(2)) +
+                {parseInt(parseFloat(purchasedData.RemainingPayments).toFixed(2)) +
                   parseInt(
                     parseFloat(purchasedData.residualAmount).toFixed(2)
                   )}{" "}
@@ -292,7 +292,7 @@ export default function PurchasedPricingSideBar(props) {
                 control={<Radio />}
                 label="Market"
               />
-              <p> ${purchasedData.vehiclePrice} </p>
+              <p> ${purchasedData.Market} </p>
             </Box>
             <Box
               px={2}
@@ -309,8 +309,8 @@ export default function PurchasedPricingSideBar(props) {
               <p>
                 {" "}
                 $
-                {parseInt(purchasedData.vehiclePrice) +
-                  parseInt(purchasedData.remainingPmts)}{" "}
+                {parseInt(purchasedData.Market) +
+                  parseInt(purchasedData.RemainingPayments)}{" "}
               </p>
             </Box>
           </RadioGroup>
