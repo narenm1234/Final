@@ -13,7 +13,7 @@ import {
   getImageData,
 } from "../../service/api";
 import Loaderpage from "../LoaderPage";
-import { Box } from "@material-ui/core";
+import { Box, useForkRef } from "@material-ui/core";
 
 let resp = [
   {
@@ -117,6 +117,33 @@ export default function ListingPage2(props) {
     setImages(getimagesRes.data.imageDetails);
   };
 
+  function getPurchasetype(list) {
+    let price = "";
+    if (list.length != 0) {
+      list.forEach((x, index) => {
+        if( x.price_category){
+          if(index == list.length-1){
+            price = price += x.price_category;
+          }else{
+            price = price += x.price_category + ' + ';
+          }
+        }
+      });
+    }
+    return price;
+  }
+  function getTotprice(list) {
+    let price = 0;
+    if (list.length != 0) {
+      list.forEach((x, index) => {
+        if( x.sale_amount){
+            price = price += x.sale_amount;
+        }
+      });
+    }
+    return price;
+  }
+
   return vehicleResponse?.length > 0 ? (
     vehicleResponse.map((vehicle, index) => {
       return (
@@ -128,11 +155,11 @@ export default function ListingPage2(props) {
                 <SwipeableTextMobileStepper vehical={vehicle} images={images} />
               ) : (
                 <div className="pendingImgBlock">
-                <img
-                  className="pendingImg"
-                  src="inspection_pending.png"
-                  alt="pending"
-                />
+                  <img
+                    className="pendingImg"
+                    src="inspection_pending.png"
+                    alt="pending"
+                  />
                 </div>
               )}
             </Grid>
@@ -140,8 +167,8 @@ export default function ListingPage2(props) {
               <div className="Year-Make-Model-Col">
                 <div className="vehicleMakeModel">
                   <span>
-                  {vehicle.model_year} {vehicle.brand} {vehicle.model} {vehicle.ext_color}{" "}
-                    
+                    {vehicle.model_year} {vehicle.brand} {vehicle.model}{" "}
+                    {vehicle.ext_color}{" "}
                   </span>
                 </div>
                 <List>
@@ -164,7 +191,7 @@ export default function ListingPage2(props) {
                     <span className="textBold"> Purchase Date:</span>{" "}
                     {moment(vehicle.purchase_date).format("MM/DD/YYYY")}
                   </span>
-                  <span className="textStyle">
+                  {/* <span className="textStyle">
                     <span className="textBold"> Grounding Mileage:</span>{" "}
                     <CurrencyFormat
                       value={vehicle.odometer_reading}
@@ -176,10 +203,11 @@ export default function ListingPage2(props) {
                   <span className="textStyle">
                     <span className="textBold"> Inspection Mileage:</span>{" "}
                     Pending
-                  </span>
+                  </span> */}
                   <span className="textStyle">
                     <span className="textBold"> Purchase Type:</span>{" "}
-                    {vehicle.purchase_type ? vehicle.purchase_type : ""}
+                    {/* {vehicle.purchase_type ? vehicle.purchase_type : ""} */}
+                    {getPurchasetype(vehicle.priceCategoryList)}
                   </span>
                 </List>
               </div>
@@ -195,8 +223,10 @@ export default function ListingPage2(props) {
                     <span className="margin__space4">
                       <CurrencyFormat
                         value={
-                          vehicle.groundingDetails &&
-                          vehicle.groundingDetails.pay_off_amt
+                          vehicle.priceCategoryList[0] &&
+                          parseFloat(
+                            vehicle.priceCategoryList[0].sale_amount
+                          ).toFixed(2)
                         }
                         displayType={"text"}
                         thousandSeparator={true}
@@ -209,8 +239,10 @@ export default function ListingPage2(props) {
                     <span className="margin__space5">
                       <CurrencyFormat
                         value={
-                          vehicle.groundingDetails &&
-                          vehicle.groundingDetails.remaining_pmts
+                          vehicle.priceCategoryList[1] &&
+                          parseFloat(
+                            vehicle.priceCategoryList[1].sale_amount
+                          ).toFixed(2)
                         }
                         displayType={"text"}
                         thousandSeparator={true}
@@ -234,13 +266,7 @@ export default function ListingPage2(props) {
                     <span className="textStyleTotalFee"> Total Price</span>{" "}
                     <span className="totalFeeSum">
                       <CurrencyFormat
-                        value={
-                          vehicle.groundingDetails &&
-                          vehicle.groundingDetails.pay_off_amt +
-                            vehicle.groundingDetails &&
-                          vehicle.groundingDetails.remaining_pmts +
-                            vehicle.admin_fee
-                        }
+                        value={parseFloat(getTotprice(vehicle.priceCategoryList)).toFixed(2)}
                         displayType={"text"}
                         thousandSeparator={true}
                         prefix={"$"}
