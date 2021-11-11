@@ -40,7 +40,6 @@ function getParameterByName(name, url = window.location.href) {
   localStorage.setItem("dealerCode",userInfo.custom_attributes.dealerCode);
   localStorage.setItem("dealerName",userInfo.custom_attributes.dealerName);
   localStorage.setItem("KintoID",userInfo.custom_attributes.kintoId);
-  localStorage.setItem("accessToken",userInfo.custom_attributes.accessToken);
     
   }
   useEffect(() => {
@@ -50,10 +49,11 @@ function getParameterByName(name, url = window.location.href) {
   async function getUserAccessInfoToken(){
   let resp = await getForgeRockToken();
   console.log("forgerock", resp);
+  localStorage.setItem("ForgeRockToken",resp.data);
 
   props.history.push('/grounded')
 
-  console.log(dealerCode);
+ 
   }
     return (
         <div>
