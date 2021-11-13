@@ -92,7 +92,7 @@ const Header = (props) => {
         onClose={handleClose}
         className="dealermenu"
       >
-        {dealerDrop &&
+        {!dealerName && dealerDrop &&
           dealerDrop.map((ditem, index) => (
             <MenuItem key={index}>
               <FormGroup row>

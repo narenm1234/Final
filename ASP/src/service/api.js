@@ -84,7 +84,7 @@ if (hostname.includes("dev")) {
   url =
     "http://internal-a3e2a8608d24e4c5f8b42aed9c3587d7-2044184104.us-east-1.elb.amazonaws.com/getAccountDetailsBykey";
   groundListUrl =
-    "https://apigateway.mfindealerservices.com/apigw-router/auctionsalesplatform/asp-services/getGroundingList";
+    "https://apigateway-stage.mfindealerservices.com/apigw-router/auctionsalesplatform/asp-services/getGroundingList";
   tokenUrl =
     "http://internal-a3e2a8608d24e4c5f8b42aed9c3587d7-2044184104.us-east-1.elb.amazonaws.com/tokenData";
   passedVehicleUrl =
@@ -171,7 +171,7 @@ if (hostname.includes("dev")) {
   url =
     "http://internal-a3e2a8608d24e4c5f8b42aed9c3587d7-2044184104.us-east-1.elb.amazonaws.com/getAccountDetailsBykey";
   groundListUrl =
-    "https://aspservices-internal-test.tfs.toyota.com/asp-services/getGroundingList";
+  "https://apigateway-test.mfindealerservices.com/apigw-router/auctionsalesplatform/asp-services/getGroundingList";
   tokenUrl =
     "http://internal-a3e2a8608d24e4c5f8b42aed9c3587d7-2044184104.us-east-1.elb.amazonaws.com/tokenData";
   passedVehicleUrl =
@@ -209,7 +209,7 @@ if (hostname.includes("dev")) {
     "https://aspservices-internal-test.tfs.toyota.com/asp-services/dealerpayment/submitPayment";
   dealerVehicleCount =
     "https://aspservices-internal-test.tfs.toyota.com/asp-services/getDealerVehicleCount";
-} else if (hostname.includes("prod")) {
+} else {
   url =
     "http://internal-a3e2a8608d24e4c5f8b42aed9c3587d7-2044184104.us-east-1.elb.amazonaws.com/getAccountDetailsBykey";
   groundListUrl =
@@ -282,6 +282,7 @@ export async function getVehicleDetails(token, VINumber) {
   return await axios.post(url, requestData, options);
 }
 export async function getGroundingList() {
+  let token=localStorage.getItem("ForgeRockToken");
   let stringData = localStorage.getItem("dealerCode");
   let payload = stringData ? stringData : "ALL";
   var data = JSON.stringify([payload]);
@@ -292,7 +293,8 @@ export async function getGroundingList() {
     headers: {
       accept: "application/json",
       "Content-Type": "application/json",
-      // "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJraWQiOiJ3VTNpZklJYUxPVUFSZVJCL0ZHNmVNMVAxUU09IiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiJhZGl0eWEuaGFyc2hhQHRveW90YS5jb20iLCJjdHMiOiJPQVVUSDJfU1RBVEVMRVNTX0dSQU5UIiwiYXV0aF9sZXZlbCI6MCwiYXVkaXRUcmFja2luZ0lkIjoiNWFmMzIwNzAtNmM5Ny00NWQ3LTgyZmItMDUwYTJlYzMyZjI3LTQzMTAzNCIsImlzcyI6Imh0dHBzOi8vYXV0aC1zdGFnZS5tZmluZGVhbGVyc2VydmljZXMuY29tOjQ0My9hdXRoL29hdXRoMiIsInRva2VuTmFtZSI6ImFjY2Vzc190b2tlbiIsInRva2VuX3R5cGUiOiJCZWFyZXIiLCJhdXRoR3JhbnRJZCI6ImFJQmN3aklpcDNqcVIyNDdvaU15bHIwTk5sNCIsImF1ZCI6InN0cmF0dXMiLCJuYmYiOjE2MzY0OTM1MTAsImdyYW50X3R5cGUiOiJhdXRob3JpemF0aW9uX2NvZGUiLCJzY29wZSI6WyJvcGVuaWQiLCJwcm9maWxlIl0sImF1dGhfdGltZSI6MTYzNjQ5MzUwNywicmVhbG0iOiIvc3RyYXR1cyIsImV4cCI6MTYzNjQ5NDQxMCwiaWF0IjoxNjM2NDkzNTEwLCJleHBpcmVzX2luIjo5MDAsImp0aSI6IkdTNmFxY2hrRDRZSGxuWmhqa1VqUDBYTnNQcyJ9.p5xwT7gvCowsngeb0VNHVLgAlIXHJZByLIsVaoWwS5fsVKHDvxuw1Ct9QgK7qWYYpT6tGKd4Sz9--H8DlD6SDUyKo7R3DsWBsaKJQ2i5VuGhQBGg3nalWHRJSFiKuCMjcIWWOUKYP3RTvxItwbO2BRk9UtNGBhEbctxugsoszFL99W4n9kINKdincg9S3dqzCeCNMawRCBZz9DDlht1zqbKbBImsajANtYX4vk0y3Sk8w7pFqOprU0I-JIg6D-ccVx7SPU5EvfsS5KtqCPQLLiPh8-dWyZENMxbBTqc7vITX4XGb7AYJbUmxSQ2Fe-36g-38IjiVsUwCvydOZ_0hBA"
+      // "Access-Control-Allow-Origin":"*",
+      // "Authorization": `Bearer ${token}`,
     },
     data: data,
   };
