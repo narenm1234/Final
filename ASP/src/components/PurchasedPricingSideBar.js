@@ -177,12 +177,14 @@ export default function PurchasedPricingSideBar(props) {
       let payment = [
         {
           amount: purchasedData.remainingPmts,
-          paymentCategory: "remainingPmts",
+          paymentCategory: "RemainingPayments",
           priceType: "Price",
         },
         {
           amount: purchasedData.residualAmount,
-          paymentCategory: "residualAmount",
+         // paymentCategory: "residualAmount",
+          paymentCategory: "Residual",
+
           priceType: "Price",
         },
       ];
@@ -190,7 +192,8 @@ export default function PurchasedPricingSideBar(props) {
     } else if (value == "3") {
       let payment = {
         amount: purchasedData.vehiclePrice,
-        paymentCategory: "vehiclePrice",
+         // paymentCategory: "vehiclePrice",
+         paymentCategory: "Market",
         priceType: "Price",
       };
       makepaymentdetails.push(payment);
@@ -198,12 +201,13 @@ export default function PurchasedPricingSideBar(props) {
       let payment = [
         {
           amount: purchasedData.vehiclePrice,
-          paymentCategory: "vehiclePrice",
+           // paymentCategory: "vehiclePrice",
+           paymentCategory: "Market",
           priceType: "Price",
         },
         {
           amount: purchasedData.remainingPmts,
-          paymentCategory: "remainingPmts",
+          paymentCategory: 'RemainingPayments',//"remainingPmts",
           priceType: "Price",
         },
       ];
