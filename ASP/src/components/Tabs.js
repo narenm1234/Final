@@ -9,6 +9,7 @@ import Box from '@material-ui/core/Box';
 import AdminDetailedReport from '../pages/AdminDetailedReport';
 import StatusHistory from './StatusHistory';
 import UpdateMileage from './UpdateMileage';
+import MileagePricingSideBar from './MileagePricingSideBar';
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
 
@@ -75,7 +76,7 @@ export default function VehicleSearchTabs(props) {
 
             </TabPanel>
             <TabPanel value={value} index={2}>
-                <div className='adminTabsSection'><UpdateMileage vin={vin}/></div>
+                <div className='adminTabsSection'><UpdateMileage vin={vin} value={props.hideShow(value)}/></div>
             </TabPanel>
         </div>
     );

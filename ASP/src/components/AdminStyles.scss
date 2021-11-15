@@ -89,7 +89,20 @@
   overflow-y: auto;
   min-width: 350px;
 }
-
+.updatePricingSidebar {
+  height: calc(100vh - 53px);
+  // min-height: 500px;
+  // height: 100vh;
+  background-color: #ffffff;
+  z-index: 3000 !important;
+  // margin-left: ; // 80%
+  position: fixed;
+  // top: 40px;
+  // right: 3%;
+  margin-top: 52px;
+  box-shadow: -1px 0 3px 0 rgba(0, 0, 0, 0.25);
+  min-width: 350px;
+}
 .swipeFilterBtn {
   position: absolute;
   bottom: 0;
