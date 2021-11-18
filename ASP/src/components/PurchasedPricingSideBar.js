@@ -43,6 +43,9 @@ const useStyles = makeStyles((theme) => ({
   selectEmpty: {
     marginTop: theme.spacing(2),
   },
+  dividerColor:{
+    backgroundColor: '#df6060',
+  }
 }));
 
 const BootstrapInput = withStyles((theme) => ({
@@ -459,6 +462,7 @@ export default function PurchasedPricingSideBar(props) {
       </ListItem>
       {paymentType && (
         <>
+      <Divider variant="middle"  className={classes.dividerColor} />
           <ListItem>
             <ListItemText className="manualPricing">
               <Box>Account Nick Name</Box>
