@@ -24,6 +24,7 @@ import {
   getInspectionDamageDetailsApi,
   getOEMBuildDetailsApi,
   getPurchasedList,
+  postDealerActionPurchaseOnVehicle
 } from "../service/api";
 import {
   getInspectionVehicleDetails,
@@ -71,6 +72,9 @@ export default function ConditionReport(props) {
   );
 
   const [openTransactionPopup, setOpenTransactionPopup] = useState(false);
+  const [transactionPopupType, setTransactionPopupType] = useState('confirm');
+  const [transactionInfo, setTransactionInfo] = useState({});
+  const [isConfirmPurchase, setIsConfirmPurchase] = useState(false);
 
   useEffect(() => {
     getOEMBuildDetails();
@@ -130,6 +134,25 @@ export default function ConditionReport(props) {
   const handleClose = () => {
     setOpen(!open);
   };
+
+  const handlePurchaseVehical = (event) => {
+    setOpenTransactionPopup(true);
+    setTransactionInfo(event);
+    setTransactionPopupType(event.type)
+  };
+
+ const handleConfirmPurchase = () =>{
+  setIsConfirmPurchase(true);
+  }
+  const handleContinue = async () =>{
+    setOpenTransactionPopup(false);
+    if(transactionPopupType == 'success'){
+      let apiResponse = await postDealerActionPurchaseOnVehicle(vin , vehicleDetails?.groundingId);
+      console.log("postDealerActionPurchaseOnVehicle==>", apiResponse);
+      // window.location.replace("/grounded");
+      window.location.reload();
+    }
+  }
 
   return (
     <>
@@ -374,7 +397,7 @@ export default function ConditionReport(props) {
                     <Card className="vehicleSectionCR">
                       <Typography variant="h6" className="vehicleDetailsMargin">
                         Vehicle Details
-                      <hr />
+                        <hr />
                       </Typography>
                       <CardContent>
                         <List className="paddingCSS">
@@ -606,16 +629,16 @@ export default function ConditionReport(props) {
                           </ListItemText>
                           <ListItemSecondaryAction>
                             <span className="textSize">
-                            <CurrencyFormat
-                              value={
-                                condionVehicleDetails?.grounding_mileage
-                                  ? condionVehicleDetails.grounding_mileage
-                                  : ""
-                              }
-                              displayType={"text"}
-                              thousandSeparator={true}
-                              suffix={""}
-                            />
+                              <CurrencyFormat
+                                value={
+                                  condionVehicleDetails?.grounding_mileage
+                                    ? condionVehicleDetails.grounding_mileage
+                                    : ""
+                                }
+                                displayType={"text"}
+                                thousandSeparator={true}
+                                suffix={""}
+                              />
                             </span>
                           </ListItemSecondaryAction>
                         </List>
@@ -655,7 +678,10 @@ export default function ConditionReport(props) {
                           {accessoryDetails.length > 0 &&
                             accessoryDetails.map((list, index) => {
                               return (
-                                <Box className="accessoriestinlineextStyle" key={index}>
+                                <Box
+                                  className="accessoriestinlineextStyle"
+                                  key={index}
+                                >
                                   <Typography variant="span">
                                     {list.description.toLowerCase()}
                                   </Typography>
@@ -890,16 +916,16 @@ export default function ConditionReport(props) {
                           </ListItemText>
                           <ListItemSecondaryAction>
                             <span className="textSize">
-                            <CurrencyFormat
-                              value={
-                                condionVehicleDetails?.grounding_mileage
-                                  ? condionVehicleDetails.grounding_mileage
-                                  : ""
-                              }
-                              displayType={"text"}
-                              thousandSeparator={true}
-                              suffix={""}
-                            />
+                              <CurrencyFormat
+                                value={
+                                  condionVehicleDetails?.grounding_mileage
+                                    ? condionVehicleDetails.grounding_mileage
+                                    : ""
+                                }
+                                displayType={"text"}
+                                thousandSeparator={true}
+                                suffix={""}
+                              />
                             </span>
                           </ListItemSecondaryAction>
                         </List>
@@ -992,9 +1018,8 @@ export default function ConditionReport(props) {
         <div className="purchasesidebar">
           {purchaseSection ? (
             <PurchasedPricingSideBar
-              onPurchaseVehical={() => {
-                setOpenTransactionPopup(true);
-              }}
+              onPurchaseVehical={handlePurchaseVehical}
+              isConfirmPurchase={isConfirmPurchase}
               vin={vin}
             />
           ) : (
@@ -1005,11 +1030,14 @@ export default function ConditionReport(props) {
 
       <Box>
         <TransactionModal
-          type={"success"}
+          transactionInfo = {transactionInfo}
+          type={transactionPopupType}
           open={openTransactionPopup}
           onClose={() => {
             setOpenTransactionPopup(false);
           }}
+          confirmPurchase={handleConfirmPurchase}
+          handleContinue={handleContinue}
         ></TransactionModal>
       </Box>
     </>

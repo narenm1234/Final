@@ -8,6 +8,7 @@ import { Box, Button } from "@material-ui/core";
 import confirmmark from "../assets/images/confirm.svg";
 import Checkmark from "../assets/images/success.svg";
 import Crossmark from "../assets/images/failure.svg";
+import CurrencyFormat from "react-currency-format";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -100,13 +101,22 @@ function TransactionModal(props) {
               <Box component={"h4"}>
                 2019 Mazda Mazda6 Grand Touring, Machine Gray Metallic
               </Box>
-              <small> VIN 000000000000</small>
+              <small> VIN {props.transactionInfo && props.transactionInfo.vin}</small>
               <Box p={2} my={2} borderRadius={5} bgcolor={"#e6e6e6"}>
                 <Box display={"flex"} justifyContent={"space-between"}>
                   <Box color={"#000000"} fontWeight={500}>
-                    Payoff
+                    {props.transactionInfo?.paymentTypeName}
                   </Box>
-                  <Box color={"#5e5e5e"}>$00.000.00</Box>
+                  <Box color={"#5e5e5e"}>
+                  <CurrencyFormat
+                  value={
+                    props.transactionInfo?.paymentTypeFee || 0
+                  }
+                  displayType={"text"}
+                  thousandSeparator={true}
+                  prefix={"$"}
+                />
+                  </Box>
                 </Box>
                 <Box display={"flex"} justifyContent={"space-between"}>
                   <Box color={"#000000"} fontWeight={500}>
@@ -117,13 +127,22 @@ function TransactionModal(props) {
                 <Box borderBottom={1} borderColor={"error.main"} my={1}></Box>
                 <Box display={"flex"} justifyContent={"space-between"}>
                   <Box fontWeight={"fontWeightBold"}>Total</Box>
-                  <Box fontWeight={"fontWeightBold"}>$00.000.00</Box>
+                  <Box fontWeight={"fontWeightBold"}>
+                  <CurrencyFormat
+                  value={
+                    props.transactionInfo?.totalFee || 0
+                  }
+                  displayType={"text"}
+                  thousandSeparator={true}
+                  prefix={"$"}
+                />
+                  </Box>
                 </Box>
               </Box>
 
               <Box display={"flex"} justifyContent={"space-between"} px={1}>
                 <Box fontWeight={500}>Bank Account</Box>
-                <Box fontWeight={500}>City(...00000)</Box>
+                <Box fontWeight={500}>{props.transactionInfo?.accountInfo?.achAccountNumberMask}</Box>
               </Box>
 
               {props.type !== "confirm" ? (
@@ -165,6 +184,7 @@ function TransactionModal(props) {
                       variant="contained"
                       color="primary"
                       className={classes.btntext}
+                      onClick={props.confirmPurchase}
                     >
                       Confirm
                     </Button>
@@ -179,6 +199,7 @@ function TransactionModal(props) {
                       variant="contained"
                       color="primary"
                       className={classes.btntext}
+                      onClick={props.handleContinue}
                     >
                       Continue
                     </Button>
