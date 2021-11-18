@@ -85,7 +85,7 @@ const Header = (props) => {
         </IconButton>
       </div>
       <Menu
-        id="simple-menu"
+        id="dealer-menu"
         anchorEl={showDealer}
         keepMounted
         open={Boolean(showDealer)} 
