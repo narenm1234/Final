@@ -84,7 +84,7 @@ if (hostname.includes("dev")) {
   url =
     "http://internal-a3e2a8608d24e4c5f8b42aed9c3587d7-2044184104.us-east-1.elb.amazonaws.com/getAccountDetailsBykey";
   groundListUrl =
-    "https://apigateway-stage.mfindealerservices.com/apigw-router/auctionsalesplatform/asp-services/getGroundingList";
+  "https://aspservices-internal-dev.tfs.toyota.com/asp-services/getGroundingList";
   tokenUrl =
     "http://internal-a3e2a8608d24e4c5f8b42aed9c3587d7-2044184104.us-east-1.elb.amazonaws.com/tokenData";
   passedVehicleUrl =
@@ -434,6 +434,18 @@ export async function postDealerActionPassOnVehicle(VINumber, groundId) {
     options
   );
 }
+export async function postDealerActionPurchaseOnVehicle(VINumber, groundId) {
+  const options = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+
+  return await axios.post(
+    `${getDealerActionUrl}?dealerAction=Purchase&groundingId=${groundId}&vin=${VINumber}`,
+    options
+  );
+}
 export async function getAuthTokenSSO() {
   const requestData = {
     "Access-Control-Allow-Origin": "*",
@@ -631,11 +643,11 @@ export async function getDealerPaymentsData() {
     },
   };
 
-  if (!!localStorage.getItem("KintoID")) {
-    getDealerPayments =
-      getDealerPayments + "?KintoId=" + localStorage.getItem("KintoID");
-  }
-  // getDealerPayments = getDealerPayments + "?KintoId=t002-51690";
+  // if (!!localStorage.getItem("KintoID")) {
+  //   getDealerPayments =
+  //     getDealerPayments + "?KintoId=" + localStorage.getItem("KintoID");
+  // }
+  getDealerPayments = getDealerPayments + "?KintoId=t002-51690";
   return await axios.get(getDealerPayments, options);
 }
 

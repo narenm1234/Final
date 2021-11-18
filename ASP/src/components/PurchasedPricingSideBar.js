@@ -15,6 +15,7 @@ import FormLabel from "@material-ui/core/FormLabel";
 import ListItemText from "@material-ui/core/ListItemText";
 import { Box, Select } from "@material-ui/core";
 import MenuItem from "@material-ui/core/MenuItem";
+import CurrencyFormat from "react-currency-format";
 import {
   getDealerPaymentsData,
   getPurchaseDetails,
@@ -74,16 +75,37 @@ export default function PurchasedPricingSideBar(props) {
   const [accountMaskNumber, setAccountMaskNumber] = React.useState(null);
   const [purchasedData, setPurchasedData] = React.useState({});
 
+  // const [value, setValue] = React.useState("");
+  const [paymentType, setPaymentType] = React.useState("");
+  const [paymentTypeName, setPaymentTypeName] = React.useState("");
+  const [paymentTypeFee, setPaymentTypeFee] = React.useState(0);
+  const [totalFee, setTotalFee] = React.useState(0);
+  const [filterInput, setFilterInput] = useState({
+    vin: "",
+    yearFrom: "",
+    yearTo: "",
+    make: "",
+    inspectionStatus: "",
+    inspectionDateFrom: "",
+    inspectionDateTo: "",
+    groundingRegion: "",
+    auctionCode: "",
+  });
+
   useEffect(async () => {
+    let getPurchaseDetailsRes = await getPurchaseDetails(props.vin);
+    setPurchasedData(getPurchaseDetailsRes.data.data);
+    console.log(
+      "getPurchaseDetailsRes.data.data",
+      getPurchaseDetailsRes.data.data
+    );
+
     let getDealerPaymentsRes = await getDealerPaymentsData();
     console.log("getDealerPaymentsData==>", getDealerPaymentsRes);
     getDealerPaymentsRes &&
       getDealerPaymentsRes.data &&
       getDealerPaymentsRes.data.PaymentMethod &&
       SetPaymentMethods(getDealerPaymentsRes.data.PaymentMethod);
-
-    let getPurchaseDetailsRes = await getPurchaseDetails(props.vin);
-    setPurchasedData(getPurchaseDetailsRes.data.data);
 
     // let reqObj = {
     //   "accountId": "8adc9a4170c2d2f80170c56d9be24c8f",
@@ -114,6 +136,10 @@ export default function PurchasedPricingSideBar(props) {
     // console.log("submitPaymentRes:::", submitPaymentRes);
   }, []);
 
+  useEffect(() => {
+    setTotalFee(paymentTypeFee);
+  }, [paymentTypeFee]);
+
   const handleChangeAccountName = (event) => {
     setAccountName(event.target.value);
     paymentMethods.forEach((item) => {
@@ -134,46 +160,26 @@ export default function PurchasedPricingSideBar(props) {
       ...{ [event.target.name]: event.target.value },
     });
   };
-  const [filterInput, setFilterInput] = useState({
-    vin: "",
-    yearFrom: "",
-    yearTo: "",
-    make: "",
-    inspectionStatus: "",
-    inspectionDateFrom: "",
-    inspectionDateTo: "",
-    groundingRegion: "",
-    auctionCode: "",
-  });
-  const [value, setValue] = React.useState("");
-  const [amount, setAmount] = React.useState("");
 
   const handleChange = (event) => {
-    setValue(event.target.value);
+    // setValue(event.target.value);
+    setPaymentType(event.target.value);
+    getMakePatmentDetails(event.target.value);
   };
 
-  const purchaseVehical = async () => {
+  const getMakePatmentDetails = (paymentTypeVal) => {
     let makepaymentdetails = [];
-    // [
-    //   {
-    //     "amount": 200,
-    //     "paymentCategory": "Payoff",
-    //     "priceType": "Price"
-    //   },
-    //   {
-    //     "amount": 300,
-    //     "paymentCategory": "Residual",
-    //     "priceType": "Price"
-    //   }
-    // ]
-    if (value == "1") {
+
+    if (paymentTypeVal == "1") {
       let payment = {
         amount: purchasedData.payOffAmount,
         paymentCategory: "Payoff",
         priceType: "Price",
       };
       makepaymentdetails.push(payment);
-    } else if (value == "2") {
+      setPaymentTypeFee(purchasedData.payOffAmount || 0);
+      setPaymentTypeName("Payoff");
+    } else if (paymentTypeVal == "2") {
       let payment = [
         {
           amount: purchasedData.remainingPmts,
@@ -182,60 +188,126 @@ export default function PurchasedPricingSideBar(props) {
         },
         {
           amount: purchasedData.residualAmount,
-         // paymentCategory: "residualAmount",
           paymentCategory: "Residual",
 
           priceType: "Price",
         },
       ];
       makepaymentdetails = payment;
-    } else if (value == "3") {
+      setPaymentTypeFee(
+        purchasedData.remainingPmts + purchasedData.residualAmount || 0
+      );
+      setPaymentTypeName("Residual + RemainingPmts");
+    } else if (paymentTypeVal == "3") {
       let payment = {
         amount: purchasedData.vehiclePrice,
-         // paymentCategory: "vehiclePrice",
-         paymentCategory: "Market",
+        paymentCategory: "Market",
         priceType: "Price",
       };
       makepaymentdetails.push(payment);
-    } else if (value == "4") {
+      setPaymentTypeFee(purchasedData.vehiclePrice || 0);
+      setPaymentTypeName("Market");
+    } else if (paymentTypeVal == "4") {
       let payment = [
         {
           amount: purchasedData.vehiclePrice,
-           // paymentCategory: "vehiclePrice",
-           paymentCategory: "Market",
+          paymentCategory: "Market",
           priceType: "Price",
         },
         {
           amount: purchasedData.remainingPmts,
-          paymentCategory: 'RemainingPayments',//"remainingPmts",
+          paymentCategory: "RemainingPayments", //"remainingPmts",
           priceType: "Price",
         },
       ];
       makepaymentdetails = payment;
+      setPaymentTypeFee(
+        purchasedData.vehiclePrice + purchasedData.remainingPmts || 0
+      );
+      setPaymentTypeName("Market + remainingPmts");
     }
 
-
-    let reqObj = {
-      accountId: accountInfo?.accountId,
-      accountNumber: localStorage.getItem("KintoID")? localStorage.getItem("KintoID") : null,
-      achAbaCode: "111111111",
-      achAccountNumberMask: accountInfo?.achAccountNumberMask,
-      achAccountType: accountInfo?.achAccountType,
-      paymentDetails: makepaymentdetails,
-      paymentMethodId:accountInfo?.id,
-      paymentMethodType: accountInfo?.type,
-      tenantId: "t002",
-      vin: props.vin,
-      // "vin": "KM3KFADM0L0797963",
-    };
-    let submitPaymentRes = await onSubmitPayment(reqObj);
-    console.log("submitPaymentRes:::", submitPaymentRes);
-
-    if(submitPaymentRes.data.success){
-      props.onPurchaseVehical()
-    }
-
+    return makepaymentdetails;
   };
+
+  const purchaseVehical = async () => {
+    // let makepaymentdetails = getMakePatmentDetails(paymentType);
+    // let reqObj = {
+    //   accountId: accountInfo?.accountId,
+    //   accountNumber: localStorage.getItem("KintoID")
+    //     ? localStorage.getItem("KintoID")
+    //     : null,
+    //   achAbaCode: "111111111",
+    //   achAccountNumberMask: accountInfo?.achAccountNumberMask,
+    //   achAccountType: accountInfo?.achAccountType,
+    //   paymentDetails: makepaymentdetails,
+    //   paymentMethodId: accountInfo?.id,
+    //   paymentMethodType: accountInfo?.type,
+    //   tenantId: "t002",
+    //   vin: props.vin,
+    //   // "vin": "KM3KFADM0L0797963",
+    // };
+    // let submitPaymentRes = await onSubmitPayment(reqObj);
+    // console.log("submitPaymentRes:::", submitPaymentRes);
+
+    // if (submitPaymentRes.data.success) {
+      let transactionDetailsObj = {
+        type: "confirm",
+        totalFee,
+        paymentTypeName,
+        paymentTypeFee,
+        vin: props.vin,
+        accountInfo: accountInfo,
+      };
+      props.onPurchaseVehical(transactionDetailsObj);
+    // }
+  };
+
+  useEffect(async ()=>{
+    if(props.isConfirmPurchase){
+      let makepaymentdetails = getMakePatmentDetails(paymentType);
+      let reqObj = {
+        accountId: accountInfo?.accountId,
+        accountNumber: localStorage.getItem("KintoID")
+          ? localStorage.getItem("KintoID")
+          : null,
+        achAbaCode: "111111111",
+        achAccountNumberMask: accountInfo?.achAccountNumberMask,
+        achAccountType: accountInfo?.achAccountType,
+        paymentDetails: makepaymentdetails,
+        paymentMethodId: accountInfo?.id,
+        paymentMethodType: accountInfo?.type,
+        tenantId: "t002",
+        vin: props.vin,
+        // "vin": "KM3KFADM0L0797963",
+      };
+      let submitPaymentRes = await onSubmitPayment(reqObj);
+      console.log("submitPaymentRes:::", submitPaymentRes);
+
+      if (submitPaymentRes && submitPaymentRes.data && submitPaymentRes.data.success) {
+        let transactionDetailsObj = {
+          type: "success",
+          totalFee,
+          paymentTypeName,
+          paymentTypeFee,
+          vin: props.vin,
+          accountInfo: accountInfo,
+        };
+        props.onPurchaseVehical(transactionDetailsObj);
+      }else{
+        let transactionDetailsObj = {
+          type: "failed",
+          totalFee,
+          paymentTypeName,
+          paymentTypeFee,
+          vin: props.vin,
+          accountInfo: accountInfo,
+        };
+        props.onPurchaseVehical(transactionDetailsObj);
+      }
+    }
+  },[props.isConfirmPurchase])
+
 
   return (
     <div className="manualPricingSidebar">
@@ -246,7 +318,7 @@ export default function PurchasedPricingSideBar(props) {
           <RadioGroup
             aria-label="gender"
             name="gender1"
-            value={value}
+            value={paymentType}
             onChange={handleChange}
           >
             <Box
@@ -261,7 +333,18 @@ export default function PurchasedPricingSideBar(props) {
                 control={<Radio />}
                 label="Payoff"
               />
-              <p> ${purchasedData.payOffAmount} </p>
+              <p>
+                <CurrencyFormat
+                  value={
+                    purchasedData.payOffAmount
+                      ? purchasedData.payOffAmount
+                      : "0"
+                  }
+                  displayType={"text"}
+                  thousandSeparator={true}
+                  prefix={"$"}
+                />
+              </p>
             </Box>
             <Box
               px={2}
@@ -276,12 +359,15 @@ export default function PurchasedPricingSideBar(props) {
                 label="Residual + Remaining Payments"
               />
               <p>
-                {" "}
-                $
-                {parseInt(parseFloat(purchasedData.remainingPmts).toFixed(2)) +
-                  parseInt(
-                    parseFloat(purchasedData.residualAmount).toFixed(2)
-                  )}{" "}
+                <CurrencyFormat
+                  value={
+                    parseInt(purchasedData.remainingPmts) +
+                      parseInt(purchasedData.residualAmount) || "0"
+                  }
+                  displayType={"text"}
+                  thousandSeparator={true}
+                  prefix={"$"}
+                />
               </p>
             </Box>
             <Box
@@ -296,7 +382,18 @@ export default function PurchasedPricingSideBar(props) {
                 control={<Radio />}
                 label="Market"
               />
-              <p> ${purchasedData.vehiclePrice} </p>
+              <p>
+                <CurrencyFormat
+                  value={
+                    purchasedData.vehiclePrice
+                      ? purchasedData.vehiclePrice
+                      : "0"
+                  }
+                  displayType={"text"}
+                  thousandSeparator={true}
+                  prefix={"$"}
+                />
+              </p>
             </Box>
             <Box
               px={2}
@@ -311,16 +408,39 @@ export default function PurchasedPricingSideBar(props) {
                 label="Market + Remaining Payments "
               />
               <p>
-                {" "}
-                $
-                {parseInt(purchasedData.vehiclePrice) +
-                  parseInt(purchasedData.remainingPmts)}{" "}
+                <CurrencyFormat
+                  value={
+                    parseInt(purchasedData.vehiclePrice) +
+                      parseInt(purchasedData.remainingPmts) || "0"
+                  }
+                  displayType={"text"}
+                  thousandSeparator={true}
+                  prefix={"$"}
+                />
               </p>
             </Box>
           </RadioGroup>
         </FormControl>
       </ListItem>
       <Divider variant="middle" />
+      {paymentType && (
+        <>
+          {" "}
+          <ListItem>
+            <ListItemText className="manualPricing">
+              {paymentTypeName} :
+            </ListItemText>
+            <ListItemText className="manualPricing">
+              <CurrencyFormat
+                value={paymentTypeFee}
+                displayType={"text"}
+                thousandSeparator={true}
+                prefix={"$"}
+              />
+            </ListItemText>
+          </ListItem>
+        </>
+      )}
       <ListItem>
         <ListItemText className="manualPricing">Admin. Fee:</ListItemText>
         <ListItemText className="manualPricing">$000,000</ListItemText>
@@ -328,52 +448,67 @@ export default function PurchasedPricingSideBar(props) {
       <Divider variant="middle" />
       <ListItem>
         <ListItemText className="manualPricing">Total Fee:</ListItemText>
-        <ListItemText className="manualPricing">$000,000</ListItemText>
-      </ListItem>
-      <ListItem>
         <ListItemText className="manualPricing">
-          <Box>Account Nick Name</Box>
-          <FormControl variant="outlined" className={classes.formControl}>
-            {/* <InputLabel id="demo-simple-select-outlined-label">City</InputLabel> */}
-            <Select
-              style={{ lineHeight: "2.1em" }}
-              labelId="demo-simple-select-outlined-label"
-              id="demo-simple-select-outlined"
-              value={accountName}
-              onChange={handleChangeAccountName}
-            >
-              {/* <MenuItem value="">
+          <CurrencyFormat
+            value={totalFee}
+            displayType={"text"}
+            thousandSeparator={true}
+            prefix={"$"}
+          />
+        </ListItemText>
+      </ListItem>
+      {paymentType && (
+        <>
+          <ListItem>
+            <ListItemText className="manualPricing">
+              <Box>Account Nick Name</Box>
+              <FormControl variant="outlined" className={classes.formControl}>
+                {/* <InputLabel id="demo-simple-select-outlined-label">City</InputLabel> */}
+                <Select
+                  style={{ lineHeight: "2.1em" }}
+                  labelId="demo-simple-select-outlined-label"
+                  id="demo-simple-select-outlined"
+                  value={accountName}
+                  onChange={handleChangeAccountName}
+                >
+                  {/* <MenuItem value="">
                 <em>None</em>
               </MenuItem> */}
-              {paymentMethods &&
-                paymentMethods.map((opt, index) => (
-                  <MenuItem key={index} value={opt.achAccountName}>
-                    {opt.achAccountName}
-                  </MenuItem>
-                ))}
-              {/* <MenuItem value={20}>BOFA</MenuItem>
+                  {paymentMethods &&
+                    paymentMethods.map((opt, index) => (
+                      <MenuItem key={index} value={opt.achAccountName}>
+                        {opt.achAccountName}
+                      </MenuItem>
+                    ))}
+                  {/* <MenuItem value={20}>BOFA</MenuItem>
               <MenuItem value={30}>CHASE</MenuItem> */}
-            </Select>
-          </FormControl>
-        </ListItemText>
-      </ListItem>
-      <ListItem>
-        <ListItemText className="manualPricing">
-          <Box px={1} mb={2}>
-            <Box color={"gray"}>Dealers bank account number </Box>
-            <Box color={"black"} p={1} bgcolor={"lightgray"} borderRadius={4}>
-              {accountMaskNumber || "****0000"}
-            </Box>
-          </Box>
-        </ListItemText>
-      </ListItem>
-
+                </Select>
+              </FormControl>
+            </ListItemText>
+          </ListItem>
+          <ListItem>
+            <ListItemText className="manualPricing">
+              <Box px={1} mb={2}>
+                <Box color={"gray"}>Dealers bank account number </Box>
+                <Box
+                  color={"black"}
+                  p={1}
+                  bgcolor={"lightgray"}
+                  borderRadius={4}
+                >
+                  {accountMaskNumber || "****0000"}
+                </Box>
+              </Box>
+            </ListItemText>
+          </ListItem>
+        </>
+      )}
       <List className="purchasePassBtn">
         <Button className="passButton" color="primary">
           Pass on Vehicle
         </Button>
         <Button
-          disabled={!accountName || !value}
+          disabled={!accountName || !paymentType}
           className="purchaseButton"
           color="secondary"
           // onClick={props.onPurchaseVehical}
