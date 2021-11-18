@@ -125,7 +125,7 @@ export default function ListingPage1(props) {
       getimagesRes.data.imageDetails.map((item) => {
         item.binImageArray = "data:image/jpeg;base64," + item.binImageArray;
       });
-    setImages(getimagesRes.data.imageDetails);
+    setImages(getimagesRes?.data?.imageDetails);
   };
 
   return vehicleResponse?.length > 0 ? (
