@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import VehicleSearchTabs from '../components/Tabs';
 import NotesSection from '../components/NotesSection';
 import {getInspectionVehicleDetails} from '../service/api';
+import UpdateMileagePricing from '../components/UpdateMileagePricing';
 
 
 const AdminHome = (props) => {
@@ -41,7 +42,7 @@ const AdminHome = (props) => {
     setHide(value)
   };
   return (
-    (isSubmit) ? (<Grid container><Grid xs={9}><VehicleSearchTabs inspectiondata={inspectiondata} searchText={searchText} hideShow={(hide)=> hideShow(hide)}/></Grid><Grid xs={3}>{(hide == 0)? <NotesSection /> : ''}</Grid></Grid>) : (<AdminVehicleSearch fromchildhandleSubmitbtn={handleSubmitbtn} searchdetails={(text) => handleSearch(text)} />)
+    (isSubmit) ? (<Grid container><Grid xs={10}><VehicleSearchTabs inspectiondata={inspectiondata} searchText={searchText} hideShow={(hide)=> hideShow(hide)}/></Grid><Grid xs={2}>{(hide == 0)? <NotesSection /> : (hide == 2)? <UpdateMileagePricing/> :''}</Grid></Grid>) : (<AdminVehicleSearch fromchildhandleSubmitbtn={handleSubmitbtn} searchdetails={(text) => handleSearch(text)} />)
   );
 };
 

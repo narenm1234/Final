@@ -48,7 +48,7 @@ const BootstrapInput = withStyles((theme) => ({
   },
 }))(InputBase);
 
-export default function UpdateMileagePricing() {
+export default function MileagePricingSideBar() {
   const [open, setOpen] = React.useState(true);
   const classes = useStyles();
   const handleClick = () => {
@@ -72,75 +72,12 @@ export default function UpdateMileagePricing() {
     auctionCode: "",
   });
   return (
-    <div className="updatePricingSidebar">
-      <ListItem className="notesSectionHeader">Update Mileage/Pricing</ListItem>
-      <ListItem>
-        <div>
-          <h3>Mileage</h3>
-        </div>
-      </ListItem>
-
-      <ListItem>
-        <div className="manualPricing">Original Grounding Mileage</div>
-        <div className="manualPricing">000,000 mi</div>
-      </ListItem>
-      <ListItem>
-        <p className="manualPricing">Inspection Mileage</p>
-        <p className="manualPricing">000,000 mi</p>
-      </ListItem>
+    <div className="manualPricingSidebar">
+      <ListItem className="notesSectionHeader">Manual Pricing</ListItem>
       <ListItem button>
         <FormControl>
           <InputLabel shrink htmlFor="vin-input">
-          Update Grounding Mileage
-          </InputLabel>
-          <BootstrapInput
-            placeholder="Enter price"
-            id="EntermarketPrice-input"
-            name="EntermarketPrice"
-            value={filterInput.vin}
-            onChange={handleOnChange}
-          />
-        </FormControl>
-      </ListItem>
-      <ListItem button>
-        <FormControl>
-          <InputLabel shrink htmlFor="vin-input">
-          Confirm Grounding Mileage
-          </InputLabel>
-          <BootstrapInput
-            placeholder="Enter Price"
-            id="reEntermarketPrice-input"
-            name="reEntermarketPrice"
-            value={filterInput.vin}
-            onChange={handleOnChange}
-          />
-        </FormControl>
-      </ListItem>
-      <ListItem button>
-        <FormControl>
-          <InputLabel shrink htmlFor="vin-input">
-          Reason for Update
-          </InputLabel>
-          <BootstrapInput
-            placeholder="MMR"
-            id="vin-input"
-            name="vin"
-            value={filterInput.vin}
-            onChange={handleOnChange}
-          />
-        </FormControl>
-      </ListItem>
-
-      <ListItem>
-        <div>
-          <h3>Pricing</h3>
-        </div>
-      </ListItem>
-
-      <ListItem button>
-        <FormControl>
-          <InputLabel shrink htmlFor="vin-input">
-             Mileage
+            Market Price
           </InputLabel>
           <BootstrapInput
             placeholder="Enter price"
