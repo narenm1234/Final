@@ -683,20 +683,11 @@ export async function getDealerPaymentsData() {
     },
   };
 
-<<<<<<< HEAD
-  if (!!localStorage.getItem("KintoID")) {
-    getDealerPayments =
-      getDealerPayments + "?KintoId=" + localStorage.getItem("KintoID");
-      
-  }
-  // getDealerPayments = getDealerPayments + "?KintoId=t002-51690";
-=======
   // if (!!localStorage.getItem("KintoID")) {
   //   getDealerPayments =
   //     getDealerPayments + "?KintoId=" + localStorage.getItem("KintoID");
   // }
   getDealerPayments = getDealerPayments + "?KintoId=t002-51690";
->>>>>>> 0f3ebd26c0c010f401b82c033ca6b31a9c4f4858
   return await axios.get(getDealerPayments, options);
 }
 
