@@ -1021,6 +1021,7 @@ export default function ConditionReport(props) {
               onPurchaseVehical={handlePurchaseVehical}
               isConfirmPurchase={isConfirmPurchase}
               vin={vin}
+              groundingId={vehicleDetails?.groundingId}
             />
           ) : (
             ""
