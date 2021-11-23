@@ -282,6 +282,7 @@ export default function PurchasedPricingSideBar(props) {
         paymentMethodType: accountInfo?.type,
         tenantId: "t002",
         vin: props.vin,
+        groundingId: props.groundingId,
         // "vin": "KM3KFADM0L0797963",
       };
       let submitPaymentRes = await onSubmitPayment(reqObj);
