@@ -31,6 +31,8 @@ let submitPayment;
 let dealerVehicleCount;
 let mileageDiscList;
 let transportDetails;
+let clientID;
+let clientSecret;
 
 // let code ='aPrxyoOWGvXqBxqwZTQG7bATs.5vkEP2UmwQ_Eeu7GT7g4TQrfoMjW6F_s7s__kGco4_nvPVrg==';
 // let grant_type='authorization_code';
@@ -85,6 +87,8 @@ if (hostname.includes("dev")) {
     "https://aspservices-internal-dev.tfs.toyota.com/asp-services/dealerpayment/submitPayment";
   dealerVehicleCount =
     "https://aspservices-internal-dev.tfs.toyota.com/asp-services/getDealerVehicleCount";
+  clientID="3MVG9_I_oWkIqLrmNgl8unCGrAPmcPODjDz6DA7QLw7qbd0CKBqVuyUVp_4.c4xZdRowJUxirUcXgiGiPYaQ.";
+  clientSecret="A8C495709B3F0BD5972D67EAF464949838E2F35EB623E514F75487A18904D70A";
 } else if (hostname.includes("local")) {
   mileageDiscList =
     "https://aspservices-internal-dev.tfs.toyota.com/asp-services/getMileageDiscList";
@@ -181,6 +185,8 @@ if (hostname.includes("dev")) {
     "https://apigateway-stage.toyotafinancial.com/apigw-router/auctionsalesplatform/dealerpayment/submitPayment";
   dealerVehicleCount =
     "https://apigateway-stage.toyotafinancial.com/apigw-router/auctionsalesplatform/getDealerVehicleCount";
+    clientID="3MVG9Eroh42Z9.iX.MtFAU7OREmQl3nLs7Kmfi9V1URQvsFxFqb46_Srme9DxYCu._LPDbUufv8__VWp.AXRV";
+    clientSecret="A604297A76C82F37CBDE9AAE30475D00A62B349BAE1E0FCAA4E4D17F198C8FA9";
 } else if (hostname.includes("test")) {
   transportDetails =
     "https://aspservices-internal-test.tfs.toyota.com/asp-services/getTransportationDetails";
@@ -600,17 +606,15 @@ var qs = require("qs");
 export async function getAccessTokenEndpoint(code) {
   var data = qs.stringify({
     grant_type: "authorization_code",
-    client_id:
-      "3MVG9Eroh42Z9.iX.MtFAU7OREmQl3nLs7Kmfi9V1URQvsFxFqb46_Srme9DxYCu._LPDbUufv8__VWp.AXRV",
+    client_id:clientID,
     code: code,
-    client_secret:
-      "A604297A76C82F37CBDE9AAE30475D00A62B349BAE1E0FCAA4E4D17F198C8FA9",
+    client_secret:clientSecret,
     redirect_uri: redirectURL,
     // redirect_uri: "http://localhost:3000/login2",
   });
   var config = {
     method: "post",
-    url: "https://stratus-stg.mfindealerservices.com/services/oauth2/token",
+    url: "https://stratus-stg3.mfindealerservices.com/services/oauth2/token",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
       //   Cookie:
@@ -625,7 +629,7 @@ export async function getUserInfoToken(token) {
   var qs = require("qs");
   var config = {
     method: "post",
-    url: `https://stratus-stg.mfindealerservices.com/services/oauth2/userinfo?access_token=${token}`,
+    url: `https://stratus-stg3.mfindealerservices.com/services/oauth2/userinfo?access_token=${token}`,
   };
 
   return await axios(config);
@@ -634,7 +638,7 @@ export async function getForgeRockToken() {
   let token = localStorage.getItem("bearerToken");
   var config = {
     method: "get",
-    url: "https://stratus-stg.mfindealerservices.com/services/apexrest/getToken",
+    url: "https://stratus-stg3.mfindealerservices.com/services/apexrest/getToken",
     headers: {
       Authorization: `Bearer ${localStorage.getItem("bearerToken")}`,
       Cookie: "CookieConsentPolicy=0:1; LSKey-c$CookieConsentPolicy=0:1",
