@@ -322,8 +322,8 @@ export async function getGroundingList() {
       accept: "application/json",
       "Content-Type": "application/json",
 
-      // "Access-Control-Allow-Origin":"*",
-      // "Authorization": `Bearer ${localStorage.getItem("ForgeRockToken")}`,
+      "Access-Control-Allow-Origin":"*",
+      "Authorization": `Bearer ${localStorage.getItem("ForgeRockToken")}`,
     },
     data: data,
   };
@@ -349,8 +349,8 @@ export async function getPassedList(data) {
     headers: {
       accept: "application/json",
       "Content-Type": "application/json",
-      // "Access-Control-Allow-Origin":"*",
-      // "Authorization": `Bearer ${localStorage.getItem("ForgeRockToken")}`,
+      "Access-Control-Allow-Origin":"*",
+      "Authorization": `Bearer ${localStorage.getItem("ForgeRockToken")}`,
     },
     data: data,
   };
@@ -379,8 +379,8 @@ export async function getPurchasedList(data) {
     headers: {
       accept: "application/json",
       "Content-Type": "application/json",
-      // "Access-Control-Allow-Origin":"*",
-      // "Authorization": `Bearer ${localStorage.getItem("ForgeRockToken")}`,
+      "Access-Control-Allow-Origin":"*",
+      "Authorization": `Bearer ${localStorage.getItem("ForgeRockToken")}`,
     },
     data: data,
   };
@@ -389,65 +389,75 @@ export async function getPurchasedList(data) {
 }
 
 export async function getInspectionVehicleDetails(vin) {
-  const options = {
-    headers: {
-      "Content-Type": "application/json",
-      // "Access-Control-Allow-Origin":"*",
-      // "Authorization": `Bearer ${localStorage.getItem("ForgeRockToken")}`,
-    },
-  };
+  var data = vin;
 
-  return await axios.post(`${inspectionVehicleDetails}?vin=${vin}`, options);
+  var config = {
+    method: "post",
+    url: inspectionVehicleDetails,
+    headers: {
+      accept: "application/json",
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin":"*",
+      "Authorization": `Bearer ${localStorage.getItem("ForgeRockToken")}`,
+    },
+    data: data,
+  };
+  return await axios(config);
 }
 export async function getInspectionWheelTiresDetails(inspectionId) {
-  const options = {
-    headers: {
-      "Content-Type": "application/json",
-      // "Access-Control-Allow-Origin":"*",
-      // "Authorization": `Bearer ${localStorage.getItem("ForgeRockToken")}`,
-    },
-  };
+  var data = inspectionId;
 
-  return await axios.post(
-    inspectionWheelTiresDetailsUrl,
-    inspectionId,
-    options
-  );
+  var config = {
+    method: "post",
+    url: inspectionWheelTiresDetailsUrl,
+    headers: {
+      accept: "application/json",
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin":"*",
+      "Authorization": `Bearer ${localStorage.getItem("ForgeRockToken")}`,
+    },
+    data: data,
+  };
+  return await axios(config);
 }
+
 export async function getInspectionAccessoryDetails(vin) {
-  const options = {
+  var data = vin;
+
+  var config = {
+    method: "post",
+    url: inspectionAccessoryDetailsUrl,
     headers: {
+      accept: "application/json",
       "Content-Type": "application/json",
-      // "Access-Control-Allow-Origin":"*",
-      // "Authorization": `Bearer ${localStorage.getItem("ForgeRockToken")}`,
+      "Access-Control-Allow-Origin":"*",
+      "Authorization": `Bearer ${localStorage.getItem("ForgeRockToken")}`,
     },
+    data: data,
   };
-
-  return await axios.post(
-    `${inspectionAccessoryDetailsUrl}?vin=${vin}`,
-    options
-  );
+  return await axios(config);
 }
+export async function getInspectionDamageDetailsApi(inspectionId,vin) {
+  var qs=require("qs");
+  var data = qs.stringify({
+    inspectionId: inspectionId,
+    tenantId:"t002",
+    vin:vin
+  });
 
-//getInspectionDamageDetails
-
-export async function getInspectionDamageDetailsApi(inspectionId, vin) {
-  console.log("inspectionId", inspectionId);
-  console.log("Vin", vin);
-
-  const options = {
+  var config = {
+    method: "post",
+    url: getInspectionDamageDetailsUrl,
     headers: {
+      accept: "application/json",
       "Content-Type": "application/json",
-      // "Access-Control-Allow-Origin":"*",
-      // "Authorization": `Bearer ${localStorage.getItem("ForgeRockToken")}`,
+      "Access-Control-Allow-Origin":"*",
+      "Authorization": `Bearer ${localStorage.getItem("ForgeRockToken")}`,
     },
+    data: data,
   };
-
-  return await axios.post(
-    `${getInspectionDamageDetailsUrl}?inpsectionId=${inspectionId}&tenantId=t002&vin=${vin}`
-  );
+  return await axios(config);
 }
-
 export async function getOEMBuildDetailsApi(vin) {
   var data = vin;
 
@@ -457,39 +467,54 @@ export async function getOEMBuildDetailsApi(vin) {
     headers: {
       accept: "application/json",
       "Content-Type": "application/json",
-      // "Access-Control-Allow-Origin":"*",
-      // "Authorization": `Bearer ${localStorage.getItem("ForgeRockToken")}`,
+      "Access-Control-Allow-Origin":"*",
+      "Authorization": `Bearer ${localStorage.getItem("ForgeRockToken")}`,
     },
     data: data,
   };
   return await axios(config);
 }
+export async function postDealerActionPassOnVehicle(vin, groundId) {
+  var qs=require("qs");
+  var data = qs.stringify({
+    dealerAction: "Pass",
+    groundingId:groundId,
+    vin:vin,
+  });
 
-export async function postDealerActionPassOnVehicle(VINumber, groundId) {
-  const options = {
+  var config = {
+    method: "post",
+    url: getDealerActionUrl,
     headers: {
+      accept: "application/json",
       "Content-Type": "application/json",
-      // "Access-Control-Allow-Origin":"*",
-      // "Authorization": `Bearer ${localStorage.getItem("ForgeRockToken")}`,
+      "Access-Control-Allow-Origin":"*",
+      "Authorization": `Bearer ${localStorage.getItem("ForgeRockToken")}`,
     },
+    data: data,
   };
-
-  return await axios.post(
-    `${getDealerActionUrl}?dealerAction=Pass&groundingId=${groundId}&vin=${VINumber}`,
-    options
-  );
+  return await axios(config);
 }
-export async function postDealerActionPurchaseOnVehicle(VINumber, groundId) {
-  const options = {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
+export async function postDealerActionPurchaseOnVehicle(vin, groundId) {
+  var qs=require("qs");
+  var data = qs.stringify({
+    dealerAction: "Purchase",
+    groundingId:groundId,
+    vin:vin,
+  });
 
-  return await axios.post(
-    `${getDealerActionUrl}?dealerAction=Purchase&groundingId=${groundId}&vin=${VINumber}`,
-    options
-  );
+  var config = {
+    method: "post",
+    url: getDealerActionUrl,
+    headers: {
+      accept: "application/json",
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin":"*",
+      "Authorization": `Bearer ${localStorage.getItem("ForgeRockToken")}`,
+    },
+    data: data,
+  };
+  return await axios(config);
 }
 export async function getAuthTokenSSO() {
   const requestData = {
@@ -614,7 +639,7 @@ export async function getAccessTokenEndpoint(code) {
   });
   var config = {
     method: "post",
-    url: "https://stratus-stg3.mfindealerservices.com/services/oauth2/token",
+    url: "https://stratus-stg.mfindealerservices.com/services/oauth2/token",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
       //   Cookie:
@@ -629,7 +654,7 @@ export async function getUserInfoToken(token) {
   var qs = require("qs");
   var config = {
     method: "post",
-    url: `https://stratus-stg3.mfindealerservices.com/services/oauth2/userinfo?access_token=${token}`,
+    url: `https://stratus-stg.mfindealerservices.com/services/oauth2/userinfo?access_token=${token}`,
   };
 
   return await axios(config);
@@ -638,7 +663,7 @@ export async function getForgeRockToken() {
   let token = localStorage.getItem("bearerToken");
   var config = {
     method: "get",
-    url: "https://stratus-stg3.mfindealerservices.com/services/apexrest/getToken",
+    url: "https://stratus-stg.mfindealerservices.com/services/apexrest/getToken",
     headers: {
       Authorization: `Bearer ${localStorage.getItem("bearerToken")}`,
       Cookie: "CookieConsentPolicy=0:1; LSKey-c$CookieConsentPolicy=0:1",
@@ -658,8 +683,8 @@ export async function getImageData(obj) {
     url: getImages,
     headers: {
       "Content-Type": "application/json",
-      // "Access-Control-Allow-Origin":"*",
-      // "Authorization": `Bearer ${localStorage.getItem("ForgeRockToken")}`,
+      "Access-Control-Allow-Origin":"*",
+      "Authorization": `Bearer ${localStorage.getItem("ForgeRockToken")}`,
     },
     data: obj,
   };
@@ -688,8 +713,8 @@ export async function getDealerPaymentsData() {
   const options = {
     headers: {
       "Content-Type": "application/json",
-      // "Access-Control-Allow-Origin":"*",
-      // "Authorization": `Bearer ${localStorage.getItem("ForgeRockToken")}`,
+      "Access-Control-Allow-Origin":"*",
+      "Authorization": `Bearer ${localStorage.getItem("ForgeRockToken")}`,
     },
   };
 
@@ -712,8 +737,8 @@ export async function getPurchaseDetails(vin) {
     url: getPurchaseDetailsApi,
     headers: {
       "Content-Type": "application/json",
-      // "Access-Control-Allow-Origin":"*",
-      // "Authorization": `Bearer ${localStorage.getItem("ForgeRockToken")}`,
+      "Access-Control-Allow-Origin":"*",
+      "Authorization": `Bearer ${localStorage.getItem("ForgeRockToken")}`,
     },
     data: vin,
   };
@@ -734,8 +759,8 @@ export async function getTransportationDetails(vinlist) {
     // vinList=JM3KFADM6L0797974&vinList=JM3KFBDM0K1698372'
     headers: {
       accept: "application/json",
-      // "Access-Control-Allow-Origin":"*",
-      // "Authorization": `Bearer ${localStorage.getItem("ForgeRockToken")}`,
+      "Access-Control-Allow-Origin":"*",
+      "Authorization": `Bearer ${localStorage.getItem("ForgeRockToken")}`,
     },
   };
 
@@ -748,8 +773,8 @@ export async function getDealerDropData() {
     url: dealerDrop,
     headers: {
       accept: "application/json",
-      // "Access-Control-Allow-Origin":"*",
-      // "Authorization": `Bearer ${localStorage.getItem("ForgeRockToken")}`,
+      "Access-Control-Allow-Origin":"*",
+      "Authorization": `Bearer ${localStorage.getItem("ForgeRockToken")}`,
     },
   };
 
@@ -762,8 +787,8 @@ export async function onSubmitPayment(data) {
     url: submitPayment,
     headers: {
       "Content-Type": "application/json",
-      // "Access-Control-Allow-Origin":"*",
-      // "Authorization": `Bearer ${localStorage.getItem("ForgeRockToken")}`,
+      "Access-Control-Allow-Origin":"*",
+      "Authorization": `Bearer ${localStorage.getItem("ForgeRockToken")}`,
     },
     data: data,
   };
@@ -787,8 +812,8 @@ export async function getDealerVehicleCount() {
     url: dealerVehicleCount,
     headers: {
       "Content-Type": "application/json",
-      // "Access-Control-Allow-Origin":"*",
-      // "Authorization": `Bearer ${localStorage.getItem("ForgeRockToken")}`,
+      "Access-Control-Allow-Origin":"*",
+      "Authorization": `Bearer ${localStorage.getItem("ForgeRockToken")}`,
     },
     data: data,
   };

@@ -49,7 +49,7 @@ function getParameterByName(name, url = window.location.href) {
   async function getUserAccessInfoToken(){
   let resp = await getForgeRockToken();
   console.log("forgerock", resp);
-  localStorage.setItem("ForgeRockToken",resp.data);
+  localStorage.setItem("ForgeRockToken",resp.data.forgeRockToken);
 
   props.history.push('/grounded')
 
