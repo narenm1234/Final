@@ -75,7 +75,7 @@ export default function MyGallery(props) {
 
     console.log("get image data::", getimagesRes);
 
-    setImages(getimagesRes.data.imageDetails);
+    setImages(getimagesRes?.data?.imageDetails);
     let imgagesdata = [];
     for (let img of getimagesRes.data.imageDetails) {
       let imgobj = {

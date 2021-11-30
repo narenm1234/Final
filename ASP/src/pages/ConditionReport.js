@@ -324,10 +324,10 @@ export default function ConditionReport(props) {
                           <div className="smallCardBody">
                             <span className="textSize">
                               <CurrencyFormat
-                                value={parseFloat(
+                                value={vehicleDetails.residual_amt?parseFloat(
                                   vehicleDetails.residual_amt +
                                     vehicleDetails.remaining_pmts
-                                ).toFixed(2)}
+                                ).toFixed(2):"0"}
                                 displayType={"text"}
                                 thousandSeparator={true}
                                 prefix={"$"}
