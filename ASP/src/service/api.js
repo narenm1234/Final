@@ -650,7 +650,7 @@ export async function getForgeRockToken() {
   let token = localStorage.getItem("bearerToken");
   var config = {
     method: "get",
-    url: "https://stratus-stg3.mfindealerservices.com/services/apexrest/getToken",
+    url: "https://stratus-stg3.mfindealerservices.com/services/apexrest/v1/stratusapi/getToken",
     headers: {
       Authorization: `Bearer ${localStorage.getItem("bearerToken")}`,
       Cookie: "CookieConsentPolicy=0:1; LSKey-c$CookieConsentPolicy=0:1",
