@@ -40,6 +40,7 @@ function getParameterByName(name, url = window.location.href) {
   localStorage.setItem("dealerCode",userInfo.custom_attributes.dealerCode);
   localStorage.setItem("dealerName",userInfo.custom_attributes.dealerName);
   localStorage.setItem("KintoID",userInfo.custom_attributes.kintoId);
+  localStorage.setItem("tenantID",userInfo.custom_attributes.tenantId);
     
   }
   useEffect(() => {
