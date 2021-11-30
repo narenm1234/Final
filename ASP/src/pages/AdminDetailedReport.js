@@ -84,7 +84,7 @@ export default function AdminDetailedReport(props) {
     <div className="conditionPageCard">
       <Grid container spacing={3} className="ConditionCardReportSpace">
         <Grid item xs={5}>
-          <MyGallery />
+          <MyGallery {...condionVehicleDetails} />
         </Grid>
         <Grid item xs={7}>
           <div className="ConditionReportSection">
