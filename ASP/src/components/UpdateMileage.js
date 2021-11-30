@@ -139,7 +139,7 @@ export default function UpdateMileage(props) {
               <Grid container spacing={3} className="ConditionCardReportSpace">
                 <Grid item xs={5}>
                   <div className="codereportimggallery">
-                    <MyGallery />
+                    <MyGallery {...condionVehicleDetails}/>
                   </div>
                   <Grid container className="ConditionCardBody">
                     <div className="damageTitle">

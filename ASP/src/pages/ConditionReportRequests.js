@@ -137,7 +137,7 @@ export default function ConditionReportRequests(props) {
       <Box p={2} pt={14}>
         <Grid container spacing={3}>
           <Grid item xs={4}>
-            <MyGallery />
+            <MyGallery {...condionVehicleDetails}/>
             <Grid container className="ConditionCardBody">
               <div className="damageTitle">
                 <span>Damage Report</span>

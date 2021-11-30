@@ -172,7 +172,7 @@ export default function ConditionReport(props) {
               <Grid container spacing={3} className="ConditionCardReportSpace">
                 <Grid item xs={5}>
                   <div className="codereportimggallery">
-                    <MyGallery />
+                    <MyGallery {...condionVehicleDetails} />
                   </div>
                   <Grid container className="ConditionCardBody">
                     <div className="damageTitle">
@@ -190,7 +190,6 @@ export default function ConditionReport(props) {
                                 displayType={"text"}
                                 thousandSeparator={true}
                                 prefix={"$"}
-                                suffix={".00"}
                               />
                             ) : (
                               "$0.00"
@@ -211,7 +210,6 @@ export default function ConditionReport(props) {
                                 displayType={"text"}
                                 thousandSeparator={true}
                                 prefix={"$"}
-                                suffix={".00"}
                               />
                             ) : (
                               "$0.00"
@@ -232,7 +230,6 @@ export default function ConditionReport(props) {
                                 displayType={"text"}
                                 thousandSeparator={true}
                                 prefix={"$"}
-                                suffix={".00"}
                               />
                             ) : (
                               "$0.00"
@@ -312,7 +309,7 @@ export default function ConditionReport(props) {
                                 thousandSeparator={true}
                                 prefix={"$"}
                               />
-                              .00
+                             
                             </span>
                           </div>
                         </CardContent>
@@ -335,7 +332,6 @@ export default function ConditionReport(props) {
                                 thousandSeparator={true}
                                 prefix={"$"}
                               />
-                              .00
                             </span>
                           </div>
                         </CardContent>
@@ -357,7 +353,6 @@ export default function ConditionReport(props) {
                                 thousandSeparator={true}
                                 prefix={"$"}
                               />
-                              .00
                             </span>
                           </div>
                         </CardContent>
