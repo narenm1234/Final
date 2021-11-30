@@ -70,13 +70,13 @@ export default function ListingPage1(props) {
   const [vehicleResponse, setVehicleResponse] = useState([]);
   //const [vehicleResponse, setVehicleResponse] = useState(resp)
   const [value, setValue] = useState([]);
-  const [images, setImages] = React.useState([]);
+  // const [images, setImages] = React.useState([]);
   const [transport, setTransport] = useState({});
   const [loader, setLoader] = React.useState(true);
 
   useEffect(() => {
     getVehicleDetails();
-    getImages();
+    // getImages();
   }, [value]);
   async function getVehicleDetails() {
     let apiResponse = await getPassedList();
@@ -95,7 +95,7 @@ export default function ListingPage1(props) {
         }
       });
 
-      console.log("vinlistqueryparams", vinlistqueryparams);
+      // console.log("vinlistqueryparams", vinlistqueryparams);
 
       let apiResponse = await getTransportationDetails(vinlistqueryparams);
       setTransport(apiResponse.data);
@@ -111,22 +111,22 @@ export default function ListingPage1(props) {
     });
   };
 
-  const getImages = async () => {
-    let reqObj = {
-      inspectionId: 18734078,
-      paramForImage: "Inspection_Front_Page",
-      tenantId: "t002",
-    };
-    let getimagesRes = await getImageData(reqObj);
-    console.log("get image data::", getimagesRes);
+  // const getImages = async () => {
+  //   let reqObj = {
+  //     inspectionId: 18734078,
+  //     paramForImage: "Inspection_Front_Page",
+  //     tenantId: "t002",
+  //   };
+  //   let getimagesRes = await getImageData(reqObj);
+  //   console.log("get image data::", getimagesRes);
 
-    getimagesRes &&
-      getimagesRes.data &&
-      getimagesRes.data.imageDetails.map((item) => {
-        item.binImageArray = "data:image/jpeg;base64," + item.binImageArray;
-      });
-    setImages(getimagesRes?.data?.imageDetails);
-  };
+  //   getimagesRes &&
+  //     getimagesRes.data &&
+  //     getimagesRes.data.imageDetails.map((item) => {
+  //       item.binImageArray = "data:image/jpeg;base64," + item.binImageArray;
+  //     });
+  //   setImages(getimagesRes?.data?.imageDetails);
+  // };
 
   return vehicleResponse?.length > 0 ? (
     vehicleResponse.map((vehicle, index) => {
@@ -135,7 +135,7 @@ export default function ListingPage1(props) {
           <Grid container spacing={3}>
             <Grid item xs={4}>
               {vehicle.inspection_mileage > 0 ? (
-                <SwipeableTextMobileStepper vehical={vehicle} images={images} />
+                <SwipeableTextMobileStepper vehical={vehicle} images={vehicle.groundingImage} />
               ) : (
                 <div className="pendingImgBlock">
                 <img

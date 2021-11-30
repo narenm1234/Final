@@ -3,7 +3,7 @@ import Separator from "../Separator";
 import AdminSearchHeader from "../AdminSearchHeader";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
-import { Route, withRouter } from "react-router-dom";
+import { Route, withRouter, useLocation } from "react-router-dom";
 import IconButton from "@material-ui/core/IconButton";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 // import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
@@ -16,6 +16,8 @@ const Header = (props) => {
   const [showDealer, setShowDealer] = useState(null);
   const [dealerName, setDealerName] = useState("");
   const [dealerDrop, setDealerDrop] = useState([]);
+  const location = useLocation();
+
   const toggleShowDealer = (event) => {
     setShowDealer(event.currentTarget);
   };
@@ -62,8 +64,8 @@ const Header = (props) => {
       }
     });
     setDealerDrop([...dealerData]);
-    let selectedDealerData = dealerData.filter(x=> x.checked);
-    props.selectedDealers(selectedDealerData)
+    let selectedDealerData = dealerData.filter((x) => x.checked);
+    props.selectedDealers(selectedDealerData);
   };
 
   return (
@@ -80,19 +82,27 @@ const Header = (props) => {
       />
       <div className="dealerName">
         {dealerName ? dealerName : "Dealer Name"} &nbsp; &nbsp;
-        <IconButton aria-label="Delete" onClick={toggleShowDealer}>
-          <ArrowDropDownIcon />
-        </IconButton>
+        {(location.pathname === "/" ||
+        location.pathname === "/grounded" ||
+        location.pathname === "/passed" ||
+        location.pathname === "/purchased") ? (
+          <IconButton aria-label="dealer" onClick={toggleShowDealer}>
+            <ArrowDropDownIcon />
+          </IconButton>
+        ) : (
+          ""
+        )}
       </div>
       <Menu
         id="dealer-menu"
         anchorEl={showDealer}
         keepMounted
-        open={Boolean(showDealer)} 
+        open={Boolean(showDealer)}
         onClose={handleClose}
         className="dealermenu"
       >
-        {!dealerName && dealerDrop &&
+        {!dealerName &&
+          dealerDrop &&
           dealerDrop.map((ditem, index) => (
             <MenuItem key={index}>
               <FormGroup row>
@@ -100,11 +110,13 @@ const Header = (props) => {
                   control={
                     <Checkbox
                       checked={ditem.checked}
-                      onChange={()=>{handleChange(ditem)}}
+                      onChange={() => {
+                        handleChange(ditem);
+                      }}
                       value={ditem.dealer_number}
                     />
                   }
-                  label={ditem.dealer_name + '('+ditem.dealer_number+')'}
+                  label={ditem.dealer_name + "(" + ditem.dealer_number + ")"}
                 />
               </FormGroup>
             </MenuItem>

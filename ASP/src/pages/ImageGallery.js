@@ -45,6 +45,7 @@ export default function MyGallery(props) {
   const [loader, setLoader] = React.useState(true);
 
   useEffect(() => {
+    console.log("inspection_id", props)
     getImages();
   }, []);
   const getImages = async () => {
@@ -66,9 +67,9 @@ export default function MyGallery(props) {
     // });
 
     let reqObj = {
-      inspectionId: 18734078,
+      inspectionId: props.inspection_id,
       paramForImage: "ALL",
-      tenantId: "t002",
+      tenantId: localStorage.getItem("KintoID")? localStorage.getItem("KintoID") : "t002",
     };
     let getimagesRes = await getImageData(reqObj);
 

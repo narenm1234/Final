@@ -85,12 +85,12 @@ export default function ListingPage2(props) {
   const [vehicleResponse, setVehicleResponse] = useState([]);
   //const [vehicleResponse, setVehicleResponse] = useState(resp)
   const [value, setValue] = useState([]);
-  const [images, setImages] = React.useState([]);
+  // const [images, setImages] = React.useState([]);
   const [loader, setLoader] = React.useState(true);
 
   useEffect(() => {
     getVehicleDetails();
-    getImages();
+    // getImages();
   }, [value]);
   async function getVehicleDetails() {
     let apiResponse = await getPurchasedList("ALL");
@@ -100,22 +100,22 @@ export default function ListingPage2(props) {
     setLoader(false);
   }
 
-  const getImages = async () => {
-    let reqObj = {
-      inspectionId: 18734078,
-      paramForImage: "Inspection_Front_Page",
-      tenantId: "t002",
-    };
-    let getimagesRes = await getImageData(reqObj);
-    console.log("get image data::", getimagesRes);
+  // const getImages = async () => {
+  //   let reqObj = {
+  //     inspectionId: 18734078,
+  //     paramForImage: "Inspection_Front_Page",
+  //     tenantId: "t002",
+  //   };
+  //   let getimagesRes = await getImageData(reqObj);
+  //   console.log("get image data::", getimagesRes);
 
-    getimagesRes &&
-      getimagesRes.data &&
-      getimagesRes.data.imageDetails.map((item) => {
-        item.binImageArray = "data:image/jpeg;base64," + item.binImageArray;
-      });
-    setImages(getimagesRes.data.imageDetails);
-  };
+  //   getimagesRes &&
+  //     getimagesRes.data &&
+  //     getimagesRes.data.imageDetails.map((item) => {
+  //       item.binImageArray = "data:image/jpeg;base64," + item.binImageArray;
+  //     });
+  //   setImages(getimagesRes.data.imageDetails);
+  // };
 
   function getPurchasetype(list) {
     let price = "";
@@ -151,8 +151,8 @@ export default function ListingPage2(props) {
           <Grid container spacing={3}>
             <Grid item xs={4}>
               {/* <SwipeableTextMobileStepper /> */}
-              {vehicle.inspection_mileage > 0 ? (
-                <SwipeableTextMobileStepper vehical={vehicle} images={images} />
+              {vehicle.groundingImage ? (
+                <SwipeableTextMobileStepper vehical={vehicle} images={vehicle.groundingImage} />
               ) : (
                 <div className="pendingImgBlock">
                   <img

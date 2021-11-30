@@ -87,12 +87,12 @@ export default function ListingPage(props) {
   const [time, setTime] = React.useState("00:00");
   const [passVin, setPassVin] = React.useState("");
   const [groundingID, setGroundingID] = React.useState("");
-  const [images, setImages] = React.useState([]);
+  // const [images, setImages] = React.useState([]);
   const [loader, setLoader] = React.useState(true);
 
   useEffect(() => {
     getVehicleDetails();
-    getImages();
+    // getImages();
   }, [value]);
 
   async function getVehicleDetails() {
@@ -131,22 +131,22 @@ export default function ListingPage(props) {
     console.log("-------0------>", SSOAuth);
   }
 
-  const getImages = async () => {
-    let reqObj = {
-      inspectionId: 18734078,
-      paramForImage: "Inspection_Front_Page",
-      tenantId: "t002",
-    };
-    let getimagesRes = await getImageData(reqObj);
-    console.log("get image data::", getimagesRes);
+  // const getImages = async () => {
+  //   let reqObj = {
+  //     inspectionId: 18734078,
+  //     paramForImage: "Inspection_Front_Page",
+  //     tenantId: "t002",
+  //   };
+  //   let getimagesRes = await getImageData(reqObj);
+  //   console.log("get image data::", getimagesRes);
 
-    getimagesRes &&
-      getimagesRes.data &&
-      getimagesRes.data.imageDetails.map((item) => {
-        item.binImageArray = "data:image/jpeg;base64," + item.binImageArray;
-      });
-    setImages(getimagesRes?.data.imageDetails);
-  };
+  //   getimagesRes &&
+  //     getimagesRes.data &&
+  //     getimagesRes.data.imageDetails.map((item) => {
+  //       item.binImageArray = "data:image/jpeg;base64," + item.binImageArray;
+  //     });
+  //   setImages(getimagesRes?.data.imageDetails);
+  // };
 
   // const getImages = async () => {
   //   // let obj = {
@@ -226,7 +226,7 @@ export default function ListingPage(props) {
           return (
             <div className="listingPageCard" key={index}>
               <Grid container spacing={3}>
-                <Grid item xs={4} >
+                <Grid item xs={4}>
                   {vehicle.inspection_status === "Inspection Complete" ? (
                     <SwipeableTextMobileStepper
                       // vehical={vehicle}
@@ -234,11 +234,11 @@ export default function ListingPage(props) {
                     />
                   ) : (
                     <div className="pendingImgBlock">
-                    <img
-                      className="pendingImg"
-                      src="inspection_pending.png"
-                      alt="pending"
-                    />
+                      <img
+                        className="pendingImg"
+                        src="inspection_pending.png"
+                        alt="pending"
+                      />
                     </div>
                   )}
 
@@ -330,60 +330,66 @@ export default function ListingPage(props) {
                     <div className="vehicleMakeModel1">
                       <span>Vehicle Price Options </span>
                     </div>
-                          <div className="vehicalPriceOptions">
-                    <div className="vehiclepriceopt">
-                    <span className="textStyle">
-                            <span className="textBold"> Payoff </span>
-                          </span> 
-                          <span className="textSize">
+                    <div className="vehicalPriceOptions">
+                      <div className="vehiclepriceopt">
+                        <span className="textStyle">
+                          <span className="textBold"> Payoff </span>
+                        </span>
+                        <span className="textSize">
+                          <CurrencyFormat
+                            value={
+                              vehicle.pay_off_amt ? vehicle.pay_off_amt : ""
+                            }
+                            displayType={"text"}
+                            thousandSeparator={true}
+                            prefix={"$"}
+                          />
+                        </span>
+                      </div>
+                      <div className="vehiclepriceopt">
+                        <span className="textStyle">
+                          <span className="textBold">
+                            {" "}
+                            Residual + Remaining Payments{" "}
+                          </span>
+                        </span>
+                        <span className="textSize">
+                          <CurrencyFormat
+                            value={parseFloat(
+                              vehicle.residual_amt + vehicle.remaining_pmts
+                            ).toFixed(2)}
+                            displayType={"text"}
+                            thousandSeparator={true}
+                            prefix={"$"}
+                          />
+                        </span>
+                      </div>
+                      <div className="vehiclepriceopt">
+                        <span className="textStyle">
+                          <span className="textBold"> Market </span>
+                        </span>
+                        <span className="textSize">
+                          {vehicle.vehicle_price ? (
                             <CurrencyFormat
-                              value={
-                                vehicle.pay_off_amt ? vehicle.pay_off_amt : ""
-                              }
+                              value={vehicle.vehicle_price}
                               displayType={"text"}
                               thousandSeparator={true}
                               prefix={"$"}
                             />
-                          </span>  
-                    </div>
-                    <div className="vehiclepriceopt">
-                    <span className="textStyle">
-                            <span className="textBold">  Residual + Remaining Payments </span>
-                          </span> 
-                          <span className="textSize">
-                            <CurrencyFormat
-                              value={parseFloat(
-                                vehicle.residual_amt + vehicle.remaining_pmts
-                              ).toFixed(2)}
-                              displayType={"text"}
-                              thousandSeparator={true}
-                              prefix={"$"}
-                            />
-                          </span> 
-                    </div>
-                    <div className="vehiclepriceopt">
-                    <span className="textStyle">
-                            <span className="textBold"> Market </span>
-                          </span> 
-                          <span className="textSize">
-                            {vehicle.vehicle_price ? (
-                              <CurrencyFormat
-                                value={vehicle.vehicle_price}
-                                displayType={"text"}
-                                thousandSeparator={true}
-                                prefix={"$"}
-                              />
-                            ) : (
-                              "Pending"
-                            )}
-                          </span> 
-                    </div>
-                    <div className="vehiclepriceopt">
-                    <span className="textStyle">
-                            <span className="textBold">  Market + Remaining Payments </span>
-                          </span> 
-                          <span className="textSize">
-                            {/* <CurrencyFormat
+                          ) : (
+                            "Pending"
+                          )}
+                        </span>
+                      </div>
+                      <div className="vehiclepriceopt">
+                        <span className="textStyle">
+                          <span className="textBold">
+                            {" "}
+                            Market + Remaining Payments{" "}
+                          </span>
+                        </span>
+                        <span className="textSize">
+                          {/* <CurrencyFormat
                               value={
                                 vehicle.remaining_pmts
                                   ? vehicle.remaining_pmts
@@ -393,11 +399,11 @@ export default function ListingPage(props) {
                               thousandSeparator={true}
                               prefix={"$"}
                             /> */}
-                            Pending
-                          </span>
+                          Pending
+                        </span>
+                      </div>
                     </div>
-                    </div>
- 
+
                     <div className="NavigatorButtons">
                       <Button
                         className="PassonVehicleStyle"
