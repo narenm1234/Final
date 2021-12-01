@@ -69,7 +69,7 @@ export default function MyGallery(props) {
     let reqObj = {
       inspectionId: props.inspection_id,
       paramForImage: "ALL",
-      tenantId: localStorage.getItem("KintoID")? localStorage.getItem("KintoID") : "t002",
+      tenantId: localStorage.getItem("tenantId")? localStorage.getItem("tenantId") : "t002",
     };
     let getimagesRes = await getImageData(reqObj);
 
