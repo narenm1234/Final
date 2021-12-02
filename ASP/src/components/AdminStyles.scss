@@ -58,7 +58,7 @@
     background-color: white;
   }
 }
-.adminTabsSection{
+.adminTabsSection {
   width: 100%;
   padding-top: 50px;
   margin-top: 4%;
@@ -126,7 +126,7 @@
 }
 
 .passButton {
-  width: 107px;
+  width: 140px;
   height: 32px;
   margin: 0 8px 0 0;
   padding: 1px 6px 1px 7px;
@@ -140,7 +140,7 @@
 }
 
 .purchaseButton {
-  width: 103px;
+  width: 140px;
   height: 30px;
   font-size: 0.65rem !important;
   font-weight: normal;
@@ -149,7 +149,8 @@
   line-height: 1.5 !important;
   letter-spacing: normal;
   text-align: center;
-  color: #fff;
+  color: #fff !important;
+  background: #0070d2 !important;
   border-radius: 4px !important;
   border: solid 1px grey !important;
 }
