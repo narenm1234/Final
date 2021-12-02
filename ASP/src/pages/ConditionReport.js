@@ -263,7 +263,7 @@ export default function ConditionReport(props) {
                     disabled
                     className="inputFieldTextArea"
                     aria-label="maximum height"
-                    defaultValue=""
+                    defaultValue={condionVehicleDetails?.inspection_notes}
                   />
                 </Grid>
                 <Grid item xs={7}>
@@ -303,7 +303,7 @@ export default function ConditionReport(props) {
                                     ? parseFloat(
                                         vehicleDetails.pay_off_amt
                                       ).toFixed(2)
-                                    : "0"
+                                    : "0.00"
                                 }
                                 displayType={"text"}
                                 thousandSeparator={true}
@@ -327,7 +327,7 @@ export default function ConditionReport(props) {
                                 value={vehicleDetails.residual_amt?parseFloat(
                                   vehicleDetails.residual_amt +
                                     vehicleDetails.remaining_pmts
-                                ).toFixed(2):"0"}
+                                ).toFixed(2):"0.00"}
                                 displayType={"text"}
                                 thousandSeparator={true}
                                 prefix={"$"}
@@ -347,7 +347,7 @@ export default function ConditionReport(props) {
                                 value={
                                   vehicleDetails.vehicle_price
                                     ? vehicleDetails.vehicle_price
-                                    : "0"
+                                    : "0.00"
                                 }
                                 displayType={"text"}
                                 thousandSeparator={true}
@@ -1004,10 +1004,11 @@ export default function ConditionReport(props) {
               </Grid>
             </Box>
           )}
-          <ViewDetailedReport
+          <ViewDetailedReport 
             DamageDetails={DamageDetails}
             open={open}
             close={handleClose}
+            {...condionVehicleDetails}
           />
         </div>
         <div className="purchasesidebar">
