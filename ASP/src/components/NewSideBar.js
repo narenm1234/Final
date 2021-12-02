@@ -28,12 +28,15 @@ const useStyles = makeStyles((theme) => ({
     color: "white",
   },
   sideBarCSS: {
-    marginLeft: "16px",
+    marginLeft: "1px",
   },
   activeNavLink: {
     background: "#e7f3fd",
     borderLeft: "3px solid #407ed2",
   },
+  activeNavdrop:{
+    border: "1px solid #407ed2",
+  }
 }));
 
 let sidebarItems = [
@@ -139,6 +142,7 @@ export default function NewSidebar(props) {
               onClick={() => {
                 handleClick(item);
               }}
+              // className={`${item.open ? classes.activeNavdrop : ''}`}
             >
               {item.open ? <ExpandLess /> : <ExpandMore />}
               <ListItemText primary={item.label} />
@@ -147,16 +151,17 @@ export default function NewSidebar(props) {
               <List
                 component="div"
                 disablePadding
-                className={classes.sideBarCSS}
+                // className={classes.sideBarCSS}
               >
                 {item.childs.map((child) => (
                   <ListItem
                     component={Link}
                     to={child.link}
                     key={child.link}
-                    className={
-                      activeChild == child.link ? classes.activeNavLink : ""
-                    }
+                    className={`
+                     ${activeChild == child.link ? classes.activeNavLink : ""}   
+                     ${activeChild == "/" ? (child.link == '/grounded' ? classes.activeNavLink  : ""): ""}
+                    `}
                     onClick={() => {
                       handleClickMakeActive(child);
                     }}
