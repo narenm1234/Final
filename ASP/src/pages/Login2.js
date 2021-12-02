@@ -1,5 +1,5 @@
 import React,{ useState, useEffect } from 'react'
-import { getAccessTokenEndpoint, getForgeRockToken, getUserInfoToken } from '../service/api';
+import { getAccessTokenEndpoint, getForgeRockToken, getRefreshTokenEndpoint, getUserInfoToken } from '../service/api';
 import jwt_decode from "jwt-decode";
 import { ControlPointDuplicateOutlined } from '@material-ui/icons';
 
@@ -32,6 +32,7 @@ function getParameterByName(name, url = window.location.href) {
     console.log("--->",apiResponse)
     localStorage.setItem("bearerToken",apiResponse.data.access_token);
     localStorage.setItem("userToken",apiResponse.data.id_token);
+    localStorage.setItem("refreshToken",apiResponse.data.refresh_token);
     let usertoken=localStorage.getItem("userToken");  
     let userInfo = jwt_decode(usertoken);
     console.log(userInfo);
@@ -41,6 +42,8 @@ function getParameterByName(name, url = window.location.href) {
   localStorage.setItem("dealerName",userInfo.custom_attributes.dealerName);
   localStorage.setItem("KintoID",userInfo.custom_attributes.kintoId);
   localStorage.setItem("tenantID",userInfo.custom_attributes.tenantId);
+  
+
     
   }
   useEffect(() => {
@@ -51,6 +54,14 @@ function getParameterByName(name, url = window.location.href) {
   let resp = await getForgeRockToken();
   console.log("forgerock", resp);
   localStorage.setItem("ForgeRockToken",resp.data.forgeRockToken);
+  setInterval(() =>{
+    let apiResponse = await getRefreshTokenEndpoint();
+    localStorage.setItem("bearerToken",apiResponse.data.access_token);
+    localStorage.setItem("refreshToken",apiResponse.data.refresh_token);
+    let resp1 = await getForgeRockToken();
+    localStorage.setItem("ForgeRockToken",resp1.data.forgeRockToken);
+},500000)
+  
 
   props.history.push('/grounded')
 

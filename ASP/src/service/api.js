@@ -503,31 +503,6 @@ export async function postDealerActionPurchaseOnVehicle(vin, groundId) {
   };
   return await axios(config);
 }
-export async function getAuthTokenSSO() {
-  const requestData = {
-    "Access-Control-Allow-Origin": "*",
-  };
-
-  return await axios.get(
-    `https://srmstg3-stratus2.cs194.force.com/services/oauth2/authorize?client_id=${client_id}&redirect_uri=https://asp-dev.mfindealerservices.com/purchased&response_type=code&scope=refresh_token`,
-    requestData
-  );
-}
-export async function getUserInfo(accessToken) {
-  return await axios.post(
-    `https://srmstg3-stratus2.cs194.force.com/services/oauth2/userinfo?access_token=${accessToken}`
-  );
-}
-// export async function getAccessTokenEndpoint() {
-//     const options = {
-//         headers: {
-//             "Access-Control-Allow-Origin": "*",
-//             "Content-type": "application/x-www-form-urlencoded",
-//         }
-//     }
-
-//     return await axios.post(`https://tfs-srm--srmstg3.my.salesforce.com/services/oauth2/token?code=${code}&client_id=${client_id}&client_secret=${client_secret}&redirect_uri=${redirect_uri}&grant_type=${grant_type}`,options);
-
 export async function awaitManualPricing() {
   const options = {
     headers: {
@@ -560,60 +535,7 @@ export async function getMileageDiscList() {
   //return await axios.post(MileageDiscList, options);
 }
 
-//var querystring = require('querystring');
-// export async function getAccessTokenEndpoint(code) {
 
-//     const options = {
-//         headers: {
-//             "Access-Control-Allow-Origin": "*",
-//             "content-type": 'application/x-www-form-urlencoded'
-//         }
-//     }
-
-//     return await axios.post(`https://srmstg3-tfs-srm.cs194.force.com/stratus2/services/oauth2/token`,querystring.stringify({
-//         "code": code,
-//         "grant_type": "authorization_code",
-//         "client_id": "3MVG9_I_oWkIqLrmNgl8unCGrAPmcPODjDz6DA7QLw7qbd0CKBqVuyUVp_4.c4xZdRowJUxirUcXgiGiPYaQ.",
-//         "client_secret": "A8C495709B3F0BD5972D67EAF464949838E2F35EB623E514F75487A18904D70A",
-//         "redirect_uri":"https://asp-dev.mfindealerservices.com/purchased",
-//      }),options);
-
-// }
-
-//var axios = require('axios');
-// module.exports = typeof self == 'object' ? self.FormData : window.FormData;
-
-// var FormData = require('form-data');
-// var data = new FormData();
-// data.append('code', 'aPrxyoOWGvXqBxqwZTQG7bATs2Ckp_5Qy7bslY.WBV6GFmJQDg8gvg1uHZunOlYpobQYuTxDUQ==');
-// data.append('grant_type', 'authorization_code');
-// data.append('client_id', '3MVG9_I_oWkIqLrmNgl8unCGrAPmcPODjDz6DA7QLw7qbd0CKBqVuyUVp_4.c4xZdRowJUxirUcXgiGiPYaQ.');
-// data.append('client_secret', 'A8C495709B3F0BD5972D67EAF464949838E2F35EB623E514F75487A18904D70A\n\n');
-// data.append('redirect_uri', 'http://localhost:3000/purchased');
-// const http = require('http');
-
-// var config = {
-//   method: 'post',
-//   url: 'https://srmstg3-stratus2.cs194.force.com/services/oauth2/token',
-//   headers: {
-//     'Content-Type': 'application/x-www-form-urlencoded',
-//     ...data.getHeaders()
-//   },
-//   data : data
-// };
-
-// export async function getAccessTokenEndpoint(code) {
-
-//     axios(config)
-// .then(function (response) {
-//   console.log(JSON.stringify(response.data));
-// })
-// .catch(function (error) {
-//   console.log(error);
-// });
-
-// }
-// var FormData = require('form-data');
 var qs = require("qs");
 export async function getAccessTokenEndpoint(code) {
   var data = qs.stringify({
@@ -637,17 +559,38 @@ export async function getAccessTokenEndpoint(code) {
 
   return await axios(config);
 }
-export async function getUserInfoToken(token) {
-  var qs = require("qs");
+export async function getRefreshTokenEndpoint() {
+  var data = qs.stringify({
+    grant_type: "refresh_token",
+    client_id:clientID,
+    refresh_token: localStorage.getItem("refreshToken"),
+    client_secret:clientSecret,
+    redirect_uri: redirectURL,
+    // redirect_uri: "http://localhost:3000/login2",
+  });
   var config = {
     method: "post",
-    url: `https://stratus-stg3.mfindealerservices.com/services/oauth2/userinfo?access_token=${token}`,
+    url: "https://stratus-stg3.mfindealerservices.com/services/oauth2/token",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+      //   Cookie:
+      //     "BrowserId=LAkGcCGXEeyO6WviLU7-xw; CookieConsentPolicy=0:1; LSKey-c$CookieConsentPolicy=0:1",
+    },
+    data: data,
   };
 
   return await axios(config);
 }
+// export async function getUserInfoToken(token) {
+//   var qs = require("qs");
+//   var config = {
+//     method: "post",
+//     url: `https://stratus-stg3.mfindealerservices.com/services/oauth2/userinfo?access_token=${token}`,
+//   };
+
+//   return await axios(config);
+// }
 export async function getForgeRockToken() {
-  let token = localStorage.getItem("bearerToken");
   var config = {
     method: "get",
     url: "https://stratus-stg3.mfindealerservices.com/services/apexrest/v1/stratusapi/getToken",

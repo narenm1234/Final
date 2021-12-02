@@ -27,7 +27,7 @@ const Header = (props) => {
 
   React.useEffect(() => {
     getDealerDrop();
-  }, []);
+  }, [localStorage.getItem("forgeRockToken")]);
 
   async function getDealerDrop() {
     let apiResponse = await getDealerDropData();
