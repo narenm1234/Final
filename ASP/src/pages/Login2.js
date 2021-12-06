@@ -55,10 +55,10 @@ function getParameterByName(name, url = window.location.href) {
   console.log("forgerock", resp);
   localStorage.setItem("ForgeRockToken",resp.data.forgeRockToken);
   setInterval(() =>{
-    let apiResponse = await getRefreshTokenEndpoint();
+    let apiResponse = getRefreshTokenEndpoint();
     localStorage.setItem("bearerToken",apiResponse.data.access_token);
     localStorage.setItem("refreshToken",apiResponse.data.refresh_token);
-    let resp1 = await getForgeRockToken();
+    let resp1 =  getForgeRockToken();
     localStorage.setItem("ForgeRockToken",resp1.data.forgeRockToken);
 },500000)
   

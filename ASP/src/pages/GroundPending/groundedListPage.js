@@ -8,7 +8,6 @@ import SwipeableTextMobileStepper from "./Carousel";
 import moment from "moment";
 import {
   getGroundingList,
-  getAuthTokenSSO,
   getAccessTokenEndpoint,
   getUserInfo,
   getImageData,
@@ -121,15 +120,7 @@ export default function ListingPage(props) {
     }
   }, [props.selectedDealersData]);
 
-  useEffect(() => {
-    getAuthTokenSSO1();
-  }, [value]);
-
-  async function getAuthTokenSSO1() {
-    let apiResponse = await getAuthTokenSSO();
-    setSSOAuth(apiResponse.data.data);
-    console.log("-------0------>", SSOAuth);
-  }
+ 
 
   // const getImages = async () => {
   //   let reqObj = {
