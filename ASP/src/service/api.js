@@ -439,12 +439,12 @@ export async function getInspectionAccessoryDetails(vin) {
   return await axios(config);
 }
 export async function getInspectionDamageDetailsApi(inspectionId,vin) {
-  localStorage.getItem("tenantId")
+  let tenant=localStorage.getItem("tenantId")
  
 
   var config = {
     method: "post",
-    url: `${getInspectionDamageDetailsUrl}?inpsectionId=${inspectionId}&tenantId=${localStorage.getItem("tenantId")}&vin=${vin}`,
+    url: `${getInspectionDamageDetailsUrl}?inpsectionId=${inspectionId}&tenantId=${tenant}&vin=${vin}`,
     headers: {
       accept: "application/json",
       "Content-Type": "application/json",

@@ -80,6 +80,7 @@ export default function ListingPage1(props) {
   }, [value]);
   async function getVehicleDetails() {
     let apiResponse = await getPassedList();
+    setLoader(false);
 
     getTransportDetails(apiResponse?.data.data);
   }
@@ -100,7 +101,7 @@ export default function ListingPage1(props) {
       let apiResponse = await getTransportationDetails(vinlistqueryparams);
       setTransport(apiResponse.data);
       setVehicleResponse(data);
-      setLoader(false);
+      
     }
   }
 

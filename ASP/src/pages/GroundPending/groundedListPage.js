@@ -197,6 +197,12 @@ export default function ListingPage(props) {
       clearInterval(timer);
     };
   }, []);
+  var refresh = window.localStorage.getItem('refresh');
+console.log(refresh);
+if (refresh===null){
+    window.location.reload();
+    window.localStorage.setItem('refresh', "1");
+}
 
   const getEstimagetTimeRemaining = (grounding_date) => {
     setInterval(() => {
@@ -209,6 +215,8 @@ export default function ListingPage(props) {
       setTime(timeremaining);
     }, 600);
   };
+ 
+
 
   return (
     <>
@@ -362,7 +370,7 @@ export default function ListingPage(props) {
                         <span className="textSize">
                           {vehicle.vehicle_price ? (
                             <CurrencyFormat
-                              value={vehicle.vehicle_price}
+                              value={parseFloat(vehicle.vehicle_price).toFixed(2)}
                               displayType={"text"}
                               thousandSeparator={true}
                               prefix={"$"}
