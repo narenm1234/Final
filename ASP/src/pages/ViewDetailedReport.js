@@ -727,11 +727,10 @@ export default function ViewDetailedReport(props) {
                     className="align_right11"
                   >
                     <CurrencyFormat
-                      value={finalTotal}
+                      value={parseFloat(finalTotal).toFixed(2)}
                       displayType={"text"}
                       thousandSeparator={true}
                       prefix={"$"}
-                      suffix={".00"}
                     />
                   </TableCell>
                 </TableRow>

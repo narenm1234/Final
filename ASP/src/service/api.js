@@ -476,7 +476,7 @@ export async function postDealerActionPassOnVehicle(vin, groundId) {
 
   var config = {
     method: "post",
-    url: `${getDealerActionUrl}?dealerAction="Pass"&groundingId=${groundId}&vin=${vin}`,
+    url: `${getDealerActionUrl}?dealerAction=Pass&groundingId=${groundId}&vin=${vin}`,
     headers: {
       accept: "application/json",
       "Content-Type": "application/json",
@@ -492,7 +492,7 @@ export async function postDealerActionPurchaseOnVehicle(vin, groundId) {
 
   var config = {
     method: "post",
-    url: `${getDealerActionUrl}?dealerAction="Purchase"&groundingId=${groundId}&vin=${vin}`,
+    url: `${getDealerActionUrl}?dealerAction=Purchase&groundingId=${groundId}&vin=${vin}`,
     headers: {
       accept: "application/json",
       "Content-Type": "application/json",
