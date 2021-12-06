@@ -380,17 +380,14 @@ export default function ListingPage(props) {
                           </span>
                         </span>
                         <span className="textSize">
-                          {/* <CurrencyFormat
-                              value={
-                                vehicle.remaining_pmts
-                                  ? vehicle.remaining_pmts
-                                  : ""
-                              }
-                              displayType={"text"}
-                              thousandSeparator={true}
-                              prefix={"$"}
-                            /> */}
-                          Pending
+                          {vehicle.vehicle_price?(<CurrencyFormat
+                            value={parseFloat(
+                              vehicle.vehicle_price + vehicle.remaining_pmts
+                            ).toFixed(2)}
+                            displayType={"text"}
+                            thousandSeparator={true}
+                            prefix={"$"}
+                          />):("Pending")}
                         </span>
                       </div>
                     </div>
