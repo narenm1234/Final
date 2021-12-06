@@ -186,7 +186,7 @@ export default function ConditionReport(props) {
                             {}
                             {DamageDetails.exteriorCost ? (
                               <CurrencyFormat
-                                value={DamageDetails.exteriorCost}
+                                value={parseFloat(DamageDetails.exteriorCost).toFixed(2)}
                                 displayType={"text"}
                                 thousandSeparator={true}
                                 prefix={"$"}
@@ -206,7 +206,7 @@ export default function ConditionReport(props) {
                             {}
                             {DamageDetails.interiorCost ? (
                               <CurrencyFormat
-                                value={DamageDetails.interiorCost}
+                                value={parseFloat(DamageDetails.interiorCost).toFixed(2)}
                                 displayType={"text"}
                                 thousandSeparator={true}
                                 prefix={"$"}
@@ -226,7 +226,7 @@ export default function ConditionReport(props) {
                             {}
                             {DamageDetails.maintainenceCost ? (
                               <CurrencyFormat
-                                value={DamageDetails.maintainenceCost}
+                                value={parseFloat(DamageDetails.maintainenceCost).toFixed(2)}
                                 displayType={"text"}
                                 thousandSeparator={true}
                                 prefix={"$"}
@@ -346,7 +346,7 @@ export default function ConditionReport(props) {
                               <CurrencyFormat
                                 value={
                                   vehicleDetails.vehicle_price
-                                    ? vehicleDetails.vehicle_price
+                                    ? parseFloat(vehicleDetails.vehicle_price).toFixed(2)
                                     : "0.00"
                                 }
                                 displayType={"text"}
@@ -376,7 +376,7 @@ export default function ConditionReport(props) {
                             <CurrencyFormat
                               value={
                                 condionVehicleDetails?.inspection_mileage
-                                  ? condionVehicleDetails.inspection_mileage
+                                  ? parseFloat(condionVehicleDetails.inspection_mileage).toFixed(2)
                                   : ""
                               }
                               displayType={"text"}
@@ -627,7 +627,7 @@ export default function ConditionReport(props) {
                               <CurrencyFormat
                                 value={
                                   condionVehicleDetails?.grounding_mileage
-                                    ? condionVehicleDetails.grounding_mileage
+                                    ? parseFloat(condionVehicleDetails.grounding_mileage).toFixed(2) 
                                     : ""
                                 }
                                 displayType={"text"}
@@ -833,14 +833,14 @@ export default function ConditionReport(props) {
                               <CurrencyFormat
                                 value={
                                   vehicleDetails.pay_off_amt
-                                    ? vehicleDetails.pay_off_amt
-                                    : "0"
+                                    ? parseFloat(vehicleDetails.pay_off_amt).toFixed(2)
+                                    : "0.00"
                                 }
                                 displayType={"text"}
                                 thousandSeparator={true}
                                 prefix={"$"}
                               />
-                              .00
+                              
                             </span>
                           </div>
                         </CardContent>
@@ -856,14 +856,14 @@ export default function ConditionReport(props) {
                             <span className="textSize">
                               <CurrencyFormat
                                 value={
-                                  vehicleDetails.residual_amt +
-                                  vehicleDetails.remaining_pmts
+                                  parseFloat(vehicleDetails.residual_amt +
+                                    vehicleDetails.remaining_pmts).toFixed(2) 
                                 }
                                 displayType={"text"}
                                 thousandSeparator={true}
                                 prefix={"$"}
                               />
-                              .00
+                            
                             </span>
                           </div>
                         </CardContent>
@@ -914,7 +914,7 @@ export default function ConditionReport(props) {
                               <CurrencyFormat
                                 value={
                                   condionVehicleDetails?.grounding_mileage
-                                    ? condionVehicleDetails.grounding_mileage
+                                    ? parseFloat(condionVehicleDetails.grounding_mileage).toFixed(2) 
                                     : ""
                                 }
                                 displayType={"text"}
