@@ -439,7 +439,7 @@ export async function getInspectionAccessoryDetails(vin) {
   return await axios(config);
 }
 export async function getInspectionDamageDetailsApi(inspectionId,vin) {
-  let tenant=localStorage.getItem("tenantId")
+  let tenant=localStorage.getItem("tenantId")?localStorage.getItem("tenantId"):"t002"
  
 
   var config = {

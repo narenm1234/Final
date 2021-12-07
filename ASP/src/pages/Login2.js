@@ -24,6 +24,7 @@ function getParameterByName(name, url = window.location.href) {
   const [dealerCode, setDealerCode] = useState('');
   useEffect(() => {
     getToken();
+    getUserAccessInfoToken();
     // getUserAccessInfoToken();
   }, {});
   
@@ -47,21 +48,26 @@ function getParameterByName(name, url = window.location.href) {
     
   }
   useEffect(() => {
-    getUserAccessInfoToken();
+   
   }, {});
 
   async function getUserAccessInfoToken(){
   let resp = await getForgeRockToken();
   console.log("forgerock", resp);
   localStorage.setItem("ForgeRockToken",resp.data.forgeRockToken);
-  setInterval(() =>{
-    let apiResponse =  getRefreshTokenEndpoint();
+  setInterval(async ()  =>{
+    let apiResponse =  await getRefreshTokenEndpoint();
     localStorage.setItem("bearerToken",apiResponse.data.access_token);
     // localStorage.setItem("refreshToken",apiResponse.data.refresh_token);
-    let resp1 =   getForgeRockToken();
+    let resp1 =   await getForgeRockToken();
     localStorage.setItem("ForgeRockToken",resp1.data.forgeRockToken);
-},30000)
-  
+},600000)
+var refresh1 = window.localStorage.getItem('refresh1');
+console.log(refresh1);
+if (refresh===null){
+    window.location.reload();
+    window.localStorage.setItem('refresh1', "1");
+}
 
   props.history.push('/grounded')
 
