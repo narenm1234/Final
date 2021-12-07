@@ -311,7 +311,7 @@ if (refresh===null){
                             value={vehicle.inspection_mileage}
                             displayType={"text"}
                             thousandSeparator={true}
-                            suffix={"miles"}
+                            suffix={" miles"}
                           />
                         ) : (
                           "Pending"
