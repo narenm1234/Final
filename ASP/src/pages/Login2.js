@@ -64,7 +64,7 @@ function getParameterByName(name, url = window.location.href) {
 },600000)
 var refresh1 = window.localStorage.getItem('refresh1');
 console.log(refresh1);
-if (refresh===null){
+if (refresh1===null){
     window.location.reload();
     window.localStorage.setItem('refresh1', "1");
 }
