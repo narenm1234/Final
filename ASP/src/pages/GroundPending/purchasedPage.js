@@ -147,7 +147,6 @@ export default function ListingPage2(props) {
   const openConditionReport = (VINumber, vehicle) => {
     props.history.push("/conditionreport", {
       vin: VINumber,
-      purchaseSection: true,
       vehicleDetails: vehicle,
     });
   };

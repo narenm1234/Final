@@ -474,7 +474,7 @@ export async function getOEMBuildDetailsApi(vin) {
 export async function postDealerActionPassOnVehicle(vin, groundId) {
   
 
-  var config = {
+  var config = { 
     method: "post",
     url: `${getDealerActionUrl}?dealerAction=Pass&groundingId=${groundId}&vin=${vin}`,
     headers: {

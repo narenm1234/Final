@@ -24,9 +24,7 @@ import {
   getInspectionDamageDetailsApi,
   getOEMBuildDetailsApi,
   getPurchasedList,
-  postDealerActionPurchaseOnVehicle
-} from "../service/api";
-import {
+  postDealerActionPurchaseOnVehicle,
   getInspectionVehicleDetails,
   getInspectionAccessoryDetails,
   getInspectionWheelTiresDetails,
@@ -62,7 +60,7 @@ export default function ConditionReport(props) {
   const [purchaseSection, setPurchaseSection] = React.useState(
     props?.location?.state?.purchaseSection
   );
-  const [inspectionId, setInspectionId] = React.useState(0);
+  const [inspectionId, setInspectionId] = React.useState();
   const [VehicleResponse, setVehicleResponse] = useState([]);
   //const [value, setValue] = useState([])
   const [DamageDetails, setDamageDetails] = useState([]);
@@ -72,15 +70,9 @@ export default function ConditionReport(props) {
   );
 
   const [openTransactionPopup, setOpenTransactionPopup] = useState(false);
-  const [transactionPopupType, setTransactionPopupType] = useState('confirm');
+  const [transactionPopupType, setTransactionPopupType] = useState("confirm");
   const [transactionInfo, setTransactionInfo] = useState({});
   const [isConfirmPurchase, setIsConfirmPurchase] = useState(false);
-
-useEffect(()=>{
-// console.log("vin====>",props?.match?.params?.vin) 
-setVin(props?.match?.params?.vin)
-},[props?.match?.params?.vin])
-
 
   useEffect(() => {
     getOEMBuildDetails();
@@ -94,9 +86,9 @@ setVin(props?.match?.params?.vin)
     setOEMBuildDetailsData(apiResponse.data);
   }
 
-  async function getInspectionDamageDetails() {
+  async function getInspectionDamageDetails(inspection_Id) {
     let getInspectionDamageDetailsaApiResponse =
-      await getInspectionDamageDetailsApi(inspectionId, vin);
+      await getInspectionDamageDetailsApi(inspection_Id , vin);
     setDamageDetails(getInspectionDamageDetailsaApiResponse.data);
   }
   async function getVehicleDetails() {
@@ -104,21 +96,21 @@ setVin(props?.match?.params?.vin)
     setVehicleResponse(apiResponse.data.data);
   }
 
-  useEffect(() => {
-    getInspectionWheelTires(inspectionId);
-    getInspectionDamageDetails(inspectionId);
-
-    
-  }, [inspectionId]);
+  const cloadDamageDetails = (inspection_Id) => {
+    getInspectionWheelTires(inspection_Id);
+    getInspectionDamageDetails(inspection_Id);
+  };
 
   async function getConditionVehicleDetails() {
     let apiResponse = await getInspectionVehicleDetails(vin);
     console.log("getConditionVehicleDetailsresponse", apiResponse);
-    //let length = apiResponse.data.length;
-    //if (length > 0) {
-    setCondionVehicleDetails(apiResponse.data);
-    setInspectionId(apiResponse.data.inspection_id);
-    // }
+    if (apiResponse && apiResponse.data) {
+      setCondionVehicleDetails(apiResponse.data);
+      if (apiResponse.data.inspection_id) {
+        setInspectionId(apiResponse.data.inspection_id);
+        cloadDamageDetails(apiResponse.data.inspection_id);
+      }
+    }
   }
 
   async function getInspectionAccessory(vin) {
@@ -146,21 +138,24 @@ setVin(props?.match?.params?.vin)
   const handlePurchaseVehical = (event) => {
     setOpenTransactionPopup(true);
     setTransactionInfo(event);
-    setTransactionPopupType(event.type)
+    setTransactionPopupType(event.type);
   };
 
- const handleConfirmPurchase = () =>{
-  setIsConfirmPurchase(true);
-  }
-  const handleContinue = async () =>{
+  const handleConfirmPurchase = () => {
+    setIsConfirmPurchase(true);
+  };
+  const handleContinue = async () => {
     setOpenTransactionPopup(false);
-    if(transactionPopupType == 'success'){
-      let apiResponse = await postDealerActionPurchaseOnVehicle(vin , vehicleDetails?.groundingId);
+    if (transactionPopupType == "success") {
+      let apiResponse = await postDealerActionPurchaseOnVehicle(
+        vin,
+        vehicleDetails?.groundingId
+      );
       console.log("postDealerActionPurchaseOnVehicle==>", apiResponse);
       // window.location.replace("/grounded");
       window.location.reload();
     }
-  }
+  };
 
   return (
     <>
@@ -192,9 +187,11 @@ setVin(props?.match?.params?.vin)
                           <div className="smallCardTitle">Exterior total</div>
                           <div className="smallCardBody warningColor">
                             {}
-                            {DamageDetails.exteriorCost ? (
+                            {DamageDetails && DamageDetails.exteriorCost ? (
                               <CurrencyFormat
-                                value={parseFloat(DamageDetails.exteriorCost).toFixed(2)}
+                                value={parseFloat(
+                                  DamageDetails.exteriorCost
+                                ).toFixed(2)}
                                 displayType={"text"}
                                 thousandSeparator={true}
                                 prefix={"$"}
@@ -212,9 +209,11 @@ setVin(props?.match?.params?.vin)
                           <div className="smallCardTitle">Interior total</div>
                           <div className="smallCardBody warningColor">
                             {}
-                            {DamageDetails.interiorCost ? (
+                            {DamageDetails && DamageDetails.interiorCost ? (
                               <CurrencyFormat
-                                value={parseFloat(DamageDetails.interiorCost).toFixed(2)}
+                                value={parseFloat(
+                                  DamageDetails.interiorCost
+                                ).toFixed(2)}
                                 displayType={"text"}
                                 thousandSeparator={true}
                                 prefix={"$"}
@@ -232,9 +231,11 @@ setVin(props?.match?.params?.vin)
                           <div className="smallCardTitle">Mechanical total</div>
                           <div className="smallCardBody warningColor">
                             {}
-                            {DamageDetails.maintainenceCost ? (
+                            {DamageDetails && DamageDetails.maintainenceCost ? (
                               <CurrencyFormat
-                                value={parseFloat(DamageDetails.maintainenceCost).toFixed(2)}
+                                value={parseFloat(
+                                  DamageDetails.maintainenceCost
+                                ).toFixed(2)}
                                 displayType={"text"}
                                 thousandSeparator={true}
                                 prefix={"$"}
@@ -305,19 +306,18 @@ setVin(props?.match?.params?.vin)
                           <div className="smallCardTitle">Payoff</div>
                           <div className="smallCardBody">
                             <span className="textSize">
-                              <CurrencyFormat
-                                value={
-                                  vehicleDetails && vehicleDetails.pay_off_amt
-                                    ? parseFloat(
-                                        vehicleDetails.pay_off_amt
-                                      ).toFixed(2)
-                                    : "0.00"
-                                }
-                                displayType={"text"}
-                                thousandSeparator={true}
-                                prefix={"$"}
-                              />
-                             
+                              {vehicleDetails && vehicleDetails.pay_off_amt ? (
+                                <CurrencyFormat
+                                  value={parseFloat(
+                                    vehicleDetails.pay_off_amt
+                                  ).toFixed(2)}
+                                  displayType={"text"}
+                                  thousandSeparator={true}
+                                  prefix={"$"}
+                                />
+                              ) : (
+                                "$0.00"
+                              )}
                             </span>
                           </div>
                         </CardContent>
@@ -331,17 +331,21 @@ setVin(props?.match?.params?.vin)
                           </div>
                           <div className="smallCardBody">
                             <span className="textSize">
-                              <CurrencyFormat
-                                value={
-                                  vehicleDetails && vehicleDetails.remaining_pmts && vehicleDetails.residual_amt && 
-                                  vehicleDetails.residual_amt? parseFloat(
-                                  vehicleDetails.residual_amt +
-                                    vehicleDetails.remaining_pmts
-                                ).toFixed(2):"0.00"}
-                                displayType={"text"}
-                                thousandSeparator={true}
-                                prefix={"$"}
-                              />
+                              {vehicleDetails &&
+                              vehicleDetails.remaining_pmts &&
+                              vehicleDetails.residual_amt ? (
+                                <CurrencyFormat
+                                  value={parseFloat(
+                                    vehicleDetails.residual_amt +
+                                      vehicleDetails.remaining_pmts
+                                  ).toFixed(2)}
+                                  displayType={"text"}
+                                  thousandSeparator={true}
+                                  prefix={"$"}
+                                />
+                              ) : (
+                                "$0.00"
+                              )}
                             </span>
                           </div>
                         </CardContent>
@@ -353,16 +357,19 @@ setVin(props?.match?.params?.vin)
                           <div className="smallCardTitle">Market Based</div>
                           <div className="smallCardBody">
                             <span className="textSize">
-                              <CurrencyFormat
-                                value={ vehicleDetails &&
-                                  vehicleDetails.vehicle_price
-                                    ? parseFloat(vehicleDetails.vehicle_price).toFixed(2)
-                                    : "0.00"
-                                }
-                                displayType={"text"}
-                                thousandSeparator={true}
-                                prefix={"$"}
-                              />
+                              {vehicleDetails &&
+                              vehicleDetails.vehicle_price ? (
+                                <CurrencyFormat
+                                  value={parseFloat(
+                                    vehicleDetails.vehicle_price
+                                  ).toFixed(2)}
+                                  displayType={"text"}
+                                  thousandSeparator={true}
+                                  prefix={"$"}
+                                />
+                              ) : (
+                                "$0.00"
+                              )}
                             </span>
                           </div>
                         </CardContent>
@@ -383,16 +390,17 @@ setVin(props?.match?.params?.vin)
                         <CardContent>
                           <div className="smallCardTitle">Odometer</div>
                           <div className="smallCardBody">
-                            <CurrencyFormat
-                              value={
-                                condionVehicleDetails?.inspection_mileage
-                                  ? condionVehicleDetails.inspection_mileage
-                                  : "0"
-                              }
-                              displayType={"text"}
-                              thousandSeparator={true}
-                              suffix={" miles"}
-                            />
+                            {condionVehicleDetails &&
+                            condionVehicleDetails?.inspection_mileage ? (
+                              <CurrencyFormat
+                                value={condionVehicleDetails.inspection_mileage}
+                                displayType={"text"}
+                                thousandSeparator={true}
+                                suffix={" miles"}
+                              />
+                            ) : (
+                              ""
+                            )}
                           </div>
                         </CardContent>
                       </Card>
@@ -634,16 +642,19 @@ setVin(props?.match?.params?.vin)
                           </ListItemText>
                           <ListItemSecondaryAction>
                             <span className="textSize">
-                              <CurrencyFormat
-                                value={
-                                  condionVehicleDetails?.grounding_mileage
-                                    ? condionVehicleDetails.grounding_mileage 
-                                    : ""
-                                }
-                                displayType={"text"}
-                                thousandSeparator={true}
-                                suffix={""}
-                              />
+                              {condionVehicleDetails &&
+                              condionVehicleDetails?.grounding_mileage ? (
+                                <CurrencyFormat
+                                  value={
+                                    condionVehicleDetails.grounding_mileage
+                                  }
+                                  displayType={"text"}
+                                  thousandSeparator={true}
+                                  suffix={""}
+                                />
+                              ) : (
+                                ""
+                              )}
                             </span>
                           </ListItemSecondaryAction>
                         </List>
@@ -687,7 +698,7 @@ setVin(props?.match?.params?.vin)
                                   className="accessoriestinlineextStyle"
                                   key={index}
                                 >
-                                  <Typography variant="span">
+                                  <Typography>
                                     {list.description.toLowerCase()}
                                   </Typography>
                                 </Box>
@@ -840,17 +851,18 @@ setVin(props?.match?.params?.vin)
                           <div className="smallCardTitle">Payoff</div>
                           <div className="smallCardBody">
                             <span>
-                              <CurrencyFormat
-                                value={
-                                  vehicleDetails && vehicleDetails.pay_off_amt
-                                    ? parseFloat(vehicleDetails.pay_off_amt).toFixed(2)
-                                    : "0.00"
-                                }
-                                displayType={"text"}
-                                thousandSeparator={true}
-                                prefix={"$"}
-                              />
-                              
+                              {vehicleDetails && vehicleDetails.pay_off_amt ? (
+                                <CurrencyFormat
+                                  value={parseFloat(
+                                    vehicleDetails.pay_off_amt
+                                  ).toFixed(2)}
+                                  displayType={"text"}
+                                  thousandSeparator={true}
+                                  prefix={"$"}
+                                />
+                              ) : (
+                                "$0.00"
+                              )}
                             </span>
                           </div>
                         </CardContent>
@@ -864,17 +876,21 @@ setVin(props?.match?.params?.vin)
                           </div>
                           <div className="smallCardBody">
                             <span>
-                              <CurrencyFormat
-                                value={
-                                  vehicleDetails && vehicleDetails.residual_amt && vehicleDetails.remaining_pmts &&
-                                  parseFloat(vehicleDetails.residual_amt +
-                                    vehicleDetails.remaining_pmts).toFixed(2) 
-                                }
-                                displayType={"text"}
-                                thousandSeparator={true}
-                                prefix={"$"}
-                              />
-                            
+                              {vehicleDetails &&
+                              vehicleDetails.residual_amt &&
+                              vehicleDetails.remaining_pmts ? (
+                                <CurrencyFormat
+                                  value={parseFloat(
+                                    vehicleDetails.residual_amt +
+                                      vehicleDetails.remaining_pmts
+                                  ).toFixed(2)}
+                                  displayType={"text"}
+                                  thousandSeparator={true}
+                                  prefix={"$"}
+                                />
+                              ) : (
+                                ""
+                              )}
                             </span>
                           </div>
                         </CardContent>
@@ -922,16 +938,19 @@ setVin(props?.match?.params?.vin)
                           </ListItemText>
                           <ListItemSecondaryAction>
                             <span className="textSize">
-                              <CurrencyFormat
-                                value={
-                                  condionVehicleDetails?.grounding_mileage
-                                    ? parseFloat(condionVehicleDetails.grounding_mileage).toFixed(2) 
-                                    : ""
-                                }
-                                displayType={"text"}
-                                thousandSeparator={true}
-                                suffix={""}
-                              />
+                              {condionVehicleDetails &&
+                              condionVehicleDetails?.grounding_mileage ? (
+                                <CurrencyFormat
+                                  value={parseFloat(
+                                    condionVehicleDetails.grounding_mileage
+                                  ).toFixed(2)}
+                                  displayType={"text"}
+                                  thousandSeparator={true}
+                                  suffix={""}
+                                />
+                              ) : (
+                                ""
+                              )}
                             </span>
                           </ListItemSecondaryAction>
                         </List>
@@ -1015,7 +1034,7 @@ setVin(props?.match?.params?.vin)
               </Grid>
             </Box>
           )}
-          <ViewDetailedReport 
+          <ViewDetailedReport
             DamageDetails={DamageDetails}
             open={open}
             close={handleClose}
@@ -1038,7 +1057,7 @@ setVin(props?.match?.params?.vin)
 
       <Box>
         <TransactionModal
-          transactionInfo = {transactionInfo}
+          transactionInfo={transactionInfo}
           type={transactionPopupType}
           open={openTransactionPopup}
           onClose={() => {

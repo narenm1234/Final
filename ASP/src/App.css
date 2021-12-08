@@ -37,6 +37,7 @@
   src: local("ToyotaTypeBook"),
     url("../src/assets/WebFont/ToyotaType-Book.ttf") format("truetype");
   font-weight: normal;
+  font-style: normal;
 }
 .centerContents{
   position: absolute;

@@ -71,7 +71,7 @@ const Header = (props) => {
   return (
     <div className="container">
       <div className="imageHolder">
-        <img src="MFS.png" alt="logo" width="174px" height="33px" />
+        <img src="MFS.png" alt="logo" width="213px"  />
         <Separator />
         <div className="auctionSales">Auction Sales Platform </div>
       </div>
