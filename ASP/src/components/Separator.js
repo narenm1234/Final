@@ -6,9 +6,9 @@ const Separator = (props) => {
 
     <div style={{
       width: "1px",
-      height: "32px",
+      height: "44px",
       margin: "0 0 0 10px",
-      backgroundColor: "#080707",
+      backgroundColor: "#cccccc",
     }
 
     }></div>
