@@ -121,11 +121,11 @@ export default function ListingPage2(props) {
     let price = "";
     if (list.length != 0) {
       list.forEach((x, index) => {
-        if( x.price_category){
-          if(index == list.length-1){
+        if (x.price_category) {
+          if (index == list.length - 1) {
             price = price += x.price_category;
-          }else{
-            price = price += x.price_category + ' + ';
+          } else {
+            price = price += x.price_category + " + ";
           }
         }
       });
@@ -136,13 +136,20 @@ export default function ListingPage2(props) {
     let price = 0;
     if (list.length != 0) {
       list.forEach((x, index) => {
-        if( x.sale_amount){
-            price = price += x.sale_amount;
+        if (x.sale_amount) {
+          price = price += x.sale_amount;
         }
       });
     }
     return price;
   }
+
+  const openConditionReport = (VINumber, vehicle) => {
+    props.history.push("/conditionreport", {
+      vin: VINumber,
+      vehicleDetails: vehicle,
+    });
+  };
 
   return vehicleResponse?.length > 0 ? (
     vehicleResponse.map((vehicle, index) => {
@@ -152,7 +159,10 @@ export default function ListingPage2(props) {
             <Grid item xs={4}>
               {/* <SwipeableTextMobileStepper /> */}
               {vehicle.groundingImage ? (
-                <SwipeableTextMobileStepper vehical={vehicle} images={vehicle.groundingImage} />
+                <SwipeableTextMobileStepper
+                  vehical={vehicle}
+                  images={vehicle.groundingImage}
+                />
               ) : (
                 <div className="pendingImgBlock">
                   <img
@@ -181,7 +191,10 @@ export default function ListingPage2(props) {
 
                   <span className="textStyle">
                     <span className="textBold"> VIN:</span>
-                    <a className="vin" href={`/conditionreport${vehicle.vin}`}>
+                    <a
+                      className="vin"
+                      onClick={() => openConditionReport(vehicle.vin, vehicle)}
+                    >
                       {" "}
                       {vehicle.vin}
                     </a>
@@ -266,7 +279,9 @@ export default function ListingPage2(props) {
                     <span className="textStyleTotalFee"> Total Price</span>{" "}
                     <span className="totalFeeSum">
                       <CurrencyFormat
-                        value={parseFloat(getTotprice(vehicle.priceCategoryList)).toFixed(2)}
+                        value={parseFloat(
+                          getTotprice(vehicle.priceCategoryList)
+                        ).toFixed(2)}
                         displayType={"text"}
                         thousandSeparator={true}
                         prefix={"$"}

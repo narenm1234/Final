@@ -57,7 +57,7 @@ function App() {
                   />}
                 />
                 <Route path="/passed" exact render={(props) => <GroundPending1 {...props} />} />
-                <Route path="/purchased" exact component={GroundPending2} />
+                <Route path="/purchased" exact render={(props) => <GroundPending2 {...props} />} />
                 <Route
                   path="/grounded/lastchance"
                   exact
@@ -75,7 +75,7 @@ function App() {
                   render={(props) => <ConditionReportRequests {...props} />}
                 />
                 <Route
-                  path="/conditionreport:vin"
+                  path="/conditionreport/:vin"
                   exact
                   render={(props) => <ConditionReport {...props} />}
                 />

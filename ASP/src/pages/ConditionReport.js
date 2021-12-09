@@ -24,9 +24,7 @@ import {
   getInspectionDamageDetailsApi,
   getOEMBuildDetailsApi,
   getPurchasedList,
-  postDealerActionPurchaseOnVehicle
-} from "../service/api";
-import {
+  postDealerActionPurchaseOnVehicle,
   getInspectionVehicleDetails,
   getInspectionAccessoryDetails,
   getInspectionWheelTiresDetails,
@@ -62,7 +60,7 @@ export default function ConditionReport(props) {
   const [purchaseSection, setPurchaseSection] = React.useState(
     props?.location?.state?.purchaseSection
   );
-  const [inspectionId, setInspectionId] = React.useState(0);
+  const [inspectionId, setInspectionId] = React.useState();
   const [VehicleResponse, setVehicleResponse] = useState([]);
   //const [value, setValue] = useState([])
   const [DamageDetails, setDamageDetails] = useState([]);
@@ -72,7 +70,7 @@ export default function ConditionReport(props) {
   );
 
   const [openTransactionPopup, setOpenTransactionPopup] = useState(false);
-  const [transactionPopupType, setTransactionPopupType] = useState('confirm');
+  const [transactionPopupType, setTransactionPopupType] = useState("confirm");
   const [transactionInfo, setTransactionInfo] = useState({});
   const [isConfirmPurchase, setIsConfirmPurchase] = useState(false);
 
@@ -88,9 +86,9 @@ export default function ConditionReport(props) {
     setOEMBuildDetailsData(apiResponse.data);
   }
 
-  async function getInspectionDamageDetails() {
+  async function getInspectionDamageDetails(inspection_Id) {
     let getInspectionDamageDetailsaApiResponse =
-      await getInspectionDamageDetailsApi(inspectionId, vin);
+      await getInspectionDamageDetailsApi(inspection_Id , vin);
     setDamageDetails(getInspectionDamageDetailsaApiResponse.data);
   }
   async function getVehicleDetails() {
@@ -98,19 +96,21 @@ export default function ConditionReport(props) {
     setVehicleResponse(apiResponse.data.data);
   }
 
-  useEffect(() => {
-    getInspectionWheelTires(inspectionId);
-    getInspectionDamageDetails(inspectionId);
-  }, [inspectionId]);
+  const cloadDamageDetails = (inspection_Id) => {
+    getInspectionWheelTires(inspection_Id);
+    getInspectionDamageDetails(inspection_Id);
+  };
 
   async function getConditionVehicleDetails() {
     let apiResponse = await getInspectionVehicleDetails(vin);
     console.log("getConditionVehicleDetailsresponse", apiResponse);
-    //let length = apiResponse.data.length;
-    //if (length > 0) {
-    setCondionVehicleDetails(apiResponse.data);
-    setInspectionId(apiResponse.data.inspection_id);
-    // }
+    if (apiResponse && apiResponse.data) {
+      setCondionVehicleDetails(apiResponse.data);
+      if (apiResponse.data.inspection_id) {
+        setInspectionId(apiResponse.data.inspection_id);
+        cloadDamageDetails(apiResponse.data.inspection_id);
+      }
+    }
   }
 
   async function getInspectionAccessory(vin) {
@@ -138,21 +138,24 @@ export default function ConditionReport(props) {
   const handlePurchaseVehical = (event) => {
     setOpenTransactionPopup(true);
     setTransactionInfo(event);
-    setTransactionPopupType(event.type)
+    setTransactionPopupType(event.type);
   };
 
- const handleConfirmPurchase = () =>{
-  setIsConfirmPurchase(true);
-  }
-  const handleContinue = async () =>{
+  const handleConfirmPurchase = () => {
+    setIsConfirmPurchase(true);
+  };
+  const handleContinue = async () => {
     setOpenTransactionPopup(false);
-    if(transactionPopupType == 'success'){
-      let apiResponse = await postDealerActionPurchaseOnVehicle(vin , vehicleDetails?.groundingId);
+    if (transactionPopupType == "success") {
+      let apiResponse = await postDealerActionPurchaseOnVehicle(
+        vin,
+        vehicleDetails?.groundingId
+      );
       console.log("postDealerActionPurchaseOnVehicle==>", apiResponse);
       // window.location.replace("/grounded");
       window.location.reload();
     }
-  }
+  };
 
   return (
     <>
@@ -184,9 +187,11 @@ export default function ConditionReport(props) {
                           <div className="smallCardTitle">Exterior total</div>
                           <div className="smallCardBody warningColor">
                             {}
-                            {DamageDetails.exteriorCost ? (
+                            {DamageDetails && DamageDetails.exteriorCost ? (
                               <CurrencyFormat
-                                value={parseFloat(DamageDetails.exteriorCost).toFixed(2)}
+                                value={parseFloat(
+                                  DamageDetails.exteriorCost
+                                ).toFixed(2)}
                                 displayType={"text"}
                                 thousandSeparator={true}
                                 prefix={"$"}
@@ -204,9 +209,11 @@ export default function ConditionReport(props) {
                           <div className="smallCardTitle">Interior total</div>
                           <div className="smallCardBody warningColor">
                             {}
-                            {DamageDetails.interiorCost ? (
+                            {DamageDetails && DamageDetails.interiorCost ? (
                               <CurrencyFormat
-                                value={parseFloat(DamageDetails.interiorCost).toFixed(2)}
+                                value={parseFloat(
+                                  DamageDetails.interiorCost
+                                ).toFixed(2)}
                                 displayType={"text"}
                                 thousandSeparator={true}
                                 prefix={"$"}
@@ -224,9 +231,11 @@ export default function ConditionReport(props) {
                           <div className="smallCardTitle">Mechanical total</div>
                           <div className="smallCardBody warningColor">
                             {}
-                            {DamageDetails.maintainenceCost ? (
+                            {DamageDetails && DamageDetails.maintainenceCost ? (
                               <CurrencyFormat
-                                value={parseFloat(DamageDetails.maintainenceCost).toFixed(2)}
+                                value={parseFloat(
+                                  DamageDetails.maintainenceCost
+                                ).toFixed(2)}
                                 displayType={"text"}
                                 thousandSeparator={true}
                                 prefix={"$"}
@@ -269,7 +278,7 @@ export default function ConditionReport(props) {
                 <Grid item xs={7}>
                   <Grid container spacing={1}>
                     <div className="ConditionReportSection">
-                      <Grid item xs={5}>
+                      <Grid item xs={7}>
                         <div className="reportTitle">
                           <span>
                             {vehicleDetails && vehicleDetails.model_year}{" "}
@@ -279,7 +288,7 @@ export default function ConditionReport(props) {
                           </span>
                         </div>
                       </Grid>
-                      <Grid item xs={7}>
+                      <Grid item xs={5}>
                         {condionVehicleDetails?.inspection_date && (
                           <span className="ConditionReportInspection">
                             <span className="BadgeValue">
@@ -297,19 +306,18 @@ export default function ConditionReport(props) {
                           <div className="smallCardTitle">Payoff</div>
                           <div className="smallCardBody">
                             <span className="textSize">
-                              <CurrencyFormat
-                                value={
-                                  vehicleDetails.pay_off_amt
-                                    ? parseFloat(
-                                        vehicleDetails.pay_off_amt
-                                      ).toFixed(2)
-                                    : "0.00"
-                                }
-                                displayType={"text"}
-                                thousandSeparator={true}
-                                prefix={"$"}
-                              />
-                             
+                              {vehicleDetails && vehicleDetails.pay_off_amt ? (
+                                <CurrencyFormat
+                                  value={parseFloat(
+                                    vehicleDetails.pay_off_amt
+                                  ).toFixed(2)}
+                                  displayType={"text"}
+                                  thousandSeparator={true}
+                                  prefix={"$"}
+                                />
+                              ) : (
+                                "$0.00"
+                              )}
                             </span>
                           </div>
                         </CardContent>
@@ -318,20 +326,26 @@ export default function ConditionReport(props) {
                     <Grid item xs={4} className="ConditionCardMargin">
                       <Card className="ConditionCard">
                         <CardContent>
-                          <div className="smallCardTitle1">
+                          <div className="smallCardTitle">
                             Residual + Remaining
                           </div>
                           <div className="smallCardBody">
                             <span className="textSize">
-                              <CurrencyFormat
-                                value={vehicleDetails.residual_amt?parseFloat(
-                                  vehicleDetails.residual_amt +
-                                    vehicleDetails.remaining_pmts
-                                ).toFixed(2):"0.00"}
-                                displayType={"text"}
-                                thousandSeparator={true}
-                                prefix={"$"}
-                              />
+                              {vehicleDetails &&
+                              vehicleDetails.remaining_pmts &&
+                              vehicleDetails.residual_amt ? (
+                                <CurrencyFormat
+                                  value={parseFloat(
+                                    vehicleDetails.residual_amt +
+                                      vehicleDetails.remaining_pmts
+                                  ).toFixed(2)}
+                                  displayType={"text"}
+                                  thousandSeparator={true}
+                                  prefix={"$"}
+                                />
+                              ) : (
+                                "$0.00"
+                              )}
                             </span>
                           </div>
                         </CardContent>
@@ -343,16 +357,19 @@ export default function ConditionReport(props) {
                           <div className="smallCardTitle">Market Based</div>
                           <div className="smallCardBody">
                             <span className="textSize">
-                              <CurrencyFormat
-                                value={
-                                  vehicleDetails.vehicle_price
-                                    ? parseFloat(vehicleDetails.vehicle_price).toFixed(2)
-                                    : "0.00"
-                                }
-                                displayType={"text"}
-                                thousandSeparator={true}
-                                prefix={"$"}
-                              />
+                              {vehicleDetails &&
+                              vehicleDetails.vehicle_price ? (
+                                <CurrencyFormat
+                                  value={parseFloat(
+                                    vehicleDetails.vehicle_price
+                                  ).toFixed(2)}
+                                  displayType={"text"}
+                                  thousandSeparator={true}
+                                  prefix={"$"}
+                                />
+                              ) : (
+                                "$0.00"
+                              )}
                             </span>
                           </div>
                         </CardContent>
@@ -373,16 +390,17 @@ export default function ConditionReport(props) {
                         <CardContent>
                           <div className="smallCardTitle">Odometer</div>
                           <div className="smallCardBody">
-                            <CurrencyFormat
-                              value={
-                                condionVehicleDetails?.inspection_mileage
-                                  ? parseFloat(condionVehicleDetails.inspection_mileage).toFixed(2)
-                                  : ""
-                              }
-                              displayType={"text"}
-                              thousandSeparator={true}
-                              suffix={"  miles"}
-                            />
+                            {condionVehicleDetails &&
+                            condionVehicleDetails?.inspection_mileage ? (
+                              <CurrencyFormat
+                                value={condionVehicleDetails.inspection_mileage}
+                                displayType={"text"}
+                                thousandSeparator={true}
+                                suffix={" miles"}
+                              />
+                            ) : (
+                              ""
+                            )}
                           </div>
                         </CardContent>
                       </Card>
@@ -624,16 +642,19 @@ export default function ConditionReport(props) {
                           </ListItemText>
                           <ListItemSecondaryAction>
                             <span className="textSize">
-                              <CurrencyFormat
-                                value={
-                                  condionVehicleDetails?.grounding_mileage
-                                    ? parseFloat(condionVehicleDetails.grounding_mileage).toFixed(2) 
-                                    : ""
-                                }
-                                displayType={"text"}
-                                thousandSeparator={true}
-                                suffix={""}
-                              />
+                              {condionVehicleDetails &&
+                              condionVehicleDetails?.grounding_mileage ? (
+                                <CurrencyFormat
+                                  value={
+                                    condionVehicleDetails.grounding_mileage
+                                  }
+                                  displayType={"text"}
+                                  thousandSeparator={true}
+                                  suffix={""}
+                                />
+                              ) : (
+                                ""
+                              )}
                             </span>
                           </ListItemSecondaryAction>
                         </List>
@@ -677,7 +698,7 @@ export default function ConditionReport(props) {
                                   className="accessoriestinlineextStyle"
                                   key={index}
                                 >
-                                  <Typography variant="span">
+                                  <Typography>
                                     {list.description.toLowerCase()}
                                   </Typography>
                                 </Box>
@@ -829,18 +850,19 @@ export default function ConditionReport(props) {
                         <CardContent>
                           <div className="smallCardTitle">Payoff</div>
                           <div className="smallCardBody">
-                            <span className="textSize">
-                              <CurrencyFormat
-                                value={
-                                  vehicleDetails.pay_off_amt
-                                    ? parseFloat(vehicleDetails.pay_off_amt).toFixed(2)
-                                    : "0.00"
-                                }
-                                displayType={"text"}
-                                thousandSeparator={true}
-                                prefix={"$"}
-                              />
-                              
+                            <span>
+                              {vehicleDetails && vehicleDetails.pay_off_amt ? (
+                                <CurrencyFormat
+                                  value={parseFloat(
+                                    vehicleDetails.pay_off_amt
+                                  ).toFixed(2)}
+                                  displayType={"text"}
+                                  thousandSeparator={true}
+                                  prefix={"$"}
+                                />
+                              ) : (
+                                "$0.00"
+                              )}
                             </span>
                           </div>
                         </CardContent>
@@ -849,21 +871,26 @@ export default function ConditionReport(props) {
                     <Grid item xs={4} className="ConditionCardMargin">
                       <Card className="ConditionCard">
                         <CardContent>
-                          <div className="smallCardTitle1">
+                          <div className="smallCardTitle">
                             Residual + Remaining
                           </div>
                           <div className="smallCardBody">
-                            <span className="textSize">
-                              <CurrencyFormat
-                                value={
-                                  parseFloat(vehicleDetails.residual_amt +
-                                    vehicleDetails.remaining_pmts).toFixed(2) 
-                                }
-                                displayType={"text"}
-                                thousandSeparator={true}
-                                prefix={"$"}
-                              />
-                            
+                            <span>
+                              {vehicleDetails &&
+                              vehicleDetails.residual_amt &&
+                              vehicleDetails.remaining_pmts ? (
+                                <CurrencyFormat
+                                  value={parseFloat(
+                                    vehicleDetails.residual_amt +
+                                      vehicleDetails.remaining_pmts
+                                  ).toFixed(2)}
+                                  displayType={"text"}
+                                  thousandSeparator={true}
+                                  prefix={"$"}
+                                />
+                              ) : (
+                                ""
+                              )}
                             </span>
                           </div>
                         </CardContent>
@@ -911,16 +938,19 @@ export default function ConditionReport(props) {
                           </ListItemText>
                           <ListItemSecondaryAction>
                             <span className="textSize">
-                              <CurrencyFormat
-                                value={
-                                  condionVehicleDetails?.grounding_mileage
-                                    ? parseFloat(condionVehicleDetails.grounding_mileage).toFixed(2) 
-                                    : ""
-                                }
-                                displayType={"text"}
-                                thousandSeparator={true}
-                                suffix={""}
-                              />
+                              {condionVehicleDetails &&
+                              condionVehicleDetails?.grounding_mileage ? (
+                                <CurrencyFormat
+                                  value={parseFloat(
+                                    condionVehicleDetails.grounding_mileage
+                                  ).toFixed(2)}
+                                  displayType={"text"}
+                                  thousandSeparator={true}
+                                  suffix={""}
+                                />
+                              ) : (
+                                ""
+                              )}
                             </span>
                           </ListItemSecondaryAction>
                         </List>
@@ -943,7 +973,7 @@ export default function ConditionReport(props) {
                         <Typography variant="h6">Accessories</Typography>
                         <hr />
 
-                        <span className="Pending-Inspection-R">
+                        <span className="pendingReport">
                           Pending Inspection Report
                         </span>
                       </CardContent>
@@ -986,7 +1016,7 @@ export default function ConditionReport(props) {
                       <CardContent>
                         <Typography variant="h6">Wheels and Tires</Typography>
                         <hr />
-                        <span className="Pending-Inspection-R">
+                        <span className="pendingReport">
                           Pending Inspection Report
                         </span>
                       </CardContent>
@@ -1004,7 +1034,7 @@ export default function ConditionReport(props) {
               </Grid>
             </Box>
           )}
-          <ViewDetailedReport 
+          <ViewDetailedReport
             DamageDetails={DamageDetails}
             open={open}
             close={handleClose}
@@ -1027,7 +1057,7 @@ export default function ConditionReport(props) {
 
       <Box>
         <TransactionModal
-          transactionInfo = {transactionInfo}
+          transactionInfo={transactionInfo}
           type={transactionPopupType}
           open={openTransactionPopup}
           onClose={() => {

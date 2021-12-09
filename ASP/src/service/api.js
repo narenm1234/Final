@@ -1,10 +1,13 @@
 import axios from "axios";
+import getHeaders from "./headers";
 let xmlFile = require("../assets/car.xml");
 
 // const DEV_BASE = 'https://aspservices-internal-dev.tfs.toyota.com/asp-services/';
 // const TEST_BASE = 'https://aspservices-internal-test.tfs.toyota.com/asp-services/';
 // const PROD_BASE = 'https://aspservices-internal-prod.tfs.toyota.com/asp-services/';
 // const STAGE_BASE = 'https://aspservices-internal-stage.tfs.toyota.com/asp-services/';
+const headers = getHeaders();
+
 let url;
 let groundListUrl;
 let tokenUrl;
@@ -87,8 +90,10 @@ if (hostname.includes("dev")) {
     "https://aspservices-internal-dev.tfs.toyota.com/asp-services/dealerpayment/submitPayment";
   dealerVehicleCount =
     "https://aspservices-internal-dev.tfs.toyota.com/asp-services/getDealerVehicleCount";
-  clientID="3MVG9_I_oWkIqLrmNgl8unCGrAPmcPODjDz6DA7QLw7qbd0CKBqVuyUVp_4.c4xZdRowJUxirUcXgiGiPYaQ.";
-  clientSecret="A8C495709B3F0BD5972D67EAF464949838E2F35EB623E514F75487A18904D70A";
+  clientID =
+    "3MVG9_I_oWkIqLrmNgl8unCGrAPmcPODjDz6DA7QLw7qbd0CKBqVuyUVp_4.c4xZdRowJUxirUcXgiGiPYaQ.";
+  clientSecret =
+    "A8C495709B3F0BD5972D67EAF464949838E2F35EB623E514F75487A18904D70A";
 } else if (hostname.includes("local")) {
   mileageDiscList =
     "https://aspservices-internal-dev.tfs.toyota.com/asp-services/getMileageDiscList";
@@ -185,10 +190,12 @@ if (hostname.includes("dev")) {
     "https://apigateway-stage.toyotafinancial.com/apigw-router/auctionsalesplatform/dealerpayment/submitPayment";
   dealerVehicleCount =
     "https://apigateway-stage.toyotafinancial.com/apigw-router/auctionsalesplatform/getDealerVehicleCount";
-    // clientID="3MVG9Eroh42Z9.iX.MtFAU7OREmQl3nLs7Kmfi9V1URQvsFxFqb46_Srme9DxYCu._LPDbUufv8__VWp.AXRV";
-    // clientSecret="A604297A76C82F37CBDE9AAE30475D00A62B349BAE1E0FCAA4E4D17F198C8FA9";
-    clientID="3MVG9_I_oWkIqLrmNgl8unCGrAPmcPODjDz6DA7QLw7qbd0CKBqVuyUVp_4.c4xZdRowJUxirUcXgiGiPYaQ.";
-  clientSecret="A8C495709B3F0BD5972D67EAF464949838E2F35EB623E514F75487A18904D70A";
+  // clientID="3MVG9Eroh42Z9.iX.MtFAU7OREmQl3nLs7Kmfi9V1URQvsFxFqb46_Srme9DxYCu._LPDbUufv8__VWp.AXRV";
+  // clientSecret="A604297A76C82F37CBDE9AAE30475D00A62B349BAE1E0FCAA4E4D17F198C8FA9";
+  clientID =
+    "3MVG9_I_oWkIqLrmNgl8unCGrAPmcPODjDz6DA7QLw7qbd0CKBqVuyUVp_4.c4xZdRowJUxirUcXgiGiPYaQ.";
+  clientSecret =
+    "A8C495709B3F0BD5972D67EAF464949838E2F35EB623E514F75487A18904D70A";
 } else if (hostname.includes("test")) {
   transportDetails =
     "https://aspservices-internal-test.tfs.toyota.com/asp-services/getTransportationDetails";
@@ -320,13 +327,7 @@ export async function getGroundingList() {
   var config = {
     method: "post",
     url: groundListUrl,
-    headers: {
-      accept: "application/json",
-      "Content-Type": "application/json",
-
-      "Access-Control-Allow-Origin":"*",
-      "Authorization": `Bearer ${localStorage.getItem("ForgeRockToken")}`,
-    },
+    headers: headers,
     data: data,
   };
 
@@ -348,12 +349,7 @@ export async function getPassedList(data) {
   var config = {
     method: "post",
     url: passedVehicleUrl,
-    headers: {
-      accept: "application/json",
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Origin":"*",
-      "Authorization": `Bearer ${localStorage.getItem("ForgeRockToken")}`,
-    },
+    headers: headers,
     data: data,
   };
 
@@ -362,9 +358,7 @@ export async function getPassedList(data) {
 
 export async function getPassedList1() {
   const options = {
-    headers: {
-      "Content-Type": "application/json",
-    },
+    headers: headers,
   };
   const requestData = "ALL";
 
@@ -378,12 +372,7 @@ export async function getPurchasedList(data) {
   var config = {
     method: "post",
     url: purchasedVehicleUrl,
-    headers: {
-      accept: "application/json",
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Origin":"*",
-      "Authorization": `Bearer ${localStorage.getItem("ForgeRockToken")}`,
-    },
+    headers: headers,
     data: data,
   };
 
@@ -391,17 +380,10 @@ export async function getPurchasedList(data) {
 }
 
 export async function getInspectionVehicleDetails(vin) {
-
-
   var config = {
     method: "post",
     url: `${inspectionVehicleDetails}?vin=${vin}`,
-    headers: {
-      accept: "application/json",
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Origin":"*",
-      "Authorization": `Bearer ${localStorage.getItem("ForgeRockToken")}`,
-    },
+    headers: headers,
   };
   return await axios(config);
 }
@@ -411,47 +393,29 @@ export async function getInspectionWheelTiresDetails(inspectionId) {
   var config = {
     method: "post",
     url: inspectionWheelTiresDetailsUrl,
-    headers: {
-      accept: "application/json",
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Origin":"*",
-      "Authorization": `Bearer ${localStorage.getItem("ForgeRockToken")}`,
-    },
-    data:data,
+    headers: headers,
+    data: data,
   };
   return await axios(config);
 }
 
 export async function getInspectionAccessoryDetails(vin) {
-  
-
   var config = {
     method: "post",
     url: `${inspectionAccessoryDetailsUrl}?vin=${vin}`,
-    headers: {
-      accept: "application/json",
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Origin":"*",
-      "Authorization": `Bearer ${localStorage.getItem("ForgeRockToken")}`,
-    },
-
+    headers: headers,
   };
   return await axios(config);
 }
-export async function getInspectionDamageDetailsApi(inspectionId,vin) {
-  let tenant=localStorage.getItem("tenantId")?localStorage.getItem("tenantId"):"t002"
- 
+export async function getInspectionDamageDetailsApi(inspectionId, vin) {
+  let tenant = localStorage.getItem("tenantId")
+    ? localStorage.getItem("tenantId")
+    : "t002";
 
   var config = {
     method: "post",
     url: `${getInspectionDamageDetailsUrl}?inpsectionId=${inspectionId}&tenantId=${tenant}&vin=${vin}`,
-    headers: {
-      accept: "application/json",
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Origin":"*",
-      "Authorization": `Bearer ${localStorage.getItem("ForgeRockToken")}`,
-    },
-    
+    headers: headers,
   };
   return await axios(config);
 }
@@ -461,88 +425,54 @@ export async function getOEMBuildDetailsApi(vin) {
   var config = {
     method: "post",
     url: getOEMBuildDetailsUrl,
-    headers: {
-      accept: "application/json",
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Origin":"*",
-      "Authorization": `Bearer ${localStorage.getItem("ForgeRockToken")}`,
-    },
+    headers: headers,
     data: data,
   };
   return await axios(config);
 }
 export async function postDealerActionPassOnVehicle(vin, groundId) {
-  
-
   var config = {
     method: "post",
     url: `${getDealerActionUrl}?dealerAction=Pass&groundingId=${groundId}&vin=${vin}`,
-    headers: {
-      accept: "application/json",
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Origin":"*",
-      "Authorization": `Bearer ${localStorage.getItem("ForgeRockToken")}`,
-    },
-    
+    headers: headers,
   };
   return await axios(config);
 }
 export async function postDealerActionPurchaseOnVehicle(vin, groundId) {
-
-
   var config = {
     method: "post",
     url: `${getDealerActionUrl}?dealerAction=Purchase&groundingId=${groundId}&vin=${vin}`,
-    headers: {
-      accept: "application/json",
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Origin":"*",
-      "Authorization": `Bearer ${localStorage.getItem("ForgeRockToken")}`,
-    },
-    
+    headers: headers,
   };
   return await axios(config);
 }
 export async function awaitManualPricing() {
   const options = {
-    headers: {
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Origin":"*",
-      "Authorization": `Bearer ${localStorage.getItem("ForgeRockToken")}`,
-    },
+    headers: headers,
   };
   return await axios.post(AMP, options);
 }
 export async function RRMList() {
   const options = {
-    headers: {
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Origin":"*",
-      "Authorization": `Bearer ${localStorage.getItem("ForgeRockToken")}`,
-    },
+    headers: headers,
   };
   return await axios.post(rrm, options);
 }
 export async function getMileageDiscList() {
   const options = {
-    headers: {
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Origin":"*",
-      "Authorization": `Bearer ${localStorage.getItem("ForgeRockToken")}`,
-    },
+    headers: headers,
   };
   return await axios.post(`${mileageDiscList}?vin=JM3KFACM0M0366307`, options);
   //return await axios.post(MileageDiscList, options);
 }
 
-
 var qs = require("qs");
 export async function getAccessTokenEndpoint(code) {
   var data = qs.stringify({
     grant_type: "authorization_code",
-    client_id:clientID,
+    client_id: clientID,
     code: code,
-    client_secret:clientSecret,
+    client_secret: clientSecret,
     redirect_uri: redirectURL,
     // redirect_uri: "http://localhost:3000/login2",
   });
@@ -562,9 +492,9 @@ export async function getAccessTokenEndpoint(code) {
 export async function getRefreshTokenEndpoint() {
   var data = qs.stringify({
     grant_type: "refresh_token",
-    client_id:clientID,
+    client_id: clientID,
     refresh_token: localStorage.getItem("refreshToken"),
-    client_secret:clientSecret,
+    client_secret: clientSecret,
     redirect_uri: redirectURL,
     // redirect_uri: "http://localhost:3000/login2",
   });
@@ -611,11 +541,7 @@ export async function getImageData(obj) {
   var config = {
     method: "post",
     url: getImages,
-    headers: {
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Origin":"*",
-      "Authorization": `Bearer ${localStorage.getItem("ForgeRockToken")}`,
-    },
+    headers: headers,
     data: obj,
   };
   return await axios(config).then(
@@ -641,11 +567,7 @@ export async function getCarXml() {
 
 export async function getDealerPaymentsData() {
   const options = {
-    headers: {
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Origin":"*",
-      "Authorization": `Bearer ${localStorage.getItem("ForgeRockToken")}`,
-    },
+    headers: headers,
   };
 
   if (!!localStorage.getItem("KintoID")) {
@@ -665,11 +587,7 @@ export async function getPurchaseDetails(vin) {
   var config = {
     method: "post",
     url: getPurchaseDetailsApi,
-    headers: {
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Origin":"*",
-      "Authorization": `Bearer ${localStorage.getItem("ForgeRockToken")}`,
-    },
+    headers: headers,
     data: vin,
   };
   return await axios(config).then(
@@ -687,11 +605,7 @@ export async function getTransportationDetails(vinlist) {
     method: "post",
     url: `${transportDetails}?` + vinlist,
     // vinList=JM3KFADM6L0797974&vinList=JM3KFBDM0K1698372'
-    headers: {
-      accept: "application/json",
-      "Access-Control-Allow-Origin":"*",
-      "Authorization": `Bearer ${localStorage.getItem("ForgeRockToken")}`,
-    },
+    headers: headers,
   };
 
   return await axios(config);
@@ -701,11 +615,7 @@ export async function getDealerDropData() {
   var config = {
     method: "post",
     url: dealerDrop,
-    headers: {
-      accept: "application/json",
-      "Access-Control-Allow-Origin":"*",
-      "Authorization": `Bearer ${localStorage.getItem("ForgeRockToken")}`,
-    },
+    headers: headers,
   };
 
   return await axios(config);
@@ -715,11 +625,7 @@ export async function onSubmitPayment(data) {
   var config = {
     method: "post",
     url: submitPayment,
-    headers: {
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Origin":"*",
-      "Authorization": `Bearer ${localStorage.getItem("ForgeRockToken")}`,
-    },
+    headers: headers,
     data: data,
   };
   return await axios(config).then(
@@ -740,11 +646,7 @@ export async function getDealerVehicleCount() {
   var config = {
     method: "post",
     url: dealerVehicleCount,
-    headers: {
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Origin":"*",
-      "Authorization": `Bearer ${localStorage.getItem("ForgeRockToken")}`,
-    },
+    headers: headers,
     data: data,
   };
   return await axios(config).then(

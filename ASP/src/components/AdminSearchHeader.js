@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
+import {Paper , Box} from '@material-ui/core';
 import InputBase from '@material-ui/core/InputBase';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
@@ -15,7 +15,9 @@ const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
         width: 300,
         height: 35,
-        margin: '7px 8px'
+        margin: '7px 8px',
+        border: "1px solid #ccc",
+        borderRadius:"4px"
     },
     input: {
         marginLeft: theme.spacing(1),
@@ -43,9 +45,9 @@ export default function AdminSearchHeader(props) {
     }
     if(!localStorage.getItem('dealerCode')){
     return (
-        <Paper component="form" className={classes.root}>
-            <IconButton type="submit" className={classes.iconButton} aria-label="search">
-                <SearchIcon />
+        <Box component="form" className={classes.root}>
+            <IconButton type="submit" className={classes.iconButton} aria-label="search" >
+                <SearchIcon color="disabled" fontSize="small" />
             </IconButton>
             <InputBase
                 className={classes.input}
@@ -53,7 +55,7 @@ export default function AdminSearchHeader(props) {
                 inputProps={{ 'aria-label': 'search vehicle by VIN' }}
                 onChange={(evt) => props.searchdetails(evt.target.value)}
             />
-        </Paper>
+        </Box>
     );
     }
     else 

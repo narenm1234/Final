@@ -102,7 +102,7 @@ export default function MyGallery(props) {
 
   return (
     <div>
-      {images.length != 0 ? (
+      {images && images.length != 0 ? (
         <ImageGallery
           {...props}
           items={images}
