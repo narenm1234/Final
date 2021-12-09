@@ -278,7 +278,7 @@ export default function ConditionReport(props) {
                 <Grid item xs={7}>
                   <Grid container spacing={1}>
                     <div className="ConditionReportSection">
-                      <Grid item xs={5}>
+                      <Grid item xs={7}>
                         <div className="reportTitle">
                           <span>
                             {vehicleDetails && vehicleDetails.model_year}{" "}
@@ -288,7 +288,7 @@ export default function ConditionReport(props) {
                           </span>
                         </div>
                       </Grid>
-                      <Grid item xs={7}>
+                      <Grid item xs={5}>
                         {condionVehicleDetails?.inspection_date && (
                           <span className="ConditionReportInspection">
                             <span className="BadgeValue">
@@ -973,7 +973,7 @@ export default function ConditionReport(props) {
                         <Typography variant="h6">Accessories</Typography>
                         <hr />
 
-                        <span className="Pending-Inspection-R">
+                        <span className="pendingReport">
                           Pending Inspection Report
                         </span>
                       </CardContent>
@@ -1016,7 +1016,7 @@ export default function ConditionReport(props) {
                       <CardContent>
                         <Typography variant="h6">Wheels and Tires</Typography>
                         <hr />
-                        <span className="Pending-Inspection-R">
+                        <span className="pendingReport">
                           Pending Inspection Report
                         </span>
                       </CardContent>
