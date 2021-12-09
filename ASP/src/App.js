@@ -88,7 +88,9 @@ function App() {
                   path="/login2"
                   exact
                   render={(props) => <Login2 {...props} />}
+                  
                 />
+                <Header selectedDealers={selectedDealers}></Header>
               </Switch>
             </Sidebar>
           </div>
