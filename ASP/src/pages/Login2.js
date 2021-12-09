@@ -29,6 +29,7 @@ function getParameterByName(name, url = window.location.href) {
   }, {});
   
   async function getToken() {
+    
     let apiResponse = await getAccessTokenEndpoint(data1);
     console.log("--->",apiResponse)
     localStorage.setItem("bearerToken",apiResponse.data.access_token);
@@ -47,6 +48,12 @@ function getParameterByName(name, url = window.location.href) {
 
     
   }
+  var refresh2 = window.localStorage.getItem('refresh2');
+console.log(refresh2);
+if (refresh2===null){
+    window.location.reload();
+    window.localStorage.setItem('refresh2', "1");
+}
   useEffect(() => {
    
   }, {});
@@ -61,7 +68,7 @@ function getParameterByName(name, url = window.location.href) {
     // localStorage.setItem("refreshToken",apiResponse.data.refresh_token);
     let resp1 =   await getForgeRockToken();
     localStorage.setItem("ForgeRockToken",resp1.data.forgeRockToken);
-},600000)
+},120000)
 var refresh1 = window.localStorage.getItem('refresh1');
 console.log(refresh1);
 if (refresh1===null){
