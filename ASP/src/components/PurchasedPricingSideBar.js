@@ -318,7 +318,7 @@ export default function PurchasedPricingSideBar(props) {
       <ListItem className="notesSectionHeader">Purchase Page</ListItem>
       <ListItem>
         <FormControl component="fieldset">
-          <FormLabel component="legend">Vehicle pricing options</FormLabel>
+          <FormLabel component="legend">Vehicle Pricing Options</FormLabel>
           <RadioGroup
             aria-label="gender"
             name="gender1"

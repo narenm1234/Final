@@ -283,10 +283,21 @@
   margin-top: 3%;
   background-color: #ffffff;
 }
+.grounding-Vehicle-Price-Option {
+  margin-top: 5%;
+  border-radius: 4px;
+  background-color: #ffffff;
+}
 .Vehicle-Price-Option {
   margin-top: 5%;
   border-radius: 4px;
   background-color: #ffffff;
+  max-width: 250px;
+}
+.priceOptions {
+  display: flex !important;
+  justify-content: space-between;
+  width: 100%;
 }
 .VehicleStepper {
   margin-top: -2%;
@@ -428,7 +439,7 @@ div.vehicleMakeModel1 {
   padding: 1px 0px !important;
 }
 .purchasedScreenTotal {
-  width: 240px;
+  width: 250px;
   height: 2px;
   margin: 8px 0 5px;
   background-color: #dddbda;
@@ -488,4 +499,3 @@ div.vehicleMakeModel1 {
   justify-content: space-between;
   padding: 1px;
 }
-

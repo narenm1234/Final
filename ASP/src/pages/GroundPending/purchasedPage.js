@@ -231,23 +231,28 @@ export default function ListingPage2(props) {
                   <span>Vehicle Cost </span>
                 </div>
                 <List>
-                  <span className="textStyle">
-                    <span className="textBold"> Payoff Price </span>{" "}
-                    <span className="margin__space4">
-                      <CurrencyFormat
-                        value={
-                          vehicle.priceCategoryList[0] &&
-                          parseFloat(
-                            vehicle.priceCategoryList[0].sale_amount
-                          ).toFixed(2)
-                        }
-                        displayType={"text"}
-                        thousandSeparator={true}
-                        prefix={"$"}
-                      />
-                    </span>
+                  {vehicle.priceCategoryList && vehicle.priceCategoryList.map((priceitem, index)=>
+                  <span className="textStyle priceOptions">
+                  <span className="textBold"> {priceitem.price_category} {priceitem.price_type} </span>{" "}
+                  <span className="">
+                    <CurrencyFormat
+                      value={
+                        priceitem &&
+                        parseFloat(
+                          priceitem.sale_amount
+                        ).toFixed(2)
+                      }
+                      displayType={"text"}
+                      thousandSeparator={true}
+                      prefix={"$"}
+                    />
                   </span>
-                  <span className="textStyle">
+                </span>
+                  )
+
+                  }
+                  
+                  {/* <span className="textStyle">
                     <span className="textBold"> Rem.Payments</span>{" "}
                     <span className="margin__space5">
                       <CurrencyFormat
@@ -262,10 +267,10 @@ export default function ListingPage2(props) {
                         prefix={"$"}
                       />
                     </span>
-                  </span>
-                  <span className="textStyle">
+                  </span> */}
+                  <span className="textStyle priceOptions">
                     <span className="textBold"> Admin Fee</span>{" "}
-                    <span className="margin__space6">
+                    <span className="">
                       <CurrencyFormat
                         value={vehicle.admin_fee}
                         displayType={"text"}
@@ -275,7 +280,7 @@ export default function ListingPage2(props) {
                     </span>
                   </span>
                   <div className="purchasedScreenTotal" />
-                  <span className="textStyle">
+                  <span className="textStyle priceOptions">
                     <span className="textStyleTotalFee"> Total Price</span>{" "}
                     <span className="totalFeeSum">
                       <CurrencyFormat

@@ -8,6 +8,7 @@ import Carousel from "react-material-ui-carousel";
 import { Paper, Button } from "@material-ui/core";
 
 import { getImageData } from "../../service/api";
+// import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 
 const tutorialSteps = [
   {
@@ -51,9 +52,9 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: "unset !important",
     // border: "1px solid gray",
   },
-  Carousel:{
-    width : "80%"
-  }
+  Carousel: {
+    width: "80%",
+  },
 }));
 
 const Item = ({ image_bin_value }) => {
@@ -94,7 +95,7 @@ function SwipeableTextMobileStepper(props) {
   return (
     <div className={classes.root}>
       <Carousel
-      className={classes.Carousel}
+        className={classes.Carousel}
         navButtonsAlwaysVisible={true}
         autoPlay={false}
         navButtonsProps={{
@@ -104,18 +105,24 @@ function SwipeableTextMobileStepper(props) {
             color: "gray",
           },
         }}
-        // indicatorIconButtonProps={{
-        //     style: {
-        //         // padding: '10px',    // 1
-        //         color: 'l'       // 3
-        //     }
-        // }}
-
-        // activeIndicatorIconButtonProps={{
-        //     style: {
-        //         backgroundColor: 'blue' // 2
-        //     }
-        // }}
+        indicators={{style:{fontSize:"11px"}}}
+        indicatorIconButtonProps={{
+          style: {
+            padding: "5px", // 1
+            border: "1px solid #ccc",
+            margin: "0px 3px",
+            color:"white", 
+            width: "12px",
+            height: "12px"
+          },
+        }}
+        activeIndicatorIconButtonProps={{
+          style: {
+            color: "#1589ee",
+            background:"#1589ee"
+          },
+        }}
+        
       >
         {props.images &&
           props.images.map((item, i) => <Item key={i} {...item} />)}

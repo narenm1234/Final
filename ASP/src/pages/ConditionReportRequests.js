@@ -450,7 +450,7 @@ export default function ConditionReportRequests(props) {
                             </span>
                           </ListItemText>
                           <ListItemSecondaryAction>
-                            <span className="textSize">9,000 miles</span>
+                            <span className="textSize">9,000 MI</span>
                           </ListItemSecondaryAction>
                         </List>
                         <List className="paddingCSS">

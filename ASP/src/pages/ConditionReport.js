@@ -388,7 +388,7 @@ export default function ConditionReport(props) {
                     <Grid item xs={4} className="ConditionCardMargin">
                       <Card className="ConditionCard">
                         <CardContent>
-                          <div className="smallCardTitle">Odometer</div>
+                          <div className="smallCardTitle">Inspection Mileage</div>
                           <div className="smallCardBody">
                             {condionVehicleDetails &&
                             condionVehicleDetails?.inspection_mileage ? (
@@ -396,7 +396,7 @@ export default function ConditionReport(props) {
                                 value={condionVehicleDetails.inspection_mileage}
                                 displayType={"text"}
                                 thousandSeparator={true}
-                                suffix={" miles"}
+                                suffix={" MI"}
                               />
                             ) : (
                               ""
@@ -650,7 +650,7 @@ export default function ConditionReport(props) {
                                   }
                                   displayType={"text"}
                                   thousandSeparator={true}
-                                  suffix={""}
+                                  suffix={" MI"}
                                 />
                               ) : (
                                 ""
@@ -889,7 +889,7 @@ export default function ConditionReport(props) {
                                   prefix={"$"}
                                 />
                               ) : (
-                                ""
+                                "$0.00"
                               )}
                             </span>
                           </div>
@@ -946,7 +946,7 @@ export default function ConditionReport(props) {
                                   ).toFixed(2)}
                                   displayType={"text"}
                                   thousandSeparator={true}
-                                  suffix={""}
+                                  suffix={" MI"}
                                 />
                               ) : (
                                 ""

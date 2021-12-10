@@ -301,7 +301,7 @@ if (refresh===null){
                           value={vehicle.odometer_reading}
                           displayType={"text"}
                           thousandSeparator={true}
-                          suffix={" miles"}
+                          suffix={" MI"}
                         />
                       </span>
                       <span className="textStyle">
@@ -311,7 +311,7 @@ if (refresh===null){
                             value={vehicle.inspection_mileage}
                             displayType={"text"}
                             thousandSeparator={true}
-                            suffix={" miles"}
+                            suffix={" MI"}
                           />
                         ) : (
                           "Pending"
@@ -325,7 +325,7 @@ if (refresh===null){
                   </div>
                 </Grid>
                 <Grid item xs={4}>
-                  <div className="Vehicle-Price-Option">
+                  <div className="grounding-Vehicle-Price-Option">
                     <div className="vehicleMakeModel1">
                       <span>Vehicle Price Options </span>
                     </div>
