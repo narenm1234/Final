@@ -188,12 +188,19 @@ export default function ListingPage1(props) {
                       value={vehicle.odometer_reading}
                       displayType={"text"}
                       thousandSeparator={true}
-                      suffix={"  miles"}
+                      suffix={"  MI"}
                     />
                   </span>
                   <span className="textStyle">
                     <span className="textBold"> Inspection Mileage:</span>{" "}
-                    Pending
+                    {vehicle.inspection_mileage ? 
+                     <CurrencyFormat
+                     value={vehicle.inspection_mileage}
+                     displayType={"text"}
+                     thousandSeparator={true}
+                     suffix={"  MI"}
+                   />
+                    : "Pending"}
                   </span>
                   <span className="textStyle">
                     <span className="textBold"> Account Type: </span>{" "}

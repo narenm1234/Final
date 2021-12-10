@@ -334,7 +334,7 @@ export default function UpdateMileage(props) {
                               }
                               displayType={"text"}
                               thousandSeparator={true}
-                              suffix={"  miles"}
+                              suffix={"  MI"}
                             />
                           </div>
                         </CardContent>
