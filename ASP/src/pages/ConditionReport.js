@@ -1096,5 +1096,3 @@ export default function ConditionReport(props) {
     </>
   );
 }
-
-
