@@ -430,7 +430,8 @@ export default function PurchasedPricingSideBar(props) {
       {paymentType && (
         <>
           {" "}
-          <ListItem>
+         
+         <ListItem>
             <ListItemText className="manualPricing">
               {paymentTypeName} :
             </ListItemText>
@@ -442,23 +443,29 @@ export default function PurchasedPricingSideBar(props) {
                 prefix={"$"}
               />
             </ListItemText>
-          </ListItem>
+          </ListItem> 
         </>
       )}
       <ListItem>
         <ListItemText className="manualPricing">Admin. Fee:</ListItemText>
-        <ListItemText className="manualPricing">$000,000</ListItemText>
+        <ListItemText className="manualPricing">
+        <Box textAlign={'end'}>
+          $000,000
+          </Box>
+          </ListItemText>
       </ListItem>
       <Divider variant="middle" />
       <ListItem>
         <ListItemText className="manualPricing">Total Fee:</ListItemText>
         <ListItemText className="manualPricing">
+          <Box textAlign={'end'}>
           <CurrencyFormat
             value={totalFee}
             displayType={"text"}
             thousandSeparator={true}
             prefix={"$"}
           />
+          </Box>
         </ListItemText>
       </ListItem>
       {paymentType && (
@@ -509,7 +516,7 @@ export default function PurchasedPricingSideBar(props) {
         </>
       )}
       <List className="purchasePassBtn">
-        <Button className="passButton" color="primary">
+        <Button className="passButton" color="primary" onClick={props.closePassVehiclePop}>
           Pass on Vehicle
         </Button>
         <Button
