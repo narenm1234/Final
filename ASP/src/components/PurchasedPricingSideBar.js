@@ -43,9 +43,9 @@ const useStyles = makeStyles((theme) => ({
   selectEmpty: {
     marginTop: theme.spacing(2),
   },
-  dividerColor:{
-    backgroundColor: '#df6060',
-  }
+  dividerColor: {
+    backgroundColor: "#df6060",
+  },
 }));
 
 const BootstrapInput = withStyles((theme) => ({
@@ -254,20 +254,20 @@ export default function PurchasedPricingSideBar(props) {
     // console.log("submitPaymentRes:::", submitPaymentRes);
 
     // if (submitPaymentRes.data.success) {
-      let transactionDetailsObj = {
-        type: "confirm",
-        totalFee,
-        paymentTypeName,
-        paymentTypeFee,
-        vin: props.vin,
-        accountInfo: accountInfo,
-      };
-      props.onPurchaseVehical(transactionDetailsObj);
+    let transactionDetailsObj = {
+      type: "confirm",
+      totalFee,
+      paymentTypeName,
+      paymentTypeFee,
+      vin: props.vin,
+      accountInfo: accountInfo,
+    };
+    props.onPurchaseVehical(transactionDetailsObj);
     // }
   };
 
-  useEffect(async ()=>{
-    if(props.isConfirmPurchase){
+  useEffect(async () => {
+    if (props.isConfirmPurchase) {
       let makepaymentdetails = getMakePatmentDetails(paymentType);
       let reqObj = {
         accountId: accountInfo?.accountId,
@@ -288,7 +288,11 @@ export default function PurchasedPricingSideBar(props) {
       let submitPaymentRes = await onSubmitPayment(reqObj);
       console.log("submitPaymentRes:::", submitPaymentRes);
 
-      if (submitPaymentRes && submitPaymentRes.data && submitPaymentRes.data.success) {
+      if (
+        submitPaymentRes &&
+        submitPaymentRes.data &&
+        submitPaymentRes.data.success
+      ) {
         let transactionDetailsObj = {
           type: "success",
           totalFee,
@@ -298,7 +302,7 @@ export default function PurchasedPricingSideBar(props) {
           accountInfo: accountInfo,
         };
         props.onPurchaseVehical(transactionDetailsObj);
-      }else{
+      } else {
         let transactionDetailsObj = {
           type: "failed",
           totalFee,
@@ -310,8 +314,7 @@ export default function PurchasedPricingSideBar(props) {
         props.onPurchaseVehical(transactionDetailsObj);
       }
     }
-  },[props.isConfirmPurchase])
-
+  }, [props.isConfirmPurchase]);
 
   return (
     <div className="manualPricingSidebar">
@@ -338,16 +341,16 @@ export default function PurchasedPricingSideBar(props) {
                 label="Payoff"
               />
               <p>
-                <CurrencyFormat
-                  value={
-                    purchasedData.payOffAmount
-                      ? purchasedData.payOffAmount
-                      : "0"
-                  }
-                  displayType={"text"}
-                  thousandSeparator={true}
-                  prefix={"$"}
-                />
+                {purchasedData.payOffAmount ? (
+                  <CurrencyFormat
+                    value={parseFloat(purchasedData.payOffAmount).toFixed(2)}
+                    displayType={"text"}
+                    thousandSeparator={true}
+                    prefix={"$"}
+                  />
+                ) : (
+                  "$0.00"
+                )}
               </p>
             </Box>
             <Box
@@ -363,15 +366,16 @@ export default function PurchasedPricingSideBar(props) {
                 label="Residual + Remaining Payments"
               />
               <p>
-                <CurrencyFormat
-                  value={
-                    parseInt(purchasedData.remainingPmts) +
-                      parseInt(purchasedData.residualAmount) || "0"
-                  }
-                  displayType={"text"}
-                  thousandSeparator={true}
-                  prefix={"$"}
-                />
+                {purchasedData.remainingPmts + purchasedData.residualAmount ? (
+                  <CurrencyFormat
+                    value={parseFloat(purchasedData.remainingPmts + purchasedData.residualAmount).toFixed(2)}
+                    displayType={"text"}
+                    thousandSeparator={true}
+                    prefix={"$"}
+                  />
+                ) : (
+                  "$0.00"
+                )}
               </p>
             </Box>
             <Box
@@ -387,16 +391,16 @@ export default function PurchasedPricingSideBar(props) {
                 label="Market"
               />
               <p>
-                <CurrencyFormat
-                  value={
-                    purchasedData.vehiclePrice
-                      ? purchasedData.vehiclePrice
-                      : "0"
-                  }
-                  displayType={"text"}
-                  thousandSeparator={true}
-                  prefix={"$"}
-                />
+                {purchasedData.vehiclePrice ? (
+                  <CurrencyFormat
+                    value={parseFloat(purchasedData.vehiclePrice).toFixed(2)}
+                    displayType={"text"}
+                    thousandSeparator={true}
+                    prefix={"$"}
+                  />
+                ) : (
+                  "$0.00"
+                )}
               </p>
             </Box>
             <Box
@@ -412,15 +416,16 @@ export default function PurchasedPricingSideBar(props) {
                 label="Market + Remaining Payments "
               />
               <p>
-                <CurrencyFormat
-                  value={
-                    parseInt(purchasedData.vehiclePrice) +
-                      parseInt(purchasedData.remainingPmts) || "0"
-                  }
-                  displayType={"text"}
-                  thousandSeparator={true}
-                  prefix={"$"}
-                />
+                {purchasedData.vehiclePrice + purchasedData.remainingPmts ? (
+                  <CurrencyFormat
+                    value={parseFloat(purchasedData.vehiclePrice + purchasedData.remainingPmts).toFixed(2)}
+                    displayType={"text"}
+                    thousandSeparator={true}
+                    prefix={"$"}
+                  />
+                ) : (
+                  "$0.00"
+                )}
               </p>
             </Box>
           </RadioGroup>
@@ -435,35 +440,41 @@ export default function PurchasedPricingSideBar(props) {
               {paymentTypeName} :
             </ListItemText>
             <ListItemText className="manualPricing">
-              <CurrencyFormat
-                value={paymentTypeFee}
+               <Box textAlign={"end"}>
+               <CurrencyFormat
+                value={parseFloat(paymentTypeFee).toFixed(2)}
                 displayType={"text"}
                 thousandSeparator={true}
                 prefix={"$"}
               />
+               </Box>
             </ListItemText>
           </ListItem>
         </>
       )}
       <ListItem>
         <ListItemText className="manualPricing">Admin. Fee:</ListItemText>
-        <ListItemText className="manualPricing">$000,000</ListItemText>
+        <ListItemText className="manualPricing">
+          <Box textAlign={"end"}>$000,000.00</Box>
+        </ListItemText>
       </ListItem>
       <Divider variant="middle" />
       <ListItem>
         <ListItemText className="manualPricing">Total Fee:</ListItemText>
         <ListItemText className="manualPricing">
-          <CurrencyFormat
-            value={totalFee}
-            displayType={"text"}
-            thousandSeparator={true}
-            prefix={"$"}
-          />
+          <Box textAlign={"end"}>
+            <CurrencyFormat
+              value={parseFloat(totalFee).toFixed(2)}
+              displayType={"text"}
+              thousandSeparator={true}
+              prefix={"$"}
+            />
+          </Box>
         </ListItemText>
       </ListItem>
       {paymentType && (
         <>
-      <Divider variant="middle"  className={classes.dividerColor} />
+          <Divider variant="middle" className={classes.dividerColor} />
           <ListItem>
             <ListItemText className="manualPricing">
               <Box>Account Nick Name</Box>
@@ -509,7 +520,11 @@ export default function PurchasedPricingSideBar(props) {
         </>
       )}
       <List className="purchasePassBtn">
-        <Button className="passButton" color="primary">
+        <Button
+          className="passButton"
+          color="primary"
+          onClick={props.closePassVehiclePop}
+        >
           Pass on Vehicle
         </Button>
         <Button

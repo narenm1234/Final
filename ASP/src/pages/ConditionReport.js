@@ -33,7 +33,7 @@ import moment from "moment";
 import PurchasedPricingSideBar from "../components/PurchasedPricingSideBar";
 import TransactionModal from "./TransactionModal";
 import { Box } from "@material-ui/core";
-
+import PassOnVehicle from "./PassOnVehicle";
 export default function ConditionReport(props) {
   let listOfItem = [
     "VIN",
@@ -74,6 +74,11 @@ export default function ConditionReport(props) {
   const [transactionInfo, setTransactionInfo] = useState({});
   const [isConfirmPurchase, setIsConfirmPurchase] = useState(false);
 
+
+  const [isPassVehicalPop, setIsPassVehicalPop] = useState(false);
+
+
+
   useEffect(() => {
     getOEMBuildDetails();
     getConditionVehicleDetails();
@@ -91,6 +96,7 @@ export default function ConditionReport(props) {
       await getInspectionDamageDetailsApi(inspection_Id , vin);
     setDamageDetails(getInspectionDamageDetailsaApiResponse.data);
   }
+
   async function getVehicleDetails() {
     let apiResponse = await getPurchasedList(vin);
     setVehicleResponse(apiResponse.data.data);
@@ -126,6 +132,7 @@ export default function ConditionReport(props) {
     console.log("-------------xxxxxx", inspectionId);
   }
 
+
   let kintoID = localStorage.getItem("kintoId");
 
   const handleOpen = () => {
@@ -134,6 +141,10 @@ export default function ConditionReport(props) {
   const handleClose = () => {
     setOpen(!open);
   };
+
+ const handleClosePassVehicle = () =>{
+  setIsPassVehicalPop(!isPassVehicalPop)
+ }
 
   const handlePurchaseVehical = (event) => {
     setOpenTransactionPopup(true);
@@ -1045,6 +1056,7 @@ export default function ConditionReport(props) {
           {purchaseSection ? (
             <PurchasedPricingSideBar
               onPurchaseVehical={handlePurchaseVehical}
+              closePassVehiclePop={handleClosePassVehicle}
               isConfirmPurchase={isConfirmPurchase}
               vin={vin}
               groundingId={vehicleDetails?.groundingId}
@@ -1067,6 +1079,20 @@ export default function ConditionReport(props) {
           handleContinue={handleContinue}
         ></TransactionModal>
       </Box>
+
+      <Box>
+      <PassOnVehicle
+        open={isPassVehicalPop}
+        close={handleClosePassVehicle}
+        vin={vin}
+        groundingId={vehicleDetails?.groundingId}
+        reload={()=>{}}
+      />
+      </Box>
+      {/* reload={() => {
+          getVehicleDetails();
+          props.fireEvents();
+        }} */}
     </>
   );
 }
