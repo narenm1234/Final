@@ -101,7 +101,15 @@ export default function ListingPage(props) {
     console.log("------->", apiResponse.data);
 
     setLoader(false);
+
   }
+  var refresh2 = window.localStorage.getItem('refresh2');
+  console.log(refresh2);
+  if (refresh2===null){
+      window.location.reload();
+      window.localStorage.setItem('refresh2', "1");
+  }
+
 
   useEffect(() => {
     console.log("==>", props.selectedDealersData);
@@ -197,12 +205,7 @@ export default function ListingPage(props) {
       clearInterval(timer);
     };
   }, []);
-  var refresh = window.localStorage.getItem('refresh');
-console.log(refresh);
-if (refresh===null){
-    window.location.reload();
-    window.localStorage.setItem('refresh', "1");
-}
+  
 
   const getEstimagetTimeRemaining = (grounding_date) => {
     setInterval(() => {

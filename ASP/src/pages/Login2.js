@@ -44,24 +44,17 @@ function getParameterByName(name, url = window.location.href) {
   localStorage.setItem("dealerName",userInfo.custom_attributes.dealerName);
   localStorage.setItem("KintoID",userInfo.custom_attributes.kintoId);
   localStorage.setItem("tenantID",userInfo.custom_attributes.tenantId);
+  let resp = await getForgeRockToken();
+  console.log("forgerock", resp);
+  localStorage.setItem("ForgeRockToken",resp.data.forgeRockToken);
+  props.history.push('/grounded')
   
 
     
   }
-  var refresh2 = window.localStorage.getItem('refresh2');
-console.log(refresh2);
-if (refresh2===null){
-    window.location.reload();
-    window.localStorage.setItem('refresh2', "1");
-}
-  useEffect(() => {
-   
-  }, {});
 
   async function getUserAccessInfoToken(){
-  let resp = await getForgeRockToken();
-  console.log("forgerock", resp);
-  localStorage.setItem("ForgeRockToken",resp.data.forgeRockToken);
+
   setInterval(async ()  =>{
     let apiResponse =  await getRefreshTokenEndpoint();
     localStorage.setItem("bearerToken",apiResponse.data.access_token);
@@ -69,14 +62,9 @@ if (refresh2===null){
     let resp1 =   await getForgeRockToken();
     localStorage.setItem("ForgeRockToken",resp1.data.forgeRockToken);
 },120000)
-var refresh1 = window.localStorage.getItem('refresh1');
-console.log(refresh1);
-if (refresh1===null){
-    window.location.reload();
-    window.localStorage.setItem('refresh1', "1");
-}
 
-  props.history.push('/grounded')
+
+ 
 
  
   }
