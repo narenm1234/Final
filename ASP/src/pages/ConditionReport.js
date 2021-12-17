@@ -74,10 +74,7 @@ export default function ConditionReport(props) {
   const [transactionInfo, setTransactionInfo] = useState({});
   const [isConfirmPurchase, setIsConfirmPurchase] = useState(false);
 
-
   const [isPassVehicalPop, setIsPassVehicalPop] = useState(false);
-
-
 
   useEffect(() => {
     getOEMBuildDetails();
@@ -93,7 +90,7 @@ export default function ConditionReport(props) {
 
   async function getInspectionDamageDetails(inspection_Id) {
     let getInspectionDamageDetailsaApiResponse =
-      await getInspectionDamageDetailsApi(inspection_Id , vin);
+      await getInspectionDamageDetailsApi(inspection_Id, vin);
     setDamageDetails(getInspectionDamageDetailsaApiResponse.data);
   }
 
@@ -132,7 +129,6 @@ export default function ConditionReport(props) {
     console.log("-------------xxxxxx", inspectionId);
   }
 
-
   let kintoID = localStorage.getItem("kintoId");
 
   const handleOpen = () => {
@@ -142,9 +138,9 @@ export default function ConditionReport(props) {
     setOpen(!open);
   };
 
- const handleClosePassVehicle = () =>{
-  setIsPassVehicalPop(!isPassVehicalPop)
- }
+  const handleClosePassVehicle = () => {
+    setIsPassVehicalPop(!isPassVehicalPop);
+  };
 
   const handlePurchaseVehical = (event) => {
     setOpenTransactionPopup(true);
@@ -208,7 +204,7 @@ export default function ConditionReport(props) {
                                 prefix={"$"}
                               />
                             ) : (
-                              "$0.00"
+                              "$0.0"
                             )}
                           </div>
                         </CardContent>
@@ -230,7 +226,7 @@ export default function ConditionReport(props) {
                                 prefix={"$"}
                               />
                             ) : (
-                              "$0.00"
+                              "$0.0"
                             )}
                           </div>
                         </CardContent>
@@ -252,7 +248,7 @@ export default function ConditionReport(props) {
                                 prefix={"$"}
                               />
                             ) : (
-                              "$0.00"
+                              "$0.0"
                             )}
                           </div>
                         </CardContent>
@@ -327,7 +323,7 @@ export default function ConditionReport(props) {
                                   prefix={"$"}
                                 />
                               ) : (
-                                "$0.00"
+                                "$0.0"
                               )}
                             </span>
                           </div>
@@ -355,7 +351,7 @@ export default function ConditionReport(props) {
                                   prefix={"$"}
                                 />
                               ) : (
-                                "$0.00"
+                                "$0.0"
                               )}
                             </span>
                           </div>
@@ -379,7 +375,7 @@ export default function ConditionReport(props) {
                                   prefix={"$"}
                                 />
                               ) : (
-                                "$0.00"
+                                "$0.0"
                               )}
                             </span>
                           </div>
@@ -399,7 +395,9 @@ export default function ConditionReport(props) {
                     <Grid item xs={4} className="ConditionCardMargin">
                       <Card className="ConditionCard">
                         <CardContent>
-                          <div className="smallCardTitle">Inspection Mileage</div>
+                          <div className="smallCardTitle">
+                            Inspection Mileage
+                          </div>
                           <div className="smallCardBody">
                             {condionVehicleDetails &&
                             condionVehicleDetails?.inspection_mileage ? (
@@ -872,7 +870,7 @@ export default function ConditionReport(props) {
                                   prefix={"$"}
                                 />
                               ) : (
-                                "$0.00"
+                                "$0.0"
                               )}
                             </span>
                           </div>
@@ -900,7 +898,7 @@ export default function ConditionReport(props) {
                                   prefix={"$"}
                                 />
                               ) : (
-                                "$0.00"
+                                "$0.0"
                               )}
                             </span>
                           </div>
@@ -1081,13 +1079,13 @@ export default function ConditionReport(props) {
       </Box>
 
       <Box>
-      <PassOnVehicle
-        open={isPassVehicalPop}
-        close={handleClosePassVehicle}
-        vin={vin}
-        groundingId={vehicleDetails?.groundingId}
-        reload={()=>{}}
-      />
+        <PassOnVehicle
+          open={isPassVehicalPop}
+          close={handleClosePassVehicle}
+          vin={vin}
+          groundingId={vehicleDetails?.groundingId}
+          reload={() => {}}
+        />
       </Box>
       {/* reload={() => {
           getVehicleDetails();

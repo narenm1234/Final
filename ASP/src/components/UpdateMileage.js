@@ -159,7 +159,7 @@ export default function UpdateMileage(props) {
                                 prefix={"$"}
                                 suffix={".00"}
                               />
-                              : "$0.00"}
+                              : "$0.0"}
                           </div>
                         </CardContent>
                       </Card>
@@ -178,7 +178,7 @@ export default function UpdateMileage(props) {
                                 prefix={"$"}
                                 suffix={".00"}
                               />
-                              : "$0.00"}
+                              : "$0.0"}
                           </div>
                         </CardContent>
                       </Card>
@@ -197,7 +197,7 @@ export default function UpdateMileage(props) {
                                 prefix={"$"}
                                 suffix={".00"}
                               />
-                              : "$0.00"}
+                              : "$0.0"}
                           </div>
                         </CardContent>
                       </Card>

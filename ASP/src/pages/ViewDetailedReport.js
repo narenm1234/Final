@@ -22,9 +22,9 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItemText from "@material-ui/core/ListItemText";
 import CurrencyFormat from "react-currency-format";
-import TextareaAutosize from '@material-ui/core/TextareaAutosize';
-import Tooltip from '@material-ui/core/Tooltip';
-import InfoIcon from '@material-ui/icons/Info';
+import TextareaAutosize from "@material-ui/core/TextareaAutosize";
+import Tooltip from "@material-ui/core/Tooltip";
+import InfoIcon from "@material-ui/icons/Info";
 const styles = (theme) => ({
   root: {
     margin: 0,
@@ -38,17 +38,17 @@ const styles = (theme) => ({
   },
 });
 const BlueTooltip = withStyles({
-    tooltip: {
-        width: "185px",
-        height: "68px",
-        fontSize: "12px",
-        lineHeight: 1.6,
-        color: "#080707",
-        borderRadius: "4px",
-  boxShadow: "0 2px 3px 0 rgba(0, 0, 0, 0.16)",
-  backgroundColor: "#fff",
-    }
-  })(Tooltip);
+  tooltip: {
+    width: "185px",
+    height: "68px",
+    fontSize: "12px",
+    lineHeight: 1.6,
+    color: "#080707",
+    borderRadius: "4px",
+    boxShadow: "0 2px 3px 0 rgba(0, 0, 0, 0.16)",
+    backgroundColor: "#fff",
+  },
+})(Tooltip);
 const DialogTitle = withStyles(styles)((props) => {
   const { children, classes, onClose, ...other } = props;
   return (
@@ -231,7 +231,7 @@ export default function ViewDetailedReport(props) {
     props.close();
   };
 
-  const {DamageDetails}=props;
+  const { DamageDetails } = props;
   const handleSeperation = () => {
     let interior = [];
     let exterior = [];
@@ -278,15 +278,20 @@ export default function ViewDetailedReport(props) {
         <DialogContent>
           <Grid container>
             <Grid item xs={6} className="galleryView">
-              <MyGallery getDamageDesc={(e) =>{ e? setDamagedesc(e) :setDamagedesc("") }} {...props} />
+              <MyGallery
+                getDamageDesc={(e) => {
+                  e ? setDamagedesc(e) : setDamagedesc("");
+                }}
+                {...props}
+              />
             </Grid>
 
             <Grid xs={6}>
               <div className="viewReportCenter">
                 Estimated Damage Repair Totals
-                 <div className="hrLine" />
+                <div className="hrLine" />
               </div>
-             
+
               <Grid container className="experiorSpacing">
                 <Grid item xs={12}>
                   <List>
@@ -297,13 +302,15 @@ export default function ViewDetailedReport(props) {
                       <ListItemSecondaryAction className="smallCardBody ">
                         {DamageDetails.interiorCost ? (
                           <CurrencyFormat
-                            value={parseFloat(DamageDetails.interiorCost).toFixed(2)}
+                            value={parseFloat(
+                              DamageDetails.interiorCost
+                            ).toFixed(2)}
                             displayType={"text"}
                             thousandSeparator={true}
                             prefix={"$"}
                           />
                         ) : (
-                          "$0.00"
+                          "$0.0"
                         )}
                       </ListItemSecondaryAction>
                     </ListItem>
@@ -314,13 +321,15 @@ export default function ViewDetailedReport(props) {
                       <ListItemSecondaryAction className="smallCardBody ">
                         {DamageDetails.exteriorCost ? (
                           <CurrencyFormat
-                            value={parseFloat(DamageDetails.exteriorCost).toFixed(2)}
+                            value={parseFloat(
+                              DamageDetails.exteriorCost
+                            ).toFixed(2)}
                             displayType={"text"}
                             thousandSeparator={true}
                             prefix={"$"}
                           />
                         ) : (
-                          "$0.00"
+                          "$0.0"
                         )}
                       </ListItemSecondaryAction>
                     </ListItem>
@@ -333,13 +342,15 @@ export default function ViewDetailedReport(props) {
                       <ListItemSecondaryAction className="smallCardBody ">
                         {DamageDetails.maintainenceCost ? (
                           <CurrencyFormat
-                            value={parseFloat(DamageDetails.maintainenceCost).toFixed(2)}
+                            value={parseFloat(
+                              DamageDetails.maintainenceCost
+                            ).toFixed(2)}
                             displayType={"text"}
                             thousandSeparator={true}
                             prefix={"$"}
                           />
                         ) : (
-                          "$0.00"
+                          "$0.0"
                         )}
                       </ListItemSecondaryAction>
                     </ListItem>
@@ -356,26 +367,40 @@ export default function ViewDetailedReport(props) {
                             prefix={"$"}
                           />
                         ) : (
-                          "$0.00"
+                          "$0.0"
                         )}
                       </ListItemSecondaryAction>
                     </ListItem>
                     <ListItem>
-                    <ListItemText className="smallCardTitle"><span className="textBold alignleft ">Excessive W&T<BlueTooltip title={`Excessive W&T charges are those that may be billed to the lessee on their lease end invoice`}>
-                                                <div className="icontooltip"><IconButton color='#005fb2'>
-                                                    <InfoIcon style={{width:"16px"}}color="#005fb2"/>
-                                                </IconButton></div>
-                                            </BlueTooltip></span></ListItemText>
+                      <ListItemText className="smallCardTitle">
+                        <span className="textBold alignleft ">
+                          Excessive W&T
+                          <BlueTooltip
+                            title={`Excessive W&T charges are those that may be billed to the lessee on their lease end invoice`}
+                          >
+                            <div className="icontooltip">
+                              <IconButton color="#005fb2">
+                                <InfoIcon
+                                  style={{ width: "16px" }}
+                                  color="#005fb2"
+                                />
+                              </IconButton>
+                            </div>
+                          </BlueTooltip>
+                        </span>
+                      </ListItemText>
                       <ListItemSecondaryAction className="smallCardBody ">
                         {DamageDetails.excessiveWandT ? (
                           <CurrencyFormat
-                            value={parseFloat(DamageDetails.excessiveWandT).toFixed(2)}
+                            value={parseFloat(
+                              DamageDetails.excessiveWandT
+                            ).toFixed(2)}
                             displayType={"text"}
                             thousandSeparator={true}
                             prefix={"$"}
                           />
                         ) : (
-                          "$0.00"
+                          "$0.0"
                         )}
                       </ListItemSecondaryAction>
                     </ListItem>
@@ -492,13 +517,13 @@ export default function ViewDetailedReport(props) {
                         {DamageDetails?.damageDetails?.length > 0 ? (
                           inter.part_cost ? (
                             <CurrencyFormat
-                              value={inter.part_cost}
+                              value={parseFloat(inter.part_cost).toFixed(2)}
                               displayType={"text"}
                               thousandSeparator={true}
                               prefix={"$"}
                             />
                           ) : (
-                            "$0.00"
+                            "$0.0"
                           )
                         ) : (
                           "N/A"
@@ -508,13 +533,13 @@ export default function ViewDetailedReport(props) {
                         {DamageDetails?.damageDetails?.length > 0 ? (
                           inter.total ? (
                             <CurrencyFormat
-                              value={inter.total}
+                              value={parseFloat(inter.total).toFixed(2)}
                               displayType={"text"}
                               thousandSeparator={true}
                               prefix={"$"}
                             />
                           ) : (
-                            "$0.00"
+                            "$0.0"
                           )
                         ) : (
                           "N/A"
@@ -579,14 +604,13 @@ export default function ViewDetailedReport(props) {
                         {DamageDetails?.damageDetails?.length > 0 ? (
                           exter.part_cost ? (
                             <CurrencyFormat
-                              value={exter.part_cost}
+                              value={parseFloat(exter.part_cost).toFixed(2)}
                               displayType={"text"}
                               thousandSeparator={true}
                               prefix={"$"}
-                              suffix={".00"}
                             />
                           ) : (
-                            "$0.00"
+                            "$0.0"
                           )
                         ) : (
                           "N/A"
@@ -596,13 +620,13 @@ export default function ViewDetailedReport(props) {
                         {DamageDetails?.damageDetails?.length > 0 ? (
                           exter.total ? (
                             <CurrencyFormat
-                              value={exter.total}
+                              value={parseFloat(exter.total).toFixed(2)}
                               displayType={"text"}
                               thousandSeparator={true}
                               prefix={"$"}
                             />
                           ) : (
-                            "$0.00"
+                            "$0.0"
                           )
                         ) : (
                           "N/A"
@@ -657,13 +681,13 @@ export default function ViewDetailedReport(props) {
                         {DamageDetails?.damageDetails?.length > 0 ? (
                           mech.part_cost ? (
                             <CurrencyFormat
-                              value={mech.part_cost}
+                              value={parseFloat(mech.part_cost).toFixed(2)}
                               displayType={"text"}
                               thousandSeparator={true}
                               prefix={"$"}
                             />
                           ) : (
-                            "$0.00"
+                            "$0.0"
                           )
                         ) : (
                           "N/A"
@@ -673,13 +697,13 @@ export default function ViewDetailedReport(props) {
                         {DamageDetails?.damageDetails?.length > 0 ? (
                           mech.total ? (
                             <CurrencyFormat
-                              value={mech.total}
+                              value={parseFloat(mech.total).toFixed(2)}
                               displayType={"text"}
                               thousandSeparator={true}
                               prefix={"$"}
                             />
                           ) : (
-                            "$0.00"
+                            "$0.0"
                           )
                         ) : (
                           "N/A"
