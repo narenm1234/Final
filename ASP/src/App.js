@@ -22,9 +22,9 @@ function App() {
   const fireEvents = () => {
     setStateUpdate(stateUpdate + 1);
   };
-  const selectedDealers = (data) =>{
-    setSelectedDealersData(data)
-  }
+  const selectedDealers = (data) => {
+    setSelectedDealersData(data);
+  };
 
   return (
     <>
@@ -34,12 +34,13 @@ function App() {
           <div>
             <Sidebar stateUpdate={stateUpdate}>
               <Switch>
-              <Route
+                <Route
                   path="/"
                   exact
                   exact
-                  render={(props) => <GroundPending {...props} fireEvents={fireEvents}
-                  />}
+                  render={(props) => (
+                    <GroundPending {...props} fireEvents={fireEvents} />
+                  )}
                 />
                 <Route
                   path="/home"
@@ -52,12 +53,24 @@ function App() {
                   path="/grounded"
                   exact
                   exact
-                  render={(props) => <GroundPending {...props} fireEvents={fireEvents}
-                  selectedDealersData={selectedDealersData}
-                  />}
+                  render={(props) => (
+                    <GroundPending
+                      {...props}
+                      fireEvents={fireEvents}
+                      selectedDealersData={selectedDealersData}
+                    />
+                  )}
                 />
-                <Route path="/passed" exact render={(props) => <GroundPending1 {...props} />} />
-                <Route path="/purchased" exact render={(props) => <GroundPending2 {...props} />} />
+                <Route
+                  path="/passed"
+                  exact
+                  render={(props) => <GroundPending1 {...props} />}
+                />
+                <Route
+                  path="/purchased"
+                  exact
+                  render={(props) => <GroundPending2 {...props} />}
+                />
                 <Route
                   path="/grounded/lastchance"
                   exact
@@ -87,8 +100,9 @@ function App() {
                 <Route
                   path="/login2"
                   exact
-                  render={(props) => <Login2 {...props} />}
-                  
+                  render={(props) => (
+                    <Login2 {...props} fireEvents={fireEvents} />
+                  )}
                 />
                 <Header selectedDealers={selectedDealers}></Header>
               </Switch>

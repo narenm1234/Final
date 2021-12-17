@@ -200,7 +200,7 @@ export default function PurchasedPricingSideBar(props) {
       setPaymentTypeFee(
         purchasedData.remainingPmts + purchasedData.residualAmount || 0
       );
-      setPaymentTypeName("Residual + RemainingPmts");
+      setPaymentTypeName("Residual + Remaining Payments");
     } else if (paymentTypeVal == "3") {
       let payment = {
         amount: purchasedData.vehiclePrice,
@@ -227,7 +227,7 @@ export default function PurchasedPricingSideBar(props) {
       setPaymentTypeFee(
         purchasedData.vehiclePrice + purchasedData.remainingPmts || 0
       );
-      setPaymentTypeName("Market + remainingPmts");
+      setPaymentTypeName("Market + Remaining Payments");
     }
 
     return makepaymentdetails;
@@ -349,7 +349,7 @@ export default function PurchasedPricingSideBar(props) {
                     prefix={"$"}
                   />
                 ) : (
-                  "$0.00"
+                  "$0.0"
                 )}
               </p>
             </Box>
@@ -368,13 +368,15 @@ export default function PurchasedPricingSideBar(props) {
               <p>
                 {purchasedData.remainingPmts + purchasedData.residualAmount ? (
                   <CurrencyFormat
-                    value={parseFloat(purchasedData.remainingPmts + purchasedData.residualAmount).toFixed(2)}
+                    value={parseFloat(
+                      purchasedData.remainingPmts + purchasedData.residualAmount
+                    ).toFixed(2)}
                     displayType={"text"}
                     thousandSeparator={true}
                     prefix={"$"}
                   />
                 ) : (
-                  "$0.00"
+                  "$0.0"
                 )}
               </p>
             </Box>
@@ -399,7 +401,7 @@ export default function PurchasedPricingSideBar(props) {
                     prefix={"$"}
                   />
                 ) : (
-                  "$0.00"
+                  "$0.0"
                 )}
               </p>
             </Box>
@@ -418,13 +420,15 @@ export default function PurchasedPricingSideBar(props) {
               <p>
                 {purchasedData.vehiclePrice + purchasedData.remainingPmts ? (
                   <CurrencyFormat
-                    value={parseFloat(purchasedData.vehiclePrice + purchasedData.remainingPmts).toFixed(2)}
+                    value={parseFloat(
+                      purchasedData.vehiclePrice + purchasedData.remainingPmts
+                    ).toFixed(2)}
                     displayType={"text"}
                     thousandSeparator={true}
                     prefix={"$"}
                   />
                 ) : (
-                  "$0.00"
+                  "$0.0"
                 )}
               </p>
             </Box>
@@ -440,20 +444,24 @@ export default function PurchasedPricingSideBar(props) {
               {paymentTypeName} :
             </ListItemText>
             <ListItemText className="manualPricing">
-               <Box textAlign={"end"}>
-               <CurrencyFormat
-                value={parseFloat(paymentTypeFee).toFixed(2)}
-                displayType={"text"}
-                thousandSeparator={true}
-                prefix={"$"}
-              />
-               </Box>
+              <Box textAlign={"end"}>
+                {paymentTypeFee ? (
+                  <CurrencyFormat
+                    value={parseFloat(paymentTypeFee).toFixed(2)}
+                    displayType={"text"}
+                    thousandSeparator={true}
+                    prefix={"$"}
+                  />
+                ) : (
+                  "$0.0"
+                )}
+              </Box>
             </ListItemText>
           </ListItem>
         </>
       )}
       <ListItem>
-        <ListItemText className="manualPricing">Admin. Fee:</ListItemText>
+        <ListItemText className="manualPricing">Admin Fee:</ListItemText>
         <ListItemText className="manualPricing">
           <Box textAlign={"end"}>$000,000.00</Box>
         </ListItemText>
@@ -463,12 +471,16 @@ export default function PurchasedPricingSideBar(props) {
         <ListItemText className="manualPricing">Total Fee:</ListItemText>
         <ListItemText className="manualPricing">
           <Box textAlign={"end"}>
-            <CurrencyFormat
-              value={parseFloat(totalFee).toFixed(2)}
-              displayType={"text"}
-              thousandSeparator={true}
-              prefix={"$"}
-            />
+            {totalFee ? (
+              <CurrencyFormat
+                value={parseFloat(totalFee).toFixed(2)}
+                displayType={"text"}
+                thousandSeparator={true}
+                prefix={"$"}
+              />
+            ) : (
+              "$0.0"
+            )}
           </Box>
         </ListItemText>
       </ListItem>

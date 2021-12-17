@@ -10,9 +10,7 @@ import ExpandMore from "@material-ui/icons/ExpandMore";
 import Chip from "@material-ui/core/Chip";
 import { makeStyles } from "@material-ui/core/styles";
 import { useLocation } from "react-router-dom";
-import {
-  getDealerVehicleCount
-} from "../service/api";
+import { getDealerVehicleCount } from "../service/api";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,9 +32,9 @@ const useStyles = makeStyles((theme) => ({
     background: "#e7f3fd",
     borderLeft: "3px solid #407ed2",
   },
-  activeNavdrop:{
+  activeNavdrop: {
     border: "1px solid #407ed2",
-  }
+  },
 }));
 
 let sidebarItems = [
@@ -87,6 +85,7 @@ export default function NewSidebar(props) {
   const classes = useStyles();
 
   useEffect(async () => {
+    setActiveChild(location.pathname);
     let DealerVehicleCountRes = await getDealerVehicleCount();
     sidebarItems.map((item) => {
       item.childs.map((child) => {
@@ -95,21 +94,20 @@ export default function NewSidebar(props) {
         }
 
         if (child.link == "/grounded") {
-            child.badge = DealerVehicleCountRes?.data.data.groundedVehicleCount;
+          child.badge = DealerVehicleCountRes?.data.data.groundedVehicleCount;
         }
         if (child.link == "/passed") {
-            child.badge = DealerVehicleCountRes?.data.data.passedVehicleCount;
+          child.badge = DealerVehicleCountRes?.data.data.passedVehicleCount;
         }
         if (child.link == "/purchased") {
-            child.badge = DealerVehicleCountRes?.data.data.purchasedVehicleCount;
+          child.badge = DealerVehicleCountRes?.data.data.purchasedVehicleCount;
         }
       });
     });
-    if(localStorage.getItem('dealerCode'))
-    {
-    console.log('dealerCode')
-    
-    sidebarItems = sidebarItems.filter(row=>row.label != 'Admin')
+    if (localStorage.getItem("dealerCode")) {
+      console.log("dealerCode");
+
+      sidebarItems = sidebarItems.filter((row) => row.label != "Admin");
     }
     setList([...sidebarItems]);
   }, [props.stateUpdate]);
@@ -159,8 +157,16 @@ export default function NewSidebar(props) {
                     to={child.link}
                     key={child.link}
                     className={`
-                     ${activeChild == child.link ? classes.activeNavLink : ""}   
-                     ${activeChild == "/" ? (child.link == '/grounded' ? classes.activeNavLink  : ""): ""}
+                     ${
+                       activeChild == child.link ? classes.activeNavLink : ""
+                     }   
+                     ${
+                       activeChild == "/"
+                         ? child.link == "/grounded"
+                           ? classes.activeNavLink
+                           : ""
+                         : ""
+                     }
                     `}
                     onClick={() => {
                       handleClickMakeActive(child);
