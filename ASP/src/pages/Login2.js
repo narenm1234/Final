@@ -25,7 +25,7 @@ function Login2(props) {
     getToken();
     getUserAccessInfoToken();
     // getUserAccessInfoToken();
-  }, {});
+  }, []);
 
   async function getToken() {
     let apiResponse = await getAccessTokenEndpoint(data1);
