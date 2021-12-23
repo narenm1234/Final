@@ -88,6 +88,12 @@ export default function ListingPage(props) {
   const [groundingID, setGroundingID] = React.useState("");
   // const [images, setImages] = React.useState([]);
   const [loader, setLoader] = React.useState(true);
+  var refresh1 = window.localStorage.getItem('refresh1');
+  console.log(refresh1);
+  if (refresh1===null){
+      window.location.reload();
+      window.localStorage.setItem('refresh1', "1");
+  }
 
   useEffect(() => {
     getVehicleDetails();
@@ -207,17 +213,17 @@ export default function ListingPage(props) {
   }, []);
   
 
-  const getEstimagetTimeRemaining = (grounding_date) => {
-    setInterval(() => {
-      let time = moment(grounding_date).unix();
-      let end = moment.duration(1, "d");
-      var duration = moment.duration(end.diff(time));
-      let hours = time.add(end).asHours();
+  // const getEstimagetTimeRemaining = (grounding_date) => {
+  //   setInterval(() => {
+  //     let time = moment(grounding_date).unix();
+  //     let end = moment.duration(1, "d");
+  //     var duration = moment.duration(end.diff(time));
+  //     let hours = time.add(end).asHours();
 
-      let timeremaining = moment.unix(hours).format("hh:mm");
-      setTime(timeremaining);
-    }, 600);
-  };
+  //     let timeremaining = moment.unix(hours).format("hh:mm");
+  //     setTime(timeremaining);
+  //   }, 600);
+  // };
  
 
 

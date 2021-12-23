@@ -372,7 +372,7 @@ export async function getPassedList1() {
 
   return await axios.post(passedVehicleUrl, requestData, options);
 }
-export async function getPurchasedList(data) {
+export async function getPurchasedList() {
   let stringData = localStorage.getItem("dealerCode");
   let payload = stringData ? stringData : "ALL";
   var data = JSON.stringify([payload]);

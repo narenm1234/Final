@@ -21,6 +21,7 @@ function Login2(props) {
   const [token, setToken] = useState();
   const [Idtoken, setIdToken] = useState();
   const [dealerCode, setDealerCode] = useState("");
+
   useEffect(() => {
     getToken();
     getUserAccessInfoToken();
@@ -46,18 +47,17 @@ function Login2(props) {
     console.log("forgerock", resp);
     localStorage.setItem("ForgeRockToken", resp.data.forgeRockToken);
     props.history.push("/grounded");
-    props.fireEvents();
   }
 
-  async function getUserAccessInfoToken() {
+ async function getUserAccessInfoToken() {
     setInterval(async () => {
       let apiResponse = await getRefreshTokenEndpoint();
       localStorage.setItem("bearerToken", apiResponse.data.access_token);
       // localStorage.setItem("refreshToken",apiResponse.data.refresh_token);
       let resp1 = await getForgeRockToken();
       localStorage.setItem("ForgeRockToken", resp1.data.forgeRockToken);
-    }, 120000);
-  }
+    }, 200000);
+  } 
   return <div></div>;
 }
 

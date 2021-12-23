@@ -93,7 +93,7 @@ export default function ListingPage2(props) {
     // getImages();
   }, [value]);
   async function getVehicleDetails() {
-    let apiResponse = await getPurchasedList("ALL");
+    let apiResponse = await getPurchasedList();
     setVehicleResponse(apiResponse?.data.data);
     console.log(vehicleResponse);
     // console.log(apiResponse?.data.data);
