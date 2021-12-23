@@ -13,6 +13,7 @@ import "../src/sass/main.scss";
 import VINSearch from "./pages/GroundPending/VINSearch";
 import ConditionReport from "./pages/ConditionReport";
 import AdminHome from "./pages/AdminHome";
+import AdminVehicleSearch from "./components/AdminVehicleSearch";
 import ConditionReportRequests from "./pages/ConditionReportRequests";
 import InventoryRequestsTabs from "./components/InventoryRequestsTabs";
 import Login2 from "./pages/Login2";
@@ -47,7 +48,9 @@ function App() {
                   exact
                   render={(props) => <Home {...props} />}
                 />
-                <Route path="/adminSearch" exact component={AdminHome} />
+                <Route path="/adminSearch" exact component={AdminVehicleSearch} />
+                <Route path="/adminSearchResult" exact component={AdminHome} />
+
                 <Route path="/checkinvehicle" exact component={VINSearch} />
                 <Route
                   path="/grounded"
