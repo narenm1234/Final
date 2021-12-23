@@ -438,7 +438,7 @@ export async function getOEMBuildDetailsApi(vin) {
   };
   return await axios(config);
 }
-export async function postDealerActionPassOnVehicle(vin, groundId) {
+export async function postDealerActionPassOnVehicle(vin, groundId, dealerName) {
   var config = {
     method: "post",
     url: `${getDealerActionUrl}?dealerAction=Pass&groundingId=${groundId}&vin=${vin}`,

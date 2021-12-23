@@ -85,6 +85,7 @@ export default function ListingPage(props) {
   const [open, setOpen] = React.useState(false);
   const [time, setTime] = React.useState("00:00");
   const [passVin, setPassVin] = React.useState("");
+  const [dealerName, setDealerName] = React.useState("");
   const [groundingID, setGroundingID] = React.useState("");
   // const [images, setImages] = React.useState([]);
   const [loader, setLoader] = React.useState(true);
@@ -182,9 +183,10 @@ export default function ListingPage(props) {
       vehicleDetails: vehicle,
     });
   };
-  const handleOpen = (vin, groundingId) => {
+  const handleOpen = (vin, groundingId, dealer_name) => {
     setPassVin(vin);
     setGroundingID(groundingId);
+    setDealerName(dealer_name);
     setOpen(!open);
   };
   const handleClose = () => {
@@ -415,7 +417,8 @@ export default function ListingPage(props) {
                         onClick={handleOpen.bind(
                           this,
                           vehicle.vin,
-                          vehicle.groundingId
+                          vehicle.groundingId,
+                          vehicle.dealer_name
                         )}
                       >
                         Pass on vehicle
@@ -465,6 +468,7 @@ export default function ListingPage(props) {
         open={open}
         close={handleClose}
         vin={passVin}
+        dealerName={dealerName}
         groundingId={groundingID}
         reload={() => {
           getVehicleDetails();
