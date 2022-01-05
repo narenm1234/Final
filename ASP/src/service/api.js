@@ -58,7 +58,7 @@ if (hostname.includes("dev")) {
   purchasedVehicleUrl =
     "https://aspservices-internal-dev.tfs.toyota.com/asp-services/getPurchasedVehicles";
   inspectionAccessoryDetailsUrl =
-    "https://aspservices-internal-dev.tfs.toyota.com/asp-services/getAccessoryDetails";
+    "https://aspservices-internal-dev.tfs.toyota.com/asp-services/getAccessoryDetails";    
   inspectionWheelTiresDetailsUrl =
     "https://aspservices-internal-dev.tfs.toyota.com/asp-services/getInspectionWheelTiresDetails";
   inspectionVehicleDetails =
@@ -577,13 +577,13 @@ export async function getDealerPaymentsData() {
   const options = {
     headers: headers,
   };
-
+  let dealerPayment = "";
   if (!!localStorage.getItem("KintoID")) {
-    getDealerPayments =
+    dealerPayment =
       getDealerPayments + "?KintoId=" + localStorage.getItem("KintoID");
   }
   //getDealerPayments = getDealerPayments + "?KintoId=t002-51690";
-  return await axios.get(getDealerPayments, options);
+  return await axios.get(dealerPayment, options);
 }
 
 export async function getPurchaseDetails(vin) {
