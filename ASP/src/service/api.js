@@ -578,9 +578,9 @@ export async function getDealerPaymentsData() {
     headers: headers,
   };
   let dealerPayment = "";
+  dealerPayment = getDealerPayments + "?KintoId=null";
   if (!!localStorage.getItem("KintoID")) {
-    dealerPayment =
-      getDealerPayments + "?KintoId=" + localStorage.getItem("KintoID");
+    dealerPayment = getDealerPayments + "?KintoId=" + localStorage.getItem("KintoID");
   }
   //getDealerPayments = getDealerPayments + "?KintoId=t002-51690";
   return await axios.get(dealerPayment, options);
