@@ -60,18 +60,17 @@
 }
 .adminTabsSection {
   width: 100%;
-  padding-top: 50px;
-  margin-top: 4%;
+  padding-top: 90px;
 }
 .notesSection {
-  height: 100vh;
+  width: 280px;
+  height: calc(100vh - 50px);
   background-color: #ffffff;
-  z-index: 5700 !important;
+  z-index: 1110 !important;
   position: sticky;
-  margin-top: 12%;
-  float: right;
-  margin-right: 1%;
-  box-shadow: -1px 0 3px 0 #f7f7f8;
+  top: 50px;
+  overflow-y: auto;
+  box-shadow: 1px 2px 4px #969696;
 }
 
 .manualPricingSidebar {
@@ -87,21 +86,22 @@
   margin-top: 52px;
   box-shadow: -1px 0 3px 0 rgba(0, 0, 0, 0.25);
   overflow-y: auto;
-   // min-width: 350px;
+  // min-width: 350px;
 }
 .updatePricingSidebar {
   height: calc(100vh - 53px);
   // min-height: 500px;
   // height: 100vh;
   background-color: #ffffff;
-  z-index: 3000 !important;
+  z-index: 1110 !important;
   // margin-left: ; // 80%
-  position: fixed;
-  // top: 40px;
+  position: sticky;
+  top: 50px;
   // right: 3%;
-  margin-top: 52px;
+  // margin-top: 52px;
   box-shadow: -1px 0 3px 0 rgba(0, 0, 0, 0.25);
   min-width: 350px;
+  overflow-y: auto;
 }
 .swipeFilterBtn {
   position: absolute;
@@ -173,10 +173,8 @@
 }
 
 .notesText {
-  width: 216px;
-  height: 150px;
-  margin: 0 0 16px 0;
-  padding: 5px 12px 45px;
+  min-height: 130px;
+  padding: 10px;
   border-radius: 4px;
   border: solid 1px #dddbda;
   background-color: #ffffff;
@@ -202,18 +200,15 @@
 }
 
 .notesSectionHeader {
-  width: 264px;
-  height: 52px;
-  margin: 0 0 24px;
+  // width: 264px;
+  height: 47px;
   padding: 10px 12px;
   box-shadow: 0 1px 0 0 #dddbda;
   background-color: #ffffff;
 }
 
 .notesSectionContent {
-  width: 217px !important;
-  height: 80px;
-  margin: 0 0 4px;
+  // width: 217px;
   font-size: 13px;
   font-weight: normal;
   font-stretch: normal;
@@ -221,8 +216,6 @@
   line-height: 1.54;
   letter-spacing: normal;
   color: #3e3e3c;
-  margin: 10px;
-  padding: 10px;
 }
 
 .custompagination {
@@ -265,8 +258,6 @@
   width: 10px;
 }
 
-
-
 .resultForVin {
   font-size: 15px;
   font-weight: 600;
@@ -275,4 +266,19 @@
   line-height: 1.5;
   letter-spacing: normal;
   color: #080707;
+}
+
+.topBarAdmin {
+  .MuiTabs-indicator {
+    height: 3px !important;
+    top: 0 !important;
+    background-color: #006fd0 !important;
+  }
+  .Mui-selected {
+    background-color: rgba(21, 137, 238, 0.1) !important;
+  }
+}
+
+.deviderred {
+  background-color: #c23934 !important;
 }

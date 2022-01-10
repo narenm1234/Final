@@ -11,6 +11,7 @@ import MyGallery from "./ImageGallery";
 import { getInspectionVehicleDetails } from "../service/api";
 import moment from "moment";
 import ClearIcon from "@material-ui/icons/Clear";
+import CurrencyFormat from "react-currency-format";
 
 export default function AdminDetailedReport(props) {
   let groundingDetails = {
@@ -60,6 +61,7 @@ export default function AdminDetailedReport(props) {
     "Gross Purchase Amount": "$00,000.00",
     "Purchasing Dealer Legal Name": "Detail",
   };
+
   const [open, setOpen] = useState(false);
   const [inspectiondata, setinspectiondata] = useState(props.inspectiondata);
 
@@ -77,7 +79,7 @@ export default function AdminDetailedReport(props) {
         <Grid container spacing={3} className="ConditionCardReportSpace">
           <Grid item md={12}>
             <Box display={"flex"} alignItems={"center"}>
-              <Box class="resultForVin">
+              <Box className="resultForVin">
                 Results for VIN: {inspectiondata.vin}
               </Box>
               <Box pl={2} pt={1}>
@@ -96,9 +98,15 @@ export default function AdminDetailedReport(props) {
               <div className="reportTitle">
                 <span>Year Make Model Color</span>
               </div>
-              <span className="ConditionReportInspection">
-                <span className="BadgeValue">Inspection Complete</span>
-              </span>
+              {inspectiondata?.inspectionStatus === "COMPLETED" ? (
+                <span className="ConditionReportInspection">
+                  <span className="BadgeValue">Inspection Complete</span>
+                </span>
+              ) : (
+                <span className="ConditionReportInspectionPending">
+                  <span className="BadgeValue">Inspection Pending</span>
+                </span>
+              )}
             </div>
 
             <Grid container spacing={3}>
@@ -148,33 +156,38 @@ export default function AdminDetailedReport(props) {
                       </span>
                     </ListItemText>
                     <ListItemSecondaryAction>
-                      <span className="textSize">---</span>
+                      <span className="textSize">
+                        {inspectiondata?.customerReturnDate &&
+                          moment(inspectiondata?.customerReturnDate).format(
+                            "MM/DD/YYYY"
+                          )}
+                      </span>
                     </ListItemSecondaryAction>
                   </List>
                   <List className="paddingCSS">
                     <ListItemText>
                       <span className="textStyle">
                         <span className="textBold">
-                          {" "}
-                          Grounding Dealer Number{" "}
+                          Grounding Dealer Number
                         </span>
                       </span>
                     </ListItemText>
                     <ListItemSecondaryAction>
-                      <span className="textSize">---</span>
+                      <span className="textSize">
+                        {inspectiondata?.groundingDealerNumber}
+                      </span>
                     </ListItemSecondaryAction>
                   </List>
                   <List className="paddingCSS">
                     <ListItemText>
                       <span className="textStyle">
-                        <span className="textBold">
-                          {" "}
-                          Grounding Dealer Name{" "}
-                        </span>
+                        <span className="textBold">Grounding Dealer Name</span>
                       </span>
                     </ListItemText>
                     <ListItemSecondaryAction>
-                      <span className="textSize">---</span>
+                      <span className="textSize">
+                        {inspectiondata?.groundingDealerName}
+                      </span>
                     </ListItemSecondaryAction>
                   </List>
                   <List className="paddingCSS">
@@ -184,7 +197,12 @@ export default function AdminDetailedReport(props) {
                       </span>
                     </ListItemText>
                     <ListItemSecondaryAction>
-                      <span className="textSize">---</span>
+                      <span className="textSize">
+                        {inspectiondata?.groundingDate &&
+                          moment(inspectiondata?.groundingDate).format(
+                            "MM/DD/YYYY"
+                          )}
+                      </span>
                     </ListItemSecondaryAction>
                   </List>
                   <List className="paddingCSS">
@@ -194,32 +212,45 @@ export default function AdminDetailedReport(props) {
                       </span>
                     </ListItemText>
                     <ListItemSecondaryAction>
-                      <span className="textSize">---</span>
+                      <span className="textSize">
+                        {inspectiondata.groundingMileage && (
+                          <CurrencyFormat
+                            value={inspectiondata.groundingMileage}
+                            displayType={"text"}
+                            thousandSeparator={true}
+                            suffix={" MI"}
+                          />
+                        )}
+                      </span>
                     </ListItemSecondaryAction>
                   </List>
                   <List className="paddingCSS">
                     <ListItemText>
                       <span className="textStyle">
                         <span className="textBold">
-                          {" "}
-                          Transportation Order Date{" "}
+                          Transportation Order Date
                         </span>
                       </span>
                     </ListItemText>
                     <ListItemSecondaryAction>
-                      <span className="textSize">---</span>
+                      <span className="textSize">
+                        {inspectiondata?.transportationOrderedDate &&
+                          moment(
+                            inspectiondata?.transportationOrderedDate
+                          ).format("MM/DD/YYYY")}
+                      </span>
                     </ListItemSecondaryAction>
                   </List>
                   <List className="paddingCSS">
                     <ListItemText>
                       <span className="textStyle">
-                        <span className="textBold">
-                          Transportation Company{" "}
-                        </span>
+                        <span className="textBold">Transportation Company</span>
                       </span>
                     </ListItemText>
                     <ListItemSecondaryAction>
-                      <span className="textSize">---</span>
+                      <span className="textSize">
+                        {inspectiondata?.transportationCompany}
+                      </span>
                     </ListItemSecondaryAction>
                   </List>
                   <List className="paddingCSS">
@@ -229,7 +260,9 @@ export default function AdminDetailedReport(props) {
                       </span>
                     </ListItemText>
                     <ListItemSecondaryAction>
-                      <span className="textSize">---</span>
+                      <span className="textSize">
+                        {inspectiondata?.bankruptcyCode}
+                      </span>
                     </ListItemSecondaryAction>
                   </List>
                   <List className="paddingCSS">
@@ -239,19 +272,26 @@ export default function AdminDetailedReport(props) {
                       </span>
                     </ListItemText>
                     <ListItemSecondaryAction>
-                      <span className="textSize">---</span>
+                      <span className="textSize">
+                        {inspectiondata?.termCode}
+                      </span>
                     </ListItemSecondaryAction>
                   </List>
                   <List className="paddingCSS">
                     <ListItemText>
                       <span className="textStyle">
                         <span className="textBold">
-                          Dealer Exclusivity Expire Date{" "}
+                          Dealer Exclusivity Expire Date
                         </span>
                       </span>
                     </ListItemText>
                     <ListItemSecondaryAction>
-                      <span className="textSize">---</span>
+                      <span className="textSize">
+                        {inspectiondata?.dealerExclusivityExpireDate &&
+                          moment(
+                            inspectiondata?.dealerExclusivityExpireDate
+                          ).format("MM/DD/YYYY")}
+                      </span>
                     </ListItemSecondaryAction>
                   </List>
                   <List className="paddingCSS">
@@ -261,7 +301,9 @@ export default function AdminDetailedReport(props) {
                       </span>
                     </ListItemText>
                     <ListItemSecondaryAction>
-                      <span className="textSize">---</span>
+                      <span className="textSize">
+                        {inspectiondata.account_type}
+                      </span>
                     </ListItemSecondaryAction>
                   </List>
                   <List className="paddingCSS">
@@ -271,46 +313,49 @@ export default function AdminDetailedReport(props) {
                       </span>
                     </ListItemText>
                     <ListItemSecondaryAction>
-                      <span className="textSize">---</span>
+                      <span className="textSize">
+                        {inspectiondata?.residual}
+                      </span>
+                    </ListItemSecondaryAction>
+                  </List>
+                  <List className="paddingCSS">
+                    <ListItemText>
+                      <span className="textStyle">
+                        <span className="textBold">Current Payoff Amount</span>
+                      </span>
+                    </ListItemText>
+                    <ListItemSecondaryAction>
+                      <span className="textSize">
+                        {inspectiondata?.currentPayoffAmount}
+                      </span>
                     </ListItemSecondaryAction>
                   </List>
                   <List className="paddingCSS">
                     <ListItemText>
                       <span className="textStyle">
                         <span className="textBold">
-                          {" "}
-                          Current Payoff Amount{" "}
+                          Grounding Dealer Auction
                         </span>
                       </span>
                     </ListItemText>
                     <ListItemSecondaryAction>
-                      <span className="textSize">---</span>
+                      <span className="textSize">
+                        {inspectiondata?.groundingDealerAuction}
+                      </span>
                     </ListItemSecondaryAction>
                   </List>
                   <List className="paddingCSS">
                     <ListItemText>
                       <span className="textStyle">
                         <span className="textBold">
-                          {" "}
-                          Grounding Dealer Auction{" "}
+                          Total Outstanding Remaining Payments
                         </span>
                       </span>
                     </ListItemText>
                     <ListItemSecondaryAction>
-                      <span className="textSize">---</span>
-                    </ListItemSecondaryAction>
-                  </List>
-                  <List className="paddingCSS">
-                    <ListItemText>
-                      <span className="textStyle">
-                        <span className="textBold">
-                          {" "}
-                          Total Outstanding Remaining Payments{" "}
-                        </span>
+                      <span className="textSize">
+                        {inspectiondata?.totalOutstandingRemainingPayments}
                       </span>
-                    </ListItemText>
-                    <ListItemSecondaryAction>
-                      <span className="textSize">---</span>
                     </ListItemSecondaryAction>
                   </List>
                   <List className="paddingCSS">
@@ -320,7 +365,9 @@ export default function AdminDetailedReport(props) {
                       </span>
                     </ListItemText>
                     <ListItemSecondaryAction>
-                      <span className="textSize">---</span>
+                      <span className="textSize">
+                        {inspectiondata?.guaranteedPayments}
+                      </span>
                     </ListItemSecondaryAction>
                   </List>
                   <List className="paddingCSS">
@@ -330,20 +377,24 @@ export default function AdminDetailedReport(props) {
                       </span>
                     </ListItemText>
                     <ListItemSecondaryAction>
-                      <span className="textSize">---</span>
+                      <span className="textSize">
+                        {inspectiondata?.paymentGuarantee}
+                      </span>
                     </ListItemSecondaryAction>
                   </List>
                   <List className="paddingCSS">
                     <ListItemText>
                       <span className="textStyle">
                         <span className="textBold">
-                          {" "}
-                          10-Day Rule No Charge Amount{" "}
+                          10-Day Rule No Charge Amount
                         </span>
                       </span>
                     </ListItemText>
                     <ListItemSecondaryAction>
-                      <span className="textSize">---</span>
+                      <span className="textSize">
+                        {" "}
+                        {inspectiondata?.tenDayRuleNotChargeAmount}
+                      </span>
                     </ListItemSecondaryAction>
                   </List>
                   <List className="paddingCSS">
@@ -353,7 +404,9 @@ export default function AdminDetailedReport(props) {
                       </span>
                     </ListItemText>
                     <ListItemSecondaryAction>
-                      <span className="textSize">---</span>
+                      <span className="textSize">
+                        {inspectiondata?.payoffAtGrounding}
+                      </span>
                     </ListItemSecondaryAction>
                   </List>
                   <List className="paddingCSS">
@@ -363,20 +416,24 @@ export default function AdminDetailedReport(props) {
                       </span>
                     </ListItemText>
                     <ListItemSecondaryAction>
-                      <span className="textSize">---</span>
+                      <span className="textSize">
+                        {" "}
+                        {inspectiondata?.marketBasedPrice}
+                      </span>
                     </ListItemSecondaryAction>
                   </List>
                   <List className="paddingCSS">
                     <ListItemText>
                       <span className="textStyle">
                         <span className="textBold">
-                          {" "}
-                          Remaining Payments at Grounding{" "}
+                          Remaining Payments at Grounding
                         </span>
                       </span>
                     </ListItemText>
                     <ListItemSecondaryAction>
-                      <span className="textSize">---</span>
+                      <span className="textSize">
+                        {inspectiondata?.remainingPaymentsAtGrounding}
+                      </span>
                     </ListItemSecondaryAction>
                   </List>
                 </CardContent>
@@ -403,13 +460,12 @@ export default function AdminDetailedReport(props) {
                     <ListItemText>
                       <span className="textStyle">
                         <span className="textBold">
-                          {" "}
-                          Inspection Scheduled Date{" "}
+                          Inspection Scheduled Date
                         </span>
                       </span>
                     </ListItemText>
                     <ListItemSecondaryAction>
-                      <span className="textSize">---</span>
+                      <span className="textSize"> ---</span>
                     </ListItemSecondaryAction>
                   </List>
                   <List className="paddingCSS">
@@ -419,7 +475,12 @@ export default function AdminDetailedReport(props) {
                       </span>
                     </ListItemText>
                     <ListItemSecondaryAction>
-                      <span className="textSize">---</span>
+                      <span className="textSize">
+                        {inspectiondata?.inspectionDate &&
+                          moment(inspectiondata?.inspectionDate).format(
+                            "MM/DD/YYYY"
+                          )}
+                      </span>
                     </ListItemSecondaryAction>
                   </List>
                   <List className="paddingCSS">
@@ -429,7 +490,9 @@ export default function AdminDetailedReport(props) {
                       </span>
                     </ListItemText>
                     <ListItemSecondaryAction>
-                      <span className="textSize">---</span>
+                      <span className="textSize">
+                        {inspectiondata?.inspectionStatus}
+                      </span>
                     </ListItemSecondaryAction>
                   </List>
                   <List className="paddingCSS">
@@ -439,7 +502,16 @@ export default function AdminDetailedReport(props) {
                       </span>
                     </ListItemText>
                     <ListItemSecondaryAction>
-                      <span className="textSize">---</span>
+                      <span className="textSize">
+                        {inspectiondata?.inspectionMileage && (
+                          <CurrencyFormat
+                            value={inspectiondata?.inspectionMileage}
+                            displayType={"text"}
+                            thousandSeparator={true}
+                            suffix={" MI"}
+                          />
+                        )}
+                      </span>
                     </ListItemSecondaryAction>
                   </List>
                   <List className="paddingCSS">
@@ -449,7 +521,9 @@ export default function AdminDetailedReport(props) {
                       </span>
                     </ListItemText>
                     <ListItemSecondaryAction>
-                      <span className="textSize">---</span>
+                      <span className="textSize">
+                        {inspectiondata?.masterKeysReturned}
+                      </span>
                     </ListItemSecondaryAction>
                   </List>
                   <List className="paddingCSS">
@@ -459,7 +533,9 @@ export default function AdminDetailedReport(props) {
                       </span>
                     </ListItemText>
                     <ListItemSecondaryAction>
-                      <span className="textSize">---</span>
+                      <span className="textSize">
+                        {inspectiondata?.valetKeysReturned}
+                      </span>
                     </ListItemSecondaryAction>
                   </List>
                   <List className="paddingCSS">
@@ -469,20 +545,31 @@ export default function AdminDetailedReport(props) {
                       </span>
                     </ListItemText>
                     <ListItemSecondaryAction>
-                      <span className="textSize">---</span>
+                      <span className="textSize">
+                        {inspectiondata?.inspectionType}
+                      </span>
                     </ListItemSecondaryAction>
                   </List>
                   <List className="paddingCSS">
                     <ListItemText>
                       <span className="textStyle">
                         <span className="textBold">
-                          {" "}
-                          Excess Wear & Tear Amount{" "}
+                          Excess Wear & Tear Amount
                         </span>
                       </span>
                     </ListItemText>
                     <ListItemSecondaryAction>
-                      <span className="textSize">---</span>
+                      <span className="textSize">
+                        {inspectiondata?.excessWearAndTear && (
+                          <CurrencyFormat
+                            value={inspectiondata?.excessWearAndTear}
+                            displayType={"text"}
+                            thousandSeparator={true}
+                            prefix="$"
+                            suffix={".00"}
+                          />
+                        )}
+                      </span>
                     </ListItemSecondaryAction>
                   </List>
                 </CardContent>
@@ -507,76 +594,78 @@ export default function AdminDetailedReport(props) {
                   <List className="paddingCSS">
                     <ListItemText>
                       <span className="textStyle">
-                        <span className="textBold">
-                        Sold Date
-                        </span>
+                        <span className="textBold">Sold Date</span>
                       </span>
                     </ListItemText>
                     <ListItemSecondaryAction>
-                      <span className="textSize">---</span>
+                      <span className="textSize">
+                        {inspectiondata?.soldDate &&
+                          moment(inspectiondata?.soldDate).format("MM/DD/YYYY")}
+                      </span>
+                    </ListItemSecondaryAction>
+                  </List>
+                  <List className="paddingCSS">
+                    <ListItemText>
+                      <span className="textStyle">
+                        <span className="textBold">Purchasing Dealer</span>
+                      </span>
+                    </ListItemText>
+                    <ListItemSecondaryAction>
+                      <span className="textSize">
+                        {inspectiondata?.purchasingDealer}
+                      </span>
+                    </ListItemSecondaryAction>
+                  </List>
+                  <List className="paddingCSS">
+                    <ListItemText>
+                      <span className="textStyle">
+                        <span className="textBold">Purchase Dealer Number</span>
+                      </span>
+                    </ListItemText>
+                    <ListItemSecondaryAction>
+                      <span className="textSize">
+                        {inspectiondata?.purchaseDealerNumber}
+                      </span>
+                    </ListItemSecondaryAction>
+                  </List>
+                  <List className="paddingCSS">
+                    <ListItemText>
+                      <span className="textStyle">
+                        <span className="textBold">Purchase Type</span>
+                      </span>
+                    </ListItemText>
+                    <ListItemSecondaryAction>
+                      <span className="textSize">
+                        {inspectiondata?.purchaseType}
+                      </span>
+                    </ListItemSecondaryAction>
+                  </List>
+                  <List className="paddingCSS">
+                    <ListItemText>
+                      <span className="textStyle">
+                        <span className="textBold">Gross Purchase Amount</span>
+                      </span>
+                    </ListItemText>
+                    <ListItemSecondaryAction>
+                      <span className="textSize">
+                        {inspectiondata?.grossPurchaseAmount}
+                      </span>
                     </ListItemSecondaryAction>
                   </List>
                   <List className="paddingCSS">
                     <ListItemText>
                       <span className="textStyle">
                         <span className="textBold">
-                        Purchasing Dealer
+                          Purchasing Dealer Legal Name
                         </span>
                       </span>
                     </ListItemText>
                     <ListItemSecondaryAction>
-                      <span className="textSize">---</span>
-                    </ListItemSecondaryAction>
-                  </List>
-                  <List className="paddingCSS">
-                    <ListItemText>
-                      <span className="textStyle">
-                        <span className="textBold">
-                        Purchase Dealer Number
-                        </span>
+                      <span className="textSize">
+                        {inspectiondata?.purchasingDealerLegalName}
                       </span>
-                    </ListItemText>
-                    <ListItemSecondaryAction>
-                      <span className="textSize">---</span>
                     </ListItemSecondaryAction>
                   </List>
-                  <List className="paddingCSS">
-                    <ListItemText>
-                      <span className="textStyle">
-                        <span className="textBold">
-                        Purchase Type
-                        </span>
-                      </span>
-                    </ListItemText>
-                    <ListItemSecondaryAction>
-                      <span className="textSize">---</span>
-                    </ListItemSecondaryAction>
-                  </List>
-                  <List className="paddingCSS">
-                    <ListItemText>
-                      <span className="textStyle">
-                        <span className="textBold">
-                        Gross Purchase Amount
-                        </span>
-                      </span>
-                    </ListItemText>
-                    <ListItemSecondaryAction>
-                      <span className="textSize">---</span>
-                    </ListItemSecondaryAction>
-                  </List>
-                  <List className="paddingCSS">
-                    <ListItemText>
-                      <span className="textStyle">
-                        <span className="textBold">
-                        Purchasing Dealer Legal Name
-                        </span>
-                      </span>
-                    </ListItemText>
-                    <ListItemSecondaryAction>
-                      <span className="textSize">---</span>
-                    </ListItemSecondaryAction>
-                  </List>
-                 
                 </CardContent>
                 <div className="disclaimerVRS">
                   Disclaimer: The parts, equipment, accessories, and other

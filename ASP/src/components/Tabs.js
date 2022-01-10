@@ -79,13 +79,17 @@ export default function VehicleSearchTabs(props) {
       </TabPanel>
       <TabPanel value={value} index={1}>
         <div className="adminTabsSection">
-          <StatusHistory />
+          <StatusHistory 
+           inspectiondata={inspectiondata}
+           value={props.hideShow(value)}
+           />
         </div>
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <div className="adminTabsSection">
-          <UpdateMileage vin={vin} value={props.hideShow(value)} />
-        </div>
+        <Box  className="adminTabsSection">
+          <UpdateMileage  inspectiondata={inspectiondata}
+          value={props.hideShow(value)} vin={vin}  />
+        </Box>
       </TabPanel>
     </div>
   );
