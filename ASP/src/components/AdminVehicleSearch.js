@@ -16,9 +16,11 @@ const AdminVehicleSearch = (props) => {
   };
 
   const handleSubmitbtn = () => {
-    props.history.push("/adminSearchResult", {
-      vin: searchText
-    });
+    if (searchText) {
+      props.history.push("/adminSearchResult", {
+        vin: searchText
+      });
+    }
   };
 
   return (

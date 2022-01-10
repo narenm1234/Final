@@ -38,7 +38,7 @@ let clientID;
 let clientSecret;
 let AccessTokenURI;
 let ForgeRockTokenURI;
-
+let getGroundingDetailsURI;
 
 const hostname = window.location.hostname;
 
@@ -58,7 +58,7 @@ if (hostname.includes("dev")) {
   purchasedVehicleUrl =
     "https://aspservices-internal-dev.tfs.toyota.com/asp-services/getPurchasedVehicles";
   inspectionAccessoryDetailsUrl =
-    "https://aspservices-internal-dev.tfs.toyota.com/asp-services/getAccessoryDetails";    
+    "https://aspservices-internal-dev.tfs.toyota.com/asp-services/getAccessoryDetails";
   inspectionWheelTiresDetailsUrl =
     "https://aspservices-internal-dev.tfs.toyota.com/asp-services/getInspectionWheelTiresDetails";
   inspectionVehicleDetails =
@@ -88,6 +88,8 @@ if (hostname.includes("dev")) {
     "https://aspservices-internal-dev.tfs.toyota.com/asp-services/dealerpayment/submitPayment";
   dealerVehicleCount =
     "https://aspservices-internal-dev.tfs.toyota.com/asp-services/getDealerVehicleCount";
+  getGroundingDetailsURI =
+    "https://aspservices-internal-dev.tfs.toyota.com/asp-services/getGroundingDetails";
   clientID =
     "3MVG9_I_oWkIqLrmNgl8unCGrAPmcPODjDz6DA7QLw7qbd0CKBqVuyUVp_4.c4xZdRowJUxirUcXgiGiPYaQ.";
   clientSecret =
@@ -142,6 +144,8 @@ if (hostname.includes("dev")) {
     "https://aspservices-internal-dev.tfs.toyota.com/asp-services/getDealerVehicleCount";
   transportDetails =
     "https://aspservices-internal-dev.tfs.toyota.com/asp-services/getTransportationDetails";
+  getGroundingDetailsURI =
+    "https://aspservices-internal-dev.tfs.toyota.com/asp-services/getGroundingDetails";
 } else if (hostname.includes("stage")) {
   transportDetails =
     "https://apigateway-stage.toyotafinancial.com/apigw-router/auctionsalesplatform/getTransportationDetails";
@@ -194,8 +198,12 @@ if (hostname.includes("dev")) {
     "3MVG9_I_oWkIqLrmNgl8unCGrAPmcPODjDz6DA7QLw7qbd0CKBqVuyUVp_4.c4xZdRowJUxirUcXgiGiPYaQ.";
   clientSecret =
     "A8C495709B3F0BD5972D67EAF464949838E2F35EB623E514F75487A18904D70A";
-    AccessTokenURI="https://stratus-stg3.mfindealerservices.com/services/oauth2/token";
-    ForgeRockTokenURI="https://stratus-stg3.mfindealerservices.com/services/apexrest/v1/stratusapi/getToken";
+  AccessTokenURI =
+    "https://stratus-stg3.mfindealerservices.com/services/oauth2/token";
+  ForgeRockTokenURI =
+    "https://stratus-stg3.mfindealerservices.com/services/apexrest/v1/stratusapi/getToken";
+  getGroundingDetailsURI =
+    "https://apigateway-stage.toyotafinancial.com/apigw-router/auctionsalesplatform/getGroundingDetails";
 } else if (hostname.includes("test")) {
   transportDetails =
     "https://aspservices-internal-test.tfs.toyota.com/asp-services/getTransportationDetails";
@@ -242,60 +250,68 @@ if (hostname.includes("dev")) {
     "https://aspservices-internal-test.tfs.toyota.com/asp-services/dealerpayment/submitPayment";
   dealerVehicleCount =
     "https://aspservices-internal-test.tfs.toyota.com/asp-services/getDealerVehicleCount";
+
+  getGroundingDetailsURI =
+    "https://aspservices-internal-test.tfs.toyota.com/asp-services/getGroundingDetails";
 } else {
   transportDetails =
-  "https://apigateway.toyotafinancial.com/apigw-router/auctionsalesplatform/getTransportationDetails";
-mileageDiscList =
-  "https://apigateway.toyotafinancial.com/apigw-router/auctionsalesplatform/getMileageDiscList";
-url =
-  "http://internal-a3e2a8608d24e4c5f8b42aed9c3587d7-2044184104.us-east-1.elb.amazonaws.com/getAccountDetailsBykey";
-groundListUrl =
-  "https://apigateway.toyotafinancial.com/apigw-router/auctionsalesplatform/getGroundingList";
-tokenUrl =
-  "http://internal-a3e2a8608d24e4c5f8b42aed9c3587d7-2044184104.us-east-1.elb.amazonaws.com/tokenData";
-passedVehicleUrl =
-  "https://apigateway.toyotafinancial.com/apigw-router/auctionsalesplatform/getPassedVehicles";
-purchasedVehicleUrl =
-  "https://apigateway.toyotafinancial.com/apigw-router/auctionsalesplatform/getPurchasedVehicles";
-inspectionAccessoryDetailsUrl =
-  "https://apigateway.toyotafinancial.com/apigw-router/auctionsalesplatform/getAccessoryDetails";
-inspectionWheelTiresDetailsUrl =
-  "https://apigateway.toyotafinancial.com/apigw-router/auctionsalesplatform/getInspectionWheelTiresDetails";
-inspectionVehicleDetails =
-  "https://apigateway.toyotafinancial.com/apigw-router/auctionsalesplatform/getVehicleInspectionDetails";
-getInspectionDamageDetailsUrl =
-  "https://apigateway.toyotafinancial.com/apigw-router/auctionsalesplatform/getInspectionDamageDetails";
-getOEMBuildDetailsUrl =
-  "https://apigateway.toyotafinancial.com/apigw-router/auctionsalesplatform/getOEMBuildDetails";
-getDealerActionUrl =
-  "https://apigateway.toyotafinancial.com/apigw-router/auctionsalesplatform/DealerAction";
-AMP =
-  "https://apigateway.toyotafinancial.com/apigw-router/auctionsalesplatform/GetManualPricingList";
-rrm =
-  "https://apigateway.toyotafinancial.com/apigw-router/auctionsalesplatform/RRMApprovalList";
-MileageDiscList =
-  "https://apigateway.toyotafinancial.com/apigw-router/auctionsalesplatform/getMileageDiscList";
-getImages =
-  "https://apigateway.toyotafinancial.com/apigw-router/auctionsalesplatform/getImage";
-getDealerPayments =
-  "https://apigateway.toyotafinancial.com/apigw-router/auctionsalesplatform/dealerpayment/paymentmethod";
-getPurchaseDetailsApi =
-  "https://apigateway.toyotafinancial.com/apigw-router/auctionsalesplatform/getPurchaseDetails";
-redirectURL = "https://asp.mfindealerservices.com/login2";
-dealerDrop =
-  "https://apigateway.toyotafinancial.com/apigw-router/auctionsalesplatform/getAllDealerDetails";
-submitPayment =
-  "https://apigateway.toyotafinancial.com/apigw-router/auctionsalesplatform/dealerpayment/submitPayment";
-dealerVehicleCount =
-  "https://apigateway.toyotafinancial.com/apigw-router/auctionsalesplatform/getDealerVehicleCount";
-// clientID="3MVG9Eroh42Z9.iX.MtFAU7OREmQl3nLs7Kmfi9V1URQvsFxFqb46_Srme9DxYCu._LPDbUufv8__VWp.AXRV";
-// clientSecret="A604297A76C82F37CBDE9AAE30475D00A62B349BAE1E0FCAA4E4D17F198C8FA9";
-clientID =
-  "3MVG9szVa2RxsqBZCdUNvurdG6kEyf6lT2Ubd5U8aHZuzgO6XcONTR2ZJYYB8ed5Fo4zhwDRDPirRcUc3kClf";
-clientSecret =
-  "62883D8AFB8D34934F67CF9100E3CF33305F5A1F3C19A67D8165C39370478BCC";
-  AccessTokenURI="https://stratus.mfindealerservices.com/services/oauth2/token";
-  ForgeRockTokenURI="https://stratus.mfindealerservices.com/services/apexrest/v1/stratusapi/getToken";
+    "https://apigateway.toyotafinancial.com/apigw-router/auctionsalesplatform/getTransportationDetails";
+  mileageDiscList =
+    "https://apigateway.toyotafinancial.com/apigw-router/auctionsalesplatform/getMileageDiscList";
+  url =
+    "http://internal-a3e2a8608d24e4c5f8b42aed9c3587d7-2044184104.us-east-1.elb.amazonaws.com/getAccountDetailsBykey";
+  groundListUrl =
+    "https://apigateway.toyotafinancial.com/apigw-router/auctionsalesplatform/getGroundingList";
+  tokenUrl =
+    "http://internal-a3e2a8608d24e4c5f8b42aed9c3587d7-2044184104.us-east-1.elb.amazonaws.com/tokenData";
+  passedVehicleUrl =
+    "https://apigateway.toyotafinancial.com/apigw-router/auctionsalesplatform/getPassedVehicles";
+  purchasedVehicleUrl =
+    "https://apigateway.toyotafinancial.com/apigw-router/auctionsalesplatform/getPurchasedVehicles";
+  inspectionAccessoryDetailsUrl =
+    "https://apigateway.toyotafinancial.com/apigw-router/auctionsalesplatform/getAccessoryDetails";
+  inspectionWheelTiresDetailsUrl =
+    "https://apigateway.toyotafinancial.com/apigw-router/auctionsalesplatform/getInspectionWheelTiresDetails";
+  inspectionVehicleDetails =
+    "https://apigateway.toyotafinancial.com/apigw-router/auctionsalesplatform/getVehicleInspectionDetails";
+  getInspectionDamageDetailsUrl =
+    "https://apigateway.toyotafinancial.com/apigw-router/auctionsalesplatform/getInspectionDamageDetails";
+  getOEMBuildDetailsUrl =
+    "https://apigateway.toyotafinancial.com/apigw-router/auctionsalesplatform/getOEMBuildDetails";
+  getDealerActionUrl =
+    "https://apigateway.toyotafinancial.com/apigw-router/auctionsalesplatform/DealerAction";
+  AMP =
+    "https://apigateway.toyotafinancial.com/apigw-router/auctionsalesplatform/GetManualPricingList";
+  rrm =
+    "https://apigateway.toyotafinancial.com/apigw-router/auctionsalesplatform/RRMApprovalList";
+  MileageDiscList =
+    "https://apigateway.toyotafinancial.com/apigw-router/auctionsalesplatform/getMileageDiscList";
+  getImages =
+    "https://apigateway.toyotafinancial.com/apigw-router/auctionsalesplatform/getImage";
+  getDealerPayments =
+    "https://apigateway.toyotafinancial.com/apigw-router/auctionsalesplatform/dealerpayment/paymentmethod";
+  getPurchaseDetailsApi =
+    "https://apigateway.toyotafinancial.com/apigw-router/auctionsalesplatform/getPurchaseDetails";
+  redirectURL = "https://asp.mfindealerservices.com/login2";
+  dealerDrop =
+    "https://apigateway.toyotafinancial.com/apigw-router/auctionsalesplatform/getAllDealerDetails";
+  submitPayment =
+    "https://apigateway.toyotafinancial.com/apigw-router/auctionsalesplatform/dealerpayment/submitPayment";
+  dealerVehicleCount =
+    "https://apigateway.toyotafinancial.com/apigw-router/auctionsalesplatform/getDealerVehicleCount";
+  // clientID="3MVG9Eroh42Z9.iX.MtFAU7OREmQl3nLs7Kmfi9V1URQvsFxFqb46_Srme9DxYCu._LPDbUufv8__VWp.AXRV";
+  // clientSecret="A604297A76C82F37CBDE9AAE30475D00A62B349BAE1E0FCAA4E4D17F198C8FA9";
+  clientID =
+    "3MVG9szVa2RxsqBZCdUNvurdG6kEyf6lT2Ubd5U8aHZuzgO6XcONTR2ZJYYB8ed5Fo4zhwDRDPirRcUc3kClf";
+  clientSecret =
+    "62883D8AFB8D34934F67CF9100E3CF33305F5A1F3C19A67D8165C39370478BCC";
+  AccessTokenURI =
+    "https://stratus.mfindealerservices.com/services/oauth2/token";
+  ForgeRockTokenURI =
+    "https://stratus.mfindealerservices.com/services/apexrest/v1/stratusapi/getToken";
+
+  getGroundingDetailsURI =
+    "https://apigateway.toyotafinancial.com/apigw-router/auctionsalesplatform/getGroundingDetails";
 }
 
 export async function getAuthToken() {
@@ -580,7 +596,8 @@ export async function getDealerPaymentsData() {
   let dealerPayment = "";
   dealerPayment = getDealerPayments + "?KintoId=null";
   if (!!localStorage.getItem("KintoID")) {
-    dealerPayment = getDealerPayments + "?KintoId=" + localStorage.getItem("KintoID");
+    dealerPayment =
+      getDealerPayments + "?KintoId=" + localStorage.getItem("KintoID");
   }
   //getDealerPayments = getDealerPayments + "?KintoId=t002-51690";
   return await axios.get(dealerPayment, options);
@@ -656,6 +673,23 @@ export async function getDealerVehicleCount() {
     url: dealerVehicleCount,
     headers: headers,
     data: data,
+  };
+  return await axios(config).then(
+    (res) => {
+      return res;
+    },
+    (err) => {
+      console.log(err);
+    }
+  );
+}
+
+export async function getGroundingDetailsByVin(vin) {
+  var config = {
+    method: "post",
+    url: getGroundingDetailsURI,
+    headers: headers,
+    data: vin ,
   };
   return await axios(config).then(
     (res) => {

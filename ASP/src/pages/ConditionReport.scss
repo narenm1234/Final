@@ -12,6 +12,7 @@
   // position: relative;
   // background: #f3f2f2;
 }
+
 .purchasesidebar {
   // width: 27%;
    width: 410px;
@@ -92,13 +93,18 @@
 }
 
 .ConditionReportInspection {
-  width: 140px;
-  height: 33px;
+  // width: 140px;
+  // height: 33px;
   padding: 4px 8px;
   border-radius: 100px;
   background-color: #04844b;
-  margin-left: 245px;
-  float: right;
+  // margin-left: 245px;
+  // float: right;
+}
+.ConditionReportInspectionPending{
+  padding: 4px 8px;
+  border-radius: 100px;
+  background-color: #c23934;
 }
 .BadgeValue {
   width: 122px;

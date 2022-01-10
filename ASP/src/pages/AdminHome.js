@@ -3,8 +3,9 @@ import AdminVehicleSearch from "../components/AdminVehicleSearch";
 import Grid from "@material-ui/core/Grid";
 import VehicleSearchTabs from "../components/Tabs";
 import NotesSection from "../components/NotesSection";
-import { getInspectionVehicleDetails } from "../service/api";
+import { getInspectionVehicleDetails, getGroundingDetailsByVin } from "../service/api";
 import UpdateMileagePricing from "../components/UpdateMileagePricing";
+import { Box } from "@material-ui/core";
 
 const AdminHome = (props) => {
   const [vin, setVin] = useState(props?.location?.state?.vin);
@@ -12,23 +13,31 @@ const AdminHome = (props) => {
   const [hide, setHide] = useState(0);
 
   useEffect(() => {
-    getConditionVehicleDetails();
+    getGroundingDetailsDetails();
   }, [vin]);
 
-  async function getConditionVehicleDetails() {
-    let apiResponse = await getInspectionVehicleDetails(vin);
-    console.log("getInspectionVehicleDetails==>", apiResponse);
-    setinspectiondata(apiResponse.data);
+  async function getGroundingDetailsDetails() { 
+    let apiResponse = await getGroundingDetailsByVin(vin);
+    console.log("getGroundingDetailsByVin==>", apiResponse);
+    if(apiResponse && apiResponse.data && apiResponse.data.data){
+      setinspectiondata(apiResponse.data.data);
+    } 
   }
+  // async function getConditionVehicleDetails() {
+  //   let apiResponse = await getInspectionVehicleDetails(vin);
+  //   console.log("getInspectionVehicleDetails==>", apiResponse);
+  //   apiResponse && apiResponse.data && setinspectiondata(apiResponse.data);
+  // }
 
   const hideShow = (value) => {
+    console.log("value", value)
     setHide(value);
   };
 
   return (
     <>
-      <Grid container>
-        <Grid xs={10}>
+      <Box display={"flex"} >
+        <Box width={'100%'}>
           {inspectiondata && (
             <VehicleSearchTabs
               inspectiondata={inspectiondata}
@@ -38,17 +47,12 @@ const AdminHome = (props) => {
               }}
             />
           )}
-        </Grid>
-        <Grid xs={2}>
-          {hide == 0 ? (
-            <NotesSection />
-          ) : hide == 2 ? (
-            <UpdateMileagePricing />
-          ) : (
-            ""
-          )}
-        </Grid>
-      </Grid>
+        </Box>
+        <Box position={'relative'}>
+          {hide === 0 ? <NotesSection />: ""}
+          {hide === 2 ? <UpdateMileagePricing />: ""}
+        </Box>
+      </Box>
     </>
   );
 };
