@@ -33,8 +33,10 @@ const Login = ({ config }) => {
       }, []);
       async function getToken(){
         let usertoken = localStorage.getItem("okta_id_token");
+        console.log("tessst",usertoken)
         let userInfo = jwt_decode(usertoken);
         console.log("........======",userInfo);
+
       }
       
 
