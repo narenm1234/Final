@@ -39,6 +39,11 @@ let clientSecret;
 let AccessTokenURI;
 let ForgeRockTokenURI;
 let getGroundingDetailsURI;
+let getNotesURI;
+let insertNotesURI;
+let getVehicleStatusHistoryURI;
+let updateMileageURI;
+let updatePricingHistoryURI;
 
 const hostname = window.location.hostname;
 
@@ -88,8 +93,19 @@ if (hostname.includes("dev")) {
     "https://aspservices-internal-dev.tfs.toyota.com/asp-services/dealerpayment/submitPayment";
   dealerVehicleCount =
     "https://aspservices-internal-dev.tfs.toyota.com/asp-services/getDealerVehicleCount";
+  getNotesURI =
+    "https://aspservices-internal-dev.tfs.toyota.com/asp-services/getNotes";
+  insertNotesURI =
+    "https://aspservices-internal-dev.tfs.toyota.com/asp-services/insertNotes";
   getGroundingDetailsURI =
     "https://aspservices-internal-dev.tfs.toyota.com/asp-services/getGroundingDetails";
+  getVehicleStatusHistoryURI =
+    "https://aspservices-internal-dev.tfs.toyota.com/asp-services/getVehicleStatusHistory";
+  updateMileageURI =
+    "https://aspservices-internal-dev.tfs.toyota.com/asp-services/updateMileage";
+  updatePricingHistoryURI =
+    "https://aspservices-internal-dev.tfs.toyota.com/asp-services/updatePricingHistory";
+
   clientID =
     "3MVG9_I_oWkIqLrmNgl8unCGrAPmcPODjDz6DA7QLw7qbd0CKBqVuyUVp_4.c4xZdRowJUxirUcXgiGiPYaQ.";
   clientSecret =
@@ -146,6 +162,16 @@ if (hostname.includes("dev")) {
     "https://aspservices-internal-dev.tfs.toyota.com/asp-services/getTransportationDetails";
   getGroundingDetailsURI =
     "https://aspservices-internal-dev.tfs.toyota.com/asp-services/getGroundingDetails";
+  getNotesURI =
+    "https://aspservices-internal-dev.tfs.toyota.com/asp-services/getNotes";
+  insertNotesURI =
+    "https://aspservices-internal-dev.tfs.toyota.com/asp-services/insertNotes";
+  getVehicleStatusHistoryURI =
+    "https://aspservices-internal-dev.tfs.toyota.com/asp-services/getVehicleStatusHistory";
+  updateMileageURI =
+    "https://aspservices-internal-dev.tfs.toyota.com/asp-services/updateMileage";
+  updatePricingHistoryURI =
+    "https://aspservices-internal-dev.tfs.toyota.com/asp-services/updatePricingHistory";
 } else if (hostname.includes("stage")) {
   transportDetails =
     "https://apigateway-stage.toyotafinancial.com/apigw-router/auctionsalesplatform/getTransportationDetails";
@@ -204,6 +230,16 @@ if (hostname.includes("dev")) {
     "https://stratus-stg3.mfindealerservices.com/services/apexrest/v1/stratusapi/getToken";
   getGroundingDetailsURI =
     "https://apigateway-stage.toyotafinancial.com/apigw-router/auctionsalesplatform/getGroundingDetails";
+  getNotesURI =
+    "https://apigateway-stage.toyotafinancial.com/apigw-router/auctionsalesplatform/asp-services/getNotes";
+  insertNotesURI =
+    "https://apigateway-stage.toyotafinancial.com/apigw-router/auctionsalesplatform/insertNotes";
+  getVehicleStatusHistoryURI =
+    "https://apigateway-stage.toyotafinancial.com/apigw-router/auctionsalesplatform/getVehicleStatusHistory";
+  updateMileageURI =
+    "https://apigateway-stage.toyotafinancial.com/apigw-router/auctionsalesplatform/updateMileage";
+  updatePricingHistoryURI =
+    "https://apigateway-stage.toyotafinancial.com/apigw-router/auctionsalesplatform/updatePricingHistory";
 } else if (hostname.includes("test")) {
   transportDetails =
     "https://aspservices-internal-test.tfs.toyota.com/asp-services/getTransportationDetails";
@@ -253,6 +289,16 @@ if (hostname.includes("dev")) {
 
   getGroundingDetailsURI =
     "https://aspservices-internal-test.tfs.toyota.com/asp-services/getGroundingDetails";
+  getNotesURI =
+    "https://aspservices-internal-test.tfs.toyota.com/asp-services/getNotes";
+  insertNotesURI =
+    "https://aspservices-internal-test.tfs.toyota.com/asp-services/insertNotes";
+  getVehicleStatusHistoryURI =
+    "https://aspservices-internal-test.tfs.toyota.com/asp-services/getVehicleStatusHistory";
+  updateMileageURI =
+    "https://aspservices-internal-test.tfs.toyota.com/asp-services/updateMileage";
+  updatePricingHistoryURI =
+    "https://aspservices-internal-test.tfs.toyota.com/asp-services/updatePricingHistory";
 } else {
   transportDetails =
     "https://apigateway.toyotafinancial.com/apigw-router/auctionsalesplatform/getTransportationDetails";
@@ -312,6 +358,16 @@ if (hostname.includes("dev")) {
 
   getGroundingDetailsURI =
     "https://apigateway.toyotafinancial.com/apigw-router/auctionsalesplatform/getGroundingDetails";
+  getNotesURI =
+    "https://apigateway.toyotafinancial.com/apigw-router/auctionsalesplatform/getNotes";
+  insertNotesURI =
+    "https://apigateway.toyotafinancial.com/apigw-router/auctionsalesplatform/insertNotes";
+  getVehicleStatusHistoryURI =
+    "https://apigateway.toyotafinancial.com/apigw-router/auctionsalesplatform/getVehicleStatusHistory";
+  updateMileageURI =
+    "https://apigateway.toyotafinancial.com/apigw-router/auctionsalesplatform/updateMileage";
+  updatePricingHistoryURI =
+    "https://apigateway.toyotafinancial.com/apigw-router/auctionsalesplatform/updatePricingHistory";
 }
 
 export async function getAuthToken() {
@@ -689,7 +745,105 @@ export async function getGroundingDetailsByVin(vin) {
     method: "post",
     url: getGroundingDetailsURI,
     headers: headers,
-    data: vin ,
+    data: vin,
+  };
+  return await axios(config).then(
+    (res) => {
+      return res;
+    },
+    (err) => {
+      console.log(err);
+    }
+  );
+}
+
+export async function getNotes(vin) {
+  var config = {
+    method: "post",
+    url: getNotesURI + "?vin=" + vin,
+    headers: headers,
+  };
+  return await axios(config).then(
+    (res) => {
+      return res;
+    },
+    (err) => {
+      console.log(err);
+    }
+  );
+}
+
+export async function insertNotes({ vin, notes }) {
+  var config = {
+    method: "post",
+    url: insertNotesURI + `?notes=${notes}&vin=${vin}`,
+    headers: headers,
+  };
+  return await axios(config).then(
+    (res) => {
+      return res;
+    },
+    (err) => {
+      console.log(err);
+    }
+  );
+}
+
+export async function getVehicalStatusHistory(vin) {
+  var config = {
+    method: "post",
+    url: getVehicleStatusHistoryURI + `?vin=${vin}`,
+    headers: headers,
+  };
+  return await axios(config).then(
+    (res) => {
+      return res;
+    },
+    (err) => {
+      console.log(err);
+    }
+  );
+}
+
+export async function updateMileage(body) {
+  // {
+  //   "adjustedBy": "string",
+  //   "date": "string",
+  //   "groundingMileage": 0,
+  //   "reasonForUpdate": "string",
+  //   "source": "string",
+  //   "vin": "string"
+  // }
+  var config = {
+    method: "post",
+    url: updateMileageURI,
+    headers: headers,
+    body: body,
+  };
+  return await axios(config).then(
+    (res) => {
+      return res;
+    },
+    (err) => {
+      console.log(err);
+    }
+  );
+}
+
+export async function updatePricingHistory({
+  asofDate,
+  priceType,
+  providerName,
+  region,
+  vehicle_price,
+  vin,
+}) {
+  var config = {
+    method: "post",
+    url:
+      updatePricingHistoryURI +
+      `?asofDate=${asofDate}&priceType=${priceType}&providerName=${providerName}&region=${region}&vehicle_price=${vehicle_price}&vin=${vin}`,
+    headers: headers,
   };
   return await axios(config).then(
     (res) => {

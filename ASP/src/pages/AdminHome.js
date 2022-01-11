@@ -49,7 +49,7 @@ const AdminHome = (props) => {
           )}
         </Box>
         <Box position={'relative'}>
-          {hide === 0 ? <NotesSection />: ""}
+          {hide === 0 ? <NotesSection vin = {vin} />: ""}
           {hide === 2 ? <UpdateMileagePricing />: ""}
         </Box>
       </Box>

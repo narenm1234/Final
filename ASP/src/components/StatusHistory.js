@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -10,6 +10,8 @@ import Paper from "@material-ui/core/Paper";
 import { Box, TableSortLabel } from "@material-ui/core";
 import ClearIcon from "@material-ui/icons/Clear";
 import SortIcon from "../assets/WebFont/sort.svg";
+import { getVehicalStatusHistory } from "../service/api";
+import moment from "moment";
 
 const useStyles = makeStyles({
   table: {
@@ -31,93 +33,30 @@ const useStyles = makeStyles({
   },
 });
 
-function createVehicleData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createVehicleData(
-    "Vehicle Status",
-    "Employee Name/ID",
-    "00/00/2021",
-    "00:00 am/pm"
-  ),
-  createVehicleData(
-    "Vehicle Status",
-    "Employee Name/ID",
-    "00/00/2021",
-    "00:00 am/pm"
-  ),
-  createVehicleData(
-    "Vehicle Status",
-    "Employee Name/ID",
-    "00/00/2021",
-    "00:00 am/pm"
-  ),
-  createVehicleData(
-    "Vehicle Status",
-    "Employee Name/ID",
-    "00/00/2021",
-    "00:00 am/pm"
-  ),
-  createVehicleData(
-    "Vehicle Status",
-    "Employee Name/ID",
-    "00/00/2021",
-    "00:00 am/pm"
-  ),
-  createVehicleData(
-    "Vehicle Status",
-    "Employee Name/ID",
-    "00/00/2021",
-    "00:00 am/pm"
-  ),
-  createVehicleData(
-    "Vehicle Status",
-    "Employee Name/ID",
-    "00/00/2021",
-    "00:00 am/pm"
-  ),
-  createVehicleData(
-    "Vehicle Status",
-    "Employee Name/ID",
-    "00/00/2021",
-    "00:00 am/pm"
-  ),
-  createVehicleData(
-    "Vehicle Status",
-    "Employee Name/ID",
-    "00/00/2021",
-    "00:00 am/pm"
-  ),
-  createVehicleData(
-    "Vehicle Status",
-    "Employee Name/ID",
-    "00/00/2021",
-    "00:00 am/pm"
-  ),
-  createVehicleData(
-    "Vehicle Status",
-    "Employee Name/ID",
-    "00/00/2021",
-    "00:00 am/pm"
-  ),
-  createVehicleData(
-    "Vehicle Status",
-    "Employee Name/ID",
-    "00/00/2021",
-    "00:00 am/pm"
-  ),
-];
 
 export default function StatusHistory(props) {
   const classes = useStyles();
   const [inspectiondata, setinspectiondata] = useState(props.inspectiondata);
+  const [statusHistoryData, setStatusHistoryData] = useState([]);
+
+  useEffect(() => {
+    getStatusHistory();
+  }, [inspectiondata.vin]);
+
+  async function getStatusHistory() {
+    let apiResponse = await getVehicalStatusHistory(inspectiondata.vin);
+    console.log("getVehicalStatusHistory==>", apiResponse);
+    if (apiResponse && apiResponse.data) {
+      setStatusHistoryData(apiResponse.data);
+    }
+  }
 
   return (
     <Box>
       <Box display={"flex"} alignItems={"center"} mb={2}>
-        <Box className="resultForVin">Results for VIN: {inspectiondata.vin}</Box>
+        <Box className="resultForVin">
+          Results for VIN: {inspectiondata.vin}
+        </Box>
         <Box pl={2} pt={1}>
           <ClearIcon color="secondary" fontSize="small" />
         </Box>
@@ -177,17 +116,23 @@ export default function StatusHistory(props) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
-              <TableRow key={row.name}>
-                <TableCell component="th" scope="row">
-                  {row.name}
-                </TableCell>
-                <TableCell>{row.calories}</TableCell>
-                <TableCell>{row.fat}</TableCell>
-                <TableCell>{row.carbs}</TableCell>
-                {/* <TableCell>{row.protein}</TableCell> */}
-              </TableRow>
-            ))}
+            {statusHistoryData &&
+              statusHistoryData.map((row, index) => (
+                <TableRow key={index}>
+                  <TableCell component="th" scope="row">
+                    {row.status}
+                  </TableCell>
+                  <TableCell>{row.account}</TableCell>
+                  <TableCell>
+                    {row?.transactiondate &&
+                      moment(row?.transactiondate).format("MM/DD/YYYY")}
+                  </TableCell>
+                  <TableCell>
+                    {row?.transactiondate &&
+                      moment(row?.transactiondate).format("hh:mm")}
+                  </TableCell>
+                </TableRow>
+              ))}
           </TableBody>
         </Table>
       </TableContainer>
