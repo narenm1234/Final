@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import OktaSignInWidget from './OktaSignInWidget';
 import { useOktaAuth } from '@okta/okta-react';
 import jwt_decode from "jwt-decode";
+import { getOktaUserInfo } from '../service/api';
 
 const Login = ({ config }) => {
 
@@ -11,6 +12,8 @@ const Login = ({ config }) => {
     let data2 = getParameterByName("access_token");
     localStorage.setItem("okta_id_token",data1);
     localStorage.setItem("okta_access_token",data2);
+    let apiResponse = await getOktaUserInfo();
+    localStorage.setItem("dealerName",apiResponse.name);
     function getParameterByName(name, url = window.location.href) {
       name = name.replace(/[\[\]]/g, '\\$&');
       var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
@@ -32,10 +35,10 @@ const Login = ({ config }) => {
         // getUserAccessInfoToken();
       }, []);
       async function getToken(){
-        let usertoken = localStorage.getItem("okta_id_token");
+        let usertoken = localStorage.getItem("okta_access_token");
         console.log("tessst",usertoken)
-        let userInfo = jwt_decode(usertoken);
-        console.log("........======",userInfo);
+        let apiResponse = await getOktaUserInfo();
+        localStorage.setItem("dealerName",apiResponse.name);
 
       }
       

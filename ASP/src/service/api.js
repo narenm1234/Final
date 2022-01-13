@@ -556,6 +556,19 @@ export async function getForgeRockToken() {
   return await axios(config);
 }
 
+export async function getOktaUserInfo() {
+var config = {
+  method: 'get',
+  url: 'https://tfs.oktapreview.com/oauth2/ausredslpqIsIjQfz0h7/v1/userinfo',
+  headers: { 
+    'Accept': 'application/json', 
+    'Authorization':  `Bearer ${localStorage.getItem("okta_id_token")}`, 
+    'Cookie': 'DT=DI04xgdsdpbT-6S2joEtp5Bdg'
+  }
+};
+return await axios(config);
+}
+
 export async function getImageData(obj) {
   // let data = {
   //   "inspectionId": 18495852,
