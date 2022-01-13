@@ -50,7 +50,7 @@ export default function VehicleSearchTabs(props) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
   const [vin, setVin] = React.useState(props.vin);
-  const { inspectiondata } = props;
+  // const { inspectiondata } = props;
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -70,9 +70,10 @@ export default function VehicleSearchTabs(props) {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-       {inspectiondata &&  
+       {vin &&  
        <AdminDetailedReport
-          inspectiondata={inspectiondata}
+          // inspectiondata={inspectiondata}
+          vin={vin}
           value={props.hideShow(value)}
         />
     }
@@ -80,14 +81,16 @@ export default function VehicleSearchTabs(props) {
       <TabPanel value={value} index={1}>
         <div className="adminTabsSection">
           <StatusHistory 
-           inspectiondata={inspectiondata}
+          //  inspectiondata={inspectiondata}
            value={props.hideShow(value)}
+           vin={vin}
            />
         </div>
       </TabPanel>
       <TabPanel value={value} index={2}>
         <Box  className="adminTabsSection">
-          <UpdateMileage  inspectiondata={inspectiondata}
+          <UpdateMileage 
+          //  inspectiondata={inspectiondata}
           value={props.hideShow(value)} vin={vin}  />
         </Box>
       </TabPanel>
