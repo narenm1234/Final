@@ -120,9 +120,9 @@ export default function StatusHistory(props) {
               statusHistoryData.map((row, index) => (
                 <TableRow key={index}>
                   <TableCell component="th" scope="row">
-                    {row.status}
+                    {row?.status}
                   </TableCell>
-                  <TableCell>{row.account}</TableCell>
+                  <TableCell>{row?.account}</TableCell>
                   <TableCell>
                     {row?.transactiondate &&
                       moment(row?.transactiondate).format("MM/DD/YYYY")}
