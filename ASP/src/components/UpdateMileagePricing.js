@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import ListItem from "@material-ui/core/ListItem";
-import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import { Divider } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
@@ -8,9 +7,7 @@ import List from "@material-ui/core/List";
 import InputBase from "@material-ui/core/InputBase";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
-import Paper from "@material-ui/core/Paper";
-import IconButton from "@material-ui/core/IconButton";
-import SearchIcon from "@material-ui/icons/Search";
+import { updateMileage, updatePricingHistory } from "../service/api";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -48,29 +45,83 @@ const BootstrapInput = withStyles((theme) => ({
   },
 }))(InputBase);
 
-export default function UpdateMileagePricing() {
-  const [open, setOpen] = React.useState(true);
+export default function UpdateMileagePricing(props) {
   const classes = useStyles();
+  const [open, setOpen] = useState(true);
+  const [vin, setVin] = React.useState(props?.vin);
+
   const handleClick = () => {
     //setOpen(!open);
   };
-  const handleOnChange = (event) => {
-    setFilterInput({
-      ...filterInput,
+
+  const [mileageForm, setMileageForm] = useState({
+    groundingMileage: null,
+    confirmGroundingMileage: null,
+    reasonForUpdate: "",
+  });
+  const [vehiclePriceForm, setVehiclePriceForm] = useState({
+    vehicle_price: "",
+    confirm_vehicle_price: "",
+    region: "",
+  });
+
+  const handleOnChangeMileage = (event) => {
+    setMileageForm({
+      ...mileageForm,
       ...{ [event.target.name]: event.target.value },
     });
   };
-  const [filterInput, setFilterInput] = useState({
-    vin: "",
-    yearFrom: "",
-    yearTo: "",
-    make: "",
-    inspectionStatus: "",
-    inspectionDateFrom: "",
-    inspectionDateTo: "",
-    groundingRegion: "",
-    auctionCode: "",
-  });
+  const handleOnChangeVehiclePrice = (event) => {
+    setVehiclePriceForm({
+      ...vehiclePriceForm,
+      ...{ [event.target.name]: event.target.value },
+    });
+  };
+
+  const updateDetails = () => { 
+    mileageForm.groundingMileage && doUpdateMileage();
+    vehiclePriceForm.vehicle_price && doUpdateVehiclePrice();
+  };
+
+  const doUpdateMileage = () => {
+    if (mileageForm.groundingMileage === mileageForm.confirmGroundingMileage) {
+      var updateMileageType = {
+        adjustedBy: "adjustedBy",
+        dealerName: "testdealer",
+        groundingMileage: parseInt(mileageForm.groundingMileage),
+        reasonForUpdate: mileageForm.reasonForUpdate,
+        vin: vin,
+      };
+      updateMileage(updateMileageType).then((res) => {
+        console.log("updateMileage", res);
+      });
+    } else {
+      console.log(
+        "Grounding Mileage and Confirm Grounding Mileage is not match"
+      );
+    }
+  };
+
+  const doUpdateVehiclePrice = () => {
+    if (
+      vehiclePriceForm.vehicle_price === vehiclePriceForm.confirm_vehicle_price
+    ) {
+      var updatePricingHistoryType = {
+        priceMethod: "Manual",
+        providerName: "test user",
+        vehicle_price: vehiclePriceForm.vehicle_price,
+        region:vehiclePriceForm.region,
+        vin: vin,
+      };
+
+      updatePricingHistory(updatePricingHistoryType).then((res) => {
+        console.log("updatePricingHistory", res);
+      });
+    } else {
+      console.log("Vehicle Price and Confirm Vehicle Price is not match");
+    }
+  };
+
   return (
     <div className="updatePricingSidebar">
       <ListItem className="notesSectionHeader">Update Mileage/Pricing</ListItem>
@@ -88,45 +139,45 @@ export default function UpdateMileagePricing() {
         <p className="manualPricing">Inspection Mileage</p>
         <p className="manualPricing">000,000 mi</p>
       </ListItem>
-      <ListItem button>
+      <ListItem>
         <FormControl>
           <InputLabel shrink htmlFor="vin-input">
-          Update Grounding Mileage
+            Update Grounding Mileage
           </InputLabel>
           <BootstrapInput
             placeholder="Enter price"
             id="EntermarketPrice-input"
-            name="EntermarketPrice"
-            value={filterInput.vin}
-            onChange={handleOnChange}
+            name="groundingMileage"
+            value={mileageForm.groundingMileage}
+            onChange={handleOnChangeMileage}
           />
         </FormControl>
       </ListItem>
-      <ListItem button>
+      <ListItem>
         <FormControl>
           <InputLabel shrink htmlFor="vin-input">
-          Confirm Grounding Mileage
+            Confirm Grounding Mileage
           </InputLabel>
           <BootstrapInput
             placeholder="Enter Price"
             id="reEntermarketPrice-input"
-            name="reEntermarketPrice"
-            value={filterInput.vin}
-            onChange={handleOnChange}
+            name="confirmGroundingMileage"
+            value={mileageForm.confirmGroundingMileage}
+            onChange={handleOnChangeMileage}
           />
         </FormControl>
       </ListItem>
-      <ListItem button>
+      <ListItem>
         <FormControl>
           <InputLabel shrink htmlFor="vin-input">
-          Reason for Update
+            Reason for Update
           </InputLabel>
           <BootstrapInput
             placeholder="MMR"
             id="vin-input"
-            name="vin"
-            value={filterInput.vin}
-            onChange={handleOnChange}
+            name="reasonForUpdate"
+            value={mileageForm.reasonForUpdate}
+            onChange={handleOnChangeMileage}
           />
         </FormControl>
       </ListItem>
@@ -137,21 +188,21 @@ export default function UpdateMileagePricing() {
         </div>
       </ListItem>
 
-      <ListItem button>
+      <ListItem>
         <FormControl>
           <InputLabel shrink htmlFor="vin-input">
-             Mileage
+            Mileage
           </InputLabel>
           <BootstrapInput
             placeholder="Enter price"
             id="EntermarketPrice-input"
-            name="EntermarketPrice"
-            value={filterInput.vin}
-            onChange={handleOnChange}
+            name="vehicle_price"
+            value={vehiclePriceForm.vehicle_price}
+            onChange={handleOnChangeVehiclePrice}
           />
         </FormControl>
       </ListItem>
-      <ListItem button>
+      <ListItem>
         <FormControl>
           <InputLabel shrink htmlFor="vin-input">
             Re-Enter Market Price
@@ -159,13 +210,13 @@ export default function UpdateMileagePricing() {
           <BootstrapInput
             placeholder="Enter Price"
             id="reEntermarketPrice-input"
-            name="reEntermarketPrice"
-            value={filterInput.vin}
-            onChange={handleOnChange}
+            name="confirm_vehicle_price"
+            value={vehiclePriceForm.confirm_vehicle_price}
+            onChange={handleOnChangeVehiclePrice}
           />
         </FormControl>
       </ListItem>
-      <ListItem button>
+      <ListItem>
         <FormControl>
           <InputLabel shrink htmlFor="vin-input">
             MMR
@@ -174,8 +225,8 @@ export default function UpdateMileagePricing() {
             placeholder="MMR"
             id="vin-input"
             name="vin"
-            value={filterInput.vin}
-            onChange={handleOnChange}
+            value={vehiclePriceForm.reason}
+            onChange={handleOnChangeVehiclePrice}
           />
         </FormControl>
       </ListItem>
@@ -214,7 +265,12 @@ export default function UpdateMileagePricing() {
         <Button autoFocus className="cancelButton" color="primary">
           Cancel
         </Button>
-        <Button autoFocus className="updateButton" color="secondary">
+        <Button
+          autoFocus
+          className="updateButton"
+          color="secondary"
+          onClick={updateDetails}
+        >
           Update
         </Button>
       </List>

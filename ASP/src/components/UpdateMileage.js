@@ -56,14 +56,16 @@ export default function UpdateMileage(props) {
 
   let wheelTyrelistOfItem = ["LF", "RF", "LR", "RR", "SP", "RR"];
   const [open, setOpen] = React.useState(false);
-  const [condionVehicleDetails, setCondionVehicleDetails] = React.useState(props.inspectiondata);
+
+  const [condionVehicleDetails, setCondionVehicleDetails] = React.useState({});// inspectiondata
+  const [inspectionId, setInspectionId] = React.useState(props?.inspectiondata?.inspection_id);
+
+  const [vin, setVin] = React.useState(props?.vin);
   const [accessoryDetails, setAccessoryDetails] = React.useState([]);
   const [wheelTiresDetails, setWheelTiresDetails] = useState([]);
-  const [vin, setVin] = React.useState(props?.vin);
   const [purchaseSection, setPurchaseSection] = React.useState(
     props?.location?.state?.purchaseSection
   );
-  const [inspectionId, setInspectionId] = React.useState(props.inspectiondata.inspection_id);
   const [VehicleResponse, setVehicleResponse] = useState([]);
   //const [value, setValue] = useState([])
   const [DamageDetails, setDamageDetails] = useState([]);
@@ -136,7 +138,7 @@ export default function UpdateMileage(props) {
   return (
     <>
      <Box display={"flex"} alignItems={"center"} mb={2}>
-        <Box className="resultForVin">Results for VIN: {condionVehicleDetails.vin}</Box>
+        <Box className="resultForVin">Results for VIN: {vin}</Box>
         <Box pl={2} pt={1}>
           <ClearIcon color="secondary" fontSize="small" />
         </Box>
@@ -751,7 +753,7 @@ export default function UpdateMileage(props) {
             <Box px={2}>
               <Grid container spacing={3} className="ConditionCardReportSpace">
                 <Grid item xs={5}>
-                  <Grid>
+                  <Grid item>
                     <div className="imageReportSection">
                       <img src="TMZ.png" alt="Mazda Logo" width="100%" />
                     </div>
@@ -888,7 +890,7 @@ export default function UpdateMileage(props) {
                         <Typography variant="h6">Accessories</Typography>
                         <hr />
 
-                        <span class="Pending-Inspection-R">
+                        <span className="Pending-Inspection-R">
                           Pending Inspection Report
                         </span>
                       </CardContent>
@@ -931,7 +933,7 @@ export default function UpdateMileage(props) {
                       <CardContent>
                         <Typography variant="h6">Wheels and Tyres</Typography>
                         <hr />
-                        <span class="Pending-Inspection-R">
+                        <span className="Pending-Inspection-R">
                           Pending Inspection Report
                         </span>
                       </CardContent>

@@ -8,64 +8,36 @@ import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItemText from "@material-ui/core/ListItemText";
 import Box from "@material-ui/core/Box";
 import MyGallery from "./ImageGallery";
-import { getInspectionVehicleDetails } from "../service/api";
+import { getInspectionVehicleDetails, getVehicleSaleInfoByVin } from "../service/api";
 import moment from "moment";
 import ClearIcon from "@material-ui/icons/Clear";
 import CurrencyFormat from "react-currency-format";
 
 export default function AdminDetailedReport(props) {
-  let groundingDetails = {
-    "Account Number": "00000000000",
-    "Current Status": "Detail",
-    "Customer Return Date": "00/00/2021",
-    "Current Status": "Detail",
-    "Grounding Dealer Number": "00000000000",
-    "Grounding Dealer Name": "Dealer Name",
-    "Grounding Date": "00/00/2021",
-    "Grounding Mileage": "000,000 mi",
-    "Transportation Order Date": "00/00/2021",
-    "Transportation Company": "Company Name",
-    "Bankruptcy Code": "Detail",
-    "Term Code": "Detail",
-    "Dealer Exclusivity Expire Date": "00/00/2021",
-    Type: "Detail",
-    Residual: "$00,000.00",
-    "Current Payoff Amount": "$00,000.00",
-    "Grounding Dealer Auction": "Detail",
-    "Total Outstanding Remaining Payments": "00",
-    "Guaranteed Payments": "$00,000.00",
-    "Payment Guarantee": "Yes/No",
-    "10-Day Rule No Charge Amount": "$00,000.00",
-    "Payoff at Grounding": "?????",
-    "Market Based Price": "$00,000.00",
-    "Remaining Payments at Grounding": "$00,000.00",
-  };
-  let inspectionDetails = {
-    "Inspection Scheduled Date": `${moment(
-      props?.inspectiondata?.inspection_date
-    ).format("MM/DD/YYYY")}`,
-    "Inspection Date": "00/00/2021",
-    "Inspection Status": "Detail",
-    "Inspection Mileage": "000,000 mi",
-    "Master Keys Returned": "00",
-    "Value Keys Returned": "00",
-    "Inspection Type": "Detail",
-    "Excess Wear & Tear Amount": "$00,000.00",
-  };
-
-  let purchaseDetails = {
-    "Sold Date": "00/00/2021",
-    "Purchasing Dealer": "Dealer Name",
-    "Purchase Dealer Number": "00000000000",
-    "Purchase Type": "Detail",
-    "Gross Purchase Amount": "$00,000.00",
-    "Purchasing Dealer Legal Name": "Detail",
-  };
-
   const [open, setOpen] = useState(false);
-  const [inspectiondata, setinspectiondata] = useState(props.inspectiondata);
+  const [vin, setVin] = useState(props.vin);
+  const [inspectiondata, setinspectiondata] = useState({});
+  const [vehicleSalesInfo, setVehicleSalesInfo] = useState({});
+  // const [inspectiondata, setinspectiondata] = useState({});
 
-  console.log("admndetailedreport props:", props);
+  useEffect(() => {
+    getVehicleSaleInformation();
+  }, [vin]);
+
+  async function getVehicleSaleInformation() { 
+    let apiResponse = await getVehicleSaleInfoByVin(vin);
+    console.log("getVehicleSaleInfoByVin==>", apiResponse);
+    if(apiResponse && apiResponse.data && apiResponse.data.length !== 0){
+      setVehicleSalesInfo(apiResponse.data[0]);
+    } 
+  }
+  // async function getGroundingDetailsDetails() { 
+  //   let apiResponse = await getGroundingDetailsByVin(vin);
+  //   console.log("getGroundingDetailsByVin==>", apiResponse);
+  //   if(apiResponse && apiResponse.data && apiResponse.data.data){
+  //     setinspectiondata(apiResponse.data.data);
+  //   } 
+  // }
 
   const handleOpen = () => {
     setOpen(!open);
@@ -80,7 +52,7 @@ export default function AdminDetailedReport(props) {
           <Grid item md={12}>
             <Box display={"flex"} alignItems={"center"}>
               <Box className="resultForVin">
-                Results for VIN: {inspectiondata.vin}
+                Results for VIN: {vin}
               </Box>
               <Box pl={2} pt={1}>
                 {" "}
@@ -90,7 +62,7 @@ export default function AdminDetailedReport(props) {
           </Grid>
           <Grid item xs={5}>
             <div className="codereportimggallery">
-              {inspectiondata && <MyGallery {...inspectiondata} />}
+              {inspectiondata && inspectiondata?.inspection_id && <MyGallery {...inspectiondata} />}
             </div>
           </Grid>
           <Grid item xs={7}>
@@ -591,6 +563,8 @@ export default function AdminDetailedReport(props) {
                     );
                   })} */}
 
+
+
                   <List className="paddingCSS">
                     <ListItemText>
                       <span className="textStyle">
@@ -599,8 +573,8 @@ export default function AdminDetailedReport(props) {
                     </ListItemText>
                     <ListItemSecondaryAction>
                       <span className="textSize">
-                        {inspectiondata?.soldDate &&
-                          moment(inspectiondata?.soldDate).format("MM/DD/YYYY")}
+                        {vehicleSalesInfo?.sale_date &&
+                          moment(vehicleSalesInfo?.sale_date).format("MM/DD/YYYY")}
                       </span>
                     </ListItemSecondaryAction>
                   </List>
@@ -612,7 +586,7 @@ export default function AdminDetailedReport(props) {
                     </ListItemText>
                     <ListItemSecondaryAction>
                       <span className="textSize">
-                        {inspectiondata?.purchasingDealer}
+                        {vehicleSalesInfo?.dealer_name}
                       </span>
                     </ListItemSecondaryAction>
                   </List>
@@ -624,7 +598,7 @@ export default function AdminDetailedReport(props) {
                     </ListItemText>
                     <ListItemSecondaryAction>
                       <span className="textSize">
-                        {inspectiondata?.purchaseDealerNumber}
+                        {vehicleSalesInfo?.dealer_number}
                       </span>
                     </ListItemSecondaryAction>
                   </List>
@@ -636,7 +610,7 @@ export default function AdminDetailedReport(props) {
                     </ListItemText>
                     <ListItemSecondaryAction>
                       <span className="textSize">
-                        {inspectiondata?.purchaseType}
+                        {vehicleSalesInfo?.sale_process_stage}
                       </span>
                     </ListItemSecondaryAction>
                   </List>
@@ -648,7 +622,7 @@ export default function AdminDetailedReport(props) {
                     </ListItemText>
                     <ListItemSecondaryAction>
                       <span className="textSize">
-                        {inspectiondata?.grossPurchaseAmount}
+                        {vehicleSalesInfo?.total_sale_amount}
                       </span>
                     </ListItemSecondaryAction>
                   </List>
@@ -662,7 +636,7 @@ export default function AdminDetailedReport(props) {
                     </ListItemText>
                     <ListItemSecondaryAction>
                       <span className="textSize">
-                        {inspectiondata?.purchasingDealerLegalName}
+                        {vehicleSalesInfo?.dealer_legal_name}
                       </span>
                     </ListItemSecondaryAction>
                   </List>

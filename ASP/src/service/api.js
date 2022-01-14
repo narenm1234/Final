@@ -39,6 +39,7 @@ let clientSecret;
 let AccessTokenURI;
 let ForgeRockTokenURI;
 let getGroundingDetailsURI;
+let getVehicleSaleInfoURI;
 let getNotesURI;
 let insertNotesURI;
 let getVehicleStatusHistoryURI;
@@ -99,6 +100,8 @@ if (hostname.includes("dev")) {
     "https://aspservices-internal-dev.tfs.toyota.com/asp-services/insertNotes";
   getGroundingDetailsURI =
     "https://aspservices-internal-dev.tfs.toyota.com/asp-services/getGroundingDetails";
+  getVehicleSaleInfoURI =
+    "https://aspservices-internal-dev.tfs.toyota.com/asp-services/getVehicleSaleInfo";
   getVehicleStatusHistoryURI =
     "https://aspservices-internal-dev.tfs.toyota.com/asp-services/getVehicleStatusHistory";
   updateMileageURI =
@@ -162,6 +165,8 @@ if (hostname.includes("dev")) {
     "https://aspservices-internal-dev.tfs.toyota.com/asp-services/getTransportationDetails";
   getGroundingDetailsURI =
     "https://aspservices-internal-dev.tfs.toyota.com/asp-services/getGroundingDetails";
+  getVehicleSaleInfoURI =
+    "https://aspservices-internal-dev.tfs.toyota.com/asp-services/getVehicleSaleInfo";
   getNotesURI =
     "https://aspservices-internal-dev.tfs.toyota.com/asp-services/getNotes";
   insertNotesURI =
@@ -230,6 +235,8 @@ if (hostname.includes("dev")) {
     "https://stratus-stg3.mfindealerservices.com/services/apexrest/v1/stratusapi/getToken";
   getGroundingDetailsURI =
     "https://apigateway-stage.toyotafinancial.com/apigw-router/auctionsalesplatform/getGroundingDetails";
+  getVehicleSaleInfoURI =
+    "https://apigateway-stage.toyotafinancial.com/apigw-router/auctionsalesplatform/getVehicleSaleInfo";
   getNotesURI =
     "https://apigateway-stage.toyotafinancial.com/apigw-router/auctionsalesplatform/asp-services/getNotes";
   insertNotesURI =
@@ -289,6 +296,8 @@ if (hostname.includes("dev")) {
 
   getGroundingDetailsURI =
     "https://aspservices-internal-test.tfs.toyota.com/asp-services/getGroundingDetails";
+  getVehicleSaleInfoURI =
+    "https://aspservices-internal-test.tfs.toyota.com/asp-services/getVehicleSaleInfo";
   getNotesURI =
     "https://aspservices-internal-test.tfs.toyota.com/asp-services/getNotes";
   insertNotesURI =
@@ -358,6 +367,8 @@ if (hostname.includes("dev")) {
 
   getGroundingDetailsURI =
     "https://apigateway.toyotafinancial.com/apigw-router/auctionsalesplatform/getGroundingDetails";
+  getVehicleSaleInfoURI =
+    "https://apigateway.toyotafinancial.com/apigw-router/auctionsalesplatform/getVehicleSaleInfo";
   getNotesURI =
     "https://apigateway.toyotafinancial.com/apigw-router/auctionsalesplatform/getNotes";
   insertNotesURI =
@@ -757,6 +768,22 @@ export async function getGroundingDetailsByVin(vin) {
   );
 }
 
+export async function getVehicleSaleInfoByVin(vin) {
+  var config = {
+    method: "post",
+    url: getVehicleSaleInfoURI + `?vin=${vin}`,
+    headers: headers,
+  };
+  return await axios(config).then(
+    (res) => {
+      return res;
+    },
+    (err) => {
+      console.log(err);
+    }
+  );
+}
+
 export async function getNotes(vin) {
   var config = {
     method: "post",
@@ -805,20 +832,19 @@ export async function getVehicalStatusHistory(vin) {
   );
 }
 
+var updateMileageType = {
+  adjustedBy: "",
+  dealerName: "",
+  groundingMileage: null,
+  reasonForUpdate: "",
+  vin: "",
+};
 export async function updateMileage(body) {
-  // {
-  //   "adjustedBy": "string",
-  //   "date": "string",
-  //   "groundingMileage": 0,
-  //   "reasonForUpdate": "string",
-  //   "source": "string",
-  //   "vin": "string"
-  // }
   var config = {
     method: "post",
     url: updateMileageURI,
     headers: headers,
-    body: body,
+    data: body,
   };
   return await axios(config).then(
     (res) => {
@@ -829,20 +855,20 @@ export async function updateMileage(body) {
     }
   );
 }
-
+// http://localhost:8083/asp-services/updatePricingHistory?
+// priceMethod=Manual&providerName=Test%20User&vehicle_price=27000&vin=JM3KFBCM6M0494704
 export async function updatePricingHistory({
-  asofDate,
-  priceType,
+  priceMethod,
   providerName,
-  region,
   vehicle_price,
+  region,
   vin,
 }) {
   var config = {
     method: "post",
     url:
       updatePricingHistoryURI +
-      `?asofDate=${asofDate}&priceType=${priceType}&providerName=${providerName}&region=${region}&vehicle_price=${vehicle_price}&vin=${vin}`,
+      `?priceMethod=${priceMethod}&providerName=${providerName}&region=${region}&vehicle_price=${vehicle_price}&vin=${vin}`,
     headers: headers,
   };
   return await axios(config).then(

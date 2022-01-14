@@ -13,16 +13,16 @@ const AdminHome = (props) => {
   const [hide, setHide] = useState(0);
 
   useEffect(() => {
-    getGroundingDetailsDetails();
+    // getGroundingDetailsDetails();
   }, [vin]);
 
-  async function getGroundingDetailsDetails() { 
-    let apiResponse = await getGroundingDetailsByVin(vin);
-    console.log("getGroundingDetailsByVin==>", apiResponse);
-    if(apiResponse && apiResponse.data && apiResponse.data.data){
-      setinspectiondata(apiResponse.data.data);
-    } 
-  }
+  // async function getGroundingDetailsDetails() { 
+  //   let apiResponse = await getGroundingDetailsByVin(vin);
+  //   console.log("getGroundingDetailsByVin==>", apiResponse);
+  //   if(apiResponse && apiResponse.data && apiResponse.data.data){
+  //     setinspectiondata(apiResponse.data.data);
+  //   } 
+  // }
   // async function getConditionVehicleDetails() {
   //   let apiResponse = await getInspectionVehicleDetails(vin);
   //   console.log("getInspectionVehicleDetails==>", apiResponse);
@@ -38,9 +38,9 @@ const AdminHome = (props) => {
     <>
       <Box display={"flex"} >
         <Box width={'100%'}>
-          {inspectiondata && (
+          {vin && (
             <VehicleSearchTabs
-              inspectiondata={inspectiondata}
+              // inspectiondata={inspectiondata}
               vin={vin}
               hideShow={(hide) => {
                 hideShow(hide);
@@ -50,7 +50,7 @@ const AdminHome = (props) => {
         </Box>
         <Box position={'relative'}>
           {hide === 0 ? <NotesSection vin = {vin} />: ""}
-          {hide === 2 ? <UpdateMileagePricing />: ""}
+          {hide === 2 ? <UpdateMileagePricing vin = {vin} />: ""}
         </Box>
       </Box>
     </>
