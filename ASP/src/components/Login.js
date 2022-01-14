@@ -12,8 +12,6 @@ const Login = ({ config }) => {
     let data2 = getParameterByName("access_token");
     localStorage.setItem("okta_id_token",data1);
     localStorage.setItem("okta_access_token",data2);
-    let apiResponse = await getOktaUserInfo();
-    localStorage.setItem("dealerName",apiResponse.name);
     function getParameterByName(name, url = window.location.href) {
       name = name.replace(/[\[\]]/g, '\\$&');
       var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
