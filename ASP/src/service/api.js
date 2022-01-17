@@ -478,6 +478,7 @@ export async function getInspectionVehicleDetails(vin) {
   };
   return await axios(config);
 }
+
 export async function getInspectionWheelTiresDetails(inspectionId) {
   var data = JSON.stringify(inspectionId);
 

@@ -455,13 +455,12 @@
   padding: 5px;
 }
 .accessoriestinlineextStyle {
-  width: 130px;
+  width: 33%;
   // height: 50px;
   font-size: 13px;
   font-weight: normal;
   font-stretch: normal;
   font-style: normal;
-  line-height: 1.9;
   letter-spacing: normal;
   p{
     font-size: 14px !important; 
@@ -505,4 +504,8 @@
 }
 .icontooltip{
   margin-top: -8px;
+}
+
+.MuiRadio-colorSecondary.Mui-checked{
+  color: #0070d2 !important
 }

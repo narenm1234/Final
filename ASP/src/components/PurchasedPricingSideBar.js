@@ -82,6 +82,10 @@ export default function PurchasedPricingSideBar(props) {
   const [paymentType, setPaymentType] = React.useState("");
   const [paymentTypeName, setPaymentTypeName] = React.useState("");
   const [paymentTypeFee, setPaymentTypeFee] = React.useState(0);
+  const [additionalPaymentTypeName, setAdditionalPaymentTypeName] =
+    React.useState("");
+  const [additionalPaymentTypeFee, setAdditionalPaymentTypeFee] =
+    React.useState(0);
   const [totalFee, setTotalFee] = React.useState(0);
   const [filterInput, setFilterInput] = useState({
     vin: "",
@@ -141,7 +145,10 @@ export default function PurchasedPricingSideBar(props) {
 
   useEffect(() => {
     setTotalFee(paymentTypeFee);
-  }, [paymentTypeFee]);
+    if (additionalPaymentTypeFee) {
+      setTotalFee(parseInt(paymentTypeFee + additionalPaymentTypeFee));
+    }
+  }, [paymentTypeFee, additionalPaymentTypeFee]);
 
   const handleChangeAccountName = (event) => {
     setAccountName(event.target.value);
@@ -182,6 +189,8 @@ export default function PurchasedPricingSideBar(props) {
       makepaymentdetails.push(payment);
       setPaymentTypeFee(purchasedData.payOffAmount || 0);
       setPaymentTypeName("Payoff");
+      setAdditionalPaymentTypeFee(null);
+      setAdditionalPaymentTypeName("");
     } else if (paymentTypeVal == "2") {
       let payment = [
         {
@@ -197,10 +206,11 @@ export default function PurchasedPricingSideBar(props) {
         },
       ];
       makepaymentdetails = payment;
-      setPaymentTypeFee(
-        purchasedData.remainingPmts + purchasedData.residualAmount || 0
-      );
-      setPaymentTypeName("Residual + Remaining Payments");
+
+      setPaymentTypeFee(purchasedData.remainingPmts);
+      setPaymentTypeName("Residual");
+      setAdditionalPaymentTypeFee(purchasedData.residualAmount);
+      setAdditionalPaymentTypeName("Remaining Payments");
     } else if (paymentTypeVal == "3") {
       let payment = {
         amount: purchasedData.vehiclePrice,
@@ -210,6 +220,8 @@ export default function PurchasedPricingSideBar(props) {
       makepaymentdetails.push(payment);
       setPaymentTypeFee(purchasedData.vehiclePrice || 0);
       setPaymentTypeName("Market");
+      setAdditionalPaymentTypeFee(null);
+      setAdditionalPaymentTypeName("");
     } else if (paymentTypeVal == "4") {
       let payment = [
         {
@@ -224,10 +236,10 @@ export default function PurchasedPricingSideBar(props) {
         },
       ];
       makepaymentdetails = payment;
-      setPaymentTypeFee(
-        purchasedData.vehiclePrice + purchasedData.remainingPmts || 0
-      );
-      setPaymentTypeName("Market + Remaining Payments");
+      setPaymentTypeFee(purchasedData.vehiclePrice);
+      setPaymentTypeName("Market");
+      setAdditionalPaymentTypeFee(purchasedData.remainingPmts);
+      setAdditionalPaymentTypeName("Remaining Payments");
     }
 
     return makepaymentdetails;
@@ -339,6 +351,7 @@ export default function PurchasedPricingSideBar(props) {
                 value={"1"}
                 control={<Radio />}
                 label="Payoff"
+                disabled = {purchasedData.payOffAmount ? false : true}
               />
               <p>
                 {purchasedData.payOffAmount ? (
@@ -364,6 +377,7 @@ export default function PurchasedPricingSideBar(props) {
                 value={"2"}
                 control={<Radio />}
                 label="Residual + Remaining Payments"
+                disabled = {(purchasedData.remainingPmts + purchasedData.residualAmount) ? false : true}
               />
               <p>
                 {purchasedData.remainingPmts + purchasedData.residualAmount ? (
@@ -391,6 +405,7 @@ export default function PurchasedPricingSideBar(props) {
                 value={"3"}
                 control={<Radio />}
                 label="Market"
+                disabled = {purchasedData.vehiclePrice ? false : true}
               />
               <p>
                 {purchasedData.vehiclePrice ? (
@@ -416,6 +431,7 @@ export default function PurchasedPricingSideBar(props) {
                 value={"4"}
                 control={<Radio />}
                 label="Market + Remaining Payments "
+                disabled = {purchasedData.vehiclePrice + purchasedData.remainingPmts ? false : true}
               />
               <p>
                 {purchasedData.vehiclePrice + purchasedData.remainingPmts ? (
@@ -436,9 +452,8 @@ export default function PurchasedPricingSideBar(props) {
         </FormControl>
       </ListItem>
       <Divider variant="middle" />
-      {paymentType && (
+      {paymentTypeName && (
         <>
-          {" "}
           <ListItem>
             <ListItemText className="manualPricing">
               {paymentTypeName} :
@@ -460,10 +475,33 @@ export default function PurchasedPricingSideBar(props) {
           </ListItem>
         </>
       )}
+      {additionalPaymentTypeName && (
+        <>
+          <ListItem>
+            <ListItemText className="manualPricing">
+              {additionalPaymentTypeName} :
+            </ListItemText>
+            <ListItemText className="manualPricing">
+              <Box textAlign={"end"}>
+                {additionalPaymentTypeFee ? (
+                  <CurrencyFormat
+                    value={parseFloat(additionalPaymentTypeFee).toFixed(2)}
+                    displayType={"text"}
+                    thousandSeparator={true}
+                    prefix={"$"}
+                  />
+                ) : (
+                  "$0.0"
+                )}
+              </Box>
+            </ListItemText>
+          </ListItem>
+        </>
+      )}
       <ListItem>
         <ListItemText className="manualPricing">Admin Fee:</ListItemText>
         <ListItemText className="manualPricing">
-          <Box textAlign={"end"}>$000,000.00</Box>
+          <Box textAlign={"end"}>Waived</Box>
         </ListItemText>
       </ListItem>
       <Divider variant="middle" />

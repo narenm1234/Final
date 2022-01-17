@@ -8,7 +8,11 @@ import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItemText from "@material-ui/core/ListItemText";
 import Box from "@material-ui/core/Box";
 import MyGallery from "./ImageGallery";
-import { getInspectionVehicleDetails, getVehicleSaleInfoByVin } from "../service/api";
+import {
+  getGroundingDetailsByVin,
+  getInspectionVehicleDetails,
+  getVehicleSaleInfoByVin,
+} from "../service/api";
 import moment from "moment";
 import ClearIcon from "@material-ui/icons/Clear";
 import CurrencyFormat from "react-currency-format";
@@ -16,28 +20,42 @@ import CurrencyFormat from "react-currency-format";
 export default function AdminDetailedReport(props) {
   const [open, setOpen] = useState(false);
   const [vin, setVin] = useState(props.vin);
-  const [inspectiondata, setinspectiondata] = useState({});
+  const [groundingDetails, setGroundingDetails] = useState({});
+  const [inspectionVehicleDetails, setInspectionVehicleDetails] = useState({});
+  const [inspectiondata, setInspectionVehicleDatas] = useState({});
   const [vehicleSalesInfo, setVehicleSalesInfo] = useState({});
-  // const [inspectiondata, setinspectiondata] = useState({});
 
   useEffect(() => {
+    getGroundingDetailsDetails();
+    getInspectionVehicleDeta();
     getVehicleSaleInformation();
   }, [vin]);
 
-  async function getVehicleSaleInformation() { 
+  async function getGroundingDetailsDetails() {
+    let apiResponse = await getGroundingDetailsByVin(vin);
+    console.log("getGroundingDetailsByVin==>", apiResponse);
+    if (apiResponse && apiResponse.data && apiResponse.data.data) {
+      setGroundingDetails(apiResponse.data.data);
+    }
+  }
+
+  async function getInspectionVehicleDeta() {
+    let apiResponse = await getInspectionVehicleDetails(vin);
+    console.log("getInspectionVehicleDeta==>", apiResponse);
+    if (apiResponse && apiResponse.data) {
+      setInspectionVehicleDetails(apiResponse.data);
+    }
+  }
+
+  async function getVehicleSaleInformation() {
     let apiResponse = await getVehicleSaleInfoByVin(vin);
     console.log("getVehicleSaleInfoByVin==>", apiResponse);
-    if(apiResponse && apiResponse.data && apiResponse.data.length !== 0){
-      setVehicleSalesInfo(apiResponse.data[0]);
-    } 
+    if (apiResponse && apiResponse.data) {
+      setVehicleSalesInfo(apiResponse.data);
+    }
   }
-  // async function getGroundingDetailsDetails() { 
-  //   let apiResponse = await getGroundingDetailsByVin(vin);
-  //   console.log("getGroundingDetailsByVin==>", apiResponse);
-  //   if(apiResponse && apiResponse.data && apiResponse.data.data){
-  //     setinspectiondata(apiResponse.data.data);
-  //   } 
-  // }
+
+  
 
   const handleOpen = () => {
     setOpen(!open);
@@ -51,9 +69,7 @@ export default function AdminDetailedReport(props) {
         <Grid container spacing={3} className="ConditionCardReportSpace">
           <Grid item md={12}>
             <Box display={"flex"} alignItems={"center"}>
-              <Box className="resultForVin">
-                Results for VIN: {vin}
-              </Box>
+              <Box className="resultForVin">Results for VIN: {vin}</Box>
               <Box pl={2} pt={1}>
                 {" "}
                 <ClearIcon color="secondary" fontSize="small" />
@@ -62,7 +78,9 @@ export default function AdminDetailedReport(props) {
           </Grid>
           <Grid item xs={5}>
             <div className="codereportimggallery">
-              {inspectiondata && inspectiondata?.inspection_id && <MyGallery {...inspectiondata} />}
+              {inspectionVehicleDetails && inspectionVehicleDetails?.inspection_id && (
+                <MyGallery {...inspectionVehicleDetails} />
+              )}
             </div>
           </Grid>
           <Grid item xs={7}>
@@ -70,7 +88,7 @@ export default function AdminDetailedReport(props) {
               <div className="reportTitle">
                 <span>Year Make Model Color</span>
               </div>
-              {inspectiondata?.inspectionStatus === "COMPLETED" ? (
+              {groundingDetails?.inspectionStatus === "COMPLETED" ? (
                 <span className="ConditionReportInspection">
                   <span className="BadgeValue">Inspection Complete</span>
                 </span>
@@ -108,7 +126,10 @@ export default function AdminDetailedReport(props) {
                       </span>
                     </ListItemText>
                     <ListItemSecondaryAction>
-                      <span className="textSize">---</span>
+                      <span className="textSize">
+                        {" "}
+                        {groundingDetails?.accountNumber}
+                      </span>
                     </ListItemSecondaryAction>
                   </List>
                   <List className="paddingCSS">
@@ -118,7 +139,10 @@ export default function AdminDetailedReport(props) {
                       </span>
                     </ListItemText>
                     <ListItemSecondaryAction>
-                      <span className="textSize">---</span>
+                      <span className="textSize">
+                        {" "}
+                        {groundingDetails?.currentStatus}
+                      </span>
                     </ListItemSecondaryAction>
                   </List>
                   <List className="paddingCSS">
@@ -129,8 +153,8 @@ export default function AdminDetailedReport(props) {
                     </ListItemText>
                     <ListItemSecondaryAction>
                       <span className="textSize">
-                        {inspectiondata?.customerReturnDate &&
-                          moment(inspectiondata?.customerReturnDate).format(
+                        {groundingDetails?.customerReturnDate &&
+                          moment(groundingDetails?.customerReturnDate).format(
                             "MM/DD/YYYY"
                           )}
                       </span>
@@ -146,7 +170,7 @@ export default function AdminDetailedReport(props) {
                     </ListItemText>
                     <ListItemSecondaryAction>
                       <span className="textSize">
-                        {inspectiondata?.groundingDealerNumber}
+                        {groundingDetails?.groundingDealerNumber}
                       </span>
                     </ListItemSecondaryAction>
                   </List>
@@ -158,7 +182,7 @@ export default function AdminDetailedReport(props) {
                     </ListItemText>
                     <ListItemSecondaryAction>
                       <span className="textSize">
-                        {inspectiondata?.groundingDealerName}
+                        {groundingDetails?.groundingDealerName}
                       </span>
                     </ListItemSecondaryAction>
                   </List>
@@ -170,8 +194,8 @@ export default function AdminDetailedReport(props) {
                     </ListItemText>
                     <ListItemSecondaryAction>
                       <span className="textSize">
-                        {inspectiondata?.groundingDate &&
-                          moment(inspectiondata?.groundingDate).format(
+                        {groundingDetails?.groundingDate &&
+                          moment(groundingDetails?.groundingDate).format(
                             "MM/DD/YYYY"
                           )}
                       </span>
@@ -185,9 +209,9 @@ export default function AdminDetailedReport(props) {
                     </ListItemText>
                     <ListItemSecondaryAction>
                       <span className="textSize">
-                        {inspectiondata.groundingMileage && (
+                        {groundingDetails.groundingMileage && (
                           <CurrencyFormat
-                            value={inspectiondata.groundingMileage}
+                            value={groundingDetails.groundingMileage}
                             displayType={"text"}
                             thousandSeparator={true}
                             suffix={" MI"}
@@ -206,9 +230,9 @@ export default function AdminDetailedReport(props) {
                     </ListItemText>
                     <ListItemSecondaryAction>
                       <span className="textSize">
-                        {inspectiondata?.transportationOrderedDate &&
+                        {groundingDetails?.transportationOrderedDate &&
                           moment(
-                            inspectiondata?.transportationOrderedDate
+                            groundingDetails?.transportationOrderedDate
                           ).format("MM/DD/YYYY")}
                       </span>
                     </ListItemSecondaryAction>
@@ -221,7 +245,7 @@ export default function AdminDetailedReport(props) {
                     </ListItemText>
                     <ListItemSecondaryAction>
                       <span className="textSize">
-                        {inspectiondata?.transportationCompany}
+                        {groundingDetails?.transportationCompany}
                       </span>
                     </ListItemSecondaryAction>
                   </List>
@@ -233,7 +257,7 @@ export default function AdminDetailedReport(props) {
                     </ListItemText>
                     <ListItemSecondaryAction>
                       <span className="textSize">
-                        {inspectiondata?.bankruptcyCode}
+                        {groundingDetails?.bankruptcyCode}
                       </span>
                     </ListItemSecondaryAction>
                   </List>
@@ -245,7 +269,7 @@ export default function AdminDetailedReport(props) {
                     </ListItemText>
                     <ListItemSecondaryAction>
                       <span className="textSize">
-                        {inspectiondata?.termCode}
+                        {groundingDetails?.termCode}
                       </span>
                     </ListItemSecondaryAction>
                   </List>
@@ -259,9 +283,9 @@ export default function AdminDetailedReport(props) {
                     </ListItemText>
                     <ListItemSecondaryAction>
                       <span className="textSize">
-                        {inspectiondata?.dealerExclusivityExpireDate &&
+                        {groundingDetails?.dealerExclusivityExpireDate &&
                           moment(
-                            inspectiondata?.dealerExclusivityExpireDate
+                            groundingDetails?.dealerExclusivityExpireDate
                           ).format("MM/DD/YYYY")}
                       </span>
                     </ListItemSecondaryAction>
@@ -273,9 +297,7 @@ export default function AdminDetailedReport(props) {
                       </span>
                     </ListItemText>
                     <ListItemSecondaryAction>
-                      <span className="textSize">
-                        {inspectiondata.account_type}
-                      </span>
+                      <span className="textSize">{groundingDetails.type}</span>
                     </ListItemSecondaryAction>
                   </List>
                   <List className="paddingCSS">
@@ -286,7 +308,7 @@ export default function AdminDetailedReport(props) {
                     </ListItemText>
                     <ListItemSecondaryAction>
                       <span className="textSize">
-                        {inspectiondata?.residual}
+                        {groundingDetails?.residual}
                       </span>
                     </ListItemSecondaryAction>
                   </List>
@@ -298,7 +320,7 @@ export default function AdminDetailedReport(props) {
                     </ListItemText>
                     <ListItemSecondaryAction>
                       <span className="textSize">
-                        {inspectiondata?.currentPayoffAmount}
+                        {groundingDetails?.currentPayoffAmount}
                       </span>
                     </ListItemSecondaryAction>
                   </List>
@@ -312,7 +334,7 @@ export default function AdminDetailedReport(props) {
                     </ListItemText>
                     <ListItemSecondaryAction>
                       <span className="textSize">
-                        {inspectiondata?.groundingDealerAuction}
+                        {groundingDetails?.groundingDealerAuction}
                       </span>
                     </ListItemSecondaryAction>
                   </List>
@@ -326,7 +348,7 @@ export default function AdminDetailedReport(props) {
                     </ListItemText>
                     <ListItemSecondaryAction>
                       <span className="textSize">
-                        {inspectiondata?.totalOutstandingRemainingPayments}
+                        {groundingDetails?.totalOutstandingRemainingPayments}
                       </span>
                     </ListItemSecondaryAction>
                   </List>
@@ -338,7 +360,7 @@ export default function AdminDetailedReport(props) {
                     </ListItemText>
                     <ListItemSecondaryAction>
                       <span className="textSize">
-                        {inspectiondata?.guaranteedPayments}
+                        {groundingDetails?.guaranteedPayments}
                       </span>
                     </ListItemSecondaryAction>
                   </List>
@@ -350,7 +372,7 @@ export default function AdminDetailedReport(props) {
                     </ListItemText>
                     <ListItemSecondaryAction>
                       <span className="textSize">
-                        {inspectiondata?.paymentGuarantee}
+                        {groundingDetails?.paymentGuarantee}
                       </span>
                     </ListItemSecondaryAction>
                   </List>
@@ -364,8 +386,7 @@ export default function AdminDetailedReport(props) {
                     </ListItemText>
                     <ListItemSecondaryAction>
                       <span className="textSize">
-                        {" "}
-                        {inspectiondata?.tenDayRuleNotChargeAmount}
+                        {groundingDetails?.tenDayRuleNotChargeAmount}
                       </span>
                     </ListItemSecondaryAction>
                   </List>
@@ -377,7 +398,7 @@ export default function AdminDetailedReport(props) {
                     </ListItemText>
                     <ListItemSecondaryAction>
                       <span className="textSize">
-                        {inspectiondata?.payoffAtGrounding}
+                        {groundingDetails?.payoffAtGrounding}
                       </span>
                     </ListItemSecondaryAction>
                   </List>
@@ -389,8 +410,7 @@ export default function AdminDetailedReport(props) {
                     </ListItemText>
                     <ListItemSecondaryAction>
                       <span className="textSize">
-                        {" "}
-                        {inspectiondata?.marketBasedPrice}
+                        {groundingDetails?.marketBasedPrice}
                       </span>
                     </ListItemSecondaryAction>
                   </List>
@@ -404,7 +424,7 @@ export default function AdminDetailedReport(props) {
                     </ListItemText>
                     <ListItemSecondaryAction>
                       <span className="textSize">
-                        {inspectiondata?.remainingPaymentsAtGrounding}
+                        {groundingDetails?.remainingPaymentsAtGrounding}
                       </span>
                     </ListItemSecondaryAction>
                   </List>
@@ -437,7 +457,12 @@ export default function AdminDetailedReport(props) {
                       </span>
                     </ListItemText>
                     <ListItemSecondaryAction>
-                      <span className="textSize"> ---</span>
+                      <span className="textSize">
+                      {inspectionVehicleDetails?.inspection_req_date &&
+                          moment(inspectionVehicleDetails?.inspection_req_date).format(
+                            "MM/DD/YYYY"
+                          )}
+                      </span>
                     </ListItemSecondaryAction>
                   </List>
                   <List className="paddingCSS">
@@ -448,8 +473,8 @@ export default function AdminDetailedReport(props) {
                     </ListItemText>
                     <ListItemSecondaryAction>
                       <span className="textSize">
-                        {inspectiondata?.inspectionDate &&
-                          moment(inspectiondata?.inspectionDate).format(
+                        {inspectionVehicleDetails?.inspection_date &&
+                          moment(inspectionVehicleDetails?.inspection_date).format(
                             "MM/DD/YYYY"
                           )}
                       </span>
@@ -463,7 +488,7 @@ export default function AdminDetailedReport(props) {
                     </ListItemText>
                     <ListItemSecondaryAction>
                       <span className="textSize">
-                        {inspectiondata?.inspectionStatus}
+                        {inspectionVehicleDetails?.inspection_status}
                       </span>
                     </ListItemSecondaryAction>
                   </List>
@@ -475,9 +500,9 @@ export default function AdminDetailedReport(props) {
                     </ListItemText>
                     <ListItemSecondaryAction>
                       <span className="textSize">
-                        {inspectiondata?.inspectionMileage && (
+                        {inspectionVehicleDetails?.inspection_mileage && (
                           <CurrencyFormat
-                            value={inspectiondata?.inspectionMileage}
+                            value={inspectionVehicleDetails?.inspection_mileage}
                             displayType={"text"}
                             thousandSeparator={true}
                             suffix={" MI"}
@@ -494,7 +519,7 @@ export default function AdminDetailedReport(props) {
                     </ListItemText>
                     <ListItemSecondaryAction>
                       <span className="textSize">
-                        {inspectiondata?.masterKeysReturned}
+                        {inspectionVehicleDetails?.keys?.keys}
                       </span>
                     </ListItemSecondaryAction>
                   </List>
@@ -506,7 +531,7 @@ export default function AdminDetailedReport(props) {
                     </ListItemText>
                     <ListItemSecondaryAction>
                       <span className="textSize">
-                        {inspectiondata?.valetKeysReturned}
+                        {inspectionVehicleDetails?.keys?.valet}
                       </span>
                     </ListItemSecondaryAction>
                   </List>
@@ -518,7 +543,7 @@ export default function AdminDetailedReport(props) {
                     </ListItemText>
                     <ListItemSecondaryAction>
                       <span className="textSize">
-                        {inspectiondata?.inspectionType}
+                        {inspectionVehicleDetails?.inspection_type}
                       </span>
                     </ListItemSecondaryAction>
                   </List>
@@ -532,9 +557,9 @@ export default function AdminDetailedReport(props) {
                     </ListItemText>
                     <ListItemSecondaryAction>
                       <span className="textSize">
-                        {inspectiondata?.excessWearAndTear && (
+                        {inspectionVehicleDetails?.ewu && (
                           <CurrencyFormat
-                            value={inspectiondata?.excessWearAndTear}
+                            value={inspectionVehicleDetails?.ewu}
                             displayType={"text"}
                             thousandSeparator={true}
                             prefix="$"
@@ -563,8 +588,6 @@ export default function AdminDetailedReport(props) {
                     );
                   })} */}
 
-
-
                   <List className="paddingCSS">
                     <ListItemText>
                       <span className="textStyle">
@@ -574,7 +597,9 @@ export default function AdminDetailedReport(props) {
                     <ListItemSecondaryAction>
                       <span className="textSize">
                         {vehicleSalesInfo?.sale_date &&
-                          moment(vehicleSalesInfo?.sale_date).format("MM/DD/YYYY")}
+                          moment(vehicleSalesInfo?.sale_date).format(
+                            "MM/DD/YYYY"
+                          )}
                       </span>
                     </ListItemSecondaryAction>
                   </List>

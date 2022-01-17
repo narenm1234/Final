@@ -180,9 +180,11 @@ export default function ListingPage(props) {
   const openConditionScreen = (VINumber, vehicle) => {
     props.history.push("/conditionreport", {
       vin: VINumber,
+      purchaseSection: true,
       vehicleDetails: vehicle,
     });
   };
+  
   const handleOpen = (vin, groundingId, dealer_name) => {
     setPassVin(vin);
     setGroundingID(groundingId);
