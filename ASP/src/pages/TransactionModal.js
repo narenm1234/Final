@@ -122,7 +122,7 @@ function TransactionModal(props) {
                   <Box color={"#000000"} fontWeight={500}>
                     Admin Fee
                   </Box>
-                  <Box color={"#5e5e5e"}>$00.000.00</Box>
+                  <Box color={"#5e5e5e"}>Waived</Box>
                 </Box>
                 <Box borderBottom={1} borderColor={"error.main"} my={1}></Box>
                 <Box display={"flex"} justifyContent={"space-between"}>

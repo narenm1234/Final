@@ -153,15 +153,16 @@ export default function ConditionReport(props) {
   };
   const handleContinue = async () => {
     setOpenTransactionPopup(false);
-    if (transactionPopupType == "success") {
-      let apiResponse = await postDealerActionPurchaseOnVehicle(
-        vin,
-        vehicleDetails?.groundingId
-      );
-      console.log("postDealerActionPurchaseOnVehicle==>", apiResponse);
-      // window.location.replace("/grounded");
-      window.location.reload();
-    }
+    
+    // if (transactionPopupType == "success") {
+    //   let apiResponse = await postDealerActionPurchaseOnVehicle(
+    //     vin,
+    //     vehicleDetails?.groundingId
+    //   );
+    //   console.log("postDealerActionPurchaseOnVehicle==>", apiResponse);
+    //   // window.location.replace("/grounded");
+    //   window.location.reload();
+    // }
   };
 
   return (
