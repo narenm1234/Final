@@ -31,7 +31,7 @@ const Login = ({ config }) => {
       useEffect(() => {
         getToken();
         // getUserAccessInfoToken();
-      }, []);
+      });
       async function getToken(){
         let usertoken = localStorage.getItem("okta_access_token");
         console.log("tessst",usertoken)
