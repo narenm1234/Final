@@ -36,15 +36,15 @@ const useStyles = makeStyles({
 
 export default function StatusHistory(props) {
   const classes = useStyles();
-  const [inspectiondata, setinspectiondata] = useState(props.inspectiondata);
+  const [vin, setVin] = useState(props.vin);
   const [statusHistoryData, setStatusHistoryData] = useState([]);
 
   useEffect(() => {
     getStatusHistory();
-  }, [inspectiondata.vin]);
+  }, [vin]);
 
   async function getStatusHistory() {
-    let apiResponse = await getVehicalStatusHistory(inspectiondata.vin);
+    let apiResponse = await getVehicalStatusHistory(vin);
     console.log("getVehicalStatusHistory==>", apiResponse);
     if (apiResponse && apiResponse.data) {
       setStatusHistoryData(apiResponse.data);
@@ -55,7 +55,7 @@ export default function StatusHistory(props) {
     <Box>
       <Box display={"flex"} alignItems={"center"} mb={2}>
         <Box className="resultForVin">
-          Results for VIN: {inspectiondata.vin}
+          Results for VIN: {vin}
         </Box>
         <Box pl={2} pt={1}>
           <ClearIcon color="secondary" fontSize="small" />
