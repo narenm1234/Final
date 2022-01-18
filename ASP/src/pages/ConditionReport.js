@@ -77,6 +77,8 @@ export default function ConditionReport(props) {
   const [isPassVehicalPop, setIsPassVehicalPop] = useState(false);
 
   useEffect(() => {
+    console.log("start condition report page",new Date());
+
     getOEMBuildDetails();
     getConditionVehicleDetails();
     getVehicleDetails();
@@ -84,18 +86,30 @@ export default function ConditionReport(props) {
   }, [vin]);
 
   async function getOEMBuildDetails() {
+    console.log("start condition report page getOEMBuildDetails",new Date());
+
     let apiResponse = await getOEMBuildDetailsApi(vin);
+    console.log("end condition report page getOEMBuildDetails",new Date());
+
     setOEMBuildDetailsData(apiResponse.data);
   }
 
   async function getInspectionDamageDetails(inspection_Id) {
+    console.log("start condition report page getInspectionDamageDetails",new Date());
+
     let getInspectionDamageDetailsaApiResponse =
       await getInspectionDamageDetailsApi(inspection_Id, vin);
+    console.log("end condition report page getInspectionDamageDetails",new Date());
+
     setDamageDetails(getInspectionDamageDetailsaApiResponse.data);
   }
 
   async function getVehicleDetails() {
+    console.log("start condition report page getVehicleDetails",new Date());
+
     let apiResponse = await getPurchasedList(vin);
+    console.log("end condition report page getVehicleDetails",new Date());
+
     setVehicleResponse(apiResponse.data.data);
   }
 
@@ -105,8 +119,12 @@ export default function ConditionReport(props) {
   };
 
   async function getConditionVehicleDetails() {
+    console.log("start condition report page getConditionVehicleDetails",new Date());
+
     let apiResponse = await getInspectionVehicleDetails(vin);
     console.log("getConditionVehicleDetailsresponse", apiResponse);
+    console.log("end condition report page getConditionVehicleDetails",new Date());
+
     if (apiResponse && apiResponse.data) {
       setCondionVehicleDetails(apiResponse.data);
       if (apiResponse.data.inspection_id) {
@@ -123,8 +141,12 @@ export default function ConditionReport(props) {
   }
 
   async function getInspectionWheelTires(inspectionId) {
+    console.log("start condition report page getInspectionWheelTires",new Date());
+
     let apiResponse = await getInspectionWheelTiresDetails(inspectionId);
     console.log("wheelTiresDetailsapires", apiResponse);
+    console.log("end condition report page getInspectionWheelTires",new Date());
+
     setWheelTiresDetails(apiResponse.data);
     console.log("-------------xxxxxx", inspectionId);
   }

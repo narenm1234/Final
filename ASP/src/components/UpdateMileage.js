@@ -24,12 +24,11 @@ import {
   getInspectionDamageDetailsApi,
   getOEMBuildDetailsApi,
   getPurchasedList,
-} from "../service/api";
-import {
   getInspectionVehicleDetails,
   getInspectionAccessoryDetails,
   getInspectionWheelTiresDetails,
 } from "../service/api";
+
 import moment from "moment";
 import PurchasedPricingSideBar from "../components/PurchasedPricingSideBar";
 import TransactionModal from "../pages/TransactionModal";

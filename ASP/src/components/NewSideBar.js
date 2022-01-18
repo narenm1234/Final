@@ -123,6 +123,7 @@ export default function NewSidebar(props) {
   };
 
   const handleClickMakeActive = (child) => {
+    console.log('start grounding page', new Date())
     setActiveChild(child.link);
   };
 

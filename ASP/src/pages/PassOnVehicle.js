@@ -100,7 +100,9 @@ export default function PassOnVehicle(props) {
         <DialogContent>
           <Grid container>
             <Grid xs={12}>
-              <div className="viewReportCenter">You have passed on Vehicle</div>
+              <div className="viewReportCenter">
+              You have passed on this vehicle, transportation will be ordered.
+              </div>
             </Grid>
           </Grid>
         </DialogContent>

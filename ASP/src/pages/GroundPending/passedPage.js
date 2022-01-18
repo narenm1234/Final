@@ -79,6 +79,7 @@ export default function ListingPage1(props) {
     // getImages();
   }, [value]);
   async function getVehicleDetails() {
+    console.log("start passed page",new Date());
     let apiResponse = await getPassedList();
     setLoader(false);
 
@@ -101,6 +102,8 @@ export default function ListingPage1(props) {
       let apiResponse = await getTransportationDetails(vinlistqueryparams);
       setTransport(apiResponse.data);
       setVehicleResponse(data);
+
+     console.log("end passed page",new Date());
       
     }
   }
