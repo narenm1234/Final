@@ -22,7 +22,6 @@ export default function AdminDetailedReport(props) {
   const [vin, setVin] = useState(props.vin);
   const [groundingDetails, setGroundingDetails] = useState({});
   const [inspectionVehicleDetails, setInspectionVehicleDetails] = useState({});
-  const [inspectiondata, setInspectionVehicleDatas] = useState({});
   const [vehicleSalesInfo, setVehicleSalesInfo] = useState({});
 
   useEffect(() => {
@@ -55,8 +54,6 @@ export default function AdminDetailedReport(props) {
     }
   }
 
-  
-
   const handleOpen = () => {
     setOpen(!open);
   };
@@ -78,9 +75,10 @@ export default function AdminDetailedReport(props) {
           </Grid>
           <Grid item xs={5}>
             <div className="codereportimggallery">
-              {inspectionVehicleDetails && inspectionVehicleDetails?.inspection_id && (
-                <MyGallery {...inspectionVehicleDetails} />
-              )}
+              {inspectionVehicleDetails &&
+                inspectionVehicleDetails?.inspection_id && (
+                  <MyGallery {...inspectionVehicleDetails} />
+                )}
             </div>
           </Grid>
           <Grid item xs={7}>
@@ -88,14 +86,19 @@ export default function AdminDetailedReport(props) {
               <div className="reportTitle">
                 <span>Year Make Model Color</span>
               </div>
-              {groundingDetails?.inspectionStatus === "COMPLETED" ? (
-                <span className="ConditionReportInspection">
-                  <span className="BadgeValue">Inspection Complete</span>
-                </span>
-              ) : (
-                <span className="ConditionReportInspectionPending">
-                  <span className="BadgeValue">Inspection Pending</span>
-                </span>
+              {inspectionVehicleDetails && (
+                <div>
+                  {" "}
+                  {inspectionVehicleDetails?.inspection_date ? (
+                    <span className="ConditionReportInspection">
+                      <span className="BadgeValue">Inspection Complete</span>
+                    </span>
+                  ) : (
+                    <span className="ConditionReportInspectionPending">
+                      <span className="BadgeValue">Inspection Pending</span>
+                    </span>
+                  )}{" "}
+                </div>
               )}
             </div>
 
@@ -458,10 +461,10 @@ export default function AdminDetailedReport(props) {
                     </ListItemText>
                     <ListItemSecondaryAction>
                       <span className="textSize">
-                      {inspectionVehicleDetails?.inspection_req_date &&
-                          moment(inspectionVehicleDetails?.inspection_req_date).format(
-                            "MM/DD/YYYY"
-                          )}
+                        {inspectionVehicleDetails?.inspection_req_date &&
+                          moment(
+                            inspectionVehicleDetails?.inspection_req_date
+                          ).format("MM/DD/YYYY")}
                       </span>
                     </ListItemSecondaryAction>
                   </List>
@@ -474,9 +477,9 @@ export default function AdminDetailedReport(props) {
                     <ListItemSecondaryAction>
                       <span className="textSize">
                         {inspectionVehicleDetails?.inspection_date &&
-                          moment(inspectionVehicleDetails?.inspection_date).format(
-                            "MM/DD/YYYY"
-                          )}
+                          moment(
+                            inspectionVehicleDetails?.inspection_date
+                          ).format("MM/DD/YYYY")}
                       </span>
                     </ListItemSecondaryAction>
                   </List>

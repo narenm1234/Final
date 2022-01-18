@@ -58,6 +58,8 @@ export default function ExclusivityPeriod(props) {
         );
       }, 1000);
     }
+    console.log("start ExclusivityPeriod",new Date())
+
   }, [endtime]);
 
   return (

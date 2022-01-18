@@ -93,11 +93,15 @@ export default function ListingPage2(props) {
     // getImages();
   }, [value]);
   async function getVehicleDetails() {
+    console.log("start Purchased page",new Date());
+
     let apiResponse = await getPurchasedList();
     setVehicleResponse(apiResponse?.data.data);
     console.log(vehicleResponse);
     // console.log(apiResponse?.data.data);
     setLoader(false);
+    console.log("end Purchased page",new Date());
+
   }
 
   // const getImages = async () => {
@@ -147,6 +151,7 @@ export default function ListingPage2(props) {
   const openConditionReport = (VINumber, vehicle) => {
     props.history.push("/conditionreport", {
       vin: VINumber,
+      purchaseSection: true,
       vehicleDetails: vehicle,
     });
   };
@@ -231,7 +236,7 @@ export default function ListingPage2(props) {
                 </div>
                 <List>
                   {vehicle?.priceCategoryList && vehicle?.priceCategoryList.map((priceitem, index)=>
-                  <span className="textStyle priceOptions">
+                  <span key={index} className="textStyle priceOptions">
                   <span className="textBold"> {priceitem?.price_category} {priceitem?.price_type} </span>
                   <span className="">
                     <CurrencyFormat

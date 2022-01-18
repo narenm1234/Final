@@ -90,7 +90,6 @@ export default function ListingPage(props) {
   // const [images, setImages] = React.useState([]);
   const [loader, setLoader] = React.useState(true);
   var refresh1 = window.localStorage.getItem('refresh1');
-  console.log(refresh1);
   if (refresh1===null){
       window.location.reload();
       window.localStorage.setItem('refresh1', "1");
@@ -102,16 +101,18 @@ export default function ListingPage(props) {
   }, [value]);
 
   async function getVehicleDetails() {
+    console.log("start grounding list api",new Date())
     let apiResponse = await getGroundingList();
+    console.log("end grounding list api" , new Date())
+    console.log("------->", apiResponse.data);
     setVehicleResponse(apiResponse.data.data);
     setAllVehicleResponse(apiResponse.data.data);
-    console.log("------->", apiResponse.data);
+    
 
     setLoader(false);
 
   }
   var refresh2 = window.localStorage.getItem('refresh2');
-  console.log(refresh2);
   if (refresh2===null){
       window.location.reload();
       window.localStorage.setItem('refresh2', "1");

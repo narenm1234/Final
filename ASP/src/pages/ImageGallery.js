@@ -46,6 +46,8 @@ export default function MyGallery(props) {
 
   useEffect(() => {
     console.log("inspection_id", props)
+    console.log("start condition report page get images in my gallery",new Date());
+
     getImages();
   }, []);
   const getImages = async () => {
@@ -92,6 +94,9 @@ export default function MyGallery(props) {
 
     props.getDamageDesc &&
       props.getDamageDesc(imgagesdata[0].damageDescription);
+
+    console.log("end condition report page get images in my gallery",new Date());
+
   };
 
   const onSlideGetIndex = (index) => {

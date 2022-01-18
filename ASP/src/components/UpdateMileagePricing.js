@@ -1,13 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ListItem from "@material-ui/core/ListItem";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import { Divider } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
-import List from "@material-ui/core/List";
+import { List, Box } from "@material-ui/core";
 import InputBase from "@material-ui/core/InputBase";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
-import { updateMileage, updatePricingHistory } from "../service/api";
+import {
+  updateMileage,
+  updatePricingHistory,
+  getClearfaxStatusByVin,
+} from "../service/api";
+import FiberManualRecordIcon from "@material-ui/icons/FiberManualRecord";
+import Alert from "@material-ui/lab/Alert";
+import CheckIcon from "@material-ui/icons/Check";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -48,11 +55,25 @@ const BootstrapInput = withStyles((theme) => ({
 export default function UpdateMileagePricing(props) {
   const classes = useStyles();
   const [open, setOpen] = useState(true);
-  const [vin, setVin] = React.useState(props?.vin);
+  const [vin, setVin] = useState(props?.vin);
+  const [clearFixStatus, setClearFixStatus] = useState(null);
+  const [updateStatus, setUpdateStatus] = useState(null);
+  const [updatePrisingStatus, setUpdatePrisingStatus] = useState(null);
 
   const handleClick = () => {
     //setOpen(!open);
   };
+  useEffect(() => {
+    getClearfaxStatus();
+  }, [vin]);
+
+  async function getClearfaxStatus() {
+    let apiResponse = await getClearfaxStatusByVin(vin);
+    console.log("getClearfaxStatusByVin==>", apiResponse);
+    if (apiResponse && apiResponse.data) {
+      setClearFixStatus(apiResponse.data);
+    }
+  }
 
   const [mileageForm, setMileageForm] = useState({
     groundingMileage: null,
@@ -78,9 +99,13 @@ export default function UpdateMileagePricing(props) {
     });
   };
 
-  const updateDetails = () => { 
+  const updateDetails = () => {
     mileageForm.groundingMileage && doUpdateMileage();
     vehiclePriceForm.vehicle_price && doUpdateVehiclePrice();
+    setTimeout(() => {
+      setUpdateStatus(null);
+      setUpdatePrisingStatus(null);
+    }, 4000);
   };
 
   const doUpdateMileage = () => {
@@ -94,6 +119,11 @@ export default function UpdateMileagePricing(props) {
       };
       updateMileage(updateMileageType).then((res) => {
         console.log("updateMileage", res);
+        if (res.data === "Success") {
+          setUpdateStatus(true);
+        } else {
+          setUpdateStatus(false);
+        }
       });
     } else {
       console.log(
@@ -110,12 +140,17 @@ export default function UpdateMileagePricing(props) {
         priceMethod: "Manual",
         providerName: "test user",
         vehicle_price: vehiclePriceForm.vehicle_price,
-        region:vehiclePriceForm.region,
+        region: vehiclePriceForm.region,
         vin: vin,
       };
 
       updatePricingHistory(updatePricingHistoryType).then((res) => {
         console.log("updatePricingHistory", res);
+        if (res.data === "Success") {
+          setUpdatePrisingStatus(true);
+        } else {
+          setUpdatePrisingStatus(false);
+        }
       });
     } else {
       console.log("Vehicle Price and Confirm Vehicle Price is not match");
@@ -130,7 +165,6 @@ export default function UpdateMileagePricing(props) {
           <h3>Mileage</h3>
         </div>
       </ListItem>
-
       <ListItem>
         <div className="manualPricing">Original Grounding Mileage</div>
         <div className="manualPricing">000,000 mi</div>
@@ -145,7 +179,8 @@ export default function UpdateMileagePricing(props) {
             Update Grounding Mileage
           </InputLabel>
           <BootstrapInput
-            placeholder="Enter price"
+           onKeyPress={(e) => !/[0-9]/.test(e.key) && e.preventDefault()}
+            placeholder="Enter Grounding Mileage"
             id="EntermarketPrice-input"
             name="groundingMileage"
             value={mileageForm.groundingMileage}
@@ -159,7 +194,8 @@ export default function UpdateMileagePricing(props) {
             Confirm Grounding Mileage
           </InputLabel>
           <BootstrapInput
-            placeholder="Enter Price"
+           onKeyPress={(e) => !/[0-9]/.test(e.key) && e.preventDefault()}
+            placeholder="Enter Confirm Grounding Mileage"
             id="reEntermarketPrice-input"
             name="confirmGroundingMileage"
             value={mileageForm.confirmGroundingMileage}
@@ -173,7 +209,7 @@ export default function UpdateMileagePricing(props) {
             Reason for Update
           </InputLabel>
           <BootstrapInput
-            placeholder="MMR"
+            placeholder="Enter Reason for Update"
             id="vin-input"
             name="reasonForUpdate"
             value={mileageForm.reasonForUpdate}
@@ -181,19 +217,18 @@ export default function UpdateMileagePricing(props) {
           />
         </FormControl>
       </ListItem>
-
       <ListItem>
         <div>
           <h3>Pricing</h3>
         </div>
       </ListItem>
-
       <ListItem>
         <FormControl>
           <InputLabel shrink htmlFor="vin-input">
-            Mileage
+            Price
           </InputLabel>
           <BootstrapInput
+           onKeyPress={(e) => !/[0-9]/.test(e.key) && e.preventDefault()}
             placeholder="Enter price"
             id="EntermarketPrice-input"
             name="vehicle_price"
@@ -208,7 +243,8 @@ export default function UpdateMileagePricing(props) {
             Re-Enter Market Price
           </InputLabel>
           <BootstrapInput
-            placeholder="Enter Price"
+           onKeyPress={(e) => !/[0-9]/.test(e.key) && e.preventDefault()}
+            placeholder="Enter Confirm Price"
             id="reEntermarketPrice-input"
             name="confirm_vehicle_price"
             value={vehiclePriceForm.confirm_vehicle_price}
@@ -222,7 +258,7 @@ export default function UpdateMileagePricing(props) {
             MMR
           </InputLabel>
           <BootstrapInput
-            placeholder="MMR"
+            placeholder="Enter MMR"
             id="vin-input"
             name="vin"
             value={vehiclePriceForm.reason}
@@ -232,9 +268,17 @@ export default function UpdateMileagePricing(props) {
       </ListItem>
       <Divider variant="middle" />
       <ListItem>
-        <p className="manualPricing">TFS Carfax Alert Status:</p>
+        <Box display={"flex"} alignItems={"center"} width={"100%"}>
+          <Box className="manualPricing">TFS Carfax Alert Status:</Box>
+          <Box pt={1}>
+            <FiberManualRecordIcon
+              style={{
+                color: clearFixStatus === "Green" ? "#4bca81" : "#cc0000",
+              }}
+            />
+          </Box>
+        </Box>
       </ListItem>
-
       <ListItem>
         <p className="manualPricing">Autograde: 3.0</p>
       </ListItem>
@@ -260,6 +304,33 @@ export default function UpdateMileagePricing(props) {
           <p className="manualPricing">Price: $00,000.00</p>
           <p className="manualPricing">User Name: First, Last</p>
         </div>
+      </ListItem>
+      {/* const [updateStatus, setUpdateStatus] = useState(false); const
+      [updatePrisingStatus, setUpdatePrisingStatus] = useState(false); */}
+      <ListItem>
+        {updateStatus === true && (
+          <Alert variant="outlined" severity="success">
+            Mileage updated successfully!
+          </Alert>
+        )}
+        {updateStatus === false && (
+          <Alert variant="outlined" severity="error">
+            Mileage updating failed!
+          </Alert>
+        )}
+      </ListItem>
+      <ListItem>
+        {updatePrisingStatus === true && (
+          <Alert variant="outlined" severity="success">
+            Price updated successfully!
+          </Alert>
+        )}
+
+        {updatePrisingStatus === false && (
+          <Alert variant="outlined" severity="error">
+            Price updating failed!
+          </Alert>
+        )}
       </ListItem>
       <List className="swipeFilterBtn">
         <Button autoFocus className="cancelButton" color="primary">
