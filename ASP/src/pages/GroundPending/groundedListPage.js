@@ -81,6 +81,12 @@ let resp = [
 export default function ListingPage(props) {
   let data1 = getParameterByName1("id_token");
   let data2 = getParameterByName("access_token");
+
+  var refresh1 = window.localStorage.getItem('refresh1');
+  if (refresh1===null){
+      localStorage.clear();
+      window.localStorage.setItem('refresh1', "1");
+  }
   
   var refresh3 = window.localStorage.getItem('refresh3');
   if (refresh3===null){
@@ -88,11 +94,7 @@ export default function ListingPage(props) {
     localStorage.setItem("okta_access_token",data2);
     window.localStorage.setItem('refresh3', "1");
   }
-  var refresh1 = window.localStorage.getItem('refresh1');
-  if (refresh1===null){
-      window.location.reload();
-      window.localStorage.setItem('refresh1', "1");
-  }
+
  
   function getParameterByName(name, url = window.location.href) {
     name = name.replace(/[\[\]]/g, '\\$&');
@@ -136,15 +138,9 @@ export default function ListingPage(props) {
     setVehicleResponse(apiResponse.data.data);
     setAllVehicleResponse(apiResponse.data.data);
     console.log("------->", apiResponse.data);
-    let usertoken = localStorage.getItem("okta_access_token");
-    console.log("tessst",usertoken)
     let apiResponse1 = await getOktaUserInfo();
-    console.log(apiResponse1)
     localStorage.setItem("dealerName",apiResponse1.data.name);
-    
-
     setLoader(false);
-
   }
   var refresh2 = window.localStorage.getItem('refresh2');
   if (refresh2===null){
