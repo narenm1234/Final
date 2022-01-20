@@ -32,8 +32,10 @@ function App() {
   const [selectedDealersData, setSelectedDealersData] = useState([]);
   const oktaAuth = new OktaAuth({
     issuer: 'https://tfs.oktapreview.com/oauth2/ausredslpqIsIjQfz0h7',
-    clientId: '0oa10kchmc4Hjj6gD0h8',
-    redirectUri: 'https://asp-dev.mfindealerservices.com/login',
+    clientId: '0oazqm6unew4ySMR80h7',
+    // clientId:'0oa10kchmc4Hjj6gD0h8',
+    // redirectUri: 'https://asp-stage.mfindealerservices.com/grounded',
+    redirectUri: 'http://localhost:3000/grounded',
     restoreOriginalUri:'http://localhost:3000/login',
 
     onAuthRequired: onAuthRequired,
