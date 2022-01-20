@@ -71,7 +71,7 @@ export default function UpdateMileagePricing(props) {
 
   useEffect(() => {
     setCondionVehicleDetails(props.condionVehicleDetails);
-  }, [props.condionVehicleDetails]);
+  }, [props?.condionVehicleDetails]);
 
   async function getClearfaxStatus() {
     let apiResponse = await getClearfaxStatusByVin(vin);
@@ -193,7 +193,7 @@ export default function UpdateMileagePricing(props) {
         <div className="manualPricing">
           {condionVehicleDetails && condionVehicleDetails?.grounding_mileage ? (
             <CurrencyFormat
-              value={condionVehicleDetails.grounding_mileage}
+              value={condionVehicleDetails?.grounding_mileage}
               displayType={"text"}
               thousandSeparator={true}
               suffix={" MI"}
@@ -209,7 +209,7 @@ export default function UpdateMileagePricing(props) {
           {condionVehicleDetails &&
           condionVehicleDetails?.inspection_mileage ? (
             <CurrencyFormat
-              value={condionVehicleDetails.inspection_mileage}
+              value={condionVehicleDetails?.inspection_mileage}
               displayType={"text"}
               thousandSeparator={true}
               suffix={" MI"}
