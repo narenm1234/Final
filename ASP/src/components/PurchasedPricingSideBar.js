@@ -215,9 +215,9 @@ export default function PurchasedPricingSideBar(props) {
       ];
       makepaymentdetails = payment;
 
-      setPaymentTypeFee(purchasedData.remainingPmts);
+      setPaymentTypeFee(purchasedData.residualAmount);
       setPaymentTypeName("Residual");
-      setAdditionalPaymentTypeFee(purchasedData.residualAmount);
+      setAdditionalPaymentTypeFee(purchasedData.remainingPmts);
       setAdditionalPaymentTypeName("Remaining Payments");
     } else if (paymentTypeVal == "3") {
       let payment = {

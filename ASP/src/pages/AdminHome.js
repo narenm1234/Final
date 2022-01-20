@@ -11,6 +11,7 @@ const AdminHome = (props) => {
   const [vin, setVin] = useState(props?.location?.state?.vin);
   const [inspectiondata, setinspectiondata] = useState(null);
   const [hide, setHide] = useState(0);
+  const [condionVehicleDetails, setCondionVehicleDetails] = React.useState({});// inspectiondata
 
   useEffect(() => {
     // getGroundingDetailsDetails();
@@ -34,6 +35,10 @@ const AdminHome = (props) => {
     setHide(value);
   };
 
+  const onGetConditionVehicleDetails = (event) =>{
+    setCondionVehicleDetails(event);
+  }
+
   return (
     <>
       <Box display={"flex"} >
@@ -45,12 +50,13 @@ const AdminHome = (props) => {
               hideShow={(hide) => {
                 hideShow(hide);
               }}
+              onGetConditionVehicleDetails = {onGetConditionVehicleDetails}
             />
           )}
         </Box>
         <Box position={'relative'}>
           {hide === 0 ? <NotesSection vin = {vin} />: ""}
-          {hide === 2 ? <UpdateMileagePricing vin = {vin} />: ""}
+          {hide === 2 ? <UpdateMileagePricing vin = {vin} condionVehicleDetails={condionVehicleDetails} />: ""}
         </Box>
       </Box>
     </>

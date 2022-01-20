@@ -50,24 +50,8 @@ export default function MyGallery(props) {
 
     getImages();
   }, []);
+
   const getImages = async () => {
-    // let getXmlImages = await getCarXml();
-    // parseString(getXmlImages.data, (err, body) => {
-    //   console.log("get Xml Images::", body["ns0:sendVehicle"]["ns0:vehicles"]);
-    //   let imageArray = body["ns0:sendVehicle"]["ns0:vehicles"];
-    //   let imgagesdata = [];
-    //   for (let img of imageArray) {
-    //     let imgobj = {
-    //       original: "data:image/jpeg;base64," + img["ns0:image"][0],
-    //       thumbnail: "data:image/jpeg;base64," + img["ns0:image"][0],
-    //     };
-    //     imgagesdata.push(imgobj);
-    //   }
-
-    //   console.log("imgagesdata", imgagesdata);
-    //   setImages(imgagesdata);
-    // });
-
     let reqObj = {
       inspectionId: props.inspection_id,
       paramForImage: "ALL",
@@ -78,22 +62,35 @@ export default function MyGallery(props) {
     console.log("get image data::", getimagesRes);
 
     setImages(getimagesRes?.data?.imageDetails);
-    let imgagesdata = [];
+    let imagesdata = [];
     for (let img of getimagesRes?.data?.imageDetails) {
       let imgobj = {
         original: "data:image/jpeg;base64," + img.binImageArray,
         thumbnail: "data:image/jpeg;base64," + img.binImageArray,
         damageDescription: img.damageDescription,
       };
-      imgagesdata.push(imgobj);
+      imagesdata.push(imgobj);
     }
 
-    console.log("imgagesdata", imgagesdata);
-    setImages(imgagesdata);
+    // imagesdata = [
+    //   {
+    //     original: "data:image/jpeg;base64," + binImageArray,
+    //     thumbnail: "data:image/jpeg;base64," + binImageArray,
+    //     damageDescription: img.damageDescription,
+    //   },
+    //   {
+    //     original: "data:image/jpeg;base64," + img.binImageArray,
+    //     thumbnail: "data:image/jpeg;base64," + img.binImageArray,
+    //     damageDescription: img.damageDescription,
+    //   }
+    // ]
+
+    console.log("imagesdata==>", imagesdata);
+    setImages(imagesdata);
     setLoader(false);
 
     props.getDamageDesc &&
-      props.getDamageDesc(imgagesdata[0].damageDescription);
+      props.getDamageDesc(imagesdata[0].damageDescription);
 
     console.log("end condition report page get images in my gallery",new Date());
 

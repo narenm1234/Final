@@ -80,7 +80,7 @@ export default function UpdateMileage(props) {
     // getConditionVehicleDetails();
     getVehicleDetails();
     getInspectionAccessory(vin);
-    getConditionVehicleDetails()
+    getConditionVehicleDetails();
   }, [vin]);
 
 
@@ -91,6 +91,7 @@ export default function UpdateMileage(props) {
       setCondionVehicleDetails(apiResponse.data);
       if (apiResponse.data.inspection_id) { 
         setInspectionId(apiResponse.data.inspection_id);
+        props.onGetConditionVehicleDetails(apiResponse.data);
         // cloadDamageDetails(apiResponse.data.inspection_id);
       }
     }
@@ -637,8 +638,7 @@ export default function UpdateMileage(props) {
                           <ListItemText>
                             <span className="textStyle">
                               <span className="textBold">
-                                {" "}
-                                Grounding Mileage{" "}
+                                Grounding Mileage
                               </span>
                             </span>
                           </ListItemText>
