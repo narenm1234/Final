@@ -116,6 +116,9 @@ export default function VerticalVehicleStepper(props) {
 
     useEffect(() =>{
       setTransportInformation();
+      
+      console.log("startpassed verticle stepped",new Date());
+
     },[props.transportData]);
 
     const handleComplete = (completedSteps) => {
@@ -150,6 +153,9 @@ export default function VerticalVehicleStepper(props) {
           })
         }
       });
+      
+      console.log("startpassed verticle stepped",new Date());
+
     };
     return (
         <div className={classes.root}>

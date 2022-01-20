@@ -45,6 +45,7 @@ let insertNotesURI;
 let getVehicleStatusHistoryURI;
 let updateMileageURI;
 let updatePricingHistoryURI;
+let getCarfaxStatusURI;
 
 const hostname = window.location.hostname;
 
@@ -108,6 +109,8 @@ if (hostname.includes("dev")) {
     "https://aspservices-internal-dev.tfs.toyota.com/asp-services/updateMileage";
   updatePricingHistoryURI =
     "https://aspservices-internal-dev.tfs.toyota.com/asp-services/updatePricingHistory";
+    getCarfaxStatusURI =
+    "https://aspservices-internal-dev.tfs.toyota.com/asp-services/getCarfaxStatus";
 
   clientID =
     "3MVG9_I_oWkIqLrmNgl8unCGrAPmcPODjDz6DA7QLw7qbd0CKBqVuyUVp_4.c4xZdRowJUxirUcXgiGiPYaQ.";
@@ -177,6 +180,8 @@ if (hostname.includes("dev")) {
     "https://aspservices-internal-dev.tfs.toyota.com/asp-services/updateMileage";
   updatePricingHistoryURI =
     "https://aspservices-internal-dev.tfs.toyota.com/asp-services/updatePricingHistory";
+    getCarfaxStatusURI =
+    "https://aspservices-internal-dev.tfs.toyota.com/asp-services/getCarfaxStatus";
 } else if (hostname.includes("stage")) {
   transportDetails =
     "https://apigateway-stage.toyotafinancial.com/apigw-router/auctionsalesplatform/getTransportationDetails";
@@ -247,6 +252,8 @@ if (hostname.includes("dev")) {
     "https://apigateway-stage.toyotafinancial.com/apigw-router/auctionsalesplatform/updateMileage";
   updatePricingHistoryURI =
     "https://apigateway-stage.toyotafinancial.com/apigw-router/auctionsalesplatform/updatePricingHistory";
+    getCarfaxStatusURI =
+    "https://apigateway-stage.toyotafinancial.com/apigw-router/auctionsalesplatform/getCarfaxStatus";
 } else if (hostname.includes("test")) {
   transportDetails =
     "https://aspservices-internal-test.tfs.toyota.com/asp-services/getTransportationDetails";
@@ -308,6 +315,8 @@ if (hostname.includes("dev")) {
     "https://aspservices-internal-test.tfs.toyota.com/asp-services/updateMileage";
   updatePricingHistoryURI =
     "https://aspservices-internal-test.tfs.toyota.com/asp-services/updatePricingHistory";
+    getCarfaxStatusURI =
+    "https://aspservices-internal-test.tfs.toyota.com/asp-services/getCarfaxStatus";
 } else {
   transportDetails =
     "https://apigateway.toyotafinancial.com/apigw-router/auctionsalesplatform/getTransportationDetails";
@@ -379,6 +388,8 @@ if (hostname.includes("dev")) {
     "https://apigateway.toyotafinancial.com/apigw-router/auctionsalesplatform/updateMileage";
   updatePricingHistoryURI =
     "https://apigateway.toyotafinancial.com/apigw-router/auctionsalesplatform/updatePricingHistory";
+    getCarfaxStatusURI =
+    "https://apigateway.toyotafinancial.com/apigw-router/auctionsalesplatform/getCarfaxStatus";
 }
 
 export async function getAuthToken() {
@@ -846,6 +857,7 @@ export async function getVehicalStatusHistory(vin) {
   );
 }
 
+
 var updateMileageType = {
   adjustedBy: "",
   dealerName: "",
@@ -883,6 +895,23 @@ export async function updatePricingHistory({
     url:
       updatePricingHistoryURI +
       `?priceMethod=${priceMethod}&providerName=${providerName}&region=${region}&vehicle_price=${vehicle_price}&vin=${vin}`,
+    headers: headers,
+  };
+  return await axios(config).then(
+    (res) => {
+      return res;
+    },
+    (err) => {
+      console.log(err);
+    }
+  );
+}
+
+
+export async function getClearfaxStatusByVin(vin) {
+  var config = {
+    method: "get",
+    url: getCarfaxStatusURI + `?vin=${vin}`,
     headers: headers,
   };
   return await axios(config).then(

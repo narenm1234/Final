@@ -100,6 +100,8 @@ export default function PurchasedPricingSideBar(props) {
   });
 
   useEffect(async () => {
+    console.log("start condition report page  PurchasedPricingSideBar ",new Date());
+
     let getPurchaseDetailsRes = await getPurchaseDetails(props.vin);
     setPurchasedData(getPurchaseDetailsRes.data.data);
     console.log(
@@ -141,13 +143,19 @@ export default function PurchasedPricingSideBar(props) {
     // }
     // let submitPaymentRes = await onSubmitPayment(reqObj);
     // console.log("submitPaymentRes:::", submitPaymentRes);
+    console.log("start condition report page  PurchasedPricingSideBar ",new Date());
+
   }, []);
 
   useEffect(() => {
+    console.log("start condition report page  PurchasedPricingSideBar paymentTypeFee",new Date());
+
     setTotalFee(paymentTypeFee);
     if (additionalPaymentTypeFee) {
       setTotalFee(parseInt(paymentTypeFee + additionalPaymentTypeFee));
     }
+    console.log("end condition report page  PurchasedPricingSideBar paymentTypeFee",new Date());
+
   }, [paymentTypeFee, additionalPaymentTypeFee]);
 
   const handleChangeAccountName = (event) => {
