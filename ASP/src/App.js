@@ -2,7 +2,11 @@ import "./App.css";
 import Sidebar from "./components/Sidebar";
 import Header from "./components/Header/Header";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { Security, SecureRoute, LoginCallback } from '@okta/okta-react';
+import { OktaAuth } from '@okta/okta-auth-js';
+// import OktaApp from './OktaApp';
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import Home from "./pages/Home";
 import GroundPending from "./pages/GroundPending/GroundPending";
 import GroundPending1 from "./pages/GroundPending/GroundPending1";
@@ -13,13 +17,30 @@ import "../src/sass/main.scss";
 import VINSearch from "./pages/GroundPending/VINSearch";
 import ConditionReport from "./pages/ConditionReport";
 import AdminHome from "./pages/AdminHome";
-import AdminVehicleSearch from "./components/AdminVehicleSearch";
 import ConditionReportRequests from "./pages/ConditionReportRequests";
 import InventoryRequestsTabs from "./components/InventoryRequestsTabs";
 import Login2 from "./pages/Login2";
+import Login from "./components/Login";
 function App() {
+  const history = useHistory();
+  // let { path, url } = useRouteMatch();
+
+  const onAuthRequired = () => {
+      history.push('/login');
+  };
   const [stateUpdate, setStateUpdate] = useState(1);
   const [selectedDealersData, setSelectedDealersData] = useState([]);
+  const oktaAuth = new OktaAuth({
+    issuer: 'https://tfs.oktapreview.com/oauth2/ausredslpqIsIjQfz0h7',
+    // clientId: '0oazqm6unew4ySMR80h7',
+    clientId:'0oa10kchmc4Hjj6gD0h8',
+    redirectUri: 'https://asp-stage.mfindealerservices.com/grounded',
+    // redirectUri: 'http://localhost:3000/grounded',
+    restoreOriginalUri:'http://localhost:3000/login',
+
+    onAuthRequired: onAuthRequired,
+    pkce: false
+});
   const fireEvents = () => {
     setStateUpdate(stateUpdate + 1);
   };
@@ -30,6 +51,8 @@ function App() {
   return (
     <>
       <div>
+      <Security oktaAuth={oktaAuth} restoreOriginalUri='http://localhost:3000'>
+      {/* <OktaApp /> */}
         <Router>
           <Header selectedDealers={selectedDealers}></Header>
           <div>
@@ -48,9 +71,7 @@ function App() {
                   exact
                   render={(props) => <Home {...props} />}
                 />
-                <Route path="/adminSearch" exact component={AdminVehicleSearch} />
-                <Route path="/adminSearchResult" exact component={AdminHome} />
-
+                <Route path="/adminSearch" exact component={AdminHome} />
                 <Route path="/checkinvehicle" exact component={VINSearch} />
                 <Route
                   path="/grounded"
@@ -107,11 +128,16 @@ function App() {
                     <Login2 {...props} fireEvents={fireEvents} />
                   )}
                 />
+                <SecureRoute
+                  path="/login" exact render={(props)=> <Login {...props} />}/>
+                  {/* <Route
+                  path="/login" exact render={(props)=> <Login />}/> */}
                 <Header selectedDealers={selectedDealers}></Header>
               </Switch>
             </Sidebar>
           </div>
         </Router>
+        </Security>
       </div>
       {/* <Router>
         <AppWithRouterAccess />

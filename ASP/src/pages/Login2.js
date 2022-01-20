@@ -29,6 +29,7 @@ function Login2(props) {
   }, []);
 
   async function getToken() {
+    localStorage.clear();
     let apiResponse = await getAccessTokenEndpoint(data1);
     console.log("--->", apiResponse);
     localStorage.setItem("bearerToken", apiResponse.data.access_token);

@@ -8,6 +8,7 @@ import SwipeableTextMobileStepper from "./Carousel";
 import moment from "moment";
 import {
   getGroundingList,
+  getOktaUserInfo,
   getAccessTokenEndpoint,
   getUserInfo,
   getImageData,
@@ -78,6 +79,37 @@ let resp = [
   // },
 ];
 export default function ListingPage(props) {
+  let data1 = getParameterByName1("id_token");
+  let data2 = getParameterByName("access_token");
+  
+  var refresh3 = window.localStorage.getItem('refresh3');
+  if (refresh3===null){
+    localStorage.setItem("ForgeRockToken",data1);
+    localStorage.setItem("okta_access_token",data2);
+    window.localStorage.setItem('refresh3', "1");
+  }
+  var refresh1 = window.localStorage.getItem('refresh1');
+  if (refresh1===null){
+      window.location.reload();
+      window.localStorage.setItem('refresh1', "1");
+  }
+ 
+  function getParameterByName(name, url = window.location.href) {
+    name = name.replace(/[\[\]]/g, '\\$&');
+    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+  }
+  function getParameterByName1(name, url = window.location.href) {
+      name = name.replace(/[\[\]]/g, '\\$&');
+      var regex = new RegExp('[#&]' + name + '(=([^&#]*)|&|#|$)'),
+          results = regex.exec(url);
+      if (!results) return null;
+      if (!results[2]) return '';
+      return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
   const [vehicleResponse, setVehicleResponse] = useState([]);
   const [allVehicleResponse, setAllVehicleResponse] = useState([]);
   const [SSOAuth, setSSOAuth] = useState();
@@ -89,11 +121,7 @@ export default function ListingPage(props) {
   const [groundingID, setGroundingID] = React.useState("");
   // const [images, setImages] = React.useState([]);
   const [loader, setLoader] = React.useState(true);
-  var refresh1 = window.localStorage.getItem('refresh1');
-  if (refresh1===null){
-      window.location.reload();
-      window.localStorage.setItem('refresh1', "1");
-  }
+
 
   useEffect(() => {
     getVehicleDetails();
@@ -107,6 +135,12 @@ export default function ListingPage(props) {
     console.log("------->", apiResponse.data);
     setVehicleResponse(apiResponse.data.data);
     setAllVehicleResponse(apiResponse.data.data);
+    console.log("------->", apiResponse.data);
+    let usertoken = localStorage.getItem("okta_access_token");
+    console.log("tessst",usertoken)
+    let apiResponse1 = await getOktaUserInfo();
+    console.log(apiResponse1)
+    localStorage.setItem("dealerName",apiResponse1.data.name);
     
 
     setLoader(false);

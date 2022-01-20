@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import OktaSignInWidget from './OktaSignInWidget';
 import { useOktaAuth } from '@okta/okta-react';
 import jwt_decode from "jwt-decode";
+import { getOktaUserInfo } from '../service/api';
 
 const Login = ({ config }) => {
 
@@ -27,14 +28,17 @@ const Login = ({ config }) => {
         if (!results[2]) return '';
         return decodeURIComponent(results[2].replace(/\+/g, ' '));
       }
+     
       useEffect(() => {
         getToken();
         // getUserAccessInfoToken();
-      }, []);
+      });
       async function getToken(){
-        let usertoken = localStorage.getItem("okta_id_token");
-        let userInfo = jwt_decode(usertoken);
-        console.log("........======",userInfo);
+        let usertoken = localStorage.getItem("okta_access_token");
+        console.log("tessst",usertoken)
+        let apiResponse = await getOktaUserInfo();
+        localStorage.setItem("dealerName",apiResponse.name);
+
       }
       
 
