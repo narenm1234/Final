@@ -126,10 +126,10 @@ function App() {
                     <Login2 {...props} fireEvents={fireEvents} />
                   )}
                 />
-                {/* <SecureRoute
+                <SecureRoute
+                  path="/login" exact render={(props)=> <Login {...props} />}/>
+                  {/* <Route
                   path="/login" exact render={(props)=> <Login />}/> */}
-                  <Route
-                  path="/login" exact render={(props)=> <Login />}/>
                 <Header selectedDealers={selectedDealers}></Header>
               </Switch>
             </Sidebar>

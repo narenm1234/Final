@@ -8,6 +8,7 @@ import SwipeableTextMobileStepper from "./Carousel";
 import moment from "moment";
 import {
   getGroundingList,
+  getOktaUserInfo,
   getAccessTokenEndpoint,
   getUserInfo,
   getImageData,
@@ -106,6 +107,10 @@ export default function ListingPage(props) {
     setVehicleResponse(apiResponse.data.data);
     setAllVehicleResponse(apiResponse.data.data);
     console.log("------->", apiResponse.data);
+    let usertoken = localStorage.getItem("okta_access_token");
+    console.log("tessst",usertoken)
+    let apiResponse1 = await getOktaUserInfo();
+    localStorage.setItem("dealerName",apiResponse1.name);
 
     setLoader(false);
 

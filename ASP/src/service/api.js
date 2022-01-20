@@ -630,7 +630,7 @@ var config = {
   url: 'https://tfs.oktapreview.com/oauth2/ausredslpqIsIjQfz0h7/v1/userinfo',
   headers: { 
     'Accept': 'application/json', 
-    'Authorization':  `Bearer ${localStorage.getItem("okta_id_token")}`, 
+    'Authorization':  `Bearer ${localStorage.getItem("okta_access_token")}`, 
     'Cookie': 'DT=DI04xgdsdpbT-6S2joEtp5Bdg'
   }
 };
