@@ -15,6 +15,7 @@ import {
 import FiberManualRecordIcon from "@material-ui/icons/FiberManualRecord";
 import Alert from "@material-ui/lab/Alert";
 import CheckIcon from "@material-ui/icons/Check";
+import CurrencyFormat from "react-currency-format";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -59,6 +60,7 @@ export default function UpdateMileagePricing(props) {
   const [clearFixStatus, setClearFixStatus] = useState(null);
   const [updateStatus, setUpdateStatus] = useState(null);
   const [updatePrisingStatus, setUpdatePrisingStatus] = useState(null);
+  const [condionVehicleDetails, setCondionVehicleDetails] = React.useState({}); // inspectiondata
 
   const handleClick = () => {
     //setOpen(!open);
@@ -66,6 +68,10 @@ export default function UpdateMileagePricing(props) {
   useEffect(() => {
     getClearfaxStatus();
   }, [vin]);
+
+  useEffect(() => {
+    setCondionVehicleDetails(props.condionVehicleDetails);
+  }, [props?.condionVehicleDetails]);
 
   async function getClearfaxStatus() {
     let apiResponse = await getClearfaxStatusByVin(vin);
@@ -79,24 +85,41 @@ export default function UpdateMileagePricing(props) {
     groundingMileage: null,
     confirmGroundingMileage: null,
     reasonForUpdate: "",
+    hasErr: false,
   });
   const [vehiclePriceForm, setVehiclePriceForm] = useState({
     vehicle_price: "",
     confirm_vehicle_price: "",
     region: "",
+    hasErr: false,
   });
 
   const handleOnChangeMileage = (event) => {
-    setMileageForm({
-      ...mileageForm,
-      ...{ [event.target.name]: event.target.value },
-    });
+    if (event.target.name === "confirmGroundingMileage") {
+      setMileageForm({
+        ...mileageForm,
+        ...{ [event.target.name]: event.target.value, hasErr: true },
+      });
+    } else {
+      setMileageForm({
+        ...mileageForm,
+        ...{ [event.target.name]: event.target.value },
+      });
+    }
   };
+
   const handleOnChangeVehiclePrice = (event) => {
-    setVehiclePriceForm({
-      ...vehiclePriceForm,
-      ...{ [event.target.name]: event.target.value },
-    });
+    if (event.target.name === "confirm_vehicle_price") {
+      setVehiclePriceForm({
+        ...vehiclePriceForm,
+        ...{ [event.target.name]: event.target.value, hasErr: true },
+      });
+    } else {
+      setVehiclePriceForm({
+        ...vehiclePriceForm,
+        ...{ [event.target.name]: event.target.value },
+      });
+    }
   };
 
   const updateDetails = () => {
@@ -167,11 +190,34 @@ export default function UpdateMileagePricing(props) {
       </ListItem>
       <ListItem>
         <div className="manualPricing">Original Grounding Mileage</div>
-        <div className="manualPricing">000,000 mi</div>
+        <div className="manualPricing">
+          {condionVehicleDetails && condionVehicleDetails?.grounding_mileage ? (
+            <CurrencyFormat
+              value={condionVehicleDetails?.grounding_mileage}
+              displayType={"text"}
+              thousandSeparator={true}
+              suffix={" MI"}
+            />
+          ) : (
+            ""
+          )}
+        </div>
       </ListItem>
       <ListItem>
         <p className="manualPricing">Inspection Mileage</p>
-        <p className="manualPricing">000,000 mi</p>
+        <p className="manualPricing">
+          {condionVehicleDetails &&
+          condionVehicleDetails?.inspection_mileage ? (
+            <CurrencyFormat
+              value={condionVehicleDetails?.inspection_mileage}
+              displayType={"text"}
+              thousandSeparator={true}
+              suffix={" MI"}
+            />
+          ) : (
+            ""
+          )}
+        </p>
       </ListItem>
       <ListItem>
         <FormControl>
@@ -179,7 +225,7 @@ export default function UpdateMileagePricing(props) {
             Update Grounding Mileage
           </InputLabel>
           <BootstrapInput
-           onKeyPress={(e) => !/[0-9]/.test(e.key) && e.preventDefault()}
+            onKeyPress={(e) => !/[0-9]/.test(e.key) && e.preventDefault()}
             placeholder="Enter Grounding Mileage"
             id="EntermarketPrice-input"
             name="groundingMileage"
@@ -194,13 +240,23 @@ export default function UpdateMileagePricing(props) {
             Confirm Grounding Mileage
           </InputLabel>
           <BootstrapInput
-           onKeyPress={(e) => !/[0-9]/.test(e.key) && e.preventDefault()}
+            onKeyPress={(e) => !/[0-9]/.test(e.key) && e.preventDefault()}
             placeholder="Enter Confirm Grounding Mileage"
             id="reEntermarketPrice-input"
             name="confirmGroundingMileage"
             value={mileageForm.confirmGroundingMileage}
             onChange={handleOnChangeMileage}
+            borderColor={"red"}
           />
+          {mileageForm.hasErr &&
+          mileageForm.groundingMileage !==
+            mileageForm.confirmGroundingMileage ? (
+            <Box color={"red"} fontSize={12}>
+              Confirm grounding mileage is not matched!
+            </Box>
+          ) : (
+            ""
+          )}
         </FormControl>
       </ListItem>
       <ListItem>
@@ -228,7 +284,7 @@ export default function UpdateMileagePricing(props) {
             Price
           </InputLabel>
           <BootstrapInput
-           onKeyPress={(e) => !/[0-9]/.test(e.key) && e.preventDefault()}
+            onKeyPress={(e) => !/[0-9]/.test(e.key) && e.preventDefault()}
             placeholder="Enter price"
             id="EntermarketPrice-input"
             name="vehicle_price"
@@ -243,13 +299,22 @@ export default function UpdateMileagePricing(props) {
             Re-Enter Market Price
           </InputLabel>
           <BootstrapInput
-           onKeyPress={(e) => !/[0-9]/.test(e.key) && e.preventDefault()}
+            onKeyPress={(e) => !/[0-9]/.test(e.key) && e.preventDefault()}
             placeholder="Enter Confirm Price"
             id="reEntermarketPrice-input"
             name="confirm_vehicle_price"
             value={vehiclePriceForm.confirm_vehicle_price}
             onChange={handleOnChangeVehiclePrice}
           />
+          {vehiclePriceForm.hasErr &&
+          vehiclePriceForm.vehicle_price !==
+            vehiclePriceForm.confirm_vehicle_price ? (
+            <Box color={"red"} fontSize={12}>
+              Confirm price is not matched!
+            </Box>
+          ) : (
+            ""
+          )}
         </FormControl>
       </ListItem>
       <ListItem>

@@ -91,7 +91,8 @@ export default function VehicleSearchTabs(props) {
         <Box  className="adminTabsSection">
           <UpdateMileage 
           //  inspectiondata={inspectiondata}
-          value={props.hideShow(value)} vin={vin}  />
+        onGetConditionVehicleDetails = {props.onGetConditionVehicleDetails}
+        value={props.hideShow(value)} vin={vin}  />
         </Box>
       </TabPanel>
     </div>
