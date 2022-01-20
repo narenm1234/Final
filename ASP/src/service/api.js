@@ -550,23 +550,29 @@ export async function postDealerActionPurchaseOnVehicle(vin, groundId) {
   return await axios(config);
 }
 export async function awaitManualPricing() {
-  const options = {
+ 
+  var config = {
+    method: "post",
+    url: AMP,
     headers: headers,
   };
-  return await axios.post(AMP, options);
+  return await axios(config);
 }
 export async function RRMList() {
-  const options = {
+  var config = {
+    method: "post",
+    url: rrm,
     headers: headers,
   };
-  return await axios.post(rrm, options);
+  return await axios(config);
 }
 export async function getMileageDiscList() {
-  const options = {
+  var config = {
+    method: "post",
+    url: `${mileageDiscList}?vin=JM3KFACM0M0366307`,
     headers: headers,
   };
-  return await axios.post(`${mileageDiscList}?vin=JM3KFACM0M0366307`, options);
-  //return await axios.post(MileageDiscList, options);
+  return await axios(config);
 }
 
 var qs = require("qs");

@@ -34,11 +34,8 @@ const Login = ({ config }) => {
         // getUserAccessInfoToken();
       });
       async function getToken(){
-        let usertoken = localStorage.getItem("okta_access_token");
-        console.log("tessst",usertoken)
         let apiResponse = await getOktaUserInfo();
         localStorage.setItem("dealerName",apiResponse.name);
-
       }
       
 
