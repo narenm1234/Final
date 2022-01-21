@@ -101,9 +101,9 @@ const QontoConnector = withStyles({
     completed: PropTypes.bool,
   };
 function getSteps() {
-    return ['Transportation Ordered', 'Transportation Scheduled', 'Transportation Enroute', 'Vehicle Pick Up'];
+    return ['Transportation Ordered', 'Transportation Scheduled', 'Transportation Enroute', 'Vehicle Picked Up'];
 }
-let transportMetaData = ['Transportation Ordered', 'Transportation Scheduled', 'Transportation Enroute', 'Vehicle Pick Up'];
+let transportMetaData = ['Transportation Ordered', 'Transportation Scheduled', 'Transportation Enroute', 'Vehicle Picked Up'];
 export default function VerticalVehicleStepper(props) {
     const classes = useStyles();
     // const [activeStep, setActiveStep] = React.useState(null);
