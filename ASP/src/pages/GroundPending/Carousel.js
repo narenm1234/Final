@@ -57,15 +57,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Item = ({ image_bin_value }) => {
+const Item = ({ small_image_bin_value, file_name }) => {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   return (
     <Paper className={classes.card}>
       <img
         className="img"
-        src={"data:image/jpeg;base64," + image_bin_value}
-        alt={image_bin_value}
+        src={"data:image/jpeg;base64," + small_image_bin_value}
+        alt={file_name}
       />
     </Paper>
   );

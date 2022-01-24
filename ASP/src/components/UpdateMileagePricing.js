@@ -344,9 +344,9 @@ export default function UpdateMileagePricing(props) {
           </Box>
         </Box>
       </ListItem>
-      <ListItem>
+     {/* // <ListItem>
         <p className="manualPricing">Autograde: 3.0</p>
-      </ListItem>
+      </ListItem> */}
       <ListItem>
         <p className="manualPricing">Grounding Dealer State: TX</p>
       </ListItem>
