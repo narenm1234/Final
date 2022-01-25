@@ -308,7 +308,7 @@ export default function ConditionReport(props) {
                 <Grid item xs={7}>
                   <Grid container spacing={1}>
                     <div className="ConditionReportSection">
-                      <Grid item xs={7}>
+                      <Grid item>
                         <div className="reportTitle">
                           <span>
                             {vehicleDetails && vehicleDetails.model_year}{" "}
@@ -318,7 +318,7 @@ export default function ConditionReport(props) {
                           </span>
                         </div>
                       </Grid>
-                      <Grid item xs={5}>
+                      <Grid item >
                         {condionVehicleDetails?.inspection_date && (
                           <span className="ConditionReportInspection">
                             <span className="BadgeValue">

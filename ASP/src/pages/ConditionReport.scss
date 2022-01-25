@@ -81,6 +81,7 @@
 .ConditionReportSection {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin: 20px 0px !important;
   width: 100%;
 }
@@ -95,7 +96,7 @@
 .ConditionReportInspection {
   // width: 140px;
   // height: 33px;
-  padding: 4px 8px;
+  padding: 8px;
   border-radius: 100px;
   background-color: #04844b;
   // margin-left: 245px;
