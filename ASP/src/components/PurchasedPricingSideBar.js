@@ -514,7 +514,7 @@ export default function PurchasedPricingSideBar(props) {
       </ListItem>
       <Divider variant="middle" />
       <ListItem>
-        <ListItemText className="manualPricing">Total Fee:</ListItemText>
+        <ListItemText className="manualPricing">Total:</ListItemText>
         <ListItemText className="manualPricing">
           <Box textAlign={"end"}>
             {totalFee ? (
