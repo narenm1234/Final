@@ -7,6 +7,8 @@ import { getOktaUserInfo } from '../service/api';
 
 const Login = ({ config }) => {
 
+ 
+
     const { oktaAuth, authState } = useOktaAuth();
     let data1 = getParameterByName1("id_token");
     let data2 = getParameterByName("access_token");

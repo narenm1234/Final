@@ -16,7 +16,7 @@ const getHeaders = () => {
       Accept: "application/json",
       "Content-Type": "application/json",
       "Access-Control-Allow-Origin": "*",
-      Authorization: `Bearer ${localStorage.getItem("ForgeRockToken")}`,
+      Authorization: `Bearer ${localStorage.getItem("ESGToken")}`,
     };
   } else if (hostname.includes("test")) {
     headers = {
@@ -28,7 +28,7 @@ const getHeaders = () => {
       Accept: "application/json",
       "Content-Type": "application/json",
       "Access-Control-Allow-Origin": "*",
-      Authorization: `Bearer ${localStorage.getItem("ForgeRockToken")}`,
+      Authorization: `Bearer ${localStorage.getItem("ESGToken")}`,
     };
   }
 
