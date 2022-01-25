@@ -43,6 +43,7 @@ import { Box } from "@material-ui/core";
 export default function MyGallery(props) {
   const [images, setImages] = useState([]);
   const [imagesTemp, setImagesTemp] = useState([]);
+  const [startIndex, setStartIndex] = useState(0);
   const [loader, setLoader] = React.useState(true);
 
   useEffect(() => {
@@ -54,7 +55,6 @@ export default function MyGallery(props) {
     getImages();
   }, []);
 
-
   const getImages = async () => {
     let reqObj = {
       inspectionId: props.inspection_id,
@@ -64,23 +64,24 @@ export default function MyGallery(props) {
         : "t002",
     };
     let getimagesRes = await getImageData(reqObj);
-     console.log("get image data::", getimagesRes);
+    console.log("get image data::", getimagesRes);
 
     if (getimagesRes && getimagesRes.data && getimagesRes.data.imageDetails) {
       setImagesTemp(getimagesRes?.data?.imageDetails);
-      // const singleImage = getImage(getimagesRes?.data?.imageDetails[0]);
-      // singleImage.then(res=>{
-      //   arrangeImages( getimagesRes?.data?.imageDetails, 0, res.binImageArray );
-      // })
 
-      arrangeImages( getimagesRes?.data?.imageDetails, 0, null);
+      console.log("start get single image", new Date());
+      const singleImage = getImage(getimagesRes?.data?.imageDetails[0]);
+      singleImage.then((res) => {
+        arrangeImages(getimagesRes?.data?.imageDetails, 0, res.binImageArray);
+        console.log("end get single image", new Date());
+      });
+
       setLoader(false);
       console.log(
         "end condition report page get images in my gallery",
         new Date()
       );
     }
-
   };
 
   const getImage = async (item) => {
@@ -113,29 +114,38 @@ export default function MyGallery(props) {
     if (imgurl) {
       imagesdata[index].original = "data:image/jpeg;base64," + imgurl;
     }
-    setImages(imagesdata);
-
+    setStartIndex(index);
+    setImages([...imagesdata]);
     props.getDamageDesc &&
       props.getDamageDesc(imagesdata[index].damageDescription);
   };
 
   const onSlideGetIndex = (index) => {
-    // debugger;
-    console.log("index", index, imagesTemp[index]);
-    // const singleImage = getImage(imagesTemp[index]);
-    // singleImage.then(res=>{
-    //   arrangeImages( imagesTemp, index, res.binImageArray );
-    // })
-    props.getDamageDesc &&
-    props.getDamageDesc(imagesTemp[index].damageDescription);
+    console.log("start get single image", new Date());
+    const singleImage = getImage(imagesTemp[index]);
+    singleImage.then((res) => {
+      arrangeImages(imagesTemp, index, res.binImageArray);
+      console.log("end get single image", new Date());
+    });
+    // props.getDamageDesc &&
+    //   props.getDamageDesc(imagesTemp[index].damageDescription);
   };
 
   return (
     <div>
+      {/* <ImageGallery
+          {...props}
+          items={images}
+          showFullscreenButton={false}
+          showPlayButton={false}
+          onSlide={onSlideGetIndex}
+        /> */}
+
       {images && images.length != 0 ? (
         <ImageGallery
           {...props}
-          items={images}
+          items={[...images]}
+          startIndex={startIndex}
           showFullscreenButton={false}
           showPlayButton={false}
           onSlide={onSlideGetIndex}
