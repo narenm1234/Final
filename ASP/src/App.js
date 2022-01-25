@@ -21,6 +21,7 @@ import AdminVehicleSearch from "./components/AdminVehicleSearch";
 import ConditionReportRequests from "./pages/ConditionReportRequests";
 import InventoryRequestsTabs from "./components/InventoryRequestsTabs";
 import Login2 from "./pages/Login2";
+import Login3 from "./pages/Login3";
 import Login from "./components/Login";
 function App() {
   const history = useHistory();
@@ -35,8 +36,8 @@ function App() {
     issuer: "https://tfs.oktapreview.com/oauth2/ausredslpqIsIjQfz0h7",
     // clientId: "0oazqm6unew4ySMR80h7",
     clientId:'0oa10kchmc4Hjj6gD0h8',
-    redirectUri: 'https://asp-stage.mfindealerservices.com/grounded',
-    // redirectUri: 'http://localhost:3000/grounded',
+    redirectUri: 'https://asp-stage.mfindealerservices.com/login3',
+    // redirectUri: 'http://localhost:3000/login3',
     restoreOriginalUri: "http://localhost:3000/login",
 
     onAuthRequired: onAuthRequired,
@@ -138,6 +139,13 @@ function App() {
                     exact
                     render={(props) => (
                       <Login2 {...props} fireEvents={fireEvents} />
+                    )}
+                  />
+                   <Route
+                    path="/login3"
+                    exact
+                    render={(props) => (
+                      <Login3 {...props} fireEvents={fireEvents} />
                     )}
                   />
                   <SecureRoute

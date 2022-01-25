@@ -46,7 +46,7 @@ function Login2(props) {
     localStorage.setItem("tenantID", userInfo.custom_attributes.tenantId);
     let resp = await getForgeRockToken();
     console.log("forgerock", resp);
-    localStorage.setItem("ForgeRockToken", resp.data.forgeRockToken);
+    localStorage.setItem("ESGToken", resp.data.forgeRockToken);
     props.history.push("/grounded");
   }
 
@@ -56,7 +56,7 @@ function Login2(props) {
       localStorage.setItem("bearerToken", apiResponse.data.access_token);
       // localStorage.setItem("refreshToken",apiResponse.data.refresh_token);
       let resp1 = await getForgeRockToken();
-      localStorage.setItem("ForgeRockToken", resp1.data.forgeRockToken);
+      localStorage.setItem("ESGToken", resp1.data.forgeRockToken);
     }, 200000);
   } 
   return <div></div>;

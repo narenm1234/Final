@@ -7,11 +7,7 @@ import { getOktaUserInfo } from '../service/api';
 
 const Login = ({ config }) => {
 
-  var refresh5 = window.localStorage.getItem('refresh5');
-  if (refresh5===null){
-      localStorage.clear();
-      window.localStorage.setItem('refresh5', "1");
-  }
+ 
 
     const { oktaAuth, authState } = useOktaAuth();
     let data1 = getParameterByName1("id_token");
