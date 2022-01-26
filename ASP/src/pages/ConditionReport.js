@@ -83,6 +83,9 @@ export default function ConditionReport(props) {
     getConditionVehicleDetails();
     // getVehicleDetails();
     getInspectionAccessory(vin);
+
+console.log("vehicleDetails==>",  props?.location?.state?.vehicleDetails)
+
   }, [vin]);
 
   async function getOEMBuildDetails() {
@@ -218,7 +221,7 @@ export default function ConditionReport(props) {
             </div>
           </Grid>
           {condionVehicleDetails?.inspection_date &&
-            condionVehicleDetails?.inspection_date ? (
+          condionVehicleDetails?.inspection_date ? (
             <Box px={2}>
               <Grid container spacing={3} className="ConditionCardReportSpace">
                 <Grid item xs={5}>
@@ -234,7 +237,7 @@ export default function ConditionReport(props) {
                         <CardContent>
                           <div className="smallCardTitle">Exterior total</div>
                           <div className="smallCardBody warningColor">
-                            { }
+                            {}
                             {DamageDetails && DamageDetails.exteriorCost ? (
                               <CurrencyFormat
                                 value={parseFloat(
@@ -256,7 +259,7 @@ export default function ConditionReport(props) {
                         <CardContent>
                           <div className="smallCardTitle">Interior total</div>
                           <div className="smallCardBody warningColor">
-                            { }
+                            {}
                             {DamageDetails && DamageDetails.interiorCost ? (
                               <CurrencyFormat
                                 value={parseFloat(
@@ -278,11 +281,11 @@ export default function ConditionReport(props) {
                         <CardContent>
                           <div className="smallCardTitle">Mechanical total</div>
                           <div className="smallCardBody warningColor">
-                            { }
-                            {DamageDetails && DamageDetails.maintainenceCost ? (
+                            {}
+                            {DamageDetails && DamageDetails.mechanicalCost ? (
                               <CurrencyFormat
                                 value={parseFloat(
-                                  DamageDetails.maintainenceCost
+                                  DamageDetails.mechanicalCost
                                 ).toFixed(2)}
                                 displayType={"text"}
                                 thousandSeparator={true}
@@ -354,10 +357,11 @@ export default function ConditionReport(props) {
                           <div className="smallCardTitle">Payoff</div>
                           <div className="smallCardBody">
                             <span className="textSize">
-                              {vehicleDetails && vehicleDetails.pay_off_amt ? (
+                              {condionVehicleDetails &&
+                              condionVehicleDetails?.currentPayoffAmount ? (
                                 <CurrencyFormat
                                   value={parseFloat(
-                                    vehicleDetails.pay_off_amt
+                                    condionVehicleDetails?.currentPayoffAmount
                                   ).toFixed(2)}
                                   displayType={"text"}
                                   thousandSeparator={true}
@@ -379,13 +383,13 @@ export default function ConditionReport(props) {
                           </div>
                           <div className="smallCardBody">
                             <span className="textSize">
-                              {vehicleDetails &&
-                                vehicleDetails.remaining_pmts &&
-                                vehicleDetails.residual_amt ? (
+                              {condionVehicleDetails &&
+                              condionVehicleDetails.totalOutstandingRemainingPayments &&
+                              condionVehicleDetails.residual ? (
                                 <CurrencyFormat
                                   value={parseFloat(
-                                    vehicleDetails.residual_amt +
-                                    vehicleDetails.remaining_pmts
+                                    condionVehicleDetails.residual +
+                                    condionVehicleDetails.totalOutstandingRemainingPayments
                                   ).toFixed(2)}
                                   displayType={"text"}
                                   thousandSeparator={true}
@@ -405,11 +409,11 @@ export default function ConditionReport(props) {
                           <div className="smallCardTitle">Market Based</div>
                           <div className="smallCardBody">
                             <span className="textSize">
-                              {vehicleDetails &&
-                                vehicleDetails.vehicle_price ? (
+                              {condionVehicleDetails &&
+                              condionVehicleDetails?.marketBasedPrice ? (
                                 <CurrencyFormat
                                   value={parseFloat(
-                                    vehicleDetails.vehicle_price
+                                    condionVehicleDetails?.marketBasedPrice
                                   ).toFixed(2)}
                                   displayType={"text"}
                                   thousandSeparator={true}
@@ -441,7 +445,7 @@ export default function ConditionReport(props) {
                           </div>
                           <div className="smallCardBody">
                             {condionVehicleDetails &&
-                              condionVehicleDetails?.inspection_mileage ? (
+                            condionVehicleDetails?.inspection_mileage ? (
                               <CurrencyFormat
                                 value={condionVehicleDetails.inspection_mileage}
                                 displayType={"text"}
@@ -693,7 +697,7 @@ export default function ConditionReport(props) {
                           <ListItemSecondaryAction>
                             <span className="textSize">
                               {condionVehicleDetails &&
-                                condionVehicleDetails?.grounding_mileage ? (
+                              condionVehicleDetails?.grounding_mileage ? (
                                 <CurrencyFormat
                                   value={
                                     condionVehicleDetails.grounding_mileage
@@ -900,11 +904,12 @@ export default function ConditionReport(props) {
                         <CardContent>
                           <div className="smallCardTitle">Payoff</div>
                           <div className="smallCardBody">
-                            <span>
-                              {vehicleDetails && vehicleDetails.pay_off_amt ? (
+                            <span className="textSize">
+                              {condionVehicleDetails &&
+                              condionVehicleDetails?.currentPayoffAmount ? (
                                 <CurrencyFormat
                                   value={parseFloat(
-                                    vehicleDetails.pay_off_amt
+                                    condionVehicleDetails?.currentPayoffAmount
                                   ).toFixed(2)}
                                   displayType={"text"}
                                   thousandSeparator={true}
@@ -925,14 +930,14 @@ export default function ConditionReport(props) {
                             Residual + Remaining
                           </div>
                           <div className="smallCardBody">
-                            <span>
-                              {vehicleDetails &&
-                                vehicleDetails.residual_amt &&
-                                vehicleDetails.remaining_pmts ? (
+                            <span className="textSize">
+                              {condionVehicleDetails &&
+                              condionVehicleDetails.totalOutstandingRemainingPayments &&
+                              condionVehicleDetails.residual ? (
                                 <CurrencyFormat
                                   value={parseFloat(
-                                    vehicleDetails.residual_amt +
-                                    vehicleDetails.remaining_pmts
+                                    condionVehicleDetails.residual +
+                                    condionVehicleDetails.totalOutstandingRemainingPayments
                                   ).toFixed(2)}
                                   displayType={"text"}
                                   thousandSeparator={true}
@@ -989,7 +994,7 @@ export default function ConditionReport(props) {
                           <ListItemSecondaryAction>
                             <span className="textSize">
                               {condionVehicleDetails &&
-                                condionVehicleDetails?.grounding_mileage ? (
+                              condionVehicleDetails?.grounding_mileage ? (
                                 <CurrencyFormat
                                   value={parseFloat(
                                     condionVehicleDetails.grounding_mileage
@@ -1125,7 +1130,7 @@ export default function ConditionReport(props) {
           close={handleClosePassVehicle}
           vin={vin}
           groundingId={vehicleDetails?.groundingId}
-          reload={() => { }}
+          reload={() => {}}
         />
       </Box>
       {/* reload={() => {

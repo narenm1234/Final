@@ -152,7 +152,7 @@ export default function PurchasedPricingSideBar(props) {
 
     setTotalFee(paymentTypeFee);
     if (additionalPaymentTypeFee) {
-      setTotalFee(parseInt(paymentTypeFee + additionalPaymentTypeFee));
+      setTotalFee(parseFloat(paymentTypeFee + additionalPaymentTypeFee).toFixed(2));
     }
     console.log("end condition report page  PurchasedPricingSideBar paymentTypeFee",new Date());
 
@@ -534,7 +534,7 @@ export default function PurchasedPricingSideBar(props) {
         <>
           <Divider variant="middle" className={classes.dividerColor} />
           <ListItem>
-            <ListItemText className="manualPricing">
+            <ListItemText className="manualPricing"> 
               <Box>Account Nick Name</Box>
               <FormControl variant="outlined" className={classes.formControl}>
                 {/* <InputLabel id="demo-simple-select-outlined-label">City</InputLabel> */}
