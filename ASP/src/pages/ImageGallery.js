@@ -66,13 +66,13 @@ export default function MyGallery(props) {
     let getimagesRes = await getImageData(reqObj);
     console.log("get image data::", getimagesRes);
 
-    if (getimagesRes && getimagesRes.data && getimagesRes.data.imageDetails) {
-      setImagesTemp(getimagesRes?.data?.imageDetails);
+    if (getimagesRes && getimagesRes.data ) {
+      setImagesTemp(getimagesRes?.data);
 
       console.log("start get single image", new Date());
-      const singleImage = getImage(getimagesRes?.data?.imageDetails[0]);
+      const singleImage = getImage(getimagesRes?.data[0]);
       singleImage.then((res) => {
-        arrangeImages(getimagesRes?.data?.imageDetails, 0, res.binImageArray);
+        arrangeImages(getimagesRes?.data, 0, res.image_bin_value);
         console.log("end get single image", new Date());
       });
 
@@ -86,7 +86,7 @@ export default function MyGallery(props) {
 
   const getImage = async (item) => {
     let reqObj = {
-      fileName: item.fileName,
+      fileName: item.file_name,
       inspectionId: props.inspection_id,
       paramForImage: "ALL",
       tenantId: localStorage.getItem("tenantId")
@@ -94,8 +94,8 @@ export default function MyGallery(props) {
         : "t002",
     };
     let getimagesRes = await getImageData(reqObj);
-    if (getimagesRes && getimagesRes.data && getimagesRes.data.imageDetails) {
-      const singleImage = getimagesRes.data.imageDetails[0];
+    if (getimagesRes && getimagesRes.data && getimagesRes.data) {
+      const singleImage = getimagesRes.data[0];
       return singleImage;
     }
     return null;
@@ -105,9 +105,9 @@ export default function MyGallery(props) {
     let imagesdata = [];
     for (let img of images) {
       let imgobj = {
-        original: "data:image/jpeg;base64," + img.binImageArray,
-        thumbnail: "data:image/jpeg;base64," + img.binImageArray,
-        damageDescription: img.damageDescription,
+        original: "data:image/jpeg;base64," + img.image_bin_value,
+        thumbnail: "data:image/jpeg;base64," + img.image_bin_value,
+        damageDescription: img.damage_description,
       };
       imagesdata.push(imgobj);
     }
@@ -124,7 +124,7 @@ export default function MyGallery(props) {
     console.log("start get single image", new Date());
     const singleImage = getImage(imagesTemp[index]);
     singleImage.then((res) => {
-      arrangeImages(imagesTemp, index, res.binImageArray);
+      arrangeImages(imagesTemp, index, res.image_bin_value);
       console.log("end get single image", new Date());
     });
     // props.getDamageDesc &&
