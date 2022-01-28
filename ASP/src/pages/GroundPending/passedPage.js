@@ -81,8 +81,6 @@ export default function ListingPage1(props) {
   async function getVehicleDetails() {
     console.log("start passed page",new Date());
     let apiResponse = await getPassedList();
-    setLoader(false);
-
     getTransportDetails(apiResponse?.data.data);
   }
 
@@ -103,6 +101,7 @@ export default function ListingPage1(props) {
       setTransport(apiResponse.data);
       setVehicleResponse(data);
 
+      setLoader(false);
      console.log("end passed page",new Date());
       
     }
@@ -111,6 +110,7 @@ export default function ListingPage1(props) {
   const openConditionScreen = (VINumber, vehicle) => {
     props.history.push("/conditionreport", {
       vin: VINumber,
+      //purchaseSection: true,
       vehicleDetails: vehicle,
     });
   };
@@ -132,7 +132,8 @@ export default function ListingPage1(props) {
   //   setImages(getimagesRes?.data?.imageDetails);
   // };
 
-  return vehicleResponse?.length > 0 ? (
+  return <>
+  {vehicleResponse.length > 0 ? (
     vehicleResponse.map((vehicle, index) => {
       return (
         <div className="listingPageCard" key={index}>
@@ -245,5 +246,6 @@ export default function ListingPage1(props) {
         </div>
       )}
     </div>
-  );
+  )}
+  </>
 }

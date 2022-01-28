@@ -61,7 +61,7 @@ export default function ConditionReport(props) {
     props?.location?.state?.purchaseSection
   );
   const [inspectionId, setInspectionId] = React.useState();
-  const [VehicleResponse, setVehicleResponse] = useState([]);
+  // const [VehicleResponse, setVehicleResponse] = useState([]);
   //const [value, setValue] = useState([])
   const [DamageDetails, setDamageDetails] = useState([]);
   const [OEMBuildDetailsData, setOEMBuildDetailsData] = useState([]);
@@ -77,41 +77,50 @@ export default function ConditionReport(props) {
   const [isPassVehicalPop, setIsPassVehicalPop] = useState(false);
 
   useEffect(() => {
-    console.log("start condition report page",new Date());
+    console.log("start condition report page", new Date());
 
     getOEMBuildDetails();
     getConditionVehicleDetails();
-    getVehicleDetails();
+    // getVehicleDetails();
     getInspectionAccessory(vin);
+
+console.log("vehicleDetails==>",  props?.location?.state?.vehicleDetails)
+
   }, [vin]);
 
   async function getOEMBuildDetails() {
-    console.log("start condition report page getOEMBuildDetails",new Date());
+    console.log("start condition report page getOEMBuildDetails", new Date());
 
     let apiResponse = await getOEMBuildDetailsApi(vin);
-    console.log("end condition report page getOEMBuildDetails",new Date());
+    console.log("end condition report page getOEMBuildDetails", new Date());
 
     setOEMBuildDetailsData(apiResponse.data);
   }
 
   async function getInspectionDamageDetails(inspection_Id) {
-    console.log("start condition report page getInspectionDamageDetails",new Date());
+    console.log(
+      "start condition report page getInspectionDamageDetails",
+      new Date()
+    );
 
     let getInspectionDamageDetailsaApiResponse =
       await getInspectionDamageDetailsApi(inspection_Id, vin);
-    console.log("end condition report page getInspectionDamageDetails",new Date());
+    console.log(
+      "end condition report page getInspectionDamageDetails",
+      new Date()
+    );
 
     setDamageDetails(getInspectionDamageDetailsaApiResponse.data);
   }
 
-  async function getVehicleDetails() {
-    console.log("start condition report page getVehicleDetails",new Date());
+  // async function getVehicleDetails() {
+  //   console.log("start condition report page getVehicleDetails",new Date());
 
-    let apiResponse = await getPurchasedList(vin);
-    console.log("end condition report page getVehicleDetails",new Date());
+  //   let apiResponse = await getPurchasedList(vin);
+  //   console.log("end condition report page getVehicleDetails",new Date());
 
-    setVehicleResponse(apiResponse.data.data);
-  }
+  //   setVehicleResponse(apiResponse.data.data);
+  // }
 
   const cloadDamageDetails = (inspection_Id) => {
     getInspectionWheelTires(inspection_Id);
@@ -119,11 +128,17 @@ export default function ConditionReport(props) {
   };
 
   async function getConditionVehicleDetails() {
-    console.log("start condition report page getConditionVehicleDetails",new Date());
+    console.log(
+      "start condition report page getConditionVehicleDetails",
+      new Date()
+    );
 
     let apiResponse = await getInspectionVehicleDetails(vin);
     console.log("getConditionVehicleDetailsresponse", apiResponse);
-    console.log("end condition report page getConditionVehicleDetails",new Date());
+    console.log(
+      "end condition report page getConditionVehicleDetails",
+      new Date()
+    );
 
     if (apiResponse && apiResponse.data) {
       setCondionVehicleDetails(apiResponse.data);
@@ -141,11 +156,17 @@ export default function ConditionReport(props) {
   }
 
   async function getInspectionWheelTires(inspectionId) {
-    console.log("start condition report page getInspectionWheelTires",new Date());
+    console.log(
+      "start condition report page getInspectionWheelTires",
+      new Date()
+    );
 
     let apiResponse = await getInspectionWheelTiresDetails(inspectionId);
     console.log("wheelTiresDetailsapires", apiResponse);
-    console.log("end condition report page getInspectionWheelTires",new Date());
+    console.log(
+      "end condition report page getInspectionWheelTires",
+      new Date()
+    );
 
     setWheelTiresDetails(apiResponse.data);
     console.log("-------------xxxxxx", inspectionId);
@@ -175,7 +196,7 @@ export default function ConditionReport(props) {
   };
   const handleContinue = async () => {
     setOpenTransactionPopup(false);
-    
+
     // if (transactionPopupType == "success") {
     //   let apiResponse = await postDealerActionPurchaseOnVehicle(
     //     vin,
@@ -261,10 +282,10 @@ export default function ConditionReport(props) {
                           <div className="smallCardTitle">Mechanical total</div>
                           <div className="smallCardBody warningColor">
                             {}
-                            {DamageDetails && DamageDetails.maintainenceCost ? (
+                            {DamageDetails && DamageDetails.mechanicalCost ? (
                               <CurrencyFormat
                                 value={parseFloat(
-                                  DamageDetails.maintainenceCost
+                                  DamageDetails.mechanicalCost
                                 ).toFixed(2)}
                                 displayType={"text"}
                                 thousandSeparator={true}
@@ -308,7 +329,7 @@ export default function ConditionReport(props) {
                 <Grid item xs={7}>
                   <Grid container spacing={1}>
                     <div className="ConditionReportSection">
-                      <Grid item xs={7}>
+                      <Grid item>
                         <div className="reportTitle">
                           <span>
                             {vehicleDetails && vehicleDetails.model_year}{" "}
@@ -318,7 +339,7 @@ export default function ConditionReport(props) {
                           </span>
                         </div>
                       </Grid>
-                      <Grid item xs={5}>
+                      <Grid item>
                         {condionVehicleDetails?.inspection_date && (
                           <span className="ConditionReportInspection">
                             <span className="BadgeValue">
@@ -336,10 +357,11 @@ export default function ConditionReport(props) {
                           <div className="smallCardTitle">Payoff</div>
                           <div className="smallCardBody">
                             <span className="textSize">
-                              {vehicleDetails && vehicleDetails.pay_off_amt ? (
+                              {condionVehicleDetails &&
+                              condionVehicleDetails?.currentPayoffAmount ? (
                                 <CurrencyFormat
                                   value={parseFloat(
-                                    vehicleDetails.pay_off_amt
+                                    condionVehicleDetails?.currentPayoffAmount
                                   ).toFixed(2)}
                                   displayType={"text"}
                                   thousandSeparator={true}
@@ -361,13 +383,13 @@ export default function ConditionReport(props) {
                           </div>
                           <div className="smallCardBody">
                             <span className="textSize">
-                              {vehicleDetails &&
-                              vehicleDetails.remaining_pmts &&
-                              vehicleDetails.residual_amt ? (
+                              {condionVehicleDetails &&
+                              condionVehicleDetails.totalOutstandingRemainingPayments &&
+                              condionVehicleDetails.residual ? (
                                 <CurrencyFormat
                                   value={parseFloat(
-                                    vehicleDetails.residual_amt +
-                                      vehicleDetails.remaining_pmts
+                                    condionVehicleDetails.residual +
+                                    condionVehicleDetails.totalOutstandingRemainingPayments
                                   ).toFixed(2)}
                                   displayType={"text"}
                                   thousandSeparator={true}
@@ -387,11 +409,11 @@ export default function ConditionReport(props) {
                           <div className="smallCardTitle">Market Based</div>
                           <div className="smallCardBody">
                             <span className="textSize">
-                              {vehicleDetails &&
-                              vehicleDetails.vehicle_price ? (
+                              {condionVehicleDetails &&
+                              condionVehicleDetails?.marketBasedPrice ? (
                                 <CurrencyFormat
                                   value={parseFloat(
-                                    vehicleDetails.vehicle_price
+                                    condionVehicleDetails?.marketBasedPrice
                                   ).toFixed(2)}
                                   displayType={"text"}
                                   thousandSeparator={true}
@@ -882,11 +904,12 @@ export default function ConditionReport(props) {
                         <CardContent>
                           <div className="smallCardTitle">Payoff</div>
                           <div className="smallCardBody">
-                            <span>
-                              {vehicleDetails && vehicleDetails.pay_off_amt ? (
+                            <span className="textSize">
+                              {condionVehicleDetails &&
+                              condionVehicleDetails?.currentPayoffAmount ? (
                                 <CurrencyFormat
                                   value={parseFloat(
-                                    vehicleDetails.pay_off_amt
+                                    condionVehicleDetails?.currentPayoffAmount
                                   ).toFixed(2)}
                                   displayType={"text"}
                                   thousandSeparator={true}
@@ -907,14 +930,14 @@ export default function ConditionReport(props) {
                             Residual + Remaining
                           </div>
                           <div className="smallCardBody">
-                            <span>
-                              {vehicleDetails &&
-                              vehicleDetails.residual_amt &&
-                              vehicleDetails.remaining_pmts ? (
+                            <span className="textSize">
+                              {condionVehicleDetails &&
+                              condionVehicleDetails.totalOutstandingRemainingPayments &&
+                              condionVehicleDetails.residual ? (
                                 <CurrencyFormat
                                   value={parseFloat(
-                                    vehicleDetails.residual_amt +
-                                      vehicleDetails.remaining_pmts
+                                    condionVehicleDetails.residual +
+                                    condionVehicleDetails.totalOutstandingRemainingPayments
                                   ).toFixed(2)}
                                   displayType={"text"}
                                   thousandSeparator={true}
