@@ -804,6 +804,7 @@ export default function ManualPricing(props) {
     setManualPricingList(data);
   };
 
+
   return (
     <>
       <div>

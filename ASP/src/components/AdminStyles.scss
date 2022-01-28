@@ -234,7 +234,21 @@
     background-color: #407ed2 !important;
   }
 }
-
+.custompagination1 {
+  .MuiPagination-ul {
+    background-color: #f3f2f2;
+  }
+  .MuiPaginationItem-root {
+    margin: 0px;
+    margin-top: 50px;
+    border-radius: 0px;
+  }
+  .MuiPaginationItem-outlinedPrimary.Mui-selected {
+    color: #ffffff !important;
+    border: 1px solid #407ed2 !important;
+    background-color: #407ed2 !important;
+  }
+}
 .MuiTableCell-head {
   font-weight: 600 !important;
 }

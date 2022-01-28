@@ -101,6 +101,7 @@ export default function NewSidebar(props) {
         }
         if (child.link == "/purchased") {
           child.badge = DealerVehicleCountRes?.data.data.purchasedVehicleCount;
+          localStorage.setItem("purchaseCount", DealerVehicleCountRes?.data.data.purchasedVehicleCount);
         }
       });
     });
