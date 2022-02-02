@@ -57,7 +57,7 @@ function Login2(props) {
       // localStorage.setItem("refreshToken",apiResponse.data.refresh_token);
       let resp1 = await getForgeRockToken();
       localStorage.setItem("ESGToken", resp1.data.forgeRockToken);
-    }, 200000);
+    }, 120000);
   } 
   return <div></div>;
 }

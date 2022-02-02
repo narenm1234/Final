@@ -14,6 +14,7 @@ import {
 } from "../../service/api";
 import Loaderpage from "../LoaderPage";
 import { Box, useForkRef } from "@material-ui/core";
+import Pagination from "../../components/PaginationDealerView";
 
 let resp = [
   {
@@ -89,13 +90,13 @@ export default function ListingPage2(props) {
   const [loader, setLoader] = React.useState(true);
 
   useEffect(() => {
-    getVehicleDetails();
+    getVehicleDetails(1);
     // getImages();
   }, [value]);
-  async function getVehicleDetails() {
+  async function getVehicleDetails(index) {
     console.log("start Purchased page",new Date());
 
-    let apiResponse = await getPurchasedList();
+    let apiResponse = await getPurchasedList(index);
     setVehicleResponse(apiResponse?.data.data);
     console.log(vehicleResponse);
     // console.log(apiResponse?.data.data);
@@ -155,9 +156,18 @@ export default function ListingPage2(props) {
       vehicleDetails: vehicle,
     });
   };
+  const onChangePage = (data, index) => {
+    console.log("data", data);
+    getVehicleDetails(index);
+    // setVehicleResponse(data);
+  };
 
   return vehicleResponse?.length > 0 ? (
-    vehicleResponse.map((vehicle, index) => {
+  <div>
+
+
+    
+   { vehicleResponse.map((vehicle, index) => {
       return (
         <div className="listingPageCard" key={index}>
           <Grid container spacing={3}>
@@ -301,9 +311,26 @@ export default function ListingPage2(props) {
               </div>
             </Grid>
           </Grid>
+        
         </div>
       );
+      
+
+      
+
     })
+  
+}
+{vehicleResponse.length != 0 ? (
+        <Pagination
+          showItemsPerPage={20}
+          // pages={[20, 40, 60, 80]}
+          data={vehicleResponse}
+          onChangePage={onChangePage}
+        />
+      ) : null}
+</div>  
+        
   ) : (
     <div>
       {loader ? (
