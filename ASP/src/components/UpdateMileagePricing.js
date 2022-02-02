@@ -16,6 +16,8 @@ import FiberManualRecordIcon from "@material-ui/icons/FiberManualRecord";
 import Alert from "@material-ui/lab/Alert";
 import CheckIcon from "@material-ui/icons/Check";
 import CurrencyFormat from "react-currency-format";
+import ViewFullPricingHistory from "./ViewFullPricingHistory";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -44,7 +46,7 @@ const BootstrapInput = withStyles((theme) => ({
     backgroundColor: "#ffffff",
     border: "1px solid #ced4da",
     fontSize: 16,
-    width: "auto",
+    width: "100%",
     height: "10px",
     padding: "10px 12px",
     "&:focus": {
@@ -61,6 +63,9 @@ export default function UpdateMileagePricing(props) {
   const [updateStatus, setUpdateStatus] = useState(null);
   const [updatePrisingStatus, setUpdatePrisingStatus] = useState(null);
   const [condionVehicleDetails, setCondionVehicleDetails] = React.useState({}); // inspectiondata
+
+  const [ViewFullPricingHistoryPop, setViewFullPricingHistoryPop] = useState(false);
+
 
   const handleClick = () => {
     //setOpen(!open);
@@ -90,7 +95,7 @@ export default function UpdateMileagePricing(props) {
   const [vehiclePriceForm, setVehiclePriceForm] = useState({
     vehicle_price: "",
     confirm_vehicle_price: "",
-    region: "",
+    MMR: "",
     hasErr: false,
   });
 
@@ -163,7 +168,7 @@ export default function UpdateMileagePricing(props) {
         priceMethod: "Manual",
         providerName: "test user",
         vehicle_price: vehiclePriceForm.vehicle_price,
-        region: vehiclePriceForm.region,
+        MMR: vehiclePriceForm.MMR,
         vin: vin,
       };
 
@@ -207,7 +212,7 @@ export default function UpdateMileagePricing(props) {
         <p className="manualPricing">Inspection Mileage</p>
         <p className="manualPricing">
           {condionVehicleDetails &&
-          condionVehicleDetails?.inspection_mileage ? (
+            condionVehicleDetails?.inspection_mileage ? (
             <CurrencyFormat
               value={condionVehicleDetails?.inspection_mileage}
               displayType={"text"}
@@ -220,7 +225,7 @@ export default function UpdateMileagePricing(props) {
         </p>
       </ListItem>
       <ListItem>
-        <FormControl>
+        <FormControl className="mileageFomrControl">
           <InputLabel shrink htmlFor="vin-input">
             Update Grounding Mileage
           </InputLabel>
@@ -235,7 +240,7 @@ export default function UpdateMileagePricing(props) {
         </FormControl>
       </ListItem>
       <ListItem>
-        <FormControl>
+        <FormControl className="mileageFomrControl">
           <InputLabel shrink htmlFor="vin-input">
             Confirm Grounding Mileage
           </InputLabel>
@@ -249,7 +254,7 @@ export default function UpdateMileagePricing(props) {
             borderColor={"red"}
           />
           {mileageForm.hasErr &&
-          mileageForm.groundingMileage !==
+            mileageForm.groundingMileage !==
             mileageForm.confirmGroundingMileage ? (
             <Box color={"red"} fontSize={12}>
               Confirm grounding mileage is not matched!
@@ -260,7 +265,7 @@ export default function UpdateMileagePricing(props) {
         </FormControl>
       </ListItem>
       <ListItem>
-        <FormControl>
+        <FormControl className="mileageFomrControl">
           <InputLabel shrink htmlFor="vin-input">
             Reason for Update
           </InputLabel>
@@ -279,7 +284,7 @@ export default function UpdateMileagePricing(props) {
         </div>
       </ListItem>
       <ListItem>
-        <FormControl>
+        <FormControl className="mileageFomrControl">
           <InputLabel shrink htmlFor="vin-input">
             Price
           </InputLabel>
@@ -294,7 +299,7 @@ export default function UpdateMileagePricing(props) {
         </FormControl>
       </ListItem>
       <ListItem>
-        <FormControl>
+        <FormControl className="mileageFomrControl">
           <InputLabel shrink htmlFor="vin-input">
             Re-Enter Market Price
           </InputLabel>
@@ -307,7 +312,7 @@ export default function UpdateMileagePricing(props) {
             onChange={handleOnChangeVehiclePrice}
           />
           {vehiclePriceForm.hasErr &&
-          vehiclePriceForm.vehicle_price !==
+            vehiclePriceForm.vehicle_price !==
             vehiclePriceForm.confirm_vehicle_price ? (
             <Box color={"red"} fontSize={12}>
               Confirm price is not matched!
@@ -318,15 +323,15 @@ export default function UpdateMileagePricing(props) {
         </FormControl>
       </ListItem>
       <ListItem>
-        <FormControl>
+        <FormControl className="mileageFomrControl">
           <InputLabel shrink htmlFor="vin-input">
             MMR
           </InputLabel>
           <BootstrapInput
             placeholder="Enter MMR"
             id="vin-input"
-            name="vin"
-            value={vehiclePriceForm.reason}
+            name="MMR"
+            value={vehiclePriceForm.MMR}
             onChange={handleOnChangeVehiclePrice}
           />
         </FormControl>
@@ -344,7 +349,7 @@ export default function UpdateMileagePricing(props) {
           </Box>
         </Box>
       </ListItem>
-     {/* // <ListItem>
+      {/* // <ListItem>
         <p className="manualPricing">Autograde: 3.0</p>
       </ListItem> */}
       <ListItem>
@@ -369,6 +374,19 @@ export default function UpdateMileagePricing(props) {
           <p className="manualPricing">Price: $00,000.00</p>
           <p className="manualPricing">User Name: First, Last</p>
         </div>
+      </ListItem>
+      <ListItem>
+        <Button
+          variant="outlined"
+          autoFocus
+          className="fullpricinghistorybtn"
+          color="primary"
+          onClick={() => {
+            setViewFullPricingHistoryPop(true);
+          }}
+        >
+          View Full Pricing History
+        </Button>
       </ListItem>
       {/* const [updateStatus, setUpdateStatus] = useState(false); const
       [updatePrisingStatus, setUpdatePrisingStatus] = useState(false); */}
@@ -397,19 +415,37 @@ export default function UpdateMileagePricing(props) {
           </Alert>
         )}
       </ListItem>
+
       <List className="swipeFilterBtn">
-        <Button autoFocus className="cancelButton" color="primary">
+        <Button
+          variant="outlined"
+          autoFocus
+          className="cancelButton"
+          color="primary"
+        >
           Cancel
         </Button>
         <Button
           autoFocus
+          variant="contained"
           className="updateButton"
           color="secondary"
           onClick={updateDetails}
         >
-          Update
+          Submit
         </Button>
       </List>
+
+      {ViewFullPricingHistoryPop ?
+        <ViewFullPricingHistory
+          vin={vin}
+          open={ViewFullPricingHistoryPop}
+          onClose={() => {
+            setViewFullPricingHistoryPop(false);
+          }}
+        ></ViewFullPricingHistory> : ""}
+
+
     </div>
   );
 }
