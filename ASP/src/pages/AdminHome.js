@@ -13,6 +13,7 @@ const AdminHome = (props) => {
   const [hide, setHide] = useState(0);
   const [condionVehicleDetails, setCondionVehicleDetails] = React.useState({});// inspectiondata
 
+
   useEffect(() => {
     // getGroundingDetailsDetails();
   }, [vin]);
