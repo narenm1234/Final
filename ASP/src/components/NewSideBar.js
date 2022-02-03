@@ -86,10 +86,7 @@ export default function NewSidebar(props) {
 
   useEffect(async () => {
     setActiveChild(location.pathname);
-    setTimeout(() => {
-      let DealerVehicleCountRes = await getDealerVehicleCount();
-    }, 500);
-    
+    let DealerVehicleCountRes = await getDealerVehicleCount();
     sidebarItems.map((item) => {
       item.childs.map((child) => {
         if (activeChild == child.link) {
