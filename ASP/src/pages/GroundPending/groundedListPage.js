@@ -99,7 +99,7 @@ export default function ListingPage(props) {
     // }, 3000);
     
     // getImages();
-  });
+  },[value]);
 
   async function getVehicleDetails() {
     console.log("start grounding list api",new Date())

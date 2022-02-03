@@ -749,7 +749,7 @@ export async function getDealerDropData() {
   var config = {
     method: "post",
     url: dealerDrop,
-    headers: headers,
+    headers: getHeaders(),
   };
 
   return await axios(config);
@@ -780,7 +780,7 @@ export async function getDealerVehicleCount() {
   var config = {
     method: "post",
     url: dealerVehicleCount,
-    headers: headers,
+    headers: getHeaders(),
     data: data,
   };
   return await axios(config).then(
