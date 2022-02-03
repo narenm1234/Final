@@ -94,9 +94,12 @@ export default function ListingPage(props) {
 
 
   useEffect(() => {
-    getVehicleDetails();
+    // setTimeout(() => {
+      getVehicleDetails();
+    // }, 3000);
+    
     // getImages();
-  }, [value]);
+  });
 
   async function getVehicleDetails() {
     console.log("start grounding list api",new Date())
@@ -108,11 +111,11 @@ export default function ListingPage(props) {
     console.log("------->", apiResponse.data);
     setLoader(false);
   }
-  var refresh2 = window.localStorage.getItem('refresh2');
-  if (refresh2===null){
-      window.location.reload();
-      window.localStorage.setItem('refresh2', "1");
-  }
+  // var refresh2 = window.localStorage.getItem('refresh2');
+  // if (refresh2===null){
+  //     window.location.reload();
+  //     window.localStorage.setItem('refresh2', "1");
+  // }
 
 
   useEffect(() => {

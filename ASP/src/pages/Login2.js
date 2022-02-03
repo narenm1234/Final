@@ -23,8 +23,9 @@ function Login2(props) {
   const [dealerCode, setDealerCode] = useState("");
 
   useEffect(() => {
-    getToken();
     getUserAccessInfoToken();
+    getToken();
+    
     // getUserAccessInfoToken();
   }, []);
 

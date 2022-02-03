@@ -421,7 +421,7 @@ export async function getVehicleDetails(token, VINumber) {
   return await axios.post(url, requestData, options);
 }
 export async function getGroundingList() {
-  let token = localStorage.getItem("ForgeRockToken");
+  // let token = localStorage.getItem("ForgeRockToken");
   let stringData = localStorage.getItem("dealerCode");
   let payload = stringData ? stringData : "ALL";
   var data = JSON.stringify([payload]);
@@ -429,7 +429,7 @@ export async function getGroundingList() {
   var config = {
     method: "post",
     url: groundListUrl,
-    headers: headers,
+    headers: getHeaders(),
     data: data,
   };
 
