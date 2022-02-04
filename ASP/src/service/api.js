@@ -462,7 +462,7 @@ export async function getPassedList(data) {
   var config = {
     method: "post",
     url: passedVehicleUrl,
-    headers: headers,
+    headers: getHeaders(),
     data: data,
   };
 
@@ -471,7 +471,7 @@ export async function getPassedList(data) {
 
 export async function getPassedList1() {
   const options = {
-    headers: headers,
+    headers: getHeaders(),
   };
   const requestData = "ALL";
 
@@ -485,7 +485,7 @@ export async function getPurchasedList(index) {
   var config = {
     method: "post",
     url: `${purchasedVehicleUrl}?pageNumber=${index}`,
-    headers: headers,
+    headers: getHeaders(),
     data: data,
   };
 
@@ -496,7 +496,7 @@ export async function getInspectionVehicleDetails(vin) {
   var config = {
     method: "post",
     url: `${inspectionVehicleDetails}?vin=${vin}`,
-    headers: headers,
+    headers: getHeaders(),
   };
   return await axios(config);
 }
@@ -507,7 +507,7 @@ export async function getInspectionWheelTiresDetails(inspectionId) {
   var config = {
     method: "post",
     url: inspectionWheelTiresDetailsUrl,
-    headers: headers,
+    headers: getHeaders(),
     data: data,
   };
   return await axios(config);
@@ -517,7 +517,7 @@ export async function getInspectionAccessoryDetails(vin) {
   var config = {
     method: "post",
     url: `${inspectionAccessoryDetailsUrl}?vin=${vin}`,
-    headers: headers,
+    headers: getHeaders(),
   };
   return await axios(config);
 }
@@ -529,7 +529,7 @@ export async function getInspectionDamageDetailsApi(inspectionId, vin) {
   var config = {
     method: "post",
     url: `${getInspectionDamageDetailsUrl}?inpsectionId=${inspectionId}&tenantId=${tenant}&vin=${vin}`,
-    headers: headers,
+    headers: getHeaders(),
   };
   return await axios(config);
 }
@@ -539,7 +539,7 @@ export async function getOEMBuildDetailsApi(vin) {
   var config = {
     method: "post",
     url: getOEMBuildDetailsUrl,
-    headers: headers,
+    headers: getHeaders(),
     data: data,
   };
   return await axios(config);
@@ -548,7 +548,7 @@ export async function postDealerActionPassOnVehicle(vin, groundId, dealerName) {
   var config = {
     method: "post",
     url: `${getDealerActionUrl}?dealerAction=Pass&groundingId=${groundId}&vin=${vin}`,
-    headers: headers,
+    headers: getHeaders(),
   };
   return await axios(config);
 }
@@ -556,7 +556,7 @@ export async function postDealerActionPurchaseOnVehicle(vin, groundId) {
   var config = {
     method: "post",
     url: `${getDealerActionUrl}?dealerAction=Purchase&groundingId=${groundId}&vin=${vin}`,
-    headers: headers,
+    headers: getHeaders(),
   };
   return await axios(config);
 }
@@ -565,7 +565,7 @@ export async function awaitManualPricing() {
   var config = {
     method: "post",
     url: AMP,
-    headers: headers,
+    headers: getHeaders(),
   };
   return await axios(config);
 }
@@ -573,7 +573,7 @@ export async function RRMList() {
   var config = {
     method: "post",
     url: rrm,
-    headers: headers,
+    headers: getHeaders(),
   };
   return await axios(config);
 }
@@ -581,7 +581,7 @@ export async function getMileageDiscList() {
   var config = {
     method: "post",
     url: `${mileageDiscList}?vin=JM3KFACM0M0366307`,
-    headers: headers,
+    headers: getHeaders(),
   };
   return await axios(config);
 }
@@ -674,7 +674,7 @@ export async function getImageData(obj) {
   var config = {
     method: "post",
     url: getImages,
-    headers: headers,
+    headers: getHeaders(),
     data: obj,
   };
   return await axios(config).then(
@@ -700,7 +700,7 @@ export async function getCarXml() {
 
 export async function getDealerPaymentsData() {
   const options = {
-    headers: headers,
+    headers: getHeaders(),
   };
   let dealerPayment = "";
   dealerPayment = getDealerPayments + "?KintoId=null";
@@ -721,7 +721,7 @@ export async function getPurchaseDetails(vin) {
   var config = {
     method: "post",
     url: getPurchaseDetailsApi,
-    headers: headers,
+    headers: getHeaders(),
     data: vin,
   };
   return await axios(config).then(
@@ -739,7 +739,7 @@ export async function getTransportationDetails(vinlist) {
     method: "post",
     url: `${transportDetails}?` + vinlist,
     // vinList=JM3KFADM6L0797974&vinList=JM3KFBDM0K1698372'
-    headers: headers,
+    headers: getHeaders(),
   };
 
   return await axios(config);
@@ -759,7 +759,7 @@ export async function onSubmitPayment(data) {
   var config = {
     method: "post",
     url: submitPayment,
-    headers: headers,
+    headers: getHeaders(),
     data: data,
   };
   return await axios(config).then(
@@ -797,7 +797,7 @@ export async function getGroundingDetailsByVin(vin) {
   var config = {
     method: "post",
     url: getGroundingDetailsURI,
-    headers: headers,
+    headers: getHeaders(),
     data: vin,
   };
   return await axios(config).then(
@@ -814,7 +814,7 @@ export async function getVehicleSaleInfoByVin(vin) {
   var config = {
     method: "post",
     url: getVehicleSaleInfoURI + `?vin=${vin}`,
-    headers: headers,
+    headers: getHeaders(),
   };
   return await axios(config).then(
     (res) => {
@@ -830,7 +830,7 @@ export async function getNotes(vin) {
   var config = {
     method: "post",
     url: getNotesURI + "?vin=" + vin,
-    headers: headers,
+    headers: getHeaders(),
   };
   return await axios(config).then(
     (res) => {
@@ -846,7 +846,7 @@ export async function insertNotes({ vin, notes }) {
   var config = {
     method: "post",
     url: insertNotesURI + `?notes=${notes}&vin=${vin}`,
-    headers: headers,
+    headers: getHeaders(),
   };
   return await axios(config).then(
     (res) => {
@@ -862,7 +862,7 @@ export async function getVehicalStatusHistory(vin) {
   var config = {
     method: "post",
     url: getVehicleStatusHistoryURI + `?vin=${vin}`,
-    headers: headers,
+    headers: getHeaders(),
   };
   return await axios(config).then(
     (res) => {
@@ -886,7 +886,7 @@ export async function updateMileage(body) {
   var config = {
     method: "post",
     url: updateMileageURI,
-    headers: headers,
+    headers: getHeaders(),
     data: body,
   };
   return await axios(config).then(
@@ -929,7 +929,7 @@ export async function getClearfaxStatusByVin(vin) {
   var config = {
     method: "get",
     url: getCarfaxStatusURI + `?vin=${vin}`,
-    headers: headers,
+    headers: getHeaders(),
   };
   return await axios(config).then(
     (res) => {
@@ -945,7 +945,7 @@ export async function getPricingHistoryByVin(vin) {
   var config = {
     method: "post",
     url: getPricingHistory + `?vin=${vin}`,
-    headers: headers,
+    headers: getHeaders(),
   };
   return await axios(config).then(
     (res) => {

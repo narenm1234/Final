@@ -84,7 +84,10 @@ export default function NewSidebar(props) {
   const [activeChild, setActiveChild] = React.useState(location.pathname);
   const classes = useStyles();
 
-  useEffect(async () => {
+  useEffect( () => {
+    setTimeout (async () =>{
+
+    
     setActiveChild(location.pathname);
     let DealerVehicleCountRes = await getDealerVehicleCount();
     sidebarItems.map((item) => {
@@ -111,6 +114,7 @@ export default function NewSidebar(props) {
       sidebarItems = sidebarItems.filter((row) => row.label != "Admin");
     }
     setList([...sidebarItems]);
+  },6000);
   }, [props.stateUpdate]);
 
   const handleClick = (item) => {
