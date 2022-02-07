@@ -99,7 +99,8 @@ function TransactionModal(props) {
             </Box>
             <Box p={2} id="transition-modal-description">
               <Box component={"h4"}>
-                2019 Mazda Mazda6 Grand Touring, Machine Gray Metallic
+                {props.modelHeadertitle}
+                {/* 2019 Mazda Mazda6 Grand Touring, Machine Gray Metallic */}
               </Box>
               <small> VIN {props.transactionInfo && props.transactionInfo.vin}</small>
               <Box p={2} my={2} borderRadius={5} bgcolor={"#e6e6e6"}>

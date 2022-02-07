@@ -75,6 +75,7 @@ export default function ConditionReport(props) {
   const [isConfirmPurchase, setIsConfirmPurchase] = useState(false);
 
   const [isPassVehicalPop, setIsPassVehicalPop] = useState(false);
+  const [modelHeadertitle,setModelHeadertitle] = useState("")
 
   useEffect(() => {
     console.log("start condition report page", new Date());
@@ -186,6 +187,8 @@ console.log("vehicleDetails==>",  props?.location?.state?.vehicleDetails)
   };
 
   const handlePurchaseVehical = (event) => {
+    let modelHeaderName = `${vehicleDetails && vehicleDetails.model_year}${" "}${vehicleDetails && vehicleDetails.brand}${" "}${vehicleDetails && vehicleDetails.model}${" "}${vehicleDetails && vehicleDetails.ext_color}${" "}`
+    setModelHeadertitle(modelHeaderName)
     setOpenTransactionPopup(true);
     setTransactionInfo(event);
     setTransactionPopupType(event.type);
@@ -1113,6 +1116,7 @@ console.log("vehicleDetails==>",  props?.location?.state?.vehicleDetails)
 
       <Box>
         <TransactionModal
+        modelHeadertitle={modelHeadertitle}
           transactionInfo={transactionInfo}
           type={transactionPopupType}
           open={openTransactionPopup}

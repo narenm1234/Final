@@ -370,7 +370,7 @@ export default function PurchasedPricingSideBar(props) {
                     prefix={"$"}
                   />
                 ) : (
-                  "$0.0"
+                  "$0.00"
                 )}
               </p>
             </Box>
@@ -398,7 +398,7 @@ export default function PurchasedPricingSideBar(props) {
                     prefix={"$"}
                   />
                 ) : (
-                  "$0.0"
+                  "$0.00"
                 )}
               </p>
             </Box>
@@ -424,7 +424,7 @@ export default function PurchasedPricingSideBar(props) {
                     prefix={"$"}
                   />
                 ) : (
-                  "$0.0"
+                  "$0.00"
                 )}
               </p>
             </Box>
@@ -439,10 +439,11 @@ export default function PurchasedPricingSideBar(props) {
                 value={"4"}
                 control={<Radio />}
                 label="Market + Remaining Payments "
-                disabled = {purchasedData.vehiclePrice + purchasedData.remainingPmts ? false : true}
+                disabled = {purchasedData.vehiclePrice + purchasedData.remainingPmts ? purchasedData.vehiclePrice ? false : true : true}
               />
               <p>
-                {purchasedData.vehiclePrice + purchasedData.remainingPmts ? (
+                {purchasedData.vehiclePrice + purchasedData.remainingPmts ? 
+                 purchasedData.vehiclePrice ?(
                   <CurrencyFormat
                     value={parseFloat(
                       purchasedData.vehiclePrice + purchasedData.remainingPmts
@@ -451,8 +452,8 @@ export default function PurchasedPricingSideBar(props) {
                     thousandSeparator={true}
                     prefix={"$"}
                   />
-                ) : (
-                  "$0.0"
+                ) :("$0.00"): (
+                  "$0.00"
                 )}
               </p>
             </Box>
@@ -476,7 +477,7 @@ export default function PurchasedPricingSideBar(props) {
                     prefix={"$"}
                   />
                 ) : (
-                  "$0.0"
+                  "$0.00"
                 )}
               </Box>
             </ListItemText>
@@ -499,7 +500,7 @@ export default function PurchasedPricingSideBar(props) {
                     prefix={"$"}
                   />
                 ) : (
-                  "$0.0"
+                  "$0.00"
                 )}
               </Box>
             </ListItemText>
@@ -525,7 +526,7 @@ export default function PurchasedPricingSideBar(props) {
                 prefix={"$"}
               />
             ) : (
-              "$0.0"
+              "$0.00"
             )}
           </Box>
         </ListItemText>
