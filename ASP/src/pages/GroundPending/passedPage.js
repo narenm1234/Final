@@ -12,6 +12,7 @@ import CurrencyFormat from "react-currency-format";
 import VerticalVehicleStepper from "../../components/Stepper/VerticalStepper";
 import Loaderpage from "../LoaderPage";
 import { Box } from "@material-ui/core";
+import Pagination from "../../components/PaginationPassedPage";
 let resp = [
   {
     account_type: "LEASE",
@@ -75,12 +76,12 @@ export default function ListingPage1(props) {
   const [loader, setLoader] = React.useState(true);
 
   useEffect(() => {
-    getVehicleDetails();
+    getVehicleDetails(1);
     // getImages();
   }, [value]);
-  async function getVehicleDetails() {
+  async function getVehicleDetails(index) {
     console.log("start passed page",new Date());
-    let apiResponse = await getPassedList();
+    let apiResponse = await getPassedList(index);
     getTransportDetails(apiResponse?.data.data);
   }
 
@@ -114,6 +115,11 @@ export default function ListingPage1(props) {
       vehicleDetails: vehicle,
     });
   };
+  const onChangePage = (data, index) => {
+    console.log("data", data);
+    getVehicleDetails(index);
+    // setVehicleResponse(data);
+  };
 
   // const getImages = async () => {
   //   let reqObj = {
@@ -134,7 +140,8 @@ export default function ListingPage1(props) {
 
   return <>
   {vehicleResponse.length > 0 ? (
-    vehicleResponse.map((vehicle, index) => {
+    <div>
+   { vehicleResponse.map((vehicle, index) => {
       return (
         <div className="listingPageCard" key={index}>
           <Grid container spacing={3}>
@@ -225,6 +232,17 @@ export default function ListingPage1(props) {
         </div>
       );
     })
+  }
+        
+  {vehicleResponse.length != 0 ? (
+    <Pagination
+      showItemsPerPage={20}
+      // pages={[20, 40, 60, 80]}
+      data={vehicleResponse}
+      onChangePage={onChangePage}
+    />
+  ) : null}
+  </div>
   ) : (
     <div>
       {loader ? (
