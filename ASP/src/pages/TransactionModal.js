@@ -119,6 +119,22 @@ function TransactionModal(props) {
                 />
                   </Box>
                 </Box>
+                {props.transactionInfo?.additionalPaymentTypeName ? <>
+                <Box display={"flex"} justifyContent={"space-between"}>
+                  <Box color={"#000000"} fontWeight={500}>
+                    {props.transactionInfo?.additionalPaymentTypeName}
+                  </Box>
+                  <Box color={"#5e5e5e"}>
+                  <CurrencyFormat
+                  value={
+                    props.transactionInfo?.additionalPaymentTypeFee || 0
+                  }
+                  displayType={"text"}
+                  thousandSeparator={true}
+                  prefix={"$"}
+                />
+                  </Box>
+                </Box></>:null}
                 <Box display={"flex"} justifyContent={"space-between"}>
                   <Box color={"#000000"} fontWeight={500}>
                     Admin Fee

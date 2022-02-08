@@ -1068,7 +1068,7 @@ console.log("vehicleDetails==>",  props?.location?.state?.vehicleDetails)
                                 );
                               })}
                             </TableBody>
-                          </Table>
+                          s</Table>
                         </TableContainer>
                       </CardContent>
                       <CardContent>
@@ -1105,6 +1105,7 @@ console.log("vehicleDetails==>",  props?.location?.state?.vehicleDetails)
               onPurchaseVehical={handlePurchaseVehical}
               closePassVehiclePop={handleClosePassVehicle}
               isConfirmPurchase={isConfirmPurchase}
+              dealerName={vehicleDetails?.dealer_name}
               vin={vin}
               groundingId={vehicleDetails?.groundingId}
             />

@@ -397,7 +397,7 @@ export default function ListingPage(props) {
                         <span className="textStyle">
                           <span className="textBold">
                             {" "}
-                            Market + Remaining Payments 1 {" "}
+                            Market + Remaining Payments {" "}
                           </span>
                         </span>
                         <span className="textSize">

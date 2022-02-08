@@ -279,6 +279,8 @@ export default function PurchasedPricingSideBar(props) {
       totalFee,
       paymentTypeName,
       paymentTypeFee,
+      additionalPaymentTypeName,
+      additionalPaymentTypeFee,
       vin: props.vin,
       accountInfo: accountInfo,
     };
@@ -303,6 +305,7 @@ export default function PurchasedPricingSideBar(props) {
         tenantId: "t002",
         vin: props.vin,
         groundingId: props.groundingId,
+        dealerName:props.dealerName
         // "vin": "KM3KFADM0L0797963",
       };
       let submitPaymentRes = await onSubmitPayment(reqObj);
