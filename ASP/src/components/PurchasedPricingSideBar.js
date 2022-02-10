@@ -103,7 +103,7 @@ export default function PurchasedPricingSideBar(props) {
     console.log("start condition report page  PurchasedPricingSideBar ",new Date());
 
     let getPurchaseDetailsRes = await getPurchaseDetails(props.vin);
-    setPurchasedData(getPurchaseDetailsRes.data.data);
+    setPurchasedData(getPurchaseDetailsRes?.data.data);
     console.log(
       "getPurchaseDetailsRes.data.data",
       getPurchaseDetailsRes.data.data
