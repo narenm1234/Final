@@ -454,14 +454,14 @@ export async function getGroundingList(index) {
   // });
 }
 
-export async function getPassedList(data) {
+export async function getPassedList(index) {
   let stringData = localStorage.getItem("dealerCode");
   let payload = stringData ? stringData : "ALL";
   var data = JSON.stringify([payload]);
 
   var config = {
     method: "post",
-    url: passedVehicleUrl,
+    url: `${passedVehicleUrl}?pageNumber=${index}`,
     headers: getHeaders(),
     data: data,
   };
