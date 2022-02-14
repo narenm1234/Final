@@ -431,7 +431,7 @@ export async function getVehicleDetails(token, VINumber) {
   };
   return await axios.post(url, requestData, options);
 }
-export async function getGroundingList() {
+export async function getGroundingList(index) {
   // let token = localStorage.getItem("ForgeRockToken");
   let stringData = localStorage.getItem("dealerCode");
   let payload = stringData ? stringData : "ALL";
@@ -439,7 +439,7 @@ export async function getGroundingList() {
 
   var config = {
     method: "post",
-    url: groundListUrl,
+    url: `${groundListUrl}?pageNumber=${index}`,
     headers: getHeaders(),
     data: data,
   };
@@ -454,14 +454,14 @@ export async function getGroundingList() {
   // });
 }
 
-export async function getPassedList(data) {
+export async function getPassedList(index) {
   let stringData = localStorage.getItem("dealerCode");
   let payload = stringData ? stringData : "ALL";
   var data = JSON.stringify([payload]);
 
   var config = {
     method: "post",
-    url: passedVehicleUrl,
+    url: `${passedVehicleUrl}?pageNumber=${index}`,
     headers: getHeaders(),
     data: data,
   };

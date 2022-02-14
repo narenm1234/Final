@@ -371,7 +371,7 @@ console.log("vehicleDetails==>",  props?.location?.state?.vehicleDetails)
                                   prefix={"$"}
                                 />
                               ) : (
-                                "$0.0"
+                                "$0.00"
                               )}
                             </span>
                           </div>
@@ -399,7 +399,7 @@ console.log("vehicleDetails==>",  props?.location?.state?.vehicleDetails)
                                   prefix={"$"}
                                 />
                               ) : (
-                                "$0.0"
+                                "$0.00"
                               )}
                             </span>
                           </div>
@@ -423,7 +423,7 @@ console.log("vehicleDetails==>",  props?.location?.state?.vehicleDetails)
                                   prefix={"$"}
                                 />
                               ) : (
-                                "$0.0"
+                                "$0.00"
                               )}
                             </span>
                           </div>
@@ -919,7 +919,7 @@ console.log("vehicleDetails==>",  props?.location?.state?.vehicleDetails)
                                   prefix={"$"}
                                 />
                               ) : (
-                                "$0.0"
+                                "$0.00"
                               )}
                             </span>
                           </div>
@@ -947,7 +947,7 @@ console.log("vehicleDetails==>",  props?.location?.state?.vehicleDetails)
                                   prefix={"$"}
                                 />
                               ) : (
-                                "$0.0"
+                                "$0.00"
                               )}
                             </span>
                           </div>
@@ -1068,7 +1068,7 @@ console.log("vehicleDetails==>",  props?.location?.state?.vehicleDetails)
                                 );
                               })}
                             </TableBody>
-                          s</Table>
+                          </Table>
                         </TableContainer>
                       </CardContent>
                       <CardContent>

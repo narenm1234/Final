@@ -22,6 +22,7 @@ import PassOnVehicle from "../PassOnVehicle";
 import ExclusivityPeriod from "./ExclusivityPeriod";
 import Loaderpage from "../LoaderPage";
 import { Box } from "@material-ui/core";
+import Pagination from "../../components/PaginationGroundedPage";
 // const parseString = require("xml2js").parseString;
 
 let resp = [
@@ -95,15 +96,15 @@ export default function ListingPage(props) {
 
   useEffect(() => {
     // setTimeout(() => {
-      getVehicleDetails();
+      getVehicleDetails(1);
     // }, 3000);
     
     // getImages();
   },[value]);
 
-  async function getVehicleDetails() {
+  async function getVehicleDetails(index) {
     console.log("start grounding list api",new Date())
-    let apiResponse = await getGroundingList();
+    let apiResponse = await getGroundingList(index);
     console.log("end grounding list api" , new Date())
     console.log("------->", apiResponse.data);
     setVehicleResponse(apiResponse.data.data);
@@ -184,6 +185,11 @@ export default function ListingPage(props) {
       vehicleDetails: vehicle,
     });
   };
+  const onChangePage = (data, index) => {
+    console.log("data", data);
+    getVehicleDetails(index);
+    // setVehicleResponse(data);
+  };
   
   const handleOpen = (vin, groundingId, dealer_name) => {
     setPassVin(vin);
@@ -232,9 +238,11 @@ export default function ListingPage(props) {
 
 
   return (
+    
     <>
       {vehicleResponse?.length > 0 ? (
-        vehicleResponse.map((vehicle, index) => {
+        <div>
+        {vehicleResponse.map((vehicle, index) => {
           return (
             <div className="listingPageCard" key={index}>
               <Grid container spacing={3}>
@@ -444,6 +452,18 @@ export default function ListingPage(props) {
             </div>
           );
         })
+
+      }
+        
+        {vehicleResponse.length != 0 ? (
+          <Pagination
+            showItemsPerPage={20}
+            // pages={[20, 40, 60, 80]}
+            data={vehicleResponse}
+            onChangePage={onChangePage}
+          />
+        ) : null}
+        </div>
       ) : (
         <div>
           {loader ? (

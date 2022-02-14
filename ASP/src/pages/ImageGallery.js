@@ -91,7 +91,7 @@ export default function MyGallery(props) {
   const getImage = async (item) => {
     try{
     let reqObj = {
-      fileName: item.file_name,
+      fileName: item?.file_name,
       inspectionId: props.inspection_id,
       paramForImage: "ALL",
       tenantId: localStorage.getItem("tenantId")

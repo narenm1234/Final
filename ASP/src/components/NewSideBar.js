@@ -98,9 +98,11 @@ export default function NewSidebar(props) {
 
         if (child.link == "/grounded") {
           child.badge = DealerVehicleCountRes?.data.data.groundedVehicleCount;
+          localStorage.setItem("groundedCount", DealerVehicleCountRes?.data.data.groundedVehicleCount);
         }
         if (child.link == "/passed") {
           child.badge = DealerVehicleCountRes?.data.data.passedVehicleCount;
+          localStorage.setItem("passedCount", DealerVehicleCountRes?.data.data.passedVehicleCount);
         }
         if (child.link == "/purchased") {
           child.badge = DealerVehicleCountRes?.data.data.purchasedVehicleCount;

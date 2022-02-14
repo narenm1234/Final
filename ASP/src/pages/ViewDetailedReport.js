@@ -523,7 +523,7 @@ export default function ViewDetailedReport(props) {
                               prefix={"$"}
                             />
                           ) : (
-                            "$0.0"
+                            "$0.00"
                           )
                         ) : (
                           "N/A"
@@ -539,7 +539,7 @@ export default function ViewDetailedReport(props) {
                               prefix={"$"}
                             />
                           ) : (
-                            "$0.0"
+                            "$0.00"
                           )
                         ) : (
                           "N/A"
@@ -610,7 +610,7 @@ export default function ViewDetailedReport(props) {
                               prefix={"$"}
                             />
                           ) : (
-                            "$0.0"
+                            "$0.00"
                           )
                         ) : (
                           "N/A"
@@ -626,7 +626,7 @@ export default function ViewDetailedReport(props) {
                               prefix={"$"}
                             />
                           ) : (
-                            "$0.0"
+                            "$0.00"
                           )
                         ) : (
                           "N/A"
@@ -687,7 +687,7 @@ export default function ViewDetailedReport(props) {
                               prefix={"$"}
                             />
                           ) : (
-                            "$0.0"
+                            "$0.00"
                           )
                         ) : (
                           "N/A"
@@ -703,7 +703,7 @@ export default function ViewDetailedReport(props) {
                               prefix={"$"}
                             />
                           ) : (
-                            "$0.0"
+                            "$0.00"
                           )
                         ) : (
                           "N/A"
