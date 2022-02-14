@@ -63,6 +63,7 @@ export default function UpdateMileagePricing(props) {
   const [updateStatus, setUpdateStatus] = useState(null);
   const [updatePrisingStatus, setUpdatePrisingStatus] = useState(null);
   const [condionVehicleDetails, setCondionVehicleDetails] = React.useState({}); // inspectiondata
+  const [isLoading,setIsloading] = useState(false)
 
   const [ViewFullPricingHistoryPop, setViewFullPricingHistoryPop] = useState(false);
 
@@ -70,6 +71,7 @@ export default function UpdateMileagePricing(props) {
   const handleClick = () => {
     //setOpen(!open);
   };
+ 
   useEffect(() => {
     getClearfaxStatus();
   }, [vin]);
@@ -80,7 +82,7 @@ export default function UpdateMileagePricing(props) {
 
   async function getClearfaxStatus() {
     let apiResponse = await getClearfaxStatusByVin(vin);
-    console.log("getClearfaxStatusByVin==>", apiResponse);
+    setIsloading(true)
     if (apiResponse && apiResponse.data) {
       setClearFixStatus(apiResponse.data);
     }
@@ -186,7 +188,7 @@ export default function UpdateMileagePricing(props) {
   };
 
   return (
-    <div className="updatePricingSidebar">
+    <div className={isLoading?"updatePricingSidebar":""}>
       <ListItem className="notesSectionHeader">Update Mileage/Pricing</ListItem>
       <ListItem>
         <div>

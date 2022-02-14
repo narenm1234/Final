@@ -56,6 +56,7 @@ export default function MyGallery(props) {
   }, []);
 
   const getImages = async () => {
+    try{
     let reqObj = {
       inspectionId: props.inspection_id,
       paramForImage: "ALL",
@@ -66,7 +67,7 @@ export default function MyGallery(props) {
     let getimagesRes = await getImageData(reqObj);
     console.log("get image data::", getimagesRes);
 
-    if (getimagesRes && getimagesRes.data ) {
+    if (getimagesRes && getimagesRes.data && getimagesRes.data.length ) {
       setImagesTemp(getimagesRes?.data);
 
       console.log("start get single image", new Date());
@@ -82,9 +83,13 @@ export default function MyGallery(props) {
         new Date()
       );
     }
+  }catch(err){
+    console.error("getImages-error:-",err.message)
+  }
   };
 
   const getImage = async (item) => {
+    try{
     let reqObj = {
       fileName: item.file_name,
       inspectionId: props.inspection_id,
@@ -99,6 +104,10 @@ export default function MyGallery(props) {
       return singleImage;
     }
     return null;
+  }catch(err){
+    return null;
+    console.error("getImage-error:-",err.message)
+  }
   };
 
   const arrangeImages = (images, index, imgurl) => {

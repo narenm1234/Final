@@ -111,7 +111,7 @@ function TransactionModal(props) {
                   <Box color={"#5e5e5e"}>
                   <CurrencyFormat
                   value={
-                    props.transactionInfo?.paymentTypeFee || 0
+                    parseFloat(props.transactionInfo?.paymentTypeFee || 0).toFixed(2)
                   }
                   displayType={"text"}
                   thousandSeparator={true}
@@ -127,7 +127,7 @@ function TransactionModal(props) {
                   <Box color={"#5e5e5e"}>
                   <CurrencyFormat
                   value={
-                    props.transactionInfo?.additionalPaymentTypeFee || 0
+                    parseFloat(props.transactionInfo?.additionalPaymentTypeFee || 0).toFixed(2)
                   }
                   displayType={"text"}
                   thousandSeparator={true}

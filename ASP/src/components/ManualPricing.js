@@ -725,12 +725,23 @@ export default function ManualPricing(props) {
     setPage(newPage);
   };
 
-  const openConditionReport = (VINumber) => {
+  const openConditionReport = (VINumber, vehicle) => {
     props.props.history.push("/conditionreportRequests", {
       vin: VINumber,
       pageName: "Manual Pricing",
+      purchaseSection: false,
+      vehicleDetails: vehicle,
     });
   };
+
+  
+  // const openConditionScreen = (VINumber, vehicle) => {
+  //   props.history.push("/conditionreport", {
+  //     vin: VINumber,
+  //     purchaseSection: true,
+  //     vehicleDetails: vehicle,
+  //   });
+  // };
 
   const fetchDataBasedOnSearchValue = (searchText) => {
     const vehicleListCopy = [...rows];
@@ -923,7 +934,7 @@ export default function ManualPricing(props) {
                     <span className="textStyle">
                       <a
                         className="vin"
-                        onClick={() => openConditionReport(row.VIN)}
+                        onClick={() => openConditionReport(row.vin, row)}
                       >
                         {" "}
                         {row.vin}
